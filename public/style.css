@@ -928,6 +928,44 @@ img {
   color: var(--text-dim);
 }
 
+/* ─── Back to Top Button ─────────────────────────────────────────────────── */
+.back-to-top {
+  position: fixed;
+  bottom: 32px;
+  right: 32px;
+  width: 44px;
+  height: 44px;
+  background: var(--brand-blue);
+  color: var(--white);
+  border: none;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: opacity 300ms ease, visibility 300ms ease, transform 300ms ease, background 150ms ease;
+  box-shadow: 0 4px 12px rgba(28, 56, 234, 0.3);
+  z-index: 90;
+}
+
+.back-to-top.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.back-to-top:hover {
+  background: #1530CC;
+  box-shadow: 0 6px 20px rgba(28, 56, 234, 0.4);
+}
+
+.back-to-top:active {
+  transform: scale(0.92);
+}
+
 /* ─── Responsive ──────────────────────────────────────────────────────────── */
 @media (max-width: 1024px) {
   .hero-container {

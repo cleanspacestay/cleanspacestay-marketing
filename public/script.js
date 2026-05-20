@@ -68,6 +68,20 @@ contactForm.addEventListener('submit', (e) => {
   }, 3000);
 });
 
+// ─── Back to Top Button ─────────────────────────────────────────────────────
+const backToTop = document.getElementById('back-to-top');
+window.addEventListener('scroll', () => {
+  if (window.scrollY > 400) {
+    backToTop.classList.add('visible');
+  } else {
+    backToTop.classList.remove('visible');
+  }
+});
+
+backToTop.addEventListener('click', () => {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+
 // ─── Intersection Observer for fade-in animations ────────────────────────────
 const observerOptions = {
   threshold: 0.1,
