@@ -962,6 +962,117 @@ img {
   transform: scale(0.92);
 }
 
+/* ─── Animations & Effects ────────────────────────────────────────────────── */
+
+/* Fade-up on scroll */
+.fade-up {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 600ms cubic-bezier(0.23, 1, 0.32, 1), transform 600ms cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.fade-up.animate-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Floating dashboard bob */
+.float-animation {
+  animation: float 4s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+/* Gradient shimmer on text */
+.shimmer {
+  background-size: 200% 100%;
+  animation: shimmer 3s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0% { background-position: 100% 0; }
+  50% { background-position: 0% 0; }
+  100% { background-position: 100% 0; }
+}
+
+/* CTA button glow pulse */
+.glow-pulse {
+  animation: glowPulse 2.5s ease-in-out infinite;
+}
+
+@keyframes glowPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.3); }
+  50% { box-shadow: 0 0 20px 4px rgba(255, 255, 255, 0.15); }
+}
+
+/* Step connector lines */
+.steps-grid {
+  position: relative;
+}
+
+.step {
+  position: relative;
+}
+
+.step::after {
+  content: '';
+  position: absolute;
+  top: 28px;
+  right: -16px;
+  width: calc(100% - 56px);
+  height: 2px;
+  background: linear-gradient(90deg, var(--brand-blue) 0%, var(--cyan) 100%);
+  opacity: 0;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: opacity 600ms ease, transform 600ms ease;
+}
+
+.step:last-child::after {
+  display: none;
+}
+
+.steps-animated .step::after {
+  opacity: 0.4;
+  transform: scaleX(1);
+}
+
+.steps-animated .step:nth-child(1)::after { transition-delay: 200ms; }
+.steps-animated .step:nth-child(2)::after { transition-delay: 400ms; }
+.steps-animated .step:nth-child(3)::after { transition-delay: 600ms; }
+
+/* Step number pop-in */
+.steps-animated .step .step-number {
+  animation: popIn 400ms cubic-bezier(0.23, 1, 0.32, 1) forwards;
+}
+
+.steps-animated .step:nth-child(1) .step-number { animation-delay: 0ms; }
+.steps-animated .step:nth-child(2) .step-number { animation-delay: 150ms; }
+.steps-animated .step:nth-child(3) .step-number { animation-delay: 300ms; }
+.steps-animated .step:nth-child(4) .step-number { animation-delay: 450ms; }
+
+@keyframes popIn {
+  0% { transform: scale(0.5); opacity: 0.5; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+/* Card hover enhanced micro-interactions */
+.feature-card,
+.problem-card,
+.role-card,
+.contact-card {
+  transition: transform 300ms cubic-bezier(0.23, 1, 0.32, 1), box-shadow 300ms ease, border-color 200ms ease;
+}
+
+/* Hero visual parallax-ready */
+.hero-visual {
+  will-change: transform;
+  transition: transform 100ms linear;
+}
+
 /* ─── Responsive ──────────────────────────────────────────────────────────── */
 @media (max-width: 1024px) {
   .hero-container {
@@ -999,6 +1110,14 @@ img {
 @media (max-width: 768px) {
   .nav-links, .nav-actions {
     display: none;
+  }
+
+  .step::after {
+    display: none;
+  }
+
+  .float-animation {
+    animation: none;
   }
 
   .nav-toggle {
@@ -1139,5 +1258,26 @@ img {
   .back-to-top {
     bottom: 20px;
     right: 20px;
+  }
+}
+
+/* Accessibility: reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .float-animation {
+    animation: none;
+  }
+
+  .shimmer {
+    animation: none;
+  }
+
+  .glow-pulse {
+    animation: none;
   }
 }
