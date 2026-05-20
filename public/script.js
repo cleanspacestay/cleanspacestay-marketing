@@ -31,10 +31,10 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 // ─── Nav background on scroll ────────────────────────────────────────────────
 const nav = document.getElementById('nav');
 window.addEventListener('scroll', () => {
-  if (window.scrollY > 20) {
-    nav.style.background = 'rgba(10, 22, 40, 0.95)';
+  if (window.scrollY > 50) {
+    nav.classList.add('scrolled');
   } else {
-    nav.style.background = 'rgba(10, 22, 40, 0.85)';
+    nav.classList.remove('scrolled');
   }
 });
 
