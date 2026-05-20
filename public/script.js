@@ -94,7 +94,7 @@ const fadeObserver = new IntersectionObserver((entries) => {
 });
 
 // Apply staggered fade-in to groups of cards
-document.querySelectorAll('.problem-card, .feature-card, .step, .role-card, .contact-card').forEach((el, index) => {
+document.querySelectorAll('.problem-card, .feature-card, .role-card, .contact-card').forEach((el, index) => {
   el.classList.add('fade-up');
   el.style.transitionDelay = `${(index % 4) * 100}ms`;
   fadeObserver.observe(el);
@@ -187,21 +187,6 @@ window.addEventListener('scroll', () => {
     heroVisual.style.transform = `translateY(${rate}px)`;
   }
 });
-
-// ─── Step connector animation ───────────────────────────────────────────────
-const stepsObserver = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('steps-animated');
-      stepsObserver.unobserve(entry.target);
-    }
-  });
-}, { threshold: 0.3 });
-
-const stepsGrid = document.querySelector('.steps-grid');
-if (stepsGrid) {
-  stepsObserver.observe(stepsGrid);
-}
 
 // ─── Tilt effect on feature cards (desktop only) ────────────────────────────
 if (window.matchMedia('(min-width: 768px)').matches) {

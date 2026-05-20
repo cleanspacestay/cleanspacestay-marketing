@@ -1010,21 +1010,6 @@ img {
 
 
 
-/* Step number pop-in */
-.steps-animated .step .step-number {
-  animation: popIn 400ms cubic-bezier(0.23, 1, 0.32, 1) forwards;
-}
-
-.steps-animated .step:nth-child(1) .step-number { animation-delay: 0ms; }
-.steps-animated .step:nth-child(2) .step-number { animation-delay: 150ms; }
-.steps-animated .step:nth-child(3) .step-number { animation-delay: 300ms; }
-.steps-animated .step:nth-child(4) .step-number { animation-delay: 450ms; }
-
-@keyframes popIn {
-  0% { transform: scale(0.5); opacity: 0.5; }
-  100% { transform: scale(1); opacity: 1; }
-}
-
 /* Card hover enhanced micro-interactions */
 .feature-card,
 .problem-card,
