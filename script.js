@@ -46,13 +46,17 @@ contactForm.addEventListener('submit', (e) => {
   const formData = new FormData(contactForm);
   const data = Object.fromEntries(formData.entries());
   
-  // In production, this would send to an API endpoint
-  console.log('Form submitted:', data);
+  // Compose mailto link to dev@cleanspacestay.com
+  const subject = encodeURIComponent(`Contact from ${data.name} — ${data.company || 'N/A'}`);
+  const body = encodeURIComponent(
+    `Name: ${data.name}\nEmail: ${data.email}\nCompany: ${data.company || 'N/A'}\n\nMessage:\n${data.message}`
+  );
+  window.location.href = `mailto:dev@cleanspacestay.com?subject=${subject}&body=${body}`;
   
   // Show success message
   const btn = contactForm.querySelector('button[type="submit"]');
   const originalText = btn.textContent;
-  btn.textContent = 'Message Sent!';
+  btn.textContent = 'Opening Email Client...';
   btn.style.background = '#22c55e';
   btn.disabled = true;
   
