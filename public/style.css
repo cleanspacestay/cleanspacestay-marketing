@@ -1008,41 +1008,7 @@ img {
   50% { box-shadow: 0 0 20px 4px rgba(255, 255, 255, 0.15); }
 }
 
-/* Step connector lines */
-.steps-grid {
-  position: relative;
-}
 
-.step {
-  position: relative;
-}
-
-.step::after {
-  content: '';
-  position: absolute;
-  top: 28px;
-  right: -16px;
-  width: calc(100% - 56px);
-  height: 2px;
-  background: linear-gradient(90deg, var(--brand-blue) 0%, var(--cyan) 100%);
-  opacity: 0;
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: opacity 600ms ease, transform 600ms ease;
-}
-
-.step:last-child::after {
-  display: none;
-}
-
-.steps-animated .step::after {
-  opacity: 0.4;
-  transform: scaleX(1);
-}
-
-.steps-animated .step:nth-child(1)::after { transition-delay: 200ms; }
-.steps-animated .step:nth-child(2)::after { transition-delay: 400ms; }
-.steps-animated .step:nth-child(3)::after { transition-delay: 600ms; }
 
 /* Step number pop-in */
 .steps-animated .step .step-number {
@@ -1109,10 +1075,6 @@ img {
 
 @media (max-width: 768px) {
   .nav-links, .nav-actions {
-    display: none;
-  }
-
-  .step::after {
     display: none;
   }
 
