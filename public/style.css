@@ -1186,31 +1186,70 @@ img {
   }
 
   .hero {
-    padding: 110px 0 60px;
+    padding: 100px 0 48px;
+  }
+
+  .hero-container {
+    padding: 0 16px;
+  }
+
+  .hero-badge {
+    font-size: 12px;
+    padding: 5px 12px;
   }
 
   .hero-title {
     font-size: 32px;
+    line-height: 1.15;
   }
 
   .hero-description {
-    font-size: 16px;
+    font-size: 15px;
+    line-height: 1.6;
   }
 
   .hero-stats {
-    gap: 24px;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .stat {
+    flex-direction: row;
+    align-items: baseline;
+    gap: 8px;
   }
 
   .stat-number {
-    font-size: 22px;
+    font-size: 18px;
+  }
+
+  .stat-label {
+    font-size: 12px;
+  }
+
+  /* Hide dashboard on mobile — content-first */
+  .hero-visual {
+    display: none;
   }
 
   .section-title {
-    font-size: 28px;
+    font-size: 26px;
+  }
+
+  .section-description {
+    font-size: 14px;
   }
 
   .problem-grid {
     grid-template-columns: 1fr;
+  }
+
+  .problem-stat {
+    padding: 20px 16px;
+  }
+
+  .problem-stat p {
+    font-size: 15px;
   }
 
   .features-grid {
@@ -1219,6 +1258,13 @@ img {
 
   .steps-grid {
     grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .step-number {
+    width: 48px;
+    height: 48px;
+    font-size: 20px;
   }
 
   .team-grid {
@@ -1230,12 +1276,14 @@ img {
   }
 
   .trust-items {
-    gap: 20px;
+    flex-wrap: wrap;
+    gap: 16px;
+    justify-content: flex-start;
   }
 
   .contact-grid {
     grid-template-columns: 1fr;
-    gap: 40px;
+    gap: 32px;
   }
 
   .form-row {
@@ -1253,16 +1301,7 @@ img {
 
   .hero-cta .btn {
     width: 100%;
-  }
-
-  .preview-kpi-row {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 8px;
-  }
-
-  .preview-row {
-    font-size: 11px;
-    padding: 8px 10px;
+    justify-content: center;
   }
 
   body {
@@ -1274,46 +1313,42 @@ img {
     padding-right: 16px;
   }
 
-  .dashboard-preview {
-    font-size: 11px;
+  .cta-content h2 {
+    font-size: 28px;
   }
 
-  .preview-content {
-    padding: 12px;
+  .cta-content p {
+    font-size: 15px;
   }
 
-  .hero {
-    padding-top: 100px;
-    padding-bottom: 48px;
+  .nav-logo-img {
+    height: 36px;
   }
 }
 
 @media (max-width: 480px) {
   .hero-title {
-    font-size: 28px;
+    font-size: 26px;
   }
 
-  .hero-stats {
-    flex-direction: column;
-    gap: 12px;
-  }
-
-  .stat {
-    flex-direction: row;
-    align-items: baseline;
-    gap: 8px;
-  }
-
-  .preview-kpi-row {
-    grid-template-columns: 1fr;
+  .hero-badge {
+    font-size: 11px;
   }
 
   .section-title {
-    font-size: 24px;
+    font-size: 22px;
+  }
+
+  .section-tag {
+    font-size: 11px;
   }
 
   .feature-card {
     padding: 20px 16px;
+  }
+
+  .feature-card h3 {
+    font-size: 15px;
   }
 
   .team-card {
@@ -1321,18 +1356,45 @@ img {
   }
 
   .connected-card {
-    padding: 24px 16px;
+    padding: 20px 16px;
+  }
+
+  .connected-card h3 {
+    font-size: 18px;
   }
 
   .trust-items {
     flex-direction: column;
-    align-items: center;
-    gap: 16px;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .problem-card {
+    padding: 24px 16px;
+  }
+
+  .step h3 {
+    font-size: 15px;
+  }
+
+  .step p {
+    font-size: 13px;
+  }
+
+  .cta-content h2 {
+    font-size: 24px;
   }
 
   .back-to-top {
     bottom: 20px;
     right: 20px;
+    width: 40px;
+    height: 40px;
+  }
+
+  .btn-lg {
+    padding: 14px 24px;
+    font-size: 15px;
   }
 }
 
