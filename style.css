@@ -678,19 +678,91 @@ img {
   line-height: 1.6;
 }
 
-/* ─── Roles Section (Light Gray) ─────────────────────────────────────────── */
-.roles {
+/* ─── Problem Stat ──────────────────────────────────────────────────────── */
+.problem-stat {
+  margin-top: 48px;
+  text-align: center;
+  padding: 24px 32px;
+  background: var(--brand-blue-light);
+  border: 1px solid var(--brand-blue-medium);
+  border-radius: var(--radius);
+}
+
+.problem-stat p {
+  font-size: 17px;
+  color: var(--gray-700);
+  line-height: 1.6;
+}
+
+.problem-stat strong {
+  color: var(--brand-blue);
+  font-weight: 700;
+}
+
+/* ─── Connected Section (Worker Map + WhatsApp) ─────────────────────────── */
+.connected {
+  padding: 100px 0;
+  background: var(--white);
+}
+
+.connected-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 32px;
+}
+
+.connected-card {
+  background: var(--gray-50);
+  border: 1px solid var(--gray-200);
+  border-radius: var(--radius);
+  padding: 36px;
+  transition: all 200ms var(--ease-out);
+}
+
+.connected-card:hover {
+  border-color: var(--brand-blue);
+  box-shadow: 0 4px 20px rgba(28, 56, 234, 0.08);
+  transform: translateY(-2px);
+}
+
+.connected-icon {
+  width: 56px;
+  height: 56px;
+  background: var(--brand-blue-medium);
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  color: var(--brand-blue);
+}
+
+.connected-card h3 {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--gray-900);
+  margin-bottom: 12px;
+}
+
+.connected-card p {
+  font-size: 15px;
+  color: var(--gray-600);
+  line-height: 1.7;
+}
+
+/* ─── Team Access Section (Light Gray) ──────────────────────────────────── */
+.team-access {
   padding: 100px 0;
   background: var(--gray-50);
 }
 
-.roles-grid {
+.team-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 24px;
 }
 
-.role-card {
+.team-card {
   background: var(--white);
   border: 1px solid var(--gray-200);
   border-radius: var(--radius);
@@ -698,29 +770,66 @@ img {
   transition: all 200ms var(--ease-out);
 }
 
-.role-card:hover {
+.team-card:hover {
   box-shadow: var(--shadow-md);
   transform: translateY(-1px);
 }
 
-.role-badge {
+.team-role {
   display: inline-block;
   padding: 4px 12px;
   border-radius: 6px;
   font-size: 13px;
   font-weight: 600;
   margin-bottom: 12px;
+  background: var(--brand-blue-light);
+  color: var(--brand-blue);
 }
 
-.role-badge.admin { background: rgba(239, 68, 68, 0.08); color: #dc2626; }
-.role-badge.pm { background: var(--brand-blue-light); color: var(--brand-blue); }
-.role-badge.accounting { background: rgba(34, 197, 94, 0.08); color: #16a34a; }
-.role-badge.staff { background: rgba(0, 200, 255, 0.08); color: #0891b2; }
-
-.role-card p {
+.team-card p {
   font-size: 14px;
   color: var(--gray-600);
   line-height: 1.6;
+}
+
+/* ─── Trust Strip ───────────────────────────────────────────────────────── */
+.trust-strip {
+  padding: 48px 0;
+  background: var(--white);
+  border-top: 1px solid var(--gray-200);
+  border-bottom: 1px solid var(--gray-200);
+}
+
+.trust-header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.trust-header h3 {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--gray-900);
+}
+
+.trust-items {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+.trust-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--gray-700);
+}
+
+.trust-item svg {
+  color: var(--brand-blue);
+  flex-shrink: 0;
 }
 
 /* ─── CTA Section (Dark - The one bold section) ──────────────────────────── */
@@ -1013,7 +1122,8 @@ img {
 /* Card hover enhanced micro-interactions */
 .feature-card,
 .problem-card,
-.role-card,
+.team-card,
+.connected-card,
 .contact-card {
   transition: transform 300ms cubic-bezier(0.23, 1, 0.32, 1), box-shadow 300ms ease, border-color 200ms ease;
 }
@@ -1111,8 +1221,16 @@ img {
     grid-template-columns: 1fr;
   }
 
-  .roles-grid {
+  .team-grid {
     grid-template-columns: 1fr;
+  }
+
+  .connected-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .trust-items {
+    gap: 20px;
   }
 
   .contact-grid {
@@ -1198,8 +1316,18 @@ img {
     padding: 20px 16px;
   }
 
-  .role-card {
+  .team-card {
     padding: 20px 16px;
+  }
+
+  .connected-card {
+    padding: 24px 16px;
+  }
+
+  .trust-items {
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
   }
 
   .back-to-top {

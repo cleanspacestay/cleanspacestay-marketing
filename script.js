@@ -94,7 +94,7 @@ const fadeObserver = new IntersectionObserver((entries) => {
 });
 
 // Apply staggered fade-in to groups of cards
-document.querySelectorAll('.problem-card, .feature-card, .role-card, .contact-card').forEach((el, index) => {
+document.querySelectorAll('.problem-card, .feature-card, .team-card, .connected-card, .contact-card').forEach((el, index) => {
   el.classList.add('fade-up');
   el.style.transitionDelay = `${(index % 4) * 100}ms`;
   fadeObserver.observe(el);
@@ -190,7 +190,7 @@ window.addEventListener('scroll', () => {
 
 // ─── Tilt effect on feature cards (desktop only) ────────────────────────────
 if (window.matchMedia('(min-width: 768px)').matches) {
-  document.querySelectorAll('.feature-card, .problem-card').forEach(card => {
+  document.querySelectorAll('.feature-card, .problem-card, .connected-card').forEach(card => {
     card.addEventListener('mousemove', (e) => {
       const rect = card.getBoundingClientRect();
       const x = e.clientX - rect.left;
