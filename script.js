@@ -40,30 +40,45 @@ window.addEventListener('scroll', () => {
 
 // ─── Contact Form ────────────────────────────────────────────────────────────
 const contactForm = document.getElementById('contact-form');
-contactForm.addEventListener('submit', (e) => {
+contactForm.addEventListener('submit', async (e) => {
   e.preventDefault();
+  
+  const btn = contactForm.querySelector('button[type="submit"]');
+  const originalText = btn.textContent;
+  btn.textContent = 'Sending...';
+  btn.disabled = true;
   
   const formData = new FormData(contactForm);
   const data = Object.fromEntries(formData.entries());
   
-  const subject = encodeURIComponent(`Contact from ${data.name} — ${data.company || 'N/A'}`);
-  const body = encodeURIComponent(
-    `Name: ${data.name}\nEmail: ${data.email}\nCompany: ${data.company || 'N/A'}\n\nMessage:\n${data.message}`
-  );
-  window.location.href = `mailto:dev@cleanspacestay.com?subject=${subject}&body=${body}`;
-  
-  const btn = contactForm.querySelector('button[type="submit"]');
-  const originalText = btn.textContent;
-  btn.textContent = 'Opening Email Client...';
-  btn.style.background = '#22c55e';
-  btn.disabled = true;
-  
-  setTimeout(() => {
-    btn.textContent = originalText;
-    btn.style.background = '';
+  try {
+    const response = await fetch('/api/contact', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data),
+    });
+    
+    if (response.ok) {
+      btn.textContent = 'Sent! We\'ll be in touch.';
+      btn.style.background = '#22c55e';
+      contactForm.reset();
+      setTimeout(() => {
+        btn.textContent = originalText;
+        btn.style.background = '';
+        btn.disabled = false;
+      }, 4000);
+    } else {
+      throw new Error('Failed to send');
+    }
+  } catch (err) {
+    btn.textContent = 'Error — try again';
+    btn.style.background = '#ef4444';
     btn.disabled = false;
-    contactForm.reset();
-  }, 3000);
+    setTimeout(() => {
+      btn.textContent = originalText;
+      btn.style.background = '';
+    }, 3000);
+  }
 });
 
 // ─── Back to Top Button ─────────────────────────────────────────────────────
