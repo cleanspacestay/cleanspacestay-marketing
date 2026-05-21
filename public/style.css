@@ -1179,6 +1179,7 @@ img {
 
   .float-animation {
     animation: none;
+    transform: none !important;
   }
 
   .nav-toggle {
@@ -1190,7 +1191,16 @@ img {
   }
 
   .hero {
-    padding: 100px 0 48px;
+    padding: 80px 0 40px;
+  }
+
+  .nav-container {
+    height: 56px;
+    padding: 0 16px;
+  }
+
+  .nav-logo-img {
+    height: 36px;
   }
 
   .hero-container {
@@ -1231,9 +1241,19 @@ img {
     font-size: 12px;
   }
 
-  /* Hide dashboard on mobile — content-first */
+  /* Show dashboard on mobile — scaled down */
   .hero-visual {
-    display: none;
+    display: block;
+    max-width: 100%;
+    margin-top: 24px;
+  }
+
+  .dashboard-preview {
+    border-radius: 8px;
+  }
+
+  .dashboard-preview img {
+    border-radius: 8px;
   }
 
   .section-title {
@@ -1323,10 +1343,6 @@ img {
 
   .cta-content p {
     font-size: 15px;
-  }
-
-  .nav-logo-img {
-    height: 36px;
   }
 }
 
