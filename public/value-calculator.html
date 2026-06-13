@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Platform Value Calculator — CleanSpace Stay</title>
+  <meta name="description" content="Confidential: Interactive value model for the CleanSpace Stay platform." />
+  <!-- Private page: keep out of search engines -->
+  <meta name="robots" content="noindex, nofollow" />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon_32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon_16x16.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Shared site styles -->
+  <link rel="stylesheet" href="style.css?v=20260521" />
+
+  <style>
+    /* ──────────────────────────────────────────────────────────────
+       Value Calculator — "Boardroom Instrument"
+       Brand: navy #0A1A81 / #061058 · brand-blue #1C38EA · cyan #00C8FF
+       Big animated tabular figures · restrained decoration · brand-consistent
+       ────────────────────────────────────────────────────────────── */
+    :root { --positive: #16A34A; --positive-dark: #15803D; }
+
+    .vc-tnum { font-variant-numeric: tabular-nums; font-feature-settings: "tnum"; }
+    .vc-display { font-family: 'Space Grotesk', 'Inter', sans-serif; }
+
+    /* HERO */
+    .vc-hero {
+      background: linear-gradient(160deg, #061058 0%, #0A1A81 55%, #14258F 120%);
+      color: #fff;
+      padding: 150px 0 70px;
+      position: relative;
+      overflow: hidden;
+    }
+    .vc-hero::after {
+      content: "";
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(700px 360px at 88% -8%, rgba(0,200,255,0.18), transparent 60%),
+        radial-gradient(560px 300px at 4% 120%, rgba(28,56,234,0.30), transparent 55%);
+      pointer-events: none;
+    }
+    .vc-hero .container { position: relative; z-index: 1; }
+    .vc-eyebrow {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 12px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
+      color: #00C8FF; margin-bottom: 18px;
+    }
+    .vc-eyebrow::before { content: ""; width: 22px; height: 1.5px; background: #00C8FF; display: inline-block; }
+    .vc-hero h1 {
+      font-family: 'Space Grotesk', 'Inter', sans-serif;
+      font-size: clamp(30px, 5vw, 48px); font-weight: 700; line-height: 1.08;
+      letter-spacing: -1px; margin-bottom: 18px; max-width: 880px;
+    }
+    .vc-hero h1 .accent { color: #00C8FF; }
+    .vc-hero p.lede { font-size: clamp(15px, 2vw, 18px); color: #C8D4FF; max-width: 660px; }
+    .vc-hero .scrolldown {
+      display: inline-flex; align-items: center; gap: 10px;
+      margin-top: 30px; font-size: 14px; font-weight: 600; color: #fff;
+      background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.18);
+      border-radius: 999px; padding: 11px 20px; transition: background .2s var(--ease-out);
+    }
+    .vc-hero .scrolldown:hover { background: rgba(255,255,255,0.16); }
+
+    /* SECTION SCAFFOLD */
+    .vc-section { padding: 76px 0; }
+    .vc-section.alt { background: var(--gray-50); }
+    .vc-section.dark { background: linear-gradient(160deg, #061058 0%, #0A1A81 100%); color: #fff; }
+    .vc-kicker {
+      font-size: 12px; font-weight: 700; letter-spacing: 1.8px; text-transform: uppercase;
+      color: var(--brand-blue); margin-bottom: 12px;
+    }
+    .vc-section.dark .vc-kicker { color: #00C8FF; }
+    .vc-h2 {
+      font-family: 'Space Grotesk', 'Inter', sans-serif;
+      font-size: clamp(24px, 3.4vw, 34px); font-weight: 700; letter-spacing: -0.6px;
+      color: var(--dark); line-height: 1.15; margin-bottom: 16px; max-width: 760px;
+    }
+    .vc-section.dark .vc-h2 { color: #fff; }
+    .vc-lead { font-size: 17px; line-height: 1.7; color: var(--gray-600); max-width: 720px; }
+    .vc-section.dark .vc-lead { color: #C8D4FF; }
+    .vc-body p { font-size: 16px; line-height: 1.75; color: var(--gray-600); max-width: 760px; margin-bottom: 18px; }
+    .vc-section.dark .vc-body p { color: #C8D4FF; }
+    .vc-body strong { color: var(--dark); font-weight: 700; }
+    .vc-section.dark .vc-body strong { color: #fff; }
+
+    /* EXEC SUMMARY PILLARS */
+    .vc-pillars { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 40px; }
+    .vc-pillar {
+      background: #fff; border: 1px solid var(--gray-200); border-radius: 16px; padding: 26px 24px;
+      box-shadow: var(--shadow-sm); transition: transform .25s var(--ease-out), box-shadow .25s var(--ease-out);
+    }
+    .vc-pillar:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+    .vc-pillar .pnum {
+      width: 38px; height: 38px; border-radius: 10px; background: var(--brand-blue-light);
+      color: var(--brand-blue); display: flex; align-items: center; justify-content: center;
+      font-weight: 800; font-size: 16px; margin-bottom: 16px;
+    }
+    .vc-pillar h3 { font-size: 17px; font-weight: 700; color: var(--dark); margin-bottom: 9px; }
+    .vc-pillar p { font-size: 14.5px; line-height: 1.6; color: var(--gray-600); }
+
+    /* ── CALCULATOR ── */
+    .vc-calc { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 28px; margin-top: 44px; align-items: start; }
+    .vc-controls {
+      background: #fff; border: 1px solid var(--gray-200); border-radius: 18px; padding: 30px 30px 26px;
+      box-shadow: var(--shadow-md);
+    }
+    .vc-controls h3 { font-size: 18px; font-weight: 700; color: var(--dark); margin-bottom: 4px; }
+    .vc-controls .sub { font-size: 13.5px; color: var(--gray-500); margin-bottom: 26px; }
+
+    .vc-field { margin-bottom: 26px; }
+    .vc-field:last-child { margin-bottom: 0; }
+    .vc-field-top { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 12px; }
+    .vc-field-label { font-size: 14px; font-weight: 600; color: var(--gray-700); }
+    .vc-field-val {
+      font-family: 'Space Grotesk', 'Inter', sans-serif; font-weight: 700; font-size: 19px;
+      color: var(--brand-blue); font-variant-numeric: tabular-nums;
+    }
+    .vc-field-help { font-size: 12px; color: var(--gray-400); margin-top: 9px; line-height: 1.5; }
+
+    /* Range slider — custom brand styling */
+    input[type="range"].vc-range {
+      -webkit-appearance: none; appearance: none; width: 100%; height: 6px; border-radius: 999px;
+      background: var(--gray-200); outline: none; cursor: pointer; margin: 0;
+    }
+    input[type="range"].vc-range::-webkit-slider-thumb {
+      -webkit-appearance: none; appearance: none; width: 22px; height: 22px; border-radius: 50%;
+      background: var(--brand-blue); border: 3px solid #fff;
+      box-shadow: 0 0 0 1px var(--brand-blue), 0 2px 8px rgba(28,56,234,0.45);
+      transition: transform .15s var(--ease-out), box-shadow .15s var(--ease-out);
+    }
+    input[type="range"].vc-range::-webkit-slider-thumb:active {
+      transform: scale(1.18); box-shadow: 0 0 0 1px var(--brand-blue), 0 0 0 6px rgba(28,56,234,0.18);
+    }
+    input[type="range"].vc-range::-moz-range-thumb {
+      width: 22px; height: 22px; border-radius: 50%; background: var(--brand-blue); border: 3px solid #fff;
+      box-shadow: 0 0 0 1px var(--brand-blue), 0 2px 8px rgba(28,56,234,0.45); cursor: pointer;
+    }
+
+    /* RESULTS PANEL */
+    .vc-results {
+      background: linear-gradient(165deg, #0A1A81 0%, #061058 100%); color: #fff;
+      border-radius: 18px; padding: 32px 30px; position: sticky; top: 90px;
+      box-shadow: 0 18px 50px rgba(6,16,88,0.45); overflow: hidden;
+    }
+    .vc-results::after {
+      content: ""; position: absolute; inset: 0;
+      background: radial-gradient(420px 220px at 90% -10%, rgba(0,200,255,0.18), transparent 60%);
+      pointer-events: none;
+    }
+    .vc-results-inner { position: relative; z-index: 1; }
+    .vc-result-eyebrow { font-size: 12px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: #00C8FF; margin-bottom: 6px; }
+    .vc-hero-num {
+      font-family: 'Space Grotesk', 'Inter', sans-serif; font-weight: 700;
+      font-size: clamp(38px, 6vw, 52px); line-height: 1; letter-spacing: -1.5px;
+      font-variant-numeric: tabular-nums; margin: 2px 0 4px;
+    }
+    .vc-hero-num.pos { color: #4ADE80; }
+    .vc-result-caption { font-size: 13.5px; color: #B8C8F0; margin-bottom: 26px; }
+
+    .vc-metric-row { display: flex; align-items: center; justify-content: space-between; padding: 15px 0; border-top: 1px solid rgba(255,255,255,0.12); }
+    .vc-metric-row .m-label { font-size: 14px; color: #C8D4FF; max-width: 60%; }
+    .vc-metric-row .m-label span { display: block; font-size: 11.5px; color: #7A8FCC; margin-top: 2px; }
+    .vc-metric-row .m-val { font-family: 'Space Grotesk', 'Inter', sans-serif; font-weight: 700; font-size: 21px; font-variant-numeric: tabular-nums; white-space: nowrap; }
+    .vc-metric-row .m-val.cyan { color: #00C8FF; }
+
+    .vc-ev-band { margin-top: 22px; background: linear-gradient(135deg, rgba(0,200,255,0.16), rgba(28,56,234,0.20)); border: 1px solid rgba(0,200,255,0.30); border-radius: 14px; padding: 20px 22px; }
+    .vc-ev-band .e-label { font-size: 13px; color: #C8D4FF; margin-bottom: 4px; }
+    .vc-ev-band .e-val { font-family: 'Space Grotesk', 'Inter', sans-serif; font-weight: 700; font-size: clamp(26px, 4vw, 34px); letter-spacing: -0.8px; font-variant-numeric: tabular-nums; }
+    .vc-ev-band .e-sub { font-size: 12px; color: #9FB0E8; margin-top: 7px; line-height: 1.5; }
+
+    .vc-reset { margin-top: 22px; width: 100%; background: transparent; border: 1px solid rgba(255,255,255,0.25); color: #fff; border-radius: 10px; padding: 11px; font-size: 13.5px; font-weight: 600; font-family: var(--font); transition: background .2s var(--ease-out); }
+    .vc-reset:hover { background: rgba(255,255,255,0.1); }
+
+    /* VALUATION SCENARIO CARDS */
+    .vc-scenarios { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 40px; }
+    .vc-scn { border-radius: 16px; padding: 28px 26px; }
+    .vc-scn.light { background: #fff; border: 1px solid var(--gray-200); box-shadow: var(--shadow-sm); }
+    .vc-scn.deep { background: linear-gradient(160deg, #0A1A81, #061058); color: #fff; }
+    .vc-scn .tag { font-size: 11.5px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 12px; }
+    .vc-scn.light .tag { color: var(--brand-blue); }
+    .vc-scn.deep .tag { color: #00C8FF; }
+    .vc-scn h3 { font-family: 'Space Grotesk','Inter',sans-serif; font-size: 20px; font-weight: 700; margin-bottom: 8px; }
+    .vc-scn.light h3 { color: var(--dark); }
+    .vc-scn .figure { font-family: 'Space Grotesk','Inter',sans-serif; font-size: 30px; font-weight: 700; letter-spacing: -0.8px; margin: 6px 0 12px; }
+    .vc-scn.light .figure { color: var(--dark); }
+    .vc-scn.deep .figure { color: #fff; }
+    .vc-scn p { font-size: 14px; line-height: 1.6; }
+    .vc-scn.light p { color: var(--gray-600); }
+    .vc-scn.deep p { color: #C8D4FF; }
+
+    /* ARBITRAGE CALLOUT */
+    .vc-arb { margin-top: 26px; background: #fff; border: 1px solid var(--gray-200); border-left: 4px solid var(--brand-blue); border-radius: 12px; padding: 24px 26px; box-shadow: var(--shadow-sm); }
+    .vc-arb h4 { font-size: 16px; font-weight: 700; color: var(--dark); margin-bottom: 8px; }
+    .vc-arb p { font-size: 15px; line-height: 1.7; color: var(--gray-600); margin: 0; }
+    .vc-arb .hl { color: var(--brand-blue); font-weight: 700; }
+
+    /* PROPRIETARY TWO-COL */
+    .vc-prop { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; margin-top: 40px; }
+    .vc-prop-col { border-radius: 16px; padding: 28px 26px; }
+    .vc-prop-col.you { background: #fff; border: 1px solid var(--gray-200); box-shadow: var(--shadow-sm); }
+    .vc-prop-col.them { background: linear-gradient(160deg, #0A1A81, #061058); color: #fff; }
+    .vc-prop-col h3 { font-family: 'Space Grotesk','Inter',sans-serif; font-size: 18px; font-weight: 700; margin-bottom: 18px; }
+    .vc-prop-col.you h3 { color: var(--dark); }
+    .vc-prop-item { display: flex; gap: 13px; align-items: flex-start; margin-bottom: 16px; }
+    .vc-prop-item:last-child { margin-bottom: 0; }
+    .vc-prop-item .dot { flex-shrink: 0; width: 8px; height: 8px; border-radius: 50%; margin-top: 7px; }
+    .vc-prop-col.you .dot { background: var(--brand-blue); }
+    .vc-prop-col.them .dot { background: #00C8FF; }
+    .vc-prop-item .txt { font-size: 14.5px; line-height: 1.55; }
+    .vc-prop-col.you .txt { color: var(--gray-600); }
+    .vc-prop-col.them .txt { color: #C8D4FF; }
+    .vc-prop-item .txt strong { font-weight: 700; }
+    .vc-prop-col.you .txt strong { color: var(--dark); }
+    .vc-prop-col.them .txt strong { color: #fff; }
+
+    /* CTA */
+    .vc-cta { text-align: center; }
+    .vc-cta .vc-h2 { margin-left: auto; margin-right: auto; }
+    .vc-cta .vc-lead { margin: 0 auto 28px; }
+    .vc-cta-actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+
+    .vc-disclaimer { font-size: 12px; color: var(--gray-400); line-height: 1.6; max-width: 860px; margin: 38px auto 0; text-align: center; }
+
+    /* MOBILE */
+    @media (max-width: 900px) {
+      .vc-calc { grid-template-columns: 1fr; }
+      .vc-results { position: relative; top: 0; }
+      .vc-pillars, .vc-scenarios, .vc-prop { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 600px) {
+      .vc-hero { padding: 120px 0 54px; }
+      .vc-section { padding: 56px 0; }
+      .vc-controls, .vc-results { padding: 24px 20px; }
+    }
+  </style>
+</head>
+<body style="background:#ffffff;">
+
+  <!-- Navigation -->
+  <nav class="nav scrolled" id="nav">
+    <div class="nav-container">
+      <a href="/" class="nav-brand">
+        <img src="/assets/logo_nav_light_2x.png" alt="CleanSpace Stay" class="nav-logo-img" height="48" />
+      </a>
+      <div class="nav-links" id="nav-links">
+        <a href="/#problem">The Problem</a>
+        <a href="/#how-it-works">How It Works</a>
+        <a href="/#features">What's Inside</a>
+        <a href="/#contact">Contact</a>
+      </div>
+      <div class="nav-actions">
+        <a href="https://app.cleanspacestay.com" class="btn btn-ghost">Sign In</a>
+        <a href="/#contact" class="btn btn-primary">Book a Demo</a>
+      </div>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="/#problem">The Problem</a>
+    <a href="/#how-it-works">How It Works</a>
+    <a href="/#features">What's Inside</a>
+    <a href="/#contact">Contact</a>
+    <div class="mobile-menu-actions">
+      <a href="https://app.cleanspacestay.com" class="btn btn-ghost btn-full">Sign In</a>
+      <a href="/#contact" class="btn btn-primary btn-full">Book a Demo</a>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <header class="vc-hero">
+    <div class="container">
+      <div class="vc-eyebrow">Confidential &middot; Platform Value Model</div>
+      <h1>What CleanSpace Stay is worth — <span class="accent">and the math behind every dollar.</span></h1>
+      <p class="lede">CleanSpace Stay turns scattered, invisible crew-travel spend into controlled, project-tracked, reconciled dollars. This page lays out the full value case — then lets you move the assumptions yourself and watch the numbers respond in real time.</p>
+      <a href="#calculator" class="scrolldown">Open the interactive calculator &darr;</a>
+    </div>
+  </header>
+
+  <!-- EXECUTIVE SUMMARY -->
+  <section class="vc-section">
+    <div class="container">
+      <div class="vc-kicker">Executive Summary</div>
+      <h2 class="vc-h2">A platform that pays for itself, then keeps paying.</h2>
+      <div class="vc-body">
+        <p>Design-build and field-service firms track labor and materials to the penny, yet crew travel — flights, hotels, rideshares, per diems — often runs through forwarded email confirmations, personal credit cards, and a single coordinator's spreadsheet. It is real money, frequently in the seven figures annually, and it is the one major cost center with almost no structured visibility. When a job ends, no one can say cleanly what travel cost, which project it belonged to, or whether it was even necessary.</p>
+        <p>CleanSpace Stay closes that gap. It is a working platform and mobile-ready app that ingests booking confirmations automatically, ties every dollar to a specific project and crew member, routes approvals through the same <strong>Project Manager &rarr; Foreman &rarr; Worker</strong> structure these companies already run, and reconciles charges against accounting before they post. The result is not a dashboard for its own sake — it is <strong>recovered margin, eliminated administrative drag, and an auditable record</strong> of money that used to disappear into overhead.</p>
+        <p>The value of the platform is best understood through two lenses. The first is <strong>operational</strong>: what it saves the operating company every year. The second is <strong>strategic</strong>: what that saved margin, and the proprietary technology that produces it, is worth when the company is valued, sold, or rolled into a larger entity. The interactive model below quantifies both — and lets CleanSpace test it against its own real numbers.</p>
+      </div>
+
+      <div class="vc-pillars">
+        <div class="vc-pillar">
+          <div class="pnum">1</div>
+          <h3>Recovered travel spend</h3>
+          <p>Enforced budgets, deduplicated bookings, and stopping off-policy upgrades before they happen typically recover a meaningful slice of total travel cost — money that previously leaked silently.</p>
+        </div>
+        <div class="vc-pillar">
+          <div class="pnum">2</div>
+          <h3>Eliminated administrative drag</h3>
+          <p>Automated email-to-booking ingestion removes the manual re-keying a dedicated coordinator does today, freeing loaded headcount cost and reducing errors.</p>
+        </div>
+        <div class="vc-pillar">
+          <div class="pnum">3</div>
+          <h3>Multiplied at exit</h3>
+          <p>Every dollar of margin the platform protects is capitalized at the company's EBITDA multiple when it sells — turning operational savings into outsized enterprise value.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CALCULATOR -->
+  <section class="vc-section alt" id="calculator">
+    <div class="container">
+      <div class="vc-kicker">Interactive Model</div>
+      <h2 class="vc-h2">Move the assumptions. Watch the value.</h2>
+      <p class="vc-lead">These are the levers that drive the value case. Drag any slider and every figure on the right recalculates instantly. Start with the defaults, then replace them with CleanSpace's real numbers.</p>
+
+      <div class="vc-calc">
+        <!-- CONTROLS -->
+        <div class="vc-controls">
+          <h3>Your assumptions</h3>
+          <p class="sub">Adjust to match CleanSpace's actual operation.</p>
+
+          <div class="vc-field">
+            <div class="vc-field-top">
+              <label class="vc-field-label" for="spend">Annual crew-travel spend</label>
+              <span class="vc-field-val" id="spend-val">$2,000,000</span>
+            </div>
+            <input type="range" class="vc-range" id="spend" min="250000" max="10000000" step="50000" value="2000000" />
+            <p class="vc-field-help">Total yearly spend on flights, hotels, rideshares, and per diems across all crews and projects.</p>
+          </div>
+
+          <div class="vc-field">
+            <div class="vc-field-top">
+              <label class="vc-field-label" for="efficiency">Efficiency capture</label>
+              <span class="vc-field-val" id="efficiency-val">10%</span>
+            </div>
+            <input type="range" class="vc-range" id="efficiency" min="3" max="20" step="0.5" value="10" />
+            <p class="vc-field-help">Share of travel spend recovered through enforced budgets, deduplication, and stopping off-policy bookings. Industry experience supports 8&ndash;15%.</p>
+          </div>
+
+          <div class="vc-field">
+            <div class="vc-field-top">
+              <label class="vc-field-label" for="coordinator">Coordinator cost avoided</label>
+              <span class="vc-field-val" id="coordinator-val">$75,000</span>
+            </div>
+            <input type="range" class="vc-range" id="coordinator" min="0" max="200000" step="5000" value="75000" />
+            <p class="vc-field-help">Loaded annual cost of the back-office time replaced by automated email-to-booking ingestion.</p>
+          </div>
+
+          <div class="vc-field">
+            <div class="vc-field-top">
+              <label class="vc-field-label" for="multiple">Company EBITDA multiple</label>
+              <span class="vc-field-val" id="multiple-val">4.0&times;</span>
+            </div>
+            <input type="range" class="vc-range" id="multiple" min="2" max="8" step="0.1" value="4" />
+            <p class="vc-field-help">The multiple a buyer would pay on the company's earnings. Specialty contractors typically trade at 3&ndash;5&times;.</p>
+          </div>
+
+          <div class="vc-field">
+            <div class="vc-field-top">
+              <label class="vc-field-label" for="expansion">Multiple expansion from owned tech</label>
+              <span class="vc-field-val" id="expansion-val">+0.5&times;</span>
+            </div>
+            <input type="range" class="vc-range" id="expansion" min="0" max="1.5" step="0.1" value="0.5" />
+            <p class="vc-field-help">Premium a buyer applies for proprietary, transferable infrastructure they can deploy across other holdings.</p>
+          </div>
+        </div>
+
+        <!-- RESULTS -->
+        <div class="vc-results">
+          <div class="vc-results-inner">
+            <div class="vc-result-eyebrow">Annual EBITDA impact</div>
+            <div class="vc-hero-num pos vc-tnum" id="r-annual">$275,000</div>
+            <div class="vc-result-caption">Recurring savings the platform delivers every single year.</div>
+
+            <div class="vc-metric-row">
+              <div class="m-label">Travel spend recovered <span>Efficiency capture applied to annual spend</span></div>
+              <div class="m-val cyan vc-tnum" id="r-travel">$200,000</div>
+            </div>
+            <div class="vc-metric-row">
+              <div class="m-label">Back-office cost avoided <span>Automation replaces manual coordination</span></div>
+              <div class="m-val cyan vc-tnum" id="r-admin">$75,000</div>
+            </div>
+            <div class="vc-metric-row">
+              <div class="m-label">Payback period <span>Against a ~$500K build / acquisition cost</span></div>
+              <div class="m-val vc-tnum" id="r-payback">1.8 yrs</div>
+            </div>
+
+            <div class="vc-ev-band">
+              <div class="e-label">Added enterprise value at exit</div>
+              <div class="e-val vc-tnum" id="r-ev">$1,237,500</div>
+              <div class="e-sub" id="r-ev-sub">Annual savings &times; (4.0&times; base + 0.5&times; expansion premium)</div>
+            </div>
+
+            <button class="vc-reset" id="reset">Reset to defaults</button>
+          </div>
+        </div>
+      </div>
+
+      <p class="vc-disclaimer">Figures update live from the assumptions above and are illustrative. Defaults reflect a ~$2M annual travel spend and prevailing 2025&ndash;2026 valuation benchmarks (specialty-construction EBITDA multiples of ~3&ndash;5&times;; ~$500K cost-to-replicate the platform). Actual values depend on CleanSpace's verified spend, headcount, and deal structure. This page is confidential and is not financial advice.</p>
+    </div>
+  </section>
+
+  <!-- HOW WE DERIVE VALUE -->
+  <section class="vc-section">
+    <div class="container">
+      <div class="vc-kicker">How the value is derived</div>
+      <h2 class="vc-h2">Two honest valuations, depending on how you buy it.</h2>
+      <p class="vc-lead">CleanSpace Stay can be valued as a standalone piece of technology, or as a margin engine embedded inside the company that owns it. Both are defensible; they simply answer different questions.</p>
+
+      <div class="vc-scenarios">
+        <div class="vc-scn light">
+          <div class="tag">Buy the technology today</div>
+          <h3>Cost to Replicate</h3>
+          <div class="figure">$350K &ndash; $600K</div>
+          <p>The defensible floor for a pre-revenue, internally-built platform: what it would cost to rebuild from scratch. A full-stack system with an automated email-parsing engine, accounting integration, role-based access, audit logging, and crew messaging benchmarks at $250K&ndash;$1M and six-to-nine months of build time — with execution risk a buyer avoids entirely by acquiring the working asset.</p>
+        </div>
+        <div class="vc-scn deep">
+          <div class="tag">Value it by what it returns</div>
+          <h3>Embedded in the Exit</h3>
+          <div class="figure" id="scn-ev">$1.2M+</div>
+          <p>The bigger number. Once the platform is producing recurring savings inside an operating company, those savings are capitalized at the company's EBITDA multiple — and owning the proprietary technology can lift the multiple itself. This is the figure the calculator above computes live.</p>
+        </div>
+      </div>
+
+      <div class="vc-arb">
+        <h4>The arbitrage, in plain terms</h4>
+        <p>A specialty contractor sells for roughly <span class="hl">3&ndash;5&times; EBITDA</span>. So every <strong>$1</strong> of margin this platform protects is not worth a dollar at exit — it is worth <span class="hl">$4 or more</span>, because a buyer pays a multiple on it. The savings the platform generates each year therefore translate into a far larger one-time lift in enterprise value the day the company sells. Owning the technology that produces those savings can raise the whole multiple on top of that.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHAT YOU GET -->
+  <section class="vc-section alt">
+    <div class="container">
+      <div class="vc-kicker">What the company gets</div>
+      <h2 class="vc-h2">A working platform and mobile app — not a roadmap.</h2>
+      <p class="vc-lead">Everything below is built, not promised. It is the operating capability that produces the savings modeled above.</p>
+      <div class="vc-pillars" style="grid-template-columns:repeat(2,1fr);">
+        <div class="vc-pillar"><h3>Unified travel ledger</h3><p>Every booking organized under its project, customer, and budget — so travel can never again hide in overhead.</p></div>
+        <div class="vc-pillar"><h3>Automated email-to-booking</h3><p>Forward a confirmation and get a structured, searchable record in seconds, with no manual re-keying.</p></div>
+        <div class="vc-pillar"><h3>Field-to-office approvals</h3><p>Foremen request, project managers approve — mapped to the exact PM &rarr; Foreman &rarr; Worker structure the business already runs.</p></div>
+        <div class="vc-pillar"><h3>Accounting reconciliation</h3><p>Match charges to bookings before they clear, turning month-end cleanup into a real-time control.</p></div>
+        <div class="vc-pillar"><h3>Live crew visibility</h3><p>See who is where, on which project, on which dates — across every active job at once.</p></div>
+        <div class="vc-pillar"><h3>Role-based access &amp; audit logs</h3><p>Every action recorded and exportable, with each role seeing only what is relevant to them.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROPRIETARY TECH -->
+  <section class="vc-section">
+    <div class="container">
+      <div class="vc-kicker">Proprietary, fully-owned technology</div>
+      <h2 class="vc-h2">Why owning the stack outright changes the equation.</h2>
+      <p class="vc-lead">CleanSpace Stay runs entirely on infrastructure the company owns and controls — no per-seat SaaS fees, no vendor lock-in, and no dependency that fails to transfer in a sale. That ownership carries value in two directions.</p>
+
+      <div class="vc-prop">
+        <div class="vc-prop-col you">
+          <h3>To you, operating it</h3>
+          <div class="vc-prop-item"><span class="dot"></span><div class="txt"><strong>No recurring license fees</strong> draining margin as you grow — scale crews without scaling software cost.</div></div>
+          <div class="vc-prop-item"><span class="dot"></span><div class="txt"><strong>Your data is your asset.</strong> Vendor pricing history, route costs, and project spend become private intelligence for bidding and negotiation.</div></div>
+          <div class="vc-prop-item"><span class="dot"></span><div class="txt"><strong>You set the roadmap.</strong> The platform bends to how CleanSpace works — not the other way around.</div></div>
+          <div class="vc-prop-item"><span class="dot"></span><div class="txt"><strong>Process survives turnover.</strong> Travel logistics live in software, not in one coordinator's head.</div></div>
+        </div>
+        <div class="vc-prop-col them">
+          <h3>To someone acquiring you</h3>
+          <div class="vc-prop-item"><span class="dot"></span><div class="txt"><strong>A real, transferable asset</strong> on the balance sheet — proprietary IP, not a rented subscription that may not convey.</div></div>
+          <div class="vc-prop-item"><span class="dot"></span><div class="txt"><strong>De-risked operations.</strong> Auditable, software-enforced workflows make the business cleaner to diligence and safer to buy.</div></div>
+          <div class="vc-prop-item"><span class="dot"></span><div class="txt"><strong>Instant margin uplift</strong> deployable across every other company a buyer owns — a concrete reason to pay a premium.</div></div>
+          <div class="vc-prop-item"><span class="dot"></span><div class="txt"><strong>Roll-up infrastructure.</strong> For a buyer assembling a national platform, this becomes the backbone the whole group runs on.</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="vc-section dark vc-cta">
+    <div class="container">
+      <div class="vc-kicker">The bottom line</div>
+      <h2 class="vc-h2">Software cost going in. Multiplied margin coming out.</h2>
+      <p class="vc-lead">Acquire the platform near its cost to replicate, and capture savings that are worth several times that the day the company is valued. The numbers above are yours to test — bring CleanSpace's real spend and we will lock in a deal-ready model.</p>
+      <div class="vc-cta-actions">
+        <a href="mailto:hello@cleanspacestay.com?subject=CleanSpace%20Stay%20Platform%20Valuation" class="btn btn-primary">Discuss the numbers</a>
+        <a href="#calculator" class="btn btn-ghost" style="color:#fff;border-color:rgba(255,255,255,0.4);">Back to the calculator</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="nav-brand">
+            <img src="/assets/logo_footer_2x.png" alt="CleanSpace Stay" class="footer-logo-img" height="44" />
+          </div>
+          <p class="footer-description">Full visibility into crew travel spend — every booking, every project, every dollar. From request to reconciliation.</p>
+        </div>
+        <div class="footer-links">
+          <h4>Platform</h4>
+          <a href="/#how-it-works">How It Works</a>
+          <a href="/#features">What's Inside</a>
+          <a href="https://app.cleanspacestay.com">Sign In</a>
+        </div>
+        <div class="footer-links">
+          <h4>Company</h4>
+          <a href="/#contact">Contact</a>
+          <a href="/privacy-policy">Privacy Policy</a>
+          <a href="/terms-of-service">Terms of Service</a>
+        </div>
+        <div class="footer-links">
+          <h4>Support</h4>
+          <a href="mailto:hello@cleanspacestay.com">Email Support</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 CleanSpace Stay. All rights reserved. &middot; Confidential valuation model.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js?v=20260521"></script>
+  <script>
+    (function () {
+      "use strict";
+      var BUILD_COST = 500000; // ~midpoint of cost-to-replicate range, used for payback
+
+      var els = {
+        spend: document.getElementById("spend"),
+        efficiency: document.getElementById("efficiency"),
+        coordinator: document.getElementById("coordinator"),
+        multiple: document.getElementById("multiple"),
+        expansion: document.getElementById("expansion"),
+        spendVal: document.getElementById("spend-val"),
+        efficiencyVal: document.getElementById("efficiency-val"),
+        coordinatorVal: document.getElementById("coordinator-val"),
+        multipleVal: document.getElementById("multiple-val"),
+        expansionVal: document.getElementById("expansion-val"),
+        rAnnual: document.getElementById("r-annual"),
+        rTravel: document.getElementById("r-travel"),
+        rAdmin: document.getElementById("r-admin"),
+        rPayback: document.getElementById("r-payback"),
+        rEv: document.getElementById("r-ev"),
+        rEvSub: document.getElementById("r-ev-sub"),
+        scnEv: document.getElementById("scn-ev"),
+        reset: document.getElementById("reset")
+      };
+
+      var DEFAULTS = { spend: 2000000, efficiency: 10, coordinator: 75000, multiple: 4, expansion: 0.5 };
+
+      function fmtUSD(n) {
+        return "$" + Math.round(n).toLocaleString("en-US");
+      }
+      function fmtCompact(n) {
+        if (n >= 1000000) {
+          var m = n / 1000000;
+          return "$" + (m >= 10 ? m.toFixed(1) : m.toFixed(2)).replace(/\.0+$/, "").replace(/(\.\d)0$/, "$1") + "M";
+        }
+        if (n >= 1000) return "$" + Math.round(n / 1000) + "K";
+        return "$" + Math.round(n);
+      }
+
+      // Smooth count-up animation between values
+      function animateNumber(el, to, formatter, key) {
+        var fromAttr = el.getAttribute("data-cur");
+        var from = fromAttr === null ? to : parseFloat(fromAttr);
+        var start = performance.now();
+        var dur = 320;
+        if (el._raf) cancelAnimationFrame(el._raf);
+        function step(now) {
+          var t = Math.min(1, (now - start) / dur);
+          var eased = 1 - Math.pow(1 - t, 3); // ease-out cubic
+          var cur = from + (to - from) * eased;
+          el.textContent = formatter(cur);
+          if (t < 1) { el._raf = requestAnimationFrame(step); }
+          else { el.setAttribute("data-cur", to); }
+        }
+        el._raf = requestAnimationFrame(step);
+      }
+
+      function paybackText(years) {
+        if (!isFinite(years) || years <= 0) return "Immediate";
+        if (years < 1) return Math.round(years * 12) + " mo";
+        return years.toFixed(1) + " yrs";
+      }
+
+      function recompute(animate) {
+        var spend = parseFloat(els.spend.value);
+        var eff = parseFloat(els.efficiency.value);
+        var coord = parseFloat(els.coordinator.value);
+        var mult = parseFloat(els.multiple.value);
+        var exp = parseFloat(els.expansion.value);
+
+        var travel = spend * (eff / 100);
+        var annual = travel + coord;
+        var payback = annual > 0 ? BUILD_COST / annual : Infinity;
+        var ev = annual * (mult + exp);
+
+        // Live labels
+        els.spendVal.textContent = fmtUSD(spend);
+        els.efficiencyVal.textContent = eff + "%";
+        els.coordinatorVal.textContent = fmtUSD(coord);
+        els.multipleVal.innerHTML = mult.toFixed(1) + "&times;";
+        els.expansionVal.innerHTML = "+" + exp.toFixed(1) + "&times;";
+
+        if (animate) {
+          animateNumber(els.rAnnual, annual, fmtUSD);
+          animateNumber(els.rTravel, travel, fmtUSD);
+          animateNumber(els.rAdmin, coord, fmtUSD);
+          animateNumber(els.rEv, ev, fmtUSD);
+        } else {
+          els.rAnnual.textContent = fmtUSD(annual); els.rAnnual.setAttribute("data-cur", annual);
+          els.rTravel.textContent = fmtUSD(travel); els.rTravel.setAttribute("data-cur", travel);
+          els.rAdmin.textContent = fmtUSD(coord); els.rAdmin.setAttribute("data-cur", coord);
+          els.rEv.textContent = fmtUSD(ev); els.rEv.setAttribute("data-cur", ev);
+        }
+
+        els.rPayback.textContent = paybackText(payback);
+        els.rEvSub.innerHTML = "Annual savings &times; (" + mult.toFixed(1) + "&times; base + " + exp.toFixed(1) + "&times; expansion premium)";
+        els.scnEv.textContent = fmtCompact(ev);
+      }
+
+      ["spend", "efficiency", "coordinator", "multiple", "expansion"].forEach(function (k) {
+        els[k].addEventListener("input", function () { recompute(true); });
+      });
+
+      els.reset.addEventListener("click", function () {
+        Object.keys(DEFAULTS).forEach(function (k) { els[k].value = DEFAULTS[k]; });
+        recompute(true);
+      });
+
+      recompute(false);
+    })();
+  </script>
+</body>
+</html>
