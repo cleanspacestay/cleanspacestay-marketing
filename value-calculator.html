@@ -460,9 +460,9 @@
           <div class="vc-field">
             <div class="vc-field-top">
               <label class="vc-field-label" for="displace">Share of that work the platform absorbs</label>
-              <span class="vc-field-val" id="displace-val">75%</span>
+              <span class="vc-field-val" id="displace-val">100%</span>
             </div>
-            <input type="range" class="vc-range" id="displace" min="25" max="100" step="5" value="75" />
+            <input type="range" class="vc-range" id="displace" min="25" max="100" step="5" value="100" />
             <p class="vc-field-help">Automated email-to-booking ingestion and reconciliation removes most of the manual workload &mdash; freeing that cost, or absorbing growth without the next hire.</p>
           </div>
 
@@ -498,20 +498,20 @@
         <div class="vc-results">
           <div class="vc-results-inner">
             <div class="vc-result-eyebrow">Value this creates for the acquirer</div>
-            <div class="vc-hero-num pos vc-tnum" id="r-ev">$1,953,000</div>
+            <div class="vc-hero-num pos vc-tnum" id="r-ev">$2,304,000</div>
             <div class="vc-result-caption" id="r-ev-cap">Enterprise value the platform adds — the basis for what it's worth to a buyer.</div>
 
             <div class="vc-metric-row">
               <div class="m-label">Annual EBITDA impact <span>Recurring savings, per company, every year</span></div>
-              <div class="m-val cyan vc-tnum" id="r-annual">$434,000</div>
+              <div class="m-val cyan vc-tnum" id="r-annual">$512,000</div>
             </div>
             <div class="vc-metric-row">
               <div class="m-label">&mdash; Travel recovered <span>Efficiency capture on annual travel spend</span></div>
               <div class="m-val vc-tnum" id="r-travel">$200,000</div>
             </div>
             <div class="vc-metric-row">
-              <div class="m-label">&mdash; Back-office labor freed <span id="r-labor-sub">3 staff &times; $104K &times; 75% absorbed</span></div>
-              <div class="m-val vc-tnum" id="r-labor">$234,000</div>
+              <div class="m-label">&mdash; Back-office labor freed <span id="r-labor-sub">3 staff &times; $104K &times; 100% absorbed</span></div>
+              <div class="m-val vc-tnum" id="r-labor">$312,000</div>
             </div>
             <div class="vc-metric-row">
               <div class="m-label">Value multiplier applied <span id="r-mult-sub">EBITDA multiple &times; companies deployed</span></div>
@@ -520,7 +520,7 @@
 
             <div class="vc-ask-band">
               <div class="a-label">Suggested acquisition range</div>
-              <div class="a-val vc-tnum" id="r-ask">$586K &ndash; $977K</div>
+              <div class="a-val vc-tnum" id="r-ask">$691K &ndash; $1.15M</div>
               <div class="a-sub" id="r-ask-sub">A 30&ndash;50% share of the value created — the buyer keeps the majority, and the price scales with their own impact.</div>
             </div>
 
@@ -546,7 +546,7 @@
         <div class="vc-scn deep">
           <div class="tag">What it's worth to the buyer</div>
           <h3>Value Created &rarr; The Ask</h3>
-          <div class="figure" id="scn-ev">$1.2M+</div>
+          <div class="figure" id="scn-ev">$2.3M</div>
           <p>The number that sets the price. Recurring savings are capitalized at the company's EBITDA multiple, multiplied across every company the buyer can deploy the owned technology on. The acquisition ask is a <strong>30&ndash;50% share</strong> of that value &mdash; the buyer keeps the majority, so the deal nets clearly positive for them while the price reflects what they actually gain.</p>
         </div>
         <div class="vc-scn light">
@@ -730,7 +730,7 @@
         reset: document.getElementById("reset")
       };
 
-      var DEFAULTS = { spend: 2000000, efficiency: 10, staff: 3, loaded: 104000, displace: 75, multiple: 4, expansion: 0.5, companies: 1 };
+      var DEFAULTS = { spend: 2000000, efficiency: 10, staff: 3, loaded: 104000, displace: 100, multiple: 4, expansion: 0.5, companies: 1 };
 
       function fmtUSD(n) {
         return "$" + Math.round(n).toLocaleString("en-US");
