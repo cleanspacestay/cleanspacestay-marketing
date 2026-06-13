@@ -178,7 +178,15 @@
     .vc-ev-band .e-val { font-family: 'Space Grotesk', 'Inter', sans-serif; font-weight: 700; font-size: clamp(26px, 4vw, 34px); letter-spacing: -0.8px; font-variant-numeric: tabular-nums; }
     .vc-ev-band .e-sub { font-size: 12px; color: #9FB0E8; margin-top: 7px; line-height: 1.5; }
 
-    .vc-reset { margin-top: 22px; width: 100%; background: transparent; border: 1px solid rgba(255,255,255,0.25); color: #fff; border-radius: 10px; padding: 11px; font-size: 13.5px; font-weight: 600; font-family: var(--font); transition: background .2s var(--ease-out); }
+    /* ASK / ACQUISITION band — the headline number we want them anchored on */
+    .vc-ask-band { margin-top: 14px; background: linear-gradient(135deg, rgba(0,200,255,0.20), rgba(28,56,234,0.28)); border: 1.5px solid rgba(0,200,255,0.45); border-radius: 14px; padding: 22px 22px; }
+    .vc-ask-band .a-label { font-size: 12px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; color: #00C8FF; margin-bottom: 6px; }
+    .vc-ask-band .a-val { font-family: 'Space Grotesk', 'Inter', sans-serif; font-weight: 700; font-size: clamp(30px, 5vw, 42px); letter-spacing: -1px; line-height: 1; color: #fff; font-variant-numeric: tabular-nums; }
+    .vc-ask-band .a-sub { font-size: 12.5px; color: #C8D4FF; margin-top: 9px; line-height: 1.55; }
+    .vc-floor-note { font-size: 12px; color: #7A8FCC; margin-top: 14px; line-height: 1.5; }
+    .vc-floor-note strong { color: #B8C8F0; font-weight: 700; }
+
+    .vc-reset { margin-top: 18px; width: 100%; background: transparent; border: 1px solid rgba(255,255,255,0.25); color: #fff; border-radius: 10px; padding: 11px; font-size: 13.5px; font-weight: 600; font-family: var(--font); transition: background .2s var(--ease-out); }
     .vc-reset:hover { background: rgba(255,255,255,0.1); }
 
     /* VALUATION SCENARIO CARDS */
@@ -314,8 +322,8 @@
         </div>
         <div class="vc-pillar">
           <div class="pnum">3</div>
-          <h3>Multiplied at exit</h3>
-          <p>Every dollar of margin the platform protects is capitalized at the company's EBITDA multiple when it sells — turning operational savings into outsized enterprise value.</p>
+          <h3>Priced on value, not build cost</h3>
+          <p>Every dollar of margin the platform protects is capitalized at the company's EBITDA multiple — and across every company a buyer can run it on. That value, not the cost of the code, is what sets the acquisition price.</p>
         </div>
       </div>
     </div>
@@ -326,7 +334,7 @@
     <div class="container">
       <div class="vc-kicker">Interactive Model</div>
       <h2 class="vc-h2">Move the assumptions. Watch the value.</h2>
-      <p class="vc-lead">These are the levers that drive the value case. Drag any slider and every figure on the right recalculates instantly. Start with the defaults, then replace them with CleanSpace's real numbers.</p>
+      <p class="vc-lead">This platform is priced on the value it creates for the acquirer &mdash; not on what it cost to build. Drag any slider and the value created, and the suggested acquisition range derived from it, recalculate instantly. Start with the defaults, then replace them with CleanSpace's real numbers.</p>
 
       <div class="vc-calc">
         <!-- CONTROLS -->
@@ -378,68 +386,79 @@
             <input type="range" class="vc-range" id="expansion" min="0" max="1.5" step="0.1" value="0.5" />
             <p class="vc-field-help">Premium a buyer applies for proprietary, transferable infrastructure they can deploy across other holdings.</p>
           </div>
+
+          <div class="vc-field">
+            <div class="vc-field-top">
+              <label class="vc-field-label" for="companies">Companies the buyer runs it across</label>
+              <span class="vc-field-val" id="companies-val">1</span>
+            </div>
+            <input type="range" class="vc-range" id="companies" min="1" max="10" step="1" value="1" />
+            <p class="vc-field-help">Owned, transferable technology isn't valued on one company — it's valued on every company a buyer can deploy it across. A roll-up or PE acquirer multiplies the value here.</p>
+          </div>
         </div>
 
         <!-- RESULTS -->
         <div class="vc-results">
           <div class="vc-results-inner">
-            <div class="vc-result-eyebrow">Annual EBITDA impact</div>
-            <div class="vc-hero-num pos vc-tnum" id="r-annual">$275,000</div>
-            <div class="vc-result-caption">Recurring savings the platform delivers every single year.</div>
+            <div class="vc-result-eyebrow">Value this creates for the acquirer</div>
+            <div class="vc-hero-num pos vc-tnum" id="r-ev">$1,237,500</div>
+            <div class="vc-result-caption" id="r-ev-cap">Enterprise value the platform adds — the basis for what it's worth to a buyer.</div>
 
             <div class="vc-metric-row">
-              <div class="m-label">Travel spend recovered <span>Efficiency capture applied to annual spend</span></div>
-              <div class="m-val cyan vc-tnum" id="r-travel">$200,000</div>
+              <div class="m-label">Annual EBITDA impact <span>Recurring savings, per company, every year</span></div>
+              <div class="m-val cyan vc-tnum" id="r-annual">$275,000</div>
             </div>
             <div class="vc-metric-row">
-              <div class="m-label">Back-office cost avoided <span>Automation replaces manual coordination</span></div>
-              <div class="m-val cyan vc-tnum" id="r-admin">$75,000</div>
+              <div class="m-label">Travel recovered + back-office <span>Efficiency capture plus coordination avoided</span></div>
+              <div class="m-val cyan vc-tnum" id="r-savings">$275,000</div>
             </div>
             <div class="vc-metric-row">
-              <div class="m-label">Payback period <span>Against a ~$500K build / acquisition cost</span></div>
-              <div class="m-val vc-tnum" id="r-payback">1.8 yrs</div>
+              <div class="m-label">Value multiplier applied <span id="r-mult-sub">EBITDA multiple &times; companies deployed</span></div>
+              <div class="m-val vc-tnum" id="r-mult">4.5&times;</div>
             </div>
 
-            <div class="vc-ev-band">
-              <div class="e-label">Added enterprise value at exit</div>
-              <div class="e-val vc-tnum" id="r-ev">$1,237,500</div>
-              <div class="e-sub" id="r-ev-sub">Annual savings &times; (4.0&times; base + 0.5&times; expansion premium)</div>
+            <div class="vc-ask-band">
+              <div class="a-label">Suggested acquisition range</div>
+              <div class="a-val vc-tnum" id="r-ask">$371K &ndash; $619K</div>
+              <div class="a-sub" id="r-ask-sub">A 30&ndash;50% share of the value created — the buyer keeps the majority, and the price scales with their own impact.</div>
             </div>
+
+            <p class="vc-floor-note" id="r-floor">Build-it-yourself alternative: <strong>~$500K</strong> and 6&ndash;9 months with execution risk. That's the floor — not the price of a working, de-risked asset.</p>
 
             <button class="vc-reset" id="reset">Reset to defaults</button>
           </div>
         </div>
       </div>
 
-      <p class="vc-disclaimer">Figures update live from the assumptions above and are illustrative. Defaults reflect a ~$2M annual travel spend and prevailing 2025&ndash;2026 valuation benchmarks (specialty-construction EBITDA multiples of ~3&ndash;5&times;; ~$500K cost-to-replicate the platform). Actual values depend on CleanSpace's verified spend, headcount, and deal structure. This page is confidential and is not financial advice.</p>
+      <p class="vc-disclaimer">Figures update live from the assumptions above and are illustrative. The suggested acquisition range is a 30&ndash;50% share of the enterprise value the platform creates, floored at the ~$500K cost to rebuild it. Defaults reflect a ~$2M annual travel spend at a single company and prevailing 2025&ndash;2026 valuation benchmarks (specialty-construction EBITDA multiples of ~3&ndash;5&times;). Value scales with the number of companies a buyer deploys it across. Actual values depend on CleanSpace's verified spend, headcount, and deal structure. This page is confidential and is not financial advice.</p>
     </div>
   </section>
 
   <!-- HOW WE DERIVE VALUE -->
   <section class="vc-section">
     <div class="container">
-      <div class="vc-kicker">How the value is derived</div>
-      <h2 class="vc-h2">Two honest valuations, depending on how you buy it.</h2>
-      <p class="vc-lead">CleanSpace Stay can be valued as a standalone piece of technology, or as a margin engine embedded inside the company that owns it. Both are defensible; they simply answer different questions.</p>
+      <div class="vc-kicker">How the price is set</div>
+      <h2 class="vc-h2">Priced on the value it creates &mdash; not on what it cost to build.</h2>
+      <p class="vc-lead">A working, revenue-protecting platform is worth a share of the value it delivers to the buyer, not the price of its source code. The floor is what it would cost to rebuild; the ceiling is the value created. The ask sits between them.</p>
 
       <div class="vc-scenarios">
-        <div class="vc-scn light">
-          <div class="tag">Buy the technology today</div>
-          <h3>Cost to Replicate</h3>
-          <div class="figure">$350K &ndash; $600K</div>
-          <p>The defensible floor for a pre-revenue, internally-built platform: what it would cost to rebuild from scratch. A full-stack system with an automated email-parsing engine, accounting integration, role-based access, audit logging, and crew messaging benchmarks at $250K&ndash;$1M and six-to-nine months of build time — with execution risk a buyer avoids entirely by acquiring the working asset.</p>
-        </div>
         <div class="vc-scn deep">
-          <div class="tag">Value it by what it returns</div>
-          <h3>Embedded in the Exit</h3>
+          <div class="tag">What it's worth to the buyer</div>
+          <h3>Value Created &rarr; The Ask</h3>
           <div class="figure" id="scn-ev">$1.2M+</div>
-          <p>The bigger number. Once the platform is producing recurring savings inside an operating company, those savings are capitalized at the company's EBITDA multiple — and owning the proprietary technology can lift the multiple itself. This is the figure the calculator above computes live.</p>
+          <p>The number that sets the price. Recurring savings are capitalized at the company's EBITDA multiple, multiplied across every company the buyer can deploy the owned technology on. The acquisition ask is a <strong>30&ndash;50% share</strong> of that value &mdash; the buyer keeps the majority, so the deal nets clearly positive for them while the price reflects what they actually gain.</p>
+        </div>
+        <div class="vc-scn light">
+          <div class="tag">The walk-away alternative</div>
+          <h3>Cost to Rebuild (the floor)</h3>
+          <div class="figure">~$500K</div>
+          <p>A buyer's only alternative is to rebuild from scratch: a full-stack system with an automated email-parsing engine, accounting integration, role-based access, audit logging, and crew messaging &mdash; $250K&ndash;$1M and six-to-nine months of build time, carrying execution risk. That cost is the floor beneath the ask, never the ask itself. Acquiring the working, de-risked asset is faster, cheaper, and certain.</p>
         </div>
       </div>
 
       <div class="vc-arb">
-        <h4>The arbitrage, in plain terms</h4>
-        <p>A specialty contractor sells for roughly <span class="hl">3&ndash;5&times; EBITDA</span>. So every <strong>$1</strong> of margin this platform protects is not worth a dollar at exit — it is worth <span class="hl">$4 or more</span>, because a buyer pays a multiple on it. The savings the platform generates each year therefore translate into a far larger one-time lift in enterprise value the day the company sells. Owning the technology that produces those savings can raise the whole multiple on top of that.</p>
+        <h4>Why the value &mdash; not the build cost &mdash; sets the price</h4>
+        <p>A specialty contractor sells for roughly <span class="hl">3&ndash;5&times; EBITDA</span>. So every <strong>$1</strong> of margin this platform protects is not worth a dollar at exit — it is worth <span class="hl">$4 or more</span>, because a buyer pays a multiple on it. Owned, transferable technology is then valued across <em>every</em> company a buyer can run it on, not just one. Pricing on build cost would hand the buyer all of that upside for free; pricing on a share of the value created keeps it where it belongs — and rises automatically as the buyer's scale grows.</p>
       </div>
     </div>
   </section>
@@ -539,28 +558,34 @@
       "use strict";
       var BUILD_COST = 500000; // ~midpoint of cost-to-replicate range, used for payback
 
+      var ASK_LOW = 0.30, ASK_HIGH = 0.50; // value-share band
+
       var els = {
         spend: document.getElementById("spend"),
         efficiency: document.getElementById("efficiency"),
         coordinator: document.getElementById("coordinator"),
         multiple: document.getElementById("multiple"),
         expansion: document.getElementById("expansion"),
+        companies: document.getElementById("companies"),
         spendVal: document.getElementById("spend-val"),
         efficiencyVal: document.getElementById("efficiency-val"),
         coordinatorVal: document.getElementById("coordinator-val"),
         multipleVal: document.getElementById("multiple-val"),
         expansionVal: document.getElementById("expansion-val"),
-        rAnnual: document.getElementById("r-annual"),
-        rTravel: document.getElementById("r-travel"),
-        rAdmin: document.getElementById("r-admin"),
-        rPayback: document.getElementById("r-payback"),
+        companiesVal: document.getElementById("companies-val"),
         rEv: document.getElementById("r-ev"),
-        rEvSub: document.getElementById("r-ev-sub"),
+        rEvCap: document.getElementById("r-ev-cap"),
+        rAnnual: document.getElementById("r-annual"),
+        rSavings: document.getElementById("r-savings"),
+        rMult: document.getElementById("r-mult"),
+        rMultSub: document.getElementById("r-mult-sub"),
+        rAsk: document.getElementById("r-ask"),
+        rAskSub: document.getElementById("r-ask-sub"),
         scnEv: document.getElementById("scn-ev"),
         reset: document.getElementById("reset")
       };
 
-      var DEFAULTS = { spend: 2000000, efficiency: 10, coordinator: 75000, multiple: 4, expansion: 0.5 };
+      var DEFAULTS = { spend: 2000000, efficiency: 10, coordinator: 75000, multiple: 4, expansion: 0.5, companies: 1 };
 
       function fmtUSD(n) {
         return "$" + Math.round(n).toLocaleString("en-US");
@@ -592,23 +617,23 @@
         el._raf = requestAnimationFrame(step);
       }
 
-      function paybackText(years) {
-        if (!isFinite(years) || years <= 0) return "Immediate";
-        if (years < 1) return Math.round(years * 12) + " mo";
-        return years.toFixed(1) + " yrs";
-      }
-
       function recompute(animate) {
         var spend = parseFloat(els.spend.value);
         var eff = parseFloat(els.efficiency.value);
         var coord = parseFloat(els.coordinator.value);
         var mult = parseFloat(els.multiple.value);
         var exp = parseFloat(els.expansion.value);
+        var companies = parseInt(els.companies.value, 10);
 
         var travel = spend * (eff / 100);
-        var annual = travel + coord;
-        var payback = annual > 0 ? BUILD_COST / annual : Infinity;
-        var ev = annual * (mult + exp);
+        var annualPerCo = travel + coord;            // savings at ONE company
+        var totalMultiple = mult + exp;              // EBITDA multiple incl. owned-tech premium
+        // Value created = per-company savings capitalized, across every company deployed
+        var ev = annualPerCo * totalMultiple * companies;
+        // Acquisition ask = 30-50% share of value created, floored at rebuild cost
+        var askLow = Math.max(ev * ASK_LOW, BUILD_COST);
+        var askHigh = Math.max(ev * ASK_HIGH, BUILD_COST * 1.2);
+        if (askHigh < askLow) askHigh = askLow;
 
         // Live labels
         els.spendVal.textContent = fmtUSD(spend);
@@ -616,25 +641,41 @@
         els.coordinatorVal.textContent = fmtUSD(coord);
         els.multipleVal.innerHTML = mult.toFixed(1) + "&times;";
         els.expansionVal.innerHTML = "+" + exp.toFixed(1) + "&times;";
+        els.companiesVal.textContent = companies;
 
         if (animate) {
-          animateNumber(els.rAnnual, annual, fmtUSD);
-          animateNumber(els.rTravel, travel, fmtUSD);
-          animateNumber(els.rAdmin, coord, fmtUSD);
           animateNumber(els.rEv, ev, fmtUSD);
+          animateNumber(els.rAnnual, annualPerCo, fmtUSD);
+          animateNumber(els.rSavings, annualPerCo, fmtUSD);
         } else {
-          els.rAnnual.textContent = fmtUSD(annual); els.rAnnual.setAttribute("data-cur", annual);
-          els.rTravel.textContent = fmtUSD(travel); els.rTravel.setAttribute("data-cur", travel);
-          els.rAdmin.textContent = fmtUSD(coord); els.rAdmin.setAttribute("data-cur", coord);
           els.rEv.textContent = fmtUSD(ev); els.rEv.setAttribute("data-cur", ev);
+          els.rAnnual.textContent = fmtUSD(annualPerCo); els.rAnnual.setAttribute("data-cur", annualPerCo);
+          els.rSavings.textContent = fmtUSD(annualPerCo); els.rSavings.setAttribute("data-cur", annualPerCo);
         }
 
-        els.rPayback.textContent = paybackText(payback);
-        els.rEvSub.innerHTML = "Annual savings &times; (" + mult.toFixed(1) + "&times; base + " + exp.toFixed(1) + "&times; expansion premium)";
+        // Effective multiplier shown (combined multiple x companies)
+        var effMult = totalMultiple * companies;
+        els.rMult.innerHTML = effMult.toFixed(1) + "&times;";
+        els.rMultSub.innerHTML = companies > 1
+          ? (totalMultiple.toFixed(1) + "&times; EBITDA &times; " + companies + " companies")
+          : (mult.toFixed(1) + "&times; base + " + exp.toFixed(1) + "&times; owned-tech premium");
+
+        // Value-created caption adapts to portfolio scale
+        els.rEvCap.textContent = companies > 1
+          ? ("Enterprise value across " + companies + " companies — the basis for what the platform is worth to this buyer.")
+          : "Enterprise value the platform adds — the basis for what it's worth to a buyer.";
+
+        // Acquisition range (the number we want them anchored on)
+        els.rAsk.innerHTML = fmtCompact(askLow) + " &ndash; " + fmtCompact(askHigh);
+        var floored = (ev * ASK_LOW) < BUILD_COST;
+        els.rAskSub.innerHTML = floored
+          ? "At this scale the rebuild-cost floor (~$500K) sets the price. The value case strengthens sharply as the buyer deploys it across more companies."
+          : "A 30&ndash;50% share of the value created — the buyer keeps the majority, and the price scales with their own impact.";
+
         els.scnEv.textContent = fmtCompact(ev);
       }
 
-      ["spend", "efficiency", "coordinator", "multiple", "expansion"].forEach(function (k) {
+      ["spend", "efficiency", "coordinator", "multiple", "expansion", "companies"].forEach(function (k) {
         els[k].addEventListener("input", function () { recompute(true); });
       });
 
