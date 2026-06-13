@@ -228,3 +228,27 @@ if (window.matchMedia('(min-width: 768px)').matches) {
     });
   });
 }
+
+
+// ─── Valuation inquiry prefill (deep link from value calculator) ─────────────
+// When the value-calculator CTA links to /?inquiry=valuation#contact, prefill
+// the contact form's message so the inquiry routes through /api/contact with
+// clear context that it concerns the platform valuation / acquisition.
+(function () {
+  try {
+    var params = new URLSearchParams(window.location.search);
+    if (params.get('inquiry') === 'valuation') {
+      var messageField = document.getElementById('message');
+      if (messageField && !messageField.value) {
+        messageField.value =
+          'I reviewed the CleanSpace Stay platform value calculator and would like to discuss the numbers and a potential acquisition. (Please include your assumptions — travel spend, efficiency capture, EBITDA multiple, and number of companies — if you have them.)';
+      }
+      var companyField = document.getElementById('company');
+      if (companyField) {
+        companyField.setAttribute('placeholder', 'Your company (re: platform valuation)');
+      }
+    }
+  } catch (err) {
+    /* no-op: prefill is a progressive enhancement */
+  }
+})();

@@ -250,9 +250,88 @@
       .vc-section { padding: 56px 0; }
       .vc-controls, .vc-results { padding: 24px 20px; }
     }
+
+    /* ── Confidential password gate ───────────────────────────────── */
+    #vc-gate {
+      position: fixed; inset: 0; z-index: 9999;
+      background: radial-gradient(120% 120% at 50% 0%, #0A1A81 0%, #061058 70%, #04093a 100%);
+      display: flex; align-items: center; justify-content: center;
+      padding: 24px;
+    }
+    #vc-gate.hidden { display: none; }
+    .vc-gate-card {
+      width: 100%; max-width: 420px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.14);
+      border-radius: 18px;
+      padding: 40px 34px;
+      text-align: center;
+      box-shadow: 0 30px 80px rgba(0,0,0,0.45);
+      backdrop-filter: blur(6px);
+    }
+    .vc-gate-card img { height: 44px; margin-bottom: 22px; }
+    .vc-gate-kicker {
+      font-family: 'Space Grotesk', sans-serif;
+      text-transform: uppercase; letter-spacing: 0.14em;
+      font-size: 0.72rem; font-weight: 600;
+      color: #00C8FF; margin-bottom: 10px;
+    }
+    .vc-gate-title {
+      font-family: 'Space Grotesk', sans-serif;
+      color: #fff; font-size: 1.5rem; font-weight: 700;
+      margin: 0 0 8px; line-height: 1.2;
+    }
+    .vc-gate-sub { color: rgba(255,255,255,0.66); font-size: 0.92rem; margin: 0 0 26px; line-height: 1.5; }
+    .vc-gate-field { position: relative; margin-bottom: 14px; }
+    #vc-gate-input {
+      width: 100%; box-sizing: border-box;
+      padding: 14px 16px; font-size: 1rem;
+      border-radius: 10px; border: 1px solid rgba(255,255,255,0.22);
+      background: rgba(255,255,255,0.06); color: #fff;
+      font-family: 'Inter', sans-serif; text-align: center; letter-spacing: 0.04em;
+      transition: border-color 160ms cubic-bezier(0.23,1,0.32,1), box-shadow 160ms cubic-bezier(0.23,1,0.32,1);
+    }
+    #vc-gate-input::placeholder { color: rgba(255,255,255,0.4); letter-spacing: 0.02em; }
+    #vc-gate-input:focus { outline: none; border-color: #00C8FF; box-shadow: 0 0 0 3px rgba(0,200,255,0.18); }
+    #vc-gate-input.err { border-color: #ff6b6b; box-shadow: 0 0 0 3px rgba(255,107,107,0.18); animation: vc-shake 320ms cubic-bezier(0.36,0.07,0.19,0.97); }
+    @keyframes vc-shake { 10%,90%{transform:translateX(-1px);} 20%,80%{transform:translateX(2px);} 30%,50%,70%{transform:translateX(-4px);} 40%,60%{transform:translateX(4px);} }
+    #vc-gate-btn {
+      width: 100%; padding: 14px 16px; font-size: 1rem; font-weight: 600;
+      font-family: 'Inter', sans-serif; cursor: pointer;
+      border: none; border-radius: 10px; color: #fff;
+      background: linear-gradient(135deg, #1C38EA 0%, #0A1A81 100%);
+      transition: transform 160ms cubic-bezier(0.23,1,0.32,1), filter 160ms ease;
+    }
+    #vc-gate-btn:hover { filter: brightness(1.08); }
+    #vc-gate-btn:active { transform: scale(0.97); }
+    .vc-gate-err { color: #ff9b9b; font-size: 0.85rem; min-height: 18px; margin-top: 12px; }
+    .vc-gate-foot { color: rgba(255,255,255,0.4); font-size: 0.74rem; margin-top: 22px; }
+    /* Hide page content until unlocked to avoid flash */
+    body.vc-locked { overflow: hidden; }
+    body.vc-locked .vc-page { filter: blur(8px); pointer-events: none; user-select: none; }
   </style>
 </head>
-<body style="background:#ffffff;">
+<body style="background:#ffffff;" class="vc-locked">
+
+  <!-- Confidential password gate -->
+  <div id="vc-gate">
+    <div class="vc-gate-card">
+      <img src="/assets/logo_nav_light_2x.png" alt="CleanSpace Stay" />
+      <div class="vc-gate-kicker">Confidential</div>
+      <div class="vc-gate-title">Platform Value Model</div>
+      <p class="vc-gate-sub">This page is private. Enter the access password you were given to continue.</p>
+      <form id="vc-gate-form" autocomplete="off">
+        <div class="vc-gate-field">
+          <input type="password" id="vc-gate-input" placeholder="Access password" autocomplete="off" autofocus />
+        </div>
+        <button type="submit" id="vc-gate-btn">View the pitch</button>
+        <div class="vc-gate-err" id="vc-gate-err"></div>
+      </form>
+      <div class="vc-gate-foot">CleanSpace Stay &middot; Shared in confidence</div>
+    </div>
+  </div>
+
+  <div class="vc-page">
 
   <!-- Navigation -->
   <nav class="nav scrolled" id="nav">
@@ -318,7 +397,7 @@
         <div class="vc-pillar">
           <div class="pnum">2</div>
           <h3>Eliminated administrative drag</h3>
-          <p>Automated email-to-booking ingestion removes the manual re-keying a dedicated coordinator does today, freeing loaded headcount cost and reducing errors.</p>
+          <p>The work of three full-time staff &mdash; booking, re-keying, chasing, and reconciling travel by hand &mdash; is largely absorbed by automation, freeing six figures of fully-loaded headcount cost and removing the errors manual entry creates.</p>
         </div>
         <div class="vc-pillar">
           <div class="pnum">3</div>
@@ -362,11 +441,29 @@
 
           <div class="vc-field">
             <div class="vc-field-top">
-              <label class="vc-field-label" for="coordinator">Coordinator cost avoided</label>
-              <span class="vc-field-val" id="coordinator-val">$75,000</span>
+              <label class="vc-field-label" for="staff">Back-office staff doing this today</label>
+              <span class="vc-field-val" id="staff-val">3</span>
             </div>
-            <input type="range" class="vc-range" id="coordinator" min="0" max="200000" step="5000" value="75000" />
-            <p class="vc-field-help">Loaded annual cost of the back-office time replaced by automated email-to-booking ingestion.</p>
+            <input type="range" class="vc-range" id="staff" min="0" max="8" step="1" value="3" />
+            <p class="vc-field-help">People who currently book, re-key, chase, and reconcile crew travel by hand. CleanSpace runs this with three today.</p>
+          </div>
+
+          <div class="vc-field">
+            <div class="vc-field-top">
+              <label class="vc-field-label" for="loaded">Fully-loaded cost per person</label>
+              <span class="vc-field-val" id="loaded-val">$104,000</span>
+            </div>
+            <input type="range" class="vc-range" id="loaded" min="60000" max="160000" step="2000" value="104000" />
+            <p class="vc-field-help">Salary plus payroll taxes, benefits, and overhead &mdash; typically 1.25&ndash;1.4&times; base pay. An $80K salary loads to roughly $104K.</p>
+          </div>
+
+          <div class="vc-field">
+            <div class="vc-field-top">
+              <label class="vc-field-label" for="displace">Share of that work the platform absorbs</label>
+              <span class="vc-field-val" id="displace-val">75%</span>
+            </div>
+            <input type="range" class="vc-range" id="displace" min="25" max="100" step="5" value="75" />
+            <p class="vc-field-help">Automated email-to-booking ingestion and reconciliation removes most of the manual workload &mdash; freeing that cost, or absorbing growth without the next hire.</p>
           </div>
 
           <div class="vc-field">
@@ -401,16 +498,20 @@
         <div class="vc-results">
           <div class="vc-results-inner">
             <div class="vc-result-eyebrow">Value this creates for the acquirer</div>
-            <div class="vc-hero-num pos vc-tnum" id="r-ev">$1,237,500</div>
+            <div class="vc-hero-num pos vc-tnum" id="r-ev">$1,953,000</div>
             <div class="vc-result-caption" id="r-ev-cap">Enterprise value the platform adds — the basis for what it's worth to a buyer.</div>
 
             <div class="vc-metric-row">
               <div class="m-label">Annual EBITDA impact <span>Recurring savings, per company, every year</span></div>
-              <div class="m-val cyan vc-tnum" id="r-annual">$275,000</div>
+              <div class="m-val cyan vc-tnum" id="r-annual">$434,000</div>
             </div>
             <div class="vc-metric-row">
-              <div class="m-label">Travel recovered + back-office <span>Efficiency capture plus coordination avoided</span></div>
-              <div class="m-val cyan vc-tnum" id="r-savings">$275,000</div>
+              <div class="m-label">&mdash; Travel recovered <span>Efficiency capture on annual travel spend</span></div>
+              <div class="m-val vc-tnum" id="r-travel">$200,000</div>
+            </div>
+            <div class="vc-metric-row">
+              <div class="m-label">&mdash; Back-office labor freed <span id="r-labor-sub">3 staff &times; $104K &times; 75% absorbed</span></div>
+              <div class="m-val vc-tnum" id="r-labor">$234,000</div>
             </div>
             <div class="vc-metric-row">
               <div class="m-label">Value multiplier applied <span id="r-mult-sub">EBITDA multiple &times; companies deployed</span></div>
@@ -419,7 +520,7 @@
 
             <div class="vc-ask-band">
               <div class="a-label">Suggested acquisition range</div>
-              <div class="a-val vc-tnum" id="r-ask">$371K &ndash; $619K</div>
+              <div class="a-val vc-tnum" id="r-ask">$586K &ndash; $977K</div>
               <div class="a-sub" id="r-ask-sub">A 30&ndash;50% share of the value created — the buyer keeps the majority, and the price scales with their own impact.</div>
             </div>
 
@@ -430,7 +531,7 @@
         </div>
       </div>
 
-      <p class="vc-disclaimer">Figures update live from the assumptions above and are illustrative. The suggested acquisition range is a 30&ndash;50% share of the enterprise value the platform creates, floored at the ~$500K cost to rebuild it. Defaults reflect a ~$2M annual travel spend at a single company and prevailing 2025&ndash;2026 valuation benchmarks (specialty-construction EBITDA multiples of ~3&ndash;5&times;). Value scales with the number of companies a buyer deploys it across. Actual values depend on CleanSpace's verified spend, headcount, and deal structure. This page is confidential and is not financial advice.</p>
+      <p class="vc-disclaimer">Figures update live from the assumptions above and are illustrative. The suggested acquisition range is a 30&ndash;50% share of the enterprise value the platform creates, floored at the ~$500K cost to rebuild it. Defaults reflect a ~$2M annual travel spend and the three fully-loaded back-office staff (~$104K each, $80K base) CleanSpace runs this function with today, at a single company, and prevailing 2025&ndash;2026 valuation benchmarks (specialty-construction EBITDA multiples of ~3&ndash;5&times;). Value scales with the number of companies a buyer deploys it across. Actual values depend on CleanSpace's verified spend, headcount, and deal structure. This page is confidential and is not financial advice.</p>
     </div>
   </section>
 
@@ -510,10 +611,10 @@
   <section class="vc-section dark vc-cta">
     <div class="container">
       <div class="vc-kicker">The bottom line</div>
-      <h2 class="vc-h2">Software cost going in. Multiplied margin coming out.</h2>
-      <p class="vc-lead">Acquire the platform near its cost to replicate, and capture savings that are worth several times that the day the company is valued. The numbers above are yours to test — bring CleanSpace's real spend and we will lock in a deal-ready model.</p>
+      <h2 class="vc-h2">Pay a share of the value. Capture the rest.</h2>
+      <p class="vc-lead">Own the platform for a fraction of the enterprise value it creates, and keep the majority of that value the day the company is built up or sold. The numbers above are yours to test — bring CleanSpace's real spend and we will lock in a deal-ready model.</p>
       <div class="vc-cta-actions">
-        <a href="mailto:hello@cleanspacestay.com?subject=CleanSpace%20Stay%20Platform%20Valuation" class="btn btn-primary">Discuss the numbers</a>
+        <a href="/?inquiry=valuation#contact" class="btn btn-primary">Discuss the numbers</a>
         <a href="#calculator" class="btn btn-ghost" style="color:#fff;border-color:rgba(255,255,255,0.4);">Back to the calculator</a>
       </div>
     </div>
@@ -552,7 +653,45 @@
     </div>
   </footer>
 
-  <script src="script.js?v=20260521"></script>
+  </div><!-- /.vc-page -->
+
+  <!-- Password gate logic (client-side; protects a confidential pitch, not bank-grade security) -->
+  <script>
+    (function () {
+      "use strict";
+      var PASSWORD = "CleanSpace2026";
+      var KEY = "vc_unlocked";
+      var gate = document.getElementById("vc-gate");
+      var form = document.getElementById("vc-gate-form");
+      var input = document.getElementById("vc-gate-input");
+      var err = document.getElementById("vc-gate-err");
+
+      function unlock() {
+        document.body.classList.remove("vc-locked");
+        gate.classList.add("hidden");
+      }
+
+      // Stay unlocked within this browser session
+      try { if (sessionStorage.getItem(KEY) === "1") { unlock(); } } catch (e) {}
+
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
+        if (input.value === PASSWORD) {
+          try { sessionStorage.setItem(KEY, "1"); } catch (e) {}
+          err.textContent = "";
+          unlock();
+        } else {
+          err.textContent = "Incorrect password. Please check the password you were given.";
+          input.classList.add("err");
+          input.value = "";
+          input.focus();
+          setTimeout(function () { input.classList.remove("err"); }, 360);
+        }
+      });
+    })();
+  </script>
+
+  <script src="script.js?v=20260605"></script>
   <script>
     (function () {
       "use strict";
@@ -563,20 +702,26 @@
       var els = {
         spend: document.getElementById("spend"),
         efficiency: document.getElementById("efficiency"),
-        coordinator: document.getElementById("coordinator"),
+        staff: document.getElementById("staff"),
+        loaded: document.getElementById("loaded"),
+        displace: document.getElementById("displace"),
         multiple: document.getElementById("multiple"),
         expansion: document.getElementById("expansion"),
         companies: document.getElementById("companies"),
         spendVal: document.getElementById("spend-val"),
         efficiencyVal: document.getElementById("efficiency-val"),
-        coordinatorVal: document.getElementById("coordinator-val"),
+        staffVal: document.getElementById("staff-val"),
+        loadedVal: document.getElementById("loaded-val"),
+        displaceVal: document.getElementById("displace-val"),
         multipleVal: document.getElementById("multiple-val"),
         expansionVal: document.getElementById("expansion-val"),
         companiesVal: document.getElementById("companies-val"),
         rEv: document.getElementById("r-ev"),
         rEvCap: document.getElementById("r-ev-cap"),
         rAnnual: document.getElementById("r-annual"),
-        rSavings: document.getElementById("r-savings"),
+        rTravel: document.getElementById("r-travel"),
+        rLabor: document.getElementById("r-labor"),
+        rLaborSub: document.getElementById("r-labor-sub"),
         rMult: document.getElementById("r-mult"),
         rMultSub: document.getElementById("r-mult-sub"),
         rAsk: document.getElementById("r-ask"),
@@ -585,7 +730,7 @@
         reset: document.getElementById("reset")
       };
 
-      var DEFAULTS = { spend: 2000000, efficiency: 10, coordinator: 75000, multiple: 4, expansion: 0.5, companies: 1 };
+      var DEFAULTS = { spend: 2000000, efficiency: 10, staff: 3, loaded: 104000, displace: 75, multiple: 4, expansion: 0.5, companies: 1 };
 
       function fmtUSD(n) {
         return "$" + Math.round(n).toLocaleString("en-US");
@@ -620,13 +765,16 @@
       function recompute(animate) {
         var spend = parseFloat(els.spend.value);
         var eff = parseFloat(els.efficiency.value);
-        var coord = parseFloat(els.coordinator.value);
+        var staff = parseInt(els.staff.value, 10);
+        var loaded = parseFloat(els.loaded.value);
+        var displace = parseFloat(els.displace.value);
         var mult = parseFloat(els.multiple.value);
         var exp = parseFloat(els.expansion.value);
         var companies = parseInt(els.companies.value, 10);
 
         var travel = spend * (eff / 100);
-        var annualPerCo = travel + coord;            // savings at ONE company
+        var labor = staff * loaded * (displace / 100);  // back-office labor freed
+        var annualPerCo = travel + labor;            // savings at ONE company
         var totalMultiple = mult + exp;              // EBITDA multiple incl. owned-tech premium
         // Value created = per-company savings capitalized, across every company deployed
         var ev = annualPerCo * totalMultiple * companies;
@@ -638,7 +786,9 @@
         // Live labels
         els.spendVal.textContent = fmtUSD(spend);
         els.efficiencyVal.textContent = eff + "%";
-        els.coordinatorVal.textContent = fmtUSD(coord);
+        els.staffVal.textContent = staff;
+        els.loadedVal.textContent = fmtUSD(loaded);
+        els.displaceVal.textContent = displace + "%";
         els.multipleVal.innerHTML = mult.toFixed(1) + "&times;";
         els.expansionVal.innerHTML = "+" + exp.toFixed(1) + "&times;";
         els.companiesVal.textContent = companies;
@@ -646,12 +796,17 @@
         if (animate) {
           animateNumber(els.rEv, ev, fmtUSD);
           animateNumber(els.rAnnual, annualPerCo, fmtUSD);
-          animateNumber(els.rSavings, annualPerCo, fmtUSD);
+          animateNumber(els.rTravel, travel, fmtUSD);
+          animateNumber(els.rLabor, labor, fmtUSD);
         } else {
           els.rEv.textContent = fmtUSD(ev); els.rEv.setAttribute("data-cur", ev);
           els.rAnnual.textContent = fmtUSD(annualPerCo); els.rAnnual.setAttribute("data-cur", annualPerCo);
-          els.rSavings.textContent = fmtUSD(annualPerCo); els.rSavings.setAttribute("data-cur", annualPerCo);
+          els.rTravel.textContent = fmtUSD(travel); els.rTravel.setAttribute("data-cur", travel);
+          els.rLabor.textContent = fmtUSD(labor); els.rLabor.setAttribute("data-cur", labor);
         }
+
+        // Labor breakdown sub-label
+        els.rLaborSub.innerHTML = staff + (staff === 1 ? " person" : " staff") + " &times; " + fmtCompact(loaded) + " &times; " + displace + "% absorbed";
 
         // Effective multiplier shown (combined multiple x companies)
         var effMult = totalMultiple * companies;
@@ -675,7 +830,7 @@
         els.scnEv.textContent = fmtCompact(ev);
       }
 
-      ["spend", "efficiency", "coordinator", "multiple", "expansion", "companies"].forEach(function (k) {
+      ["spend", "efficiency", "staff", "loaded", "displace", "multiple", "expansion", "companies"].forEach(function (k) {
         els[k].addEventListener("input", function () { recompute(true); });
       });
 
