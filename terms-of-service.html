@@ -41,6 +41,12 @@
       margin-bottom: 16px;
       color: #0A1A81;
     }
+    .legal-content h3 {
+      font-size: 18px;
+      margin-top: 28px;
+      margin-bottom: 12px;
+      color: #0A1A81;
+    }
     .legal-content p, .legal-content li {
       font-size: 16px;
       line-height: 1.6;
@@ -51,10 +57,50 @@
       margin-bottom: 24px;
       padding-left: 24px;
     }
+    .legal-content a {
+      color: #1C38EA;
+    }
     .last-updated {
       color: #64748B;
       font-style: italic;
       margin-bottom: 40px;
+    }
+    .legal-callout {
+      background: #FEF3C7;
+      border: 1px solid #FCD34D;
+      border-radius: 12px;
+      padding: 20px 24px;
+      margin: 32px 0;
+    }
+    .legal-callout p {
+      margin-bottom: 0;
+      color: #78350F;
+      font-weight: 600;
+      text-transform: none;
+    }
+    .legal-toc {
+      background: #F8FAFC;
+      border: 1px solid #E2E8F0;
+      border-radius: 12px;
+      padding: 24px 28px;
+      margin-bottom: 40px;
+    }
+    .legal-toc h2 {
+      margin-top: 0;
+      font-size: 18px;
+    }
+    .legal-toc ol {
+      margin: 0;
+      padding-left: 20px;
+      columns: 2;
+      column-gap: 32px;
+    }
+    .legal-toc li {
+      margin-bottom: 8px;
+      font-size: 15px;
+    }
+    @media (max-width: 600px) {
+      .legal-toc ol { columns: 1; }
     }
   </style>
 </head>
@@ -97,47 +143,119 @@
 
   <main class="legal-content container">
     <h1>Terms of Service</h1>
-    <p class="last-updated">Last Updated: May 29, 2026</p>
-    
-    <p>Please read these Terms of Service ("Terms") carefully before using the CleanSpace Stay website (cleanspacestay.com) and the CleanSpace Stay crew travel management platform (collectively, the "Services") operated by CleanSpace Stay ("us", "we", or "our").</p>
-    <p>Your access to and use of the Services is conditioned on your acceptance of and compliance with these Terms. These Terms apply to all visitors, users, and others who access or use the Services.</p>
-    
+    <p class="last-updated">Last Updated: June 14, 2026</p>
+
+    <p>Please read these Terms of Service ("Terms") carefully. They govern your access to and use of the CleanSpace Stay website at cleanspacestay.com, the CleanSpace Stay crew travel management platform at app.cleanspacestay.com, the CleanSpace Stay mobile applications for Apple iOS and Google Android, and all related software, features, and services (collectively, the "Services"), each operated by CleanSpace Stay ("CleanSpace Stay," "us," "we," or "our").</p>
+    <p>Your access to and use of the Services is conditioned on your acceptance of and compliance with these Terms. These Terms apply to all visitors, users, and others who access or use the Services, including project managers, foremen, workers, and back-office and administrative users. If you use the Services on behalf of an organization (your "Organization"), you represent that you are authorized to accept these Terms on its behalf.</p>
+
+    <div class="legal-callout">
+      <p>IMPORTANT: Section 13 contains a binding arbitration provision and a class-action waiver that affect your legal rights. Please read it carefully.</p>
+    </div>
+
+    <div class="legal-toc">
+      <h2>Contents</h2>
+      <ol>
+        <li>Acceptance of Terms</li>
+        <li>Accounts, Roles, and Authorization</li>
+        <li>Use of the Services and Acceptable Use</li>
+        <li>Mobile Application License (EULA)</li>
+        <li>Apple and Google App Store Terms</li>
+        <li>Intellectual Property and Restrictions</li>
+        <li>Confidentiality and Trade Secrets</li>
+        <li>Customer Data and Ownership</li>
+        <li>Travel Bookings and Third-Party Suppliers</li>
+        <li>Payment Terms</li>
+        <li>Disclaimer of Warranties</li>
+        <li>Limitation of Liability</li>
+        <li>Dispute Resolution; Arbitration; Class-Action Waiver</li>
+        <li>Indemnification</li>
+        <li>Term, Suspension, and Termination</li>
+        <li>Governing Law and Venue</li>
+        <li>Assignment</li>
+        <li>Changes to Terms</li>
+        <li>Contact Us</li>
+      </ol>
+    </div>
+
     <h2>1. Acceptance of Terms</h2>
-    <p>By accessing or using the Services, you agree to be bound by these Terms. If you disagree with any part of the terms, then you may not access the Services.</p>
+    <p>By accessing or using the Services, you agree to be bound by these Terms and by our <a href="/privacy-policy">Privacy Policy</a>, which is incorporated by reference. If you do not agree to any part of these Terms, you may not access or use the Services.</p>
 
-    <h2>2. Use of Services</h2>
-    <p>You agree to use the Services only for lawful purposes and in accordance with these Terms. You are responsible for maintaining the confidentiality of your account and password and for restricting access to your computer or device, and you agree to accept responsibility for all activities that occur under your account or password.</p>
+    <h2>2. Accounts, Roles, and Authorization</h2>
+    <p>Accounts on the Services are created and administered by your Organization, typically by invitation. The Services use role-based access in which each project is associated with a project manager and a foreman and may include many workers, along with back-office and administrative users. Foremen may book travel for themselves and for other workers on their project. You are responsible for maintaining the confidentiality of your account credentials, for restricting access to your devices, and for all activities that occur under your account. You agree to provide accurate information, to keep it current, and to notify us promptly of any unauthorized use of your account. You must be at least 18 years old to use the Services.</p>
 
-    <h2>3. Intellectual Property and Restrictions</h2>
-    <p>The Services and their original content, features, and functionality are and will remain the exclusive property of CleanSpace Stay and its licensors. The Services are protected by copyright, trademark, and other laws of both the United States and foreign countries.</p>
-    <p><strong>Anti-Reverse Engineering:</strong> You explicitly agree not to, and you will not permit others to:</p>
+    <h2>3. Use of the Services and Acceptable Use</h2>
+    <p>You agree to use the Services only for lawful business purposes and in accordance with these Terms. You agree that you will not, and will not permit any other person to: use the Services in violation of any applicable law or regulation; upload or transmit any content that is unlawful, infringing, or that you are not authorized to provide; interfere with or disrupt the integrity, security, or performance of the Services; attempt to gain unauthorized access to the Services or to any account, system, or network connected to the Services; introduce any virus, malware, or other harmful code; or use the Services to build, train, or benchmark a competing product or service. You are responsible for all data and content submitted through your account.</p>
+
+    <h2>4. Mobile Application License (EULA)</h2>
+    <p>Subject to your continuous compliance with these Terms, CleanSpace Stay grants you a limited, personal, revocable, non-exclusive, non-transferable, and non-sublicensable license to download and install the CleanSpace Stay mobile application (the "App") on a mobile device that you own or control, and to run the App solely for your internal business use in connection with an active CleanSpace Stay account. This is a license, not a sale, and CleanSpace Stay and its licensors retain all right, title, and interest in and to the App and all copies of it.</p>
+    <p>Except as expressly permitted by these Terms or by applicable law that cannot be excluded, you may not, and may not permit others to: copy, modify, or create derivative works of the App; reverse engineer, decompile, disassemble, decode, or otherwise attempt to derive or gain access to the source code of the App or any part of it; rent, lease, lend, sell, sublicense, assign, distribute, publish, or otherwise make the App available to any third party; or remove, alter, or obscure any proprietary notices on the App. The license continues until terminated in accordance with these Terms, and it terminates automatically if you fail to comply with any of its terms. Upon termination, you must cease all use of the App and delete all copies from your devices.</p>
+
+    <h2>5. Apple and Google App Store Terms</h2>
+    <p>The following additional terms apply when you obtain the App through the Apple App Store or Google Play.</p>
+    <h3>Apple App Store</h3>
+    <p>These Terms are between you and CleanSpace Stay only, and not with Apple Inc. ("Apple"). Apple is not responsible for the App or its content. Your license to use the App is limited to a non-transferable license to use the App on any Apple-branded device that you own or control, as permitted by the Usage Rules in the applicable Apple Media Services Terms and Conditions. Apple has no obligation to furnish any maintenance or support services for the App. To the maximum extent permitted by applicable law, Apple has no warranty obligation with respect to the App, and any claims, losses, liabilities, damages, costs, or expenses attributable to any failure of the App to conform to any warranty are the sole responsibility of CleanSpace Stay. Apple is not responsible for addressing any claims by you or any third party relating to the App, including product liability claims, claims that the App fails to conform to any legal or regulatory requirement, and claims arising under consumer protection or similar legislation. In the event of any third-party claim that the App or your possession and use of the App infringes that third party's intellectual property rights, CleanSpace Stay, not Apple, is solely responsible for the investigation, defense, settlement, and discharge of any such claim. You represent that you are not located in a country subject to a U.S. Government embargo or designated as a "terrorist supporting" country, and that you are not listed on any U.S. Government list of prohibited or restricted parties. You and CleanSpace Stay acknowledge that Apple and its subsidiaries are third-party beneficiaries of these Terms with respect to the App, and that Apple has the right to enforce these Terms against you as a third-party beneficiary.</p>
+    <h3>Google Play</h3>
+    <p>If you obtain the App through Google Play, you acknowledge that your use is also subject to the Google Play Terms of Service. Google is not a party to these Terms and is not responsible for the App. To the extent of any conflict between these Terms and the Google Play Terms of Service with respect to your use of the App obtained through Google Play, the Google Play Terms of Service will control solely with respect to that subject matter.</p>
+
+    <h2>6. Intellectual Property and Restrictions</h2>
+    <p>The Services and all of their original content, features, functionality, software, code, designs, text, graphics, logos, and trademarks are and will remain the exclusive property of CleanSpace Stay and its licensors. The Services are protected by copyright, trademark, trade secret, and other laws of the United States and other countries. Nothing in these Terms transfers to you any ownership of, or any right or license in, the Services other than the limited rights expressly granted in these Terms.</p>
+    <p><strong>Anti-Reverse Engineering and Use Restrictions.</strong> You explicitly agree not to, and you will not permit others to:</p>
     <ul>
-      <li>Reverse engineer, decompile, disassemble, decode, or otherwise attempt to derive or gain access to the source code of the Services or any part thereof;</li>
-      <li>Copy, modify, or create derivative works of the Services, in whole or in part;</li>
+      <li>Reverse engineer, decompile, disassemble, decode, or otherwise attempt to derive or gain access to the source code, underlying ideas, algorithms, structure, or organization of the Services or any part of them;</li>
+      <li>Copy, modify, translate, or create derivative works of the Services, in whole or in part;</li>
       <li>Remove, delete, alter, or obscure any trademarks or any copyright, trademark, patent, or other intellectual property or proprietary rights notices from the Services;</li>
-      <li>Rent, lease, lend, sell, sublicense, assign, distribute, publish, transfer, or otherwise make available the Services, or any features or functionality of the Services, to any third party for any reason;</li>
-      <li>Use any robot, spider, scraper, or other automated means to access the Services for any purpose without our express written permission.</li>
+      <li>Rent, lease, lend, sell, sublicense, assign, distribute, publish, transfer, or otherwise make available the Services, or any features or functionality of the Services, to any third party;</li>
+      <li>Use any robot, spider, scraper, crawler, or other automated means to access, harvest, or index any portion of the Services without our express prior written permission;</li>
+      <li>Use the Services to design, develop, train, or otherwise create a competing product or service, or for any benchmarking or competitive analysis.</li>
     </ul>
+    <p><strong>Feedback.</strong> If you provide us with any suggestions, ideas, or other feedback regarding the Services, you grant us a perpetual, irrevocable, worldwide, royalty-free license to use and incorporate that feedback into the Services without any obligation or compensation to you, and any improvements that result are owned exclusively by CleanSpace Stay.</p>
 
-    <h2>4. Payment Terms</h2>
-    <p>If you purchase any services from us, you agree to pay all applicable fees and taxes. We may bill you (a) in advance; (b) at the time of purchase; (c) shortly after purchase; or (d) on a recurring basis for subscription services. Specific payment terms will be outlined in a separate agreement or at the time of purchase.</p>
+    <h2>7. Confidentiality and Trade Secrets</h2>
+    <p>The Services embody valuable, proprietary, and confidential information of CleanSpace Stay, including its software, source code, architecture, data models, user interfaces, workflows, business logic, processes, automation and reconciliation methods, non-public features, pricing, and the methods by which the Services coordinate crew travel from request through reconciliation (collectively, "Confidential Information"). You acknowledge and agree that this Confidential Information constitutes trade secrets of CleanSpace Stay within the meaning of the Florida Uniform Trade Secrets Act and other applicable law, and that it derives independent economic value from not being generally known.</p>
+    <p>You agree to hold the Confidential Information in strict confidence; not to disclose it to any third party; not to use it except as necessary to use the Services as permitted under these Terms; and not to misappropriate, copy, or exploit it for any competitive or unauthorized purpose. The obligations in this section are in addition to, and do not limit, the restrictions in Sections 4 and 6, and they survive termination of these Terms. You acknowledge that any actual or threatened breach of this section may cause CleanSpace Stay irreparable harm for which monetary damages would be inadequate, and that CleanSpace Stay is entitled to seek injunctive and other equitable relief, in addition to any other remedies available at law, without the requirement to post a bond.</p>
 
-    <h2>5. Limitation of Liability</h2>
-    <p>In no event shall CleanSpace Stay, nor its directors, employees, partners, agents, suppliers, or affiliates, be liable for any indirect, incidental, special, consequential or punitive damages, including without limitation, loss of profits, data, use, goodwill, or other intangible losses, resulting from (i) your access to or use of or inability to access or use the Services; (ii) any conduct or content of any third party on the Services; (iii) any content obtained from the Services; and (iv) unauthorized access, use or alteration of your transmissions or content, whether based on warranty, contract, tort (including negligence) or any other legal theory, whether or not we have been informed of the possibility of such damage.</p>
+    <h2>8. Customer Data and Ownership</h2>
+    <p>As between you and CleanSpace Stay, you and your Organization retain ownership of the data you submit to the Services ("Customer Data"). You grant CleanSpace Stay a worldwide, non-exclusive license to host, process, transmit, display, and use Customer Data solely to provide and improve the Services and as otherwise permitted by these Terms and the Privacy Policy. CleanSpace Stay may generate and use aggregated and de-identified data derived from use of the Services, provided that such data does not identify you or your Organization, and such aggregated and de-identified data is owned by CleanSpace Stay. CleanSpace Stay owns all right, title, and interest in and to the Services and all related software and intellectual property.</p>
 
-    <h2>6. Governing Law and Jurisdiction</h2>
-    <p>These Terms shall be governed and construed in accordance with the laws of the State of Florida, United States, without regard to its conflict of law provisions.</p>
-    <p>Any legal action or proceeding relating to your access to, or use of, the Services or these Terms shall be instituted only in a state or federal court located in Fort Myers, Florida. You and CleanSpace Stay agree to submit to the jurisdiction of, and agree that venue is proper in, these courts in any such legal action or proceeding.</p>
+    <h2>9. Travel Bookings and Third-Party Suppliers</h2>
+    <p>The Services are a tool for requesting, coordinating, managing, and reconciling crew travel. CleanSpace Stay is not a travel agency, airline, hotel, lodging provider, or transportation company, and it does not own, operate, or control the travel services that you book or coordinate through the Services. Travel is provided by independent third-party suppliers subject to their own terms, conditions, rates, cancellation and change policies, and availability. CleanSpace Stay is not responsible or liable for the acts, errors, omissions, representations, warranties, breaches, pricing, availability, or negligence of any travel supplier, or for any personal injury, death, property damage, delay, or other loss resulting from a travel supplier or from your travel. You are responsible for reviewing and complying with the terms of any travel supplier.</p>
 
-    <h2>7. Changes to Terms</h2>
-    <p>We reserve the right, at our sole discretion, to modify or replace these Terms at any time. By continuing to access or use our Services after those revisions become effective, you agree to be bound by the revised terms. If you do not agree to the new terms, please stop using the Services.</p>
+    <h2>10. Payment Terms</h2>
+    <p>If you or your Organization purchase a subscription or other paid services, you agree to pay all applicable fees and taxes in accordance with the pricing and payment terms presented at the time of purchase or set out in a separate written agreement. Unless otherwise stated, fees are non-refundable, and we may bill in advance, at the time of purchase, or on a recurring basis for subscription services. We may change our fees on a prospective basis upon reasonable notice. Failure to pay amounts when due may result in suspension or termination of access to the Services.</p>
 
-    <h2>8. Contact Us</h2>
+    <h2>11. Disclaimer of Warranties</h2>
+    <p>THE SERVICES ARE PROVIDED ON AN "AS IS" AND "AS AVAILABLE" BASIS, WITHOUT WARRANTIES OF ANY KIND, WHETHER EXPRESS, IMPLIED, STATUTORY, OR OTHERWISE. TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, CLEANSPACE STAY DISCLAIMS ALL WARRANTIES, INCLUDING IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, TITLE, AND NON-INFRINGEMENT, AND ANY WARRANTIES ARISING OUT OF COURSE OF DEALING OR USAGE OF TRADE. CLEANSPACE STAY DOES NOT WARRANT THAT THE SERVICES WILL BE UNINTERRUPTED, ERROR-FREE, OR SECURE, THAT DEFECTS WILL BE CORRECTED, OR THAT THE SERVICES OR THE SERVERS THAT MAKE THEM AVAILABLE ARE FREE OF HARMFUL COMPONENTS. SOME JURISDICTIONS DO NOT ALLOW THE EXCLUSION OF CERTAIN WARRANTIES, SO SOME OF THE ABOVE EXCLUSIONS MAY NOT APPLY TO YOU.</p>
+
+    <h2>12. Limitation of Liability</h2>
+    <p>TO THE MAXIMUM EXTENT PERMITTED BY LAW, IN NO EVENT SHALL CLEANSPACE STAY, NOR ITS DIRECTORS, EMPLOYEES, PARTNERS, AGENTS, SUPPLIERS, OR AFFILIATES, BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR PUNITIVE DAMAGES, INCLUDING WITHOUT LIMITATION LOSS OF PROFITS, DATA, USE, GOODWILL, OR OTHER INTANGIBLE LOSSES, RESULTING FROM (I) YOUR ACCESS TO OR USE OF, OR INABILITY TO ACCESS OR USE, THE SERVICES; (II) ANY CONDUCT OR CONTENT OF ANY THIRD PARTY ON OR THROUGH THE SERVICES, INCLUDING ANY TRAVEL SUPPLIER; (III) ANY CONTENT OBTAINED FROM THE SERVICES; OR (IV) UNAUTHORIZED ACCESS, USE, OR ALTERATION OF YOUR TRANSMISSIONS OR CONTENT, WHETHER BASED ON WARRANTY, CONTRACT, TORT (INCLUDING NEGLIGENCE), OR ANY OTHER LEGAL THEORY, WHETHER OR NOT WE HAVE BEEN INFORMED OF THE POSSIBILITY OF SUCH DAMAGE. TO THE MAXIMUM EXTENT PERMITTED BY LAW, THE TOTAL AGGREGATE LIABILITY OF CLEANSPACE STAY ARISING OUT OF OR RELATING TO THESE TERMS OR THE SERVICES SHALL NOT EXCEED THE GREATER OF THE AMOUNTS PAID BY YOU OR YOUR ORGANIZATION TO CLEANSPACE STAY FOR THE SERVICES IN THE TWELVE MONTHS PRECEDING THE EVENT GIVING RISE TO THE CLAIM, OR ONE HUNDRED U.S. DOLLARS ($100).</p>
+
+    <h2>13. Dispute Resolution; Arbitration; Class-Action Waiver</h2>
+    <p>Please read this section carefully, as it affects your legal rights, including your right to file a lawsuit in court.</p>
+    <p><strong>Binding Arbitration.</strong> Except for disputes in which either party seeks injunctive or other equitable relief for the alleged infringement or misappropriation of intellectual property or Confidential Information, you and CleanSpace Stay agree that any dispute, claim, or controversy arising out of or relating to these Terms or the Services will be resolved by binding arbitration administered in the State of Florida in accordance with the rules of a recognized arbitration provider, rather than in court, except that either party may bring an individual claim in small-claims court if it qualifies. The arbitration will be conducted in Lee County, Florida, unless you and CleanSpace Stay agree otherwise, and judgment on the award may be entered in any court having jurisdiction.</p>
+    <p><strong>Class-Action Waiver.</strong> You and CleanSpace Stay agree that each may bring claims against the other only in your or its individual capacity, and not as a plaintiff or class member in any purported class, collective, consolidated, or representative proceeding. The arbitrator may not consolidate more than one person's claims and may not preside over any form of a representative or class proceeding.</p>
+    <p>If any portion of this Section 13 is found to be unenforceable, the remainder will remain in effect, except that if the class-action waiver is found unenforceable, then this entire Section 13 will be null and void with respect to the affected claims, which will instead proceed in the courts identified in Section 16.</p>
+
+    <h2>14. Indemnification</h2>
+    <p>You agree to defend, indemnify, and hold harmless CleanSpace Stay and its directors, officers, employees, agents, suppliers, and affiliates from and against any claims, liabilities, damages, losses, and expenses, including reasonable attorneys' fees, arising out of or in any way connected with your access to or use of the Services, your violation of these Terms, your violation of any applicable law, or your infringement or misappropriation of any third-party right.</p>
+
+    <h2>15. Term, Suspension, and Termination</h2>
+    <p>These Terms remain in effect while you use the Services. We may suspend or terminate your access to the Services, in whole or in part, at any time and without liability, if we reasonably believe you have violated these Terms, if required to do so by law, or to protect the security, integrity, or availability of the Services. Your Organization may also control and terminate your access. Upon termination, your right to use the Services ceases immediately, and you must stop using the App and delete all copies in your possession. Sections that by their nature should survive termination, including Sections 6, 7, 8, 11, 12, 13, 14, 16, and 17, will survive.</p>
+
+    <h2>16. Governing Law and Venue</h2>
+    <p>These Terms are governed by and construed in accordance with the laws of the State of Florida, United States, without regard to its conflict of law provisions. Subject to the arbitration provision in Section 13, any legal action or proceeding relating to your access to or use of the Services or these Terms shall be instituted only in a state or federal court located in Fort Myers, Lee County, Florida. You and CleanSpace Stay consent to the personal jurisdiction of, and agree that venue is proper in, these courts.</p>
+
+    <h2>17. Assignment</h2>
+    <p>You may not assign or transfer these Terms, or any of your rights or obligations under them, without our prior written consent. CleanSpace Stay may freely assign or transfer these Terms, in whole or in part, including in connection with a merger, acquisition, reorganization, financing, or sale of all or substantially all of its assets. These Terms bind and benefit the parties and their permitted successors and assigns.</p>
+
+    <h2>18. Changes to Terms</h2>
+    <p>We reserve the right, at our sole discretion, to modify or replace these Terms at any time. When we make material changes, we will update the "Last Updated" date above and, where appropriate, provide additional notice. By continuing to access or use the Services after revisions become effective, you agree to be bound by the revised Terms. If you do not agree to the new Terms, you must stop using the Services.</p>
+
+    <h2>19. Contact Us</h2>
     <p>If you have any questions about these Terms, please contact us at:</p>
     <p>
       CleanSpace Stay<br>
       Fort Myers, FL<br>
-      Email: hello@cleanspacestay.com
+      Email: <a href="mailto:support@cleanspacestay.com">support@cleanspacestay.com</a>
     </p>
   </main>
 
