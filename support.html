@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Support — CleanSpace Stay</title>
+  <meta name="description" content="Support and help center for the CleanSpace Stay crew travel management platform and mobile app. Contact us, browse FAQs, and learn how to manage your account, data, and bookings." />
+  <link rel="canonical" href="https://cleanspacestay.com/support" />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon_32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon_16x16.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="style.css?v=20260521" />
+  <style>
+    body {
+      background: #ffffff;
+    }
+    .legal-content {
+      padding: 140px 20px 80px;
+      max-width: 860px;
+      margin: 0 auto;
+      background: #ffffff;
+    }
+    .legal-content h1 {
+      font-size: 38px;
+      margin-bottom: 12px;
+      color: #0A1A81;
+    }
+    .legal-content .lede {
+      font-size: 18px;
+      line-height: 1.6;
+      color: #334155;
+      margin-bottom: 36px;
+    }
+    .legal-content h2 {
+      font-size: 24px;
+      margin-top: 48px;
+      margin-bottom: 16px;
+      color: #0A1A81;
+    }
+    .legal-content h3 {
+      font-size: 18px;
+      margin-top: 28px;
+      margin-bottom: 8px;
+      color: #0A1A81;
+    }
+    .legal-content p, .legal-content li {
+      font-size: 16px;
+      line-height: 1.65;
+      color: #334155;
+      margin-bottom: 16px;
+    }
+    .legal-content ul {
+      margin-bottom: 24px;
+      padding-left: 24px;
+    }
+    .legal-content a {
+      color: #1C38EA;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .legal-content a:hover {
+      text-decoration: underline;
+    }
+    .last-updated {
+      color: #64748B;
+      font-style: italic;
+      margin-bottom: 0;
+    }
+
+    /* Support contact cards */
+    .support-cards {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+      margin: 8px 0 16px;
+    }
+    .support-card {
+      border: 1px solid #E2E8F0;
+      border-radius: 14px;
+      padding: 24px;
+      background: #F8FAFC;
+    }
+    .support-card h3 {
+      margin-top: 0;
+      margin-bottom: 6px;
+    }
+    .support-card p {
+      margin-bottom: 8px;
+      font-size: 15px;
+    }
+    .support-card .big-link {
+      font-size: 17px;
+      font-weight: 700;
+    }
+    @media (max-width: 640px) {
+      .support-cards { grid-template-columns: 1fr; }
+      .legal-content h1 { font-size: 30px; }
+    }
+
+    /* FAQ accordion */
+    .faq-item {
+      border-bottom: 1px solid #E2E8F0;
+    }
+    .faq-item summary {
+      cursor: pointer;
+      list-style: none;
+      padding: 18px 0;
+      font-size: 17px;
+      font-weight: 600;
+      color: #0A1A81;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+    }
+    .faq-item summary::-webkit-details-marker { display: none; }
+    .faq-item summary::after {
+      content: "+";
+      font-size: 24px;
+      font-weight: 400;
+      color: #1C38EA;
+      transition: transform 0.2s ease;
+      line-height: 1;
+    }
+    .faq-item[open] summary::after {
+      content: "\2212";
+    }
+    .faq-item .faq-body {
+      padding: 0 0 18px;
+    }
+    .faq-item .faq-body p:last-child { margin-bottom: 0; }
+
+    .status-pill {
+      display: inline-block;
+      background: #E0FBEA;
+      color: #047857;
+      font-size: 13px;
+      font-weight: 700;
+      padding: 4px 12px;
+      border-radius: 999px;
+      margin-bottom: 24px;
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="nav scrolled" id="nav">
+    <div class="nav-container">
+      <a href="/" class="nav-brand">
+        <img src="/assets/logo_nav_light_2x.png" alt="CleanSpace Stay" class="nav-logo-img" height="48" />
+      </a>
+      <div class="nav-links" id="nav-links">
+        <a href="/#problem">The Problem</a>
+        <a href="/#how-it-works">How It Works</a>
+        <a href="/#features">What's Inside</a>
+        <a href="/#contact">Contact</a>
+      </div>
+      <div class="nav-actions">
+        <a href="https://app.cleanspacestay.com" class="btn btn-ghost">Sign In</a>
+        <a href="/#contact" class="btn btn-primary">Book a Demo</a>
+      </div>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="/#problem">The Problem</a>
+    <a href="/#how-it-works">How It Works</a>
+    <a href="/#features">What's Inside</a>
+    <a href="/#contact">Contact</a>
+    <div class="mobile-menu-actions">
+      <a href="https://app.cleanspacestay.com" class="btn btn-ghost btn-full">Sign In</a>
+      <a href="/#contact" class="btn btn-primary btn-full">Book a Demo</a>
+    </div>
+  </div>
+
+  <main class="legal-content container">
+    <h1>Support &amp; Help Center</h1>
+    <p class="lede">Welcome to CleanSpace Stay support. We help project managers, foremen, field workers, and back-office teams get the most out of our crew travel management platform and mobile app. Whether you have a question about your account, a booking, the app on your phone, or your data, this page tells you how to get help and answers the questions we hear most.</p>
+
+    <h2>Contact Us</h2>
+    <p>The fastest way to reach our support team is by email. We respond to all support requests as quickly as possible, typically within one business day (Monday through Friday, excluding U.S. holidays). When you write to us, please include your name, your company, and a clear description of the issue so we can help you faster.</p>
+
+    <div class="support-cards">
+      <div class="support-card">
+        <h3>Email Support</h3>
+        <p>General help, account questions, and technical issues.</p>
+        <p class="big-link"><a href="mailto:dev@cleanspacestay.com">dev@cleanspacestay.com</a></p>
+      </div>
+      <div class="support-card">
+        <h3>Mailing Address</h3>
+        <p>CleanSpace Stay</p>
+        <p>Fort Myers, FL<br>United States</p>
+      </div>
+    </div>
+    <p><strong>Support hours:</strong> Monday&ndash;Friday, 9:00 AM &ndash; 5:00 PM Eastern Time. Messages received outside of these hours are answered on the next business day.</p>
+
+    <h2>About the App</h2>
+    <p>The CleanSpace Stay mobile app gives field crews, foremen, and project managers a simple way to request travel, review itineraries, communicate with the office, and keep every booking tied to the right project &mdash; from the job site or on the road. The app works alongside the web platform at <a href="https://app.cleanspacestay.com">app.cleanspacestay.com</a>, so your information stays in sync wherever you sign in.</p>
+    <p>The app is intended for business users who have an active CleanSpace Stay account provided by their employer or organization. If you do not yet have an account, your project manager, foreman, or company administrator can invite you.</p>
+
+    <h3>System Requirements</h3>
+    <ul>
+      <li><strong>Apple (iOS):</strong> iPhone or iPad running a currently supported version of iOS. Available through the Apple App Store.</li>
+      <li><strong>Android:</strong> A device running a currently supported version of Android. Available through Google Play.</li>
+      <li><strong>Connection:</strong> An internet connection is required to sync bookings and messages. The app is designed to remain usable on slower or intermittent connections common at job sites.</li>
+    </ul>
+
+    <h2>Getting Started</h2>
+    <h3>Creating and accessing your account</h3>
+    <p>Accounts are created by invitation. Your company administrator, project manager, or foreman adds you to a project and sends an invitation to your email or phone number. Follow the link in that invitation to set your password and sign in. Once your account is active, you can sign in on the mobile app or at <a href="https://app.cleanspacestay.com">app.cleanspacestay.com</a> using the same credentials.</p>
+
+    <h3>Resetting your password</h3>
+    <p>If you forget your password, choose <strong>"Forgot password"</strong> on the sign-in screen and follow the instructions sent to your registered email address. If you no longer have access to that email, contact your company administrator or email us at <a href="mailto:dev@cleanspacestay.com">dev@cleanspacestay.com</a>.</p>
+
+    <h2>Frequently Asked Questions</h2>
+
+    <details class="faq-item">
+      <summary>How do I request or book travel?</summary>
+      <div class="faq-body">
+        <p>Open the app or web platform and start a new booking request. Select the traveler and the project the trip belongs to, choose the travel types you need (such as hotel, flight, rideshare, or per diem), and provide the dates. Foremen can book themselves and other workers on their project. Before you submit, you'll see a review step so you can check the details for accuracy. Once submitted, your request follows your project's normal approval flow.</p>
+      </div>
+    </details>
+
+    <details class="faq-item">
+      <summary>Who can see my bookings and information?</summary>
+      <div class="faq-body">
+        <p>The platform shows people only what is relevant to their role. Field workers, foremen, project managers, and back-office or accounting staff each have their own view. Your travel details are visible to the people responsible for your project and to authorized administrators within your organization. We do not sell your personal information. See our <a href="/privacy-policy">Privacy Policy</a> for full details.</p>
+      </div>
+    </details>
+
+    <details class="faq-item">
+      <summary>The app isn't syncing or a booking is missing. What should I do?</summary>
+      <div class="faq-body">
+        <p>First, confirm your device has an internet connection and that you are signed in to the correct account. Close and reopen the app to force a fresh sync. If the information still doesn't appear, make sure you are looking at the correct project. If the problem continues, email <a href="mailto:dev@cleanspacestay.com">dev@cleanspacestay.com</a> with your name, company, the project name, and a description of what's missing, and we'll investigate.</p>
+      </div>
+    </details>
+
+    <details class="faq-item">
+      <summary>How do I update my profile or travel documents?</summary>
+      <div class="faq-body">
+        <p>Open your profile from the app or web platform to update your contact details and travel-related information, such as known traveler numbers and reward program numbers, and to upload required documents. Keeping this information current helps bookings go through smoothly and reduces back-and-forth with the office.</p>
+      </div>
+    </details>
+
+    <details class="faq-item">
+      <summary>What languages does the app support?</summary>
+      <div class="faq-body">
+        <p>CleanSpace Stay is built for diverse field crews. Messaging within the platform is designed to support communication across languages so that field workers and the office can stay coordinated regardless of preferred language.</p>
+      </div>
+    </details>
+
+    <details class="faq-item">
+      <summary>Is there a cost to use the app?</summary>
+      <div class="faq-body">
+        <p>The CleanSpace Stay app is provided to users as part of their organization's subscription to the platform. Individual field users are not charged to download or use the app. Billing is handled at the organization level; questions about your company's subscription should be directed to your administrator or to <a href="mailto:dev@cleanspacestay.com">dev@cleanspacestay.com</a>.</p>
+      </div>
+    </details>
+
+    <h2>Account &amp; Data</h2>
+    <h3>Your data and privacy</h3>
+    <p>We take the security of your information seriously and use administrative, technical, and physical safeguards to protect it. To understand what we collect and how we use it, please read our <a href="/privacy-policy">Privacy Policy</a>. Your use of the platform and app is also governed by our <a href="/terms-of-service">Terms of Service</a>.</p>
+
+    <h3>Requesting account deletion</h3>
+    <p>You may request deletion of your account and associated personal data at any time. Because CleanSpace Stay accounts are managed by your organization, we recommend first contacting your company administrator. To submit a deletion request directly, email <a href="mailto:dev@cleanspacestay.com">dev@cleanspacestay.com</a> from the address associated with your account and include the words "Account Deletion Request" in the subject line. We will verify your identity and process eligible requests in accordance with applicable law. Please note that certain records may be retained where required for legal, accounting, or legitimate business purposes.</p>
+
+    <h2>Report a Problem or Give Feedback</h2>
+    <p>If you encounter a bug, a security concern, or have a suggestion to improve the platform or app, we want to hear from you. Email <a href="mailto:dev@cleanspacestay.com">dev@cleanspacestay.com</a> with as much detail as you can &mdash; including what you were doing, what you expected, and what happened. Clear reports help us resolve issues quickly.</p>
+
+    <h2>Service Status</h2>
+    <p>The CleanSpace Stay platform and app are actively maintained and monitored. If you are experiencing a widespread outage, please check back shortly or contact support for the latest information.</p>
+
+    <p class="last-updated">Last Updated: June 14, 2026</p>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="nav-brand">
+            <img src="/assets/logo_footer_2x.png" alt="CleanSpace Stay" class="footer-logo-img" height="44" />
+          </div>
+          <p class="footer-description">Full visibility into crew travel spend — every booking, every project, every dollar. From request to reconciliation.</p>
+        </div>
+        <div class="footer-links">
+          <h4>Platform</h4>
+          <a href="/#how-it-works">How It Works</a>
+          <a href="/#features">What's Inside</a>
+          <a href="https://app.cleanspacestay.com">Sign In</a>
+        </div>
+        <div class="footer-links">
+          <h4>Company</h4>
+          <a href="/#contact">Contact</a>
+          <a href="/privacy-policy">Privacy Policy</a>
+          <a href="/terms-of-service">Terms of Service</a>
+        </div>
+        <div class="footer-links">
+          <h4>Support</h4>
+          <a href="/support">Help Center</a>
+          <a href="mailto:dev@cleanspacestay.com">Email Support</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 CleanSpace Stay. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js?v=20260521"></script>
+</body>
+</html>
