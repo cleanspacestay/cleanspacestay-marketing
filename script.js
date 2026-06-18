@@ -269,7 +269,7 @@ if (window.matchMedia('(min-width: 768px)').matches) {
   var labels = dots.map(function (d) { return d.getAttribute('aria-label') || ''; });
   var current = 0;
   var timer = null;
-  var INTERVAL = 3200;
+  var INTERVAL = 2000;
 
   var reduceMotion = window.matchMedia
     ? window.matchMedia('(prefers-reduced-motion: reduce)').matches
@@ -287,11 +287,13 @@ if (window.matchMedia('(min-width: 768px)').matches) {
 
   function start() {
     if (reduceMotion || timer) return;
+    demo.classList.remove('is-paused');
     timer = window.setInterval(function () { show(current + 1); }, INTERVAL);
   }
 
   function stop() {
     if (timer) { window.clearInterval(timer); timer = null; }
+    demo.classList.add('is-paused');
   }
 
   dots.forEach(function (dot, i) {

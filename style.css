@@ -814,6 +814,18 @@ img {
   align-items: center;
 }
 
+/* Kicker badge sits on a navy band here, so brighten text/fill for contrast */
+.mobile-app .hero-badge {
+  background: rgba(0, 200, 255, 0.14);
+  border-color: rgba(0, 200, 255, 0.42);
+  color: #7fe3ff;
+  font-weight: 600;
+}
+
+.mobile-app .hero-badge .badge-dot {
+  background: #7fe3ff;
+}
+
 .mobile-app-title {
   color: var(--text-on-dark);
   text-align: left;
@@ -1080,6 +1092,19 @@ img {
   margin-top: 26px;
 }
 
+/* Desktop: put the clickable dots + label ABOVE the phone so users see them first */
+@media (min-width: 769px) {
+  .phone-demo {
+    flex-direction: column-reverse;
+  }
+  .phone-demo-caption {
+    margin-top: 0;
+    margin-bottom: 22px;
+    flex-direction: column-reverse;
+    gap: 12px;
+  }
+}
+
 .phone-demo-label {
   font-size: 14px;
   font-weight: 700;
@@ -1109,8 +1134,34 @@ img {
 }
 
 .phone-dot.is-active {
-  width: 22px;
-  background: var(--brand-blue);
+  width: 28px;
+  background: rgba(127, 227, 255, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Progress fill sweeps across the active dot to signal auto-play */
+.phone-dot.is-active::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: #7fe3ff;
+  transform-origin: left center;
+  animation: dot-progress 2000ms linear forwards;
+}
+
+.phone-demo.is-paused .phone-dot.is-active::after {
+  animation-play-state: paused;
+}
+
+@keyframes dot-progress {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .phone-dot.is-active::after { animation: none; transform: scaleX(1); }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -1140,11 +1191,11 @@ img {
   font-weight: 700;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--brand-blue);
+  color: #7fe3ff;
   padding: 6px 14px;
   border-radius: 100px;
-  background: rgba(0, 200, 255, 0.1);
-  border: 1px solid rgba(0, 200, 255, 0.28);
+  background: rgba(0, 200, 255, 0.14);
+  border: 1px solid rgba(0, 200, 255, 0.42);
   margin-bottom: 18px;
 }
 
@@ -1169,7 +1220,8 @@ img {
   font-size: 17px;
   line-height: 1.6;
   color: var(--text-on-dark-muted);
-  max-width: 600px;
+  max-width: 640px;
+  text-wrap: pretty;
 }
 
 .app-shots {
