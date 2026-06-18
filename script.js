@@ -109,7 +109,7 @@ const fadeObserver = new IntersectionObserver((entries) => {
 });
 
 // Apply staggered fade-in to groups of cards
-document.querySelectorAll('.problem-card, .feature-card, .team-card, .connected-card, .contact-card').forEach((el, index) => {
+document.querySelectorAll('.problem-card, .feature-card, .team-card, .connected-card, .contact-card, .mobile-feature').forEach((el, index) => {
   el.classList.add('fade-up');
   el.style.transitionDelay = `${(index % 4) * 100}ms`;
   fadeObserver.observe(el);
