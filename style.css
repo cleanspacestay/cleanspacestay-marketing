@@ -1092,17 +1092,17 @@ img {
   margin-top: 26px;
 }
 
-/* Desktop: put the clickable dots + label ABOVE the phone so users see them first */
-@media (min-width: 769px) {
-  .phone-demo {
-    flex-direction: column-reverse;
-  }
-  .phone-demo-caption {
-    margin-top: 0;
-    margin-bottom: 22px;
-    flex-direction: column-reverse;
-    gap: 12px;
-  }
+/* Put the clickable dots + label ABOVE the phone (all sizes) so users see them
+   first — the phone enters before its surrounding context, so leading with the
+   controls makes the animation feel intentional rather than floating. */
+.phone-demo {
+  flex-direction: column-reverse;
+}
+.phone-demo-caption {
+  margin-top: 0;
+  margin-bottom: 22px;
+  flex-direction: column-reverse;
+  gap: 12px;
 }
 
 .phone-demo-label {
