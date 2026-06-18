@@ -1138,6 +1138,43 @@ img {
   margin-bottom: 3px;
 }
 
+/* Desktop: drop the awkward horizontal scroll and show every screen in a static grid */
+@media (min-width: 1025px) {
+  .app-shots {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 18px;
+    overflow: visible;
+    scroll-snap-type: none;
+    padding: 4px;
+    margin: 0;
+  }
+
+  .app-shot {
+    width: auto;
+  }
+
+  .app-shot-frame {
+    border-radius: 20px;
+    padding: 5px;
+  }
+
+  .app-shot-frame img {
+    border-radius: 15px;
+  }
+
+  .app-shot figcaption {
+    margin-top: 12px;
+    font-size: 11.5px;
+    line-height: 1.45;
+  }
+
+  .app-shot figcaption strong {
+    font-size: 12.5px;
+    margin-bottom: 2px;
+  }
+}
+
 /* ─── Trust Strip ───────────────────────────────────────────────────────── */
 .trust-strip {
   padding: 48px 0;
