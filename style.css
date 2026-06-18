@@ -1041,6 +1041,103 @@ img {
   color: var(--brand-blue);
 }
 
+/* App screenshot gallery — real screens in subtle device frames */
+.app-gallery {
+  margin-top: 72px;
+  padding-top: 56px;
+  border-top: 1px solid var(--dark-border);
+}
+
+.app-gallery-head {
+  margin-bottom: 32px;
+}
+
+.app-gallery-head h3 {
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--text-on-dark);
+  letter-spacing: -0.01em;
+  margin-bottom: 8px;
+}
+
+.app-gallery-head p {
+  font-size: 15px;
+  color: var(--text-on-dark-muted);
+  max-width: 560px;
+}
+
+.app-shots {
+  display: flex;
+  gap: 28px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  padding: 4px 4px 24px;
+  margin: 0 -4px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--brand-blue) transparent;
+}
+
+.app-shots::-webkit-scrollbar {
+  height: 8px;
+}
+
+.app-shots::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 100px;
+}
+
+.app-shots::-webkit-scrollbar-thumb {
+  background: rgba(0, 200, 255, 0.5);
+  border-radius: 100px;
+}
+
+.app-shot {
+  flex: 0 0 auto;
+  width: 232px;
+  margin: 0;
+  scroll-snap-align: center;
+}
+
+.app-shot-frame {
+  position: relative;
+  border-radius: 28px;
+  padding: 8px;
+  background: linear-gradient(160deg, #16204d 0%, #0b1230 100%);
+  border: 1px solid var(--dark-border);
+  box-shadow: 0 18px 44px rgba(0, 0, 0, 0.4);
+  transition: transform 220ms cubic-bezier(0.23, 1, 0.32, 1), box-shadow 220ms cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.app-shot-frame img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 22px;
+}
+
+@media (hover: hover) {
+  .app-shot:hover .app-shot-frame {
+    transform: translateY(-6px);
+    box-shadow: 0 26px 60px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(0, 200, 255, 0.25);
+  }
+}
+
+.app-shot figcaption {
+  margin-top: 16px;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--text-on-dark-muted);
+}
+
+.app-shot figcaption strong {
+  display: block;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-on-dark);
+  margin-bottom: 3px;
+}
+
 /* ─── Trust Strip ───────────────────────────────────────────────────────── */
 .trust-strip {
   padding: 48px 0;
@@ -1643,6 +1740,14 @@ img {
 
   .mobile-app-lead {
     font-size: 15px;
+  }
+
+  .app-shot {
+    width: 190px;
+  }
+
+  .app-gallery-head h3 {
+    font-size: 20px;
   }
 
   .team-card {
