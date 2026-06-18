@@ -252,3 +252,74 @@ if (window.matchMedia('(min-width: 768px)').matches) {
     /* no-op: prefill is a progressive enhancement */
   }
 })();
+
+
+// ─── Animated phone slideshow ──────────────────────────────────────────────
+// Auto-cycles the hero phone screen through the real app screenshots with a
+// cross-fade. Dots jump to a screen; hover/focus pauses; honors reduced-motion.
+(function () {
+  var demo = document.getElementById('phone-demo');
+  if (!demo) return;
+
+  var slides = Array.prototype.slice.call(demo.querySelectorAll('.phone-slide'));
+  var dots = Array.prototype.slice.call(demo.querySelectorAll('.phone-dot'));
+  var label = document.getElementById('phone-demo-label');
+  if (slides.length < 2) return;
+
+  var labels = dots.map(function (d) { return d.getAttribute('aria-label') || ''; });
+  var current = 0;
+  var timer = null;
+  var INTERVAL = 3200;
+
+  var reduceMotion = window.matchMedia
+    ? window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    : false;
+
+  function show(next) {
+    if (next === current) return;
+    slides[current].classList.remove('is-active');
+    if (dots[current]) dots[current].classList.remove('is-active');
+    current = (next + slides.length) % slides.length;
+    slides[current].classList.add('is-active');
+    if (dots[current]) dots[current].classList.add('is-active');
+    if (label && labels[current]) label.textContent = labels[current];
+  }
+
+  function start() {
+    if (reduceMotion || timer) return;
+    timer = window.setInterval(function () { show(current + 1); }, INTERVAL);
+  }
+
+  function stop() {
+    if (timer) { window.clearInterval(timer); timer = null; }
+  }
+
+  dots.forEach(function (dot, i) {
+    dot.addEventListener('click', function () {
+      stop();
+      show(i);
+      start();
+    });
+  });
+
+  demo.addEventListener('mouseenter', stop);
+  demo.addEventListener('mouseleave', start);
+  demo.addEventListener('focusin', stop);
+  demo.addEventListener('focusout', start);
+
+  document.addEventListener('visibilitychange', function () {
+    if (document.hidden) stop(); else start();
+  });
+
+  // Only auto-play once the section scrolls into view, to save work off-screen.
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) start(); else stop();
+      });
+    }, { threshold: 0.25 });
+    io.observe(demo);
+  } else {
+    start();
+  }
+})();

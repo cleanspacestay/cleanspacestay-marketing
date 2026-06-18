@@ -328,39 +328,29 @@
           <p class="mobile-app-note">Invitation-only sign-in with a one-time code — no passwords to manage. Updates roll out over the air, so every crew is always on the current version.</p>
         </div>
         <div class="mobile-app-visual">
-          <div class="phone-mock">
-            <div class="phone-notch"></div>
-            <div class="phone-screen">
-              <div class="phone-status">
-                <span>9:41</span>
-                <span class="phone-status-icons"></span>
+          <div class="phone-demo" id="phone-demo" aria-roledescription="carousel" aria-label="CleanSpace Stay app screens">
+            <div class="phone-mock">
+              <div class="phone-notch"></div>
+              <div class="phone-screen phone-screen-shots">
+                <img class="phone-slide is-active" src="/assets/app/app-home.webp" alt="Role-aware home screen" width="620" height="1342" />
+                <img class="phone-slide" src="/assets/app/app-request.webp" alt="Request travel screen" width="620" height="1342" loading="lazy" />
+                <img class="phone-slide" src="/assets/app/app-calendar.webp" alt="Travel calendar screen" width="620" height="1342" loading="lazy" />
+                <img class="phone-slide" src="/assets/app/app-trips.webp" alt="My Trips screen" width="620" height="1342" loading="lazy" />
+                <img class="phone-slide" src="/assets/app/app-messages.webp" alt="Messaging screen" width="620" height="1342" loading="lazy" />
+                <img class="phone-slide" src="/assets/app/app-profile.webp" alt="Travel profile screen" width="620" height="1342" loading="lazy" />
+                <img class="phone-slide" src="/assets/app/app-signin.webp" alt="Secure sign-in screen" width="620" height="1342" loading="lazy" />
               </div>
-              <div class="phone-app-head">
-                <span class="phone-app-kicker">CLEANSPACE STAY</span>
-                <span class="phone-app-title">My Trips</span>
-              </div>
-              <div class="phone-trip current">
-                <div class="phone-trip-top">
-                  <span class="phone-trip-label">CURRENT</span>
-                  <span class="phone-trip-badge in">Checked in</span>
-                </div>
-                <div class="phone-trip-name">Hampton Inn — Tampa</div>
-                <div class="phone-trip-meta">Riverside Tower · J. Alvarez · Jun 17–20</div>
-              </div>
-              <div class="phone-trip">
-                <div class="phone-trip-top">
-                  <span class="phone-trip-label">UPCOMING</span>
-                  <span class="phone-trip-badge booked">Booked</span>
-                </div>
-                <div class="phone-trip-name">Delta 1492 — RSW → ATL</div>
-                <div class="phone-trip-meta">Hangar Retrofit · D. Cole · Jun 24</div>
-              </div>
-              <div class="phone-cta">Request travel</div>
-              <div class="phone-tabbar">
-                <span class="phone-tab active">Trips</span>
-                <span class="phone-tab">Requests</span>
-                <span class="phone-tab">Messages</span>
-                <span class="phone-tab">Profile</span>
+            </div>
+            <div class="phone-demo-caption">
+              <span class="phone-demo-label" id="phone-demo-label">Role-Aware Home</span>
+              <div class="phone-demo-dots" id="phone-demo-dots" role="tablist" aria-label="App screen">
+                <button class="phone-dot is-active" type="button" aria-label="Role-Aware Home"></button>
+                <button class="phone-dot" type="button" aria-label="Request Travel"></button>
+                <button class="phone-dot" type="button" aria-label="Travel Calendar"></button>
+                <button class="phone-dot" type="button" aria-label="My Trips"></button>
+                <button class="phone-dot" type="button" aria-label="Messaging"></button>
+                <button class="phone-dot" type="button" aria-label="Travel Profile"></button>
+                <button class="phone-dot" type="button" aria-label="Secure Sign-In"></button>
               </div>
             </div>
           </div>
@@ -369,8 +359,9 @@
 
       <div class="app-gallery">
         <div class="app-gallery-head">
-          <h3>A Closer Look at the App</h3>
-          <p>Real screens from the CleanSpace Stay app — the flow your crews use every day.</p>
+          <span class="app-gallery-kicker">The Real Thing</span>
+          <h3>A Closer Look at <span class="accent">the App</span></h3>
+          <p>Real screens from the CleanSpace Stay app&nbsp;— the flow your crews use every&nbsp;day.</p>
         </div>
         <div class="app-shots" id="app-shots">
           <figure class="app-shot">
@@ -587,6 +578,6 @@
     <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 16V4m0 0l-5 5m5-5l5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
   </button>
 
-  <script src="script.js?v=20260521"></script>
+  <script src="script.js?v=20260618"></script>
 </body>
 </html>
