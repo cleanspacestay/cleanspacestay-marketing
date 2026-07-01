@@ -309,6 +309,31 @@
     /* Hide page content until unlocked to avoid flash */
     body.vc-locked { overflow: hidden; }
     body.vc-locked .vc-page { filter: blur(8px); pointer-events: none; user-select: none; }
+
+    /* Internal & Confidential identifier bar (replaces nav/footer) */
+    .vc-bar {
+      position: sticky; top: 0; z-index: 900;
+      background: rgba(6,16,88,0.92); backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(255,255,255,0.12); color: #fff;
+    }
+    .vc-bar-inner {
+      max-width: 1200px; margin: 0 auto; padding: 11px 24px;
+      display: flex; align-items: center; justify-content: space-between; gap: 16px;
+    }
+    .vc-bar-left { display: flex; align-items: center; gap: 12px; min-width: 0; }
+    .vc-bar-left img { height: 26px; width: auto; flex: none; }
+    .vc-bar-badge {
+      display: inline-flex; align-items: center; gap: 7px;
+      font-family: 'Space Grotesk', sans-serif; font-size: 11px; font-weight: 600;
+      letter-spacing: 0.14em; text-transform: uppercase; color: #00C8FF; white-space: nowrap;
+    }
+    .vc-bar-badge::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: #00C8FF; box-shadow: 0 0 0 3px rgba(0,200,255,0.22); flex:none; }
+    .vc-bar-right { font-size: 12.5px; color: rgba(255,255,255,0.68); white-space: nowrap; }
+    .vc-foot {
+      background: #04093a; color: rgba(255,255,255,0.6); padding: 30px 0; font-size: 13px; text-align: center; line-height: 1.6;
+    }
+    .vc-foot strong { color: rgba(255,255,255,0.85); font-weight: 600; }
+    @media (max-width: 640px) { .vc-bar-inner { padding: 9px 16px; } .vc-bar-right { display: none; } .vc-bar-badge { font-size: 10px; letter-spacing: 0.1em; } }
   </style>
 </head>
 <body style="background:#ffffff;" class="vc-locked">
@@ -317,7 +342,7 @@
   <div id="vc-gate">
     <div class="vc-gate-card">
       <img src="/assets/logo_footer_2x.png" alt="CleanSpace Stay" />
-      <div class="vc-gate-kicker">Confidential</div>
+      <div class="vc-gate-kicker">Internal &amp; Confidential</div>
       <div class="vc-gate-title">Platform Value Model</div>
       <p class="vc-gate-sub">This page is private. Enter the access password you were given to continue.</p>
       <form id="vc-gate-form" autocomplete="off">
@@ -333,44 +358,21 @@
 
   <div class="vc-page">
 
-  <!-- Navigation -->
-  <nav class="nav scrolled" id="nav">
-    <div class="nav-container">
-      <a href="/" class="nav-brand">
-        <img src="/assets/logo_nav_light_2x.png" alt="CleanSpace Stay" class="nav-logo-img" height="48" />
-      </a>
-      <div class="nav-links" id="nav-links">
-        <a href="/#problem">The Problem</a>
-        <a href="/#how-it-works">How It Works</a>
-        <a href="/#features">What's Inside</a>
-        <a href="/#contact">Contact</a>
+  <!-- Internal & Confidential identifier bar (replaces marketing nav) -->
+  <div class="vc-bar">
+    <div class="vc-bar-inner">
+      <div class="vc-bar-left">
+        <img src="/assets/logo_nav_light_2x.png" alt="CleanSpace Stay" />
+        <span class="vc-bar-badge">Internal &amp; Confidential</span>
       </div>
-      <div class="nav-actions">
-        <a href="https://app.cleanspacestay.com" class="btn btn-ghost">Sign In</a>
-        <a href="/#contact" class="btn btn-primary">Book a Demo</a>
-      </div>
-      <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu">
-        <span></span><span></span><span></span>
-      </button>
-    </div>
-  </nav>
-
-  <!-- Mobile Menu -->
-  <div class="mobile-menu" id="mobile-menu">
-    <a href="/#problem">The Problem</a>
-    <a href="/#how-it-works">How It Works</a>
-    <a href="/#features">What's Inside</a>
-    <a href="/#contact">Contact</a>
-    <div class="mobile-menu-actions">
-      <a href="https://app.cleanspacestay.com" class="btn btn-ghost btn-full">Sign In</a>
-      <a href="/#contact" class="btn btn-primary btn-full">Book a Demo</a>
+      <div class="vc-bar-right">Platform Value Model &middot; Not for distribution</div>
     </div>
   </div>
 
   <!-- HERO -->
   <header class="vc-hero">
     <div class="container">
-      <div class="vc-eyebrow">Confidential &middot; Platform Value Model</div>
+      <div class="vc-eyebrow">Internal &amp; Confidential &middot; Platform Value Model</div>
       <h1>What CleanSpace Stay is worth — <span class="accent">and the math behind every dollar.</span></h1>
       <p class="lede">CleanSpace Stay turns scattered, invisible crew-travel spend into controlled, project-tracked, reconciled dollars. This page lays out the full value case — then lets you move the assumptions yourself and watch the numbers respond in real time.</p>
       <a href="#calculator" class="scrolldown">Open the interactive calculator &darr;</a>
@@ -614,44 +616,16 @@
       <h2 class="vc-h2">Pay a share of the value. Capture the rest.</h2>
       <p class="vc-lead">Acquire the platform for a fraction of the enterprise value it creates, and keep the majority of that value the day the company is built up or sold. The numbers above are yours to test — bring CleanSpace's real spend and we will lock in a deal-ready model.</p>
       <div class="vc-cta-actions">
-        <a href="/?inquiry=valuation#contact" class="btn btn-primary">Discuss the numbers</a>
-        <a href="#calculator" class="btn btn-ghost" style="color:#fff;border-color:rgba(255,255,255,0.4);">Back to the calculator</a>
+        <a href="#calculator" class="btn btn-primary">Back to the calculator</a>
       </div>
     </div>
   </section>
 
-  <!-- Footer -->
-  <footer class="footer">
+  <!-- Slim confidential footer (replaces marketing footer) -->
+  <footer class="vc-foot">
     <div class="container">
-      <div class="footer-grid">
-        <div class="footer-brand">
-          <div class="nav-brand">
-            <img src="/assets/logo_footer_2x.png" alt="CleanSpace Stay" class="footer-logo-img" height="44" />
-          </div>
-          <p class="footer-description">Full visibility into crew travel spend — every booking, every project, every dollar. From request to reconciliation.</p>
-        </div>
-        <div class="footer-links">
-          <h4>Platform</h4>
-          <a href="/#how-it-works">How It Works</a>
-          <a href="/#features">What's Inside</a>
-          <a href="https://app.cleanspacestay.com">Sign In</a>
-        </div>
-        <div class="footer-links">
-          <h4>Company</h4>
-          <a href="/#contact">Contact</a>
-          <a href="/privacy-policy">Privacy Policy</a>
-          <a href="/terms-of-service">Terms of Service</a>
-        </div>
-        <div class="footer-links">
-          <h4>Support</h4>
-          <a href="/support">Help Center</a>
-          <a href="/delete-account">Delete Account</a>
-          <a href="mailto:support@cleanspacestay.com">Email Support</a>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        <p>&copy; 2026 CleanSpace Stay. All rights reserved. &middot; Confidential valuation model.</p>
-      </div>
+      <strong>CleanSpace Stay &mdash; Internal &amp; Confidential</strong><br />
+      Confidential valuation model &middot; Not for distribution.
     </div>
   </footer>
 
@@ -661,7 +635,7 @@
   <script>
     (function () {
       "use strict";
-      var PASSWORD = "CleanSpace2026";
+      var PASSWORD = "0123456";
       var KEY = "vc_unlocked";
       var gate = document.getElementById("vc-gate");
       var form = document.getElementById("vc-gate-form");
