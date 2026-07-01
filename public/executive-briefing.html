@@ -190,18 +190,34 @@
     .eb-bignum .l { font-size: 13px; color: var(--gray-600); line-height: 1.5; }
 
     /* Valuation driver table */
-    .eb-table-wrap { margin-top: 30px; overflow-x: auto; border-radius: 14px; border: 1px solid var(--gray-200); box-shadow: var(--shadow-sm); }
-    table.eb-table { width: 100%; border-collapse: collapse; background: #fff; min-width: 640px; }
-    table.eb-table th, table.eb-table td { text-align: left; padding: 14px 18px; font-size: 14px; vertical-align: top; }
+    .eb-table-wrap { margin-top: 20px; border-radius: 14px; border: 1px solid var(--gray-200); box-shadow: var(--shadow-sm); overflow: hidden; }
+    table.eb-table { width: 100%; border-collapse: collapse; background: #fff; table-layout: fixed; }
+    table.eb-table col.c-driver { width: 30%; }
+    table.eb-table col.c-low { width: 33%; }
+    table.eb-table col.c-high { width: 37%; }
+    table.eb-table th, table.eb-table td { text-align: left; padding: 14px 16px; font-size: 14px; vertical-align: top; word-break: normal; overflow-wrap: break-word; }
     table.eb-table thead th {
       background: var(--dark); color: #fff; font-family: 'Space Grotesk', sans-serif; font-weight: 600;
-      font-size: 13px; letter-spacing: 0.02em;
+      font-size: 12.5px; letter-spacing: 0.02em;
     }
     table.eb-table tbody tr:nth-child(even) { background: var(--gray-50); }
-    table.eb-table tbody td { border-top: 1px solid var(--gray-200); color: var(--gray-700); line-height: 1.5; }
+    table.eb-table tbody td { border-top: 1px solid var(--gray-200); color: var(--gray-700); line-height: 1.45; }
     table.eb-table td.driver { font-weight: 700; color: var(--dark); }
     table.eb-table td.low { color: #B45309; }
     table.eb-table td.high { color: var(--positive-dark); font-weight: 600; }
+    /* On phones: turn each row into a stacked card so nothing clips */
+    @media (max-width: 620px) {
+      .eb-table-wrap { border: none; box-shadow: none; background: transparent; }
+      table.eb-table, table.eb-table tbody, table.eb-table tr, table.eb-table td { display: block; width: 100%; }
+      table.eb-table thead { display: none; }
+      table.eb-table { table-layout: auto; }
+      table.eb-table tbody tr { background: #fff !important; border: 1px solid var(--gray-200); border-radius: 12px; box-shadow: var(--shadow-sm); padding: 6px 4px; margin-bottom: 12px; }
+      table.eb-table td { border-top: none; padding: 8px 16px; font-size: 14px; }
+      table.eb-table td.driver { font-size: 15px; padding-top: 14px; }
+      table.eb-table td.low::before { content: "Holds price down: "; font-weight: 700; color: var(--gray-500); }
+      table.eb-table td.high::before { content: "Lifts price up: "; font-weight: 700; color: var(--gray-500); }
+      table.eb-table td.high { padding-bottom: 14px; }
+    }
 
     /* Before/After split */
     .eb-split { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 24px; }
@@ -338,10 +354,27 @@
       .eb-steps { grid-template-columns: repeat(2, 1fr); }
       .eb-split { grid-template-columns: 1fr; }
     }
-    @media (max-width: 560px) {
+    @media (max-width: 640px) {
+      .eb-hero { padding: 40px 0 40px; }
+      .eb-section { padding: 40px 0; }
       .eb-steps { grid-template-columns: 1fr; }
-      .eb-section { padding: 46px 0; }
+      .eb-container, .eb-bar-inner { padding-left: 18px; padding-right: 18px; }
+      .eb-chart-card { padding: 18px 16px 16px; border-radius: 14px; }
+      .eb-chart-wrap { height: 280px; }
+      .eb-chart-wrap.tall { height: 320px; }
+      .eb-chart-wrap.short { height: 240px; }
+      .eb-callout { padding: 16px 18px; }
+      .eb-take { padding: 16px 16px; }
+      .eb-bignum { padding: 18px 16px; }
+      .eb-vs-col, .eb-split-col, .eb-flow-card { padding: 18px 16px; }
+      .eb-controls { padding: 20px 16px 18px; }
+      .eb-results { padding: 24px 18px; }
+      .eb-cta-box { padding: 20px 18px; }
+      .eb-road-item { padding: 14px 14px; }
     }
+    /* Never let anything cause horizontal page scroll on mobile */
+    html, body { max-width: 100%; overflow-x: hidden; }
+    .eb-chart-wrap canvas { max-width: 100%; }
 
     /* ── Confidential password gate ── */
     #eb-gate {
@@ -482,27 +515,26 @@
         <h2 class="eb-h2">Two companies can earn the same profit and sell for very different prices.</h2>
         <p class="eb-lead">Specialty contractors typically sell for <strong>3.5&ndash;7&times; earnings (EBITDA)</strong>. Where a company lands is mostly about how <em>de-risked</em> and <em>transferable</em> it looks &mdash; and nearly every driver is a systems-and-data problem.</p>
 
-        <div class="eb-two">
-          <div class="eb-chart-card eb-reveal">
-            <div class="eb-chart-title">Where the multiple comes from</div>
-            <div class="eb-chart-sub">The gap between a discounted and a premium company.</div>
-            <div class="eb-chart-wrap short"><canvas id="chartGauge"></canvas></div>
-            <p class="eb-chart-note">Illustrative. Moving from "runs on a few people" to "runs on owned systems" is what shifts a company up the band.</p>
-          </div>
-          <div class="eb-table-wrap eb-reveal" style="margin-top:0;">
-            <table class="eb-table">
-              <thead>
-                <tr><th>What a buyer looks at</th><th>Holds price down</th><th>Lifts price up</th></tr>
-              </thead>
-              <tbody>
-                <tr><td class="driver">Key-person dependence</td><td class="low">Lives in a few heads</td><td class="high">Systems run without them</td></tr>
-                <tr><td class="driver">Margin predictability</td><td class="low">Surprises after job ends</td><td class="high">Tight, real-time tracking</td></tr>
-                <tr><td class="driver">Workforce stability</td><td class="low">Turnover &amp; scramble</td><td class="high">Retention &amp; smooth staffing</td></tr>
-                <tr><td class="driver">Records &amp; data</td><td class="low">Spreadsheets no one follows</td><td class="high">Clean records a buyer trusts</td></tr>
-                <tr><td class="driver">Differentiation</td><td class="low">Like every contractor</td><td class="high">Owns hard-to-copy capability</td></tr>
-              </tbody>
-            </table>
-          </div>
+        <div class="eb-chart-card eb-reveal">
+          <div class="eb-chart-title">Where the multiple comes from</div>
+          <div class="eb-chart-sub">The gap between a discounted and a premium company.</div>
+          <div class="eb-chart-wrap short"><canvas id="chartGauge"></canvas></div>
+          <p class="eb-chart-note">Illustrative. Moving from "runs on a few people" to "runs on owned systems" is what shifts a company up the band.</p>
+        </div>
+        <div class="eb-table-wrap eb-reveal">
+          <table class="eb-table">
+            <colgroup><col class="c-driver" /><col class="c-low" /><col class="c-high" /></colgroup>
+            <thead>
+              <tr><th>What a buyer looks at</th><th>Holds price down</th><th>Lifts price up</th></tr>
+            </thead>
+            <tbody>
+              <tr><td class="driver">Key-person dependence</td><td class="low">Lives in a few heads</td><td class="high">Systems run without them</td></tr>
+              <tr><td class="driver">Margin predictability</td><td class="low">Surprises after job ends</td><td class="high">Tight, real-time tracking</td></tr>
+              <tr><td class="driver">Workforce stability</td><td class="low">Turnover &amp; scramble</td><td class="high">Retention &amp; smooth staffing</td></tr>
+              <tr><td class="driver">Records &amp; data</td><td class="low">Spreadsheets no one follows</td><td class="high">Clean records a buyer trusts</td></tr>
+              <tr><td class="driver">Differentiation</td><td class="low">Like every contractor</td><td class="high">Owns hard-to-copy capability</td></tr>
+            </tbody>
+          </table>
         </div>
         <p class="eb-chart-note">Range and drivers reflect published M&amp;A guidance on specialty-contractor valuations. The point isn't the exact multiple &mdash; it's that the gap is made of fixable, systems-driven factors.</p>
       </div>
