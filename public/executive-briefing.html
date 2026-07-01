@@ -91,6 +91,10 @@
 
     /* 3 TAKEAWAYS card */
     .eb-takeaways { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 34px; }
+    .eb-assume { display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px 14px; margin-top: 24px; padding: 14px 18px; border-radius: 12px; background: rgba(0,200,255,0.08); border: 1px solid rgba(0,200,255,0.28); }
+    .eb-assume-tag { font-family: 'Space Grotesk','Inter',sans-serif; font-weight: 700; font-size: 11px; letter-spacing: 1.4px; text-transform: uppercase; color: #00C8FF; white-space: nowrap; }
+    .eb-assume-txt { font-size: 14px; line-height: 1.55; color: #C8D4FF; flex: 1; min-width: 240px; }
+    .eb-assume-txt strong { color: #FFFFFF; font-weight: 600; }
     .eb-take {
       background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.16);
       border-radius: 14px; padding: 20px 20px; backdrop-filter: blur(4px);
@@ -473,6 +477,11 @@
             <div class="tk-t">It's repeatable &mdash; and it's owned</div>
             <div class="tk-d">The same playbook applies across the business. Each workflow you own adds to enterprise value at exit.</div>
           </div>
+        </div>
+
+        <div class="eb-assume">
+          <span class="eb-assume-tag">A note on the numbers</span>
+          <span class="eb-assume-txt">Every figure here is a <strong>starting assumption</strong> &mdash; not a claim about your business. They're set conservatively for a ~$100M operation. The calculator at the bottom is interactive: <strong>move the sliders to put in your real spend and headcount</strong> and the value updates live.</span>
         </div>
       </div>
     </header>
