@@ -5,3 +5,5 @@ Disallow: /executive-briefing
 Disallow: /executive-briefing.html
 Disallow: /demo-script
 Disallow: /demo-script.html
+Disallow: /platform-overview
+Disallow: /platform-overview.html
