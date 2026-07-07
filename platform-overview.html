@@ -14,545 +14,870 @@
   <script src="https://unpkg.com/lucide@latest"></script>
   <style>
     :root {
-      --brand: #1C38EA; --brand-light: #4F6AFF; --cyan: #00D4FF; --navy: #0B1340; --navy-mid: #111B52; --navy-light: #1A2566;
-      --positive: #10B981; --positive-bg: rgba(16,185,129,0.12); --warn: #F59E0B; --warn-bg: rgba(245,158,11,0.12);
-      --danger: #EF4444; --danger-bg: rgba(239,68,68,0.12); --muted: #64748B; --surface: #F8FAFC; --border: #E2E8F0;
-      --card-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 4px 16px rgba(0,0,0,0.06);
+      --brand: #1C38EA; --brand-light: #4F6AFF; --cyan: #00D4FF; --navy: #0A0F2E; --navy-mid: #0E1545; --navy-light: #141D5C;
+      --positive: #10B981; --positive-bg: rgba(16,185,129,0.1); --warn: #F59E0B; --warn-bg: rgba(245,158,11,0.1);
+      --danger: #EF4444; --danger-bg: rgba(239,68,68,0.1); --muted: #64748B; --surface: #F8FAFC; --border: #E2E8F0;
+      --glass: rgba(255,255,255,0.03); --glass-border: rgba(255,255,255,0.08); --glass-hover: rgba(255,255,255,0.06);
+      --card-shadow: 0 4px 24px rgba(0,0,0,0.12), 0 1px 4px rgba(0,0,0,0.08);
+      --depth-shadow: 0 24px 80px rgba(0,0,0,0.35), 0 8px 32px rgba(0,0,0,0.2);
       --ease-out: cubic-bezier(0.23, 1, 0.32, 1); --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
     }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: 'Inter', -apple-system, sans-serif; color: #1E293B; line-height: 1.6; background: #fff; -webkit-font-smoothing: antialiased; }
+    body { font-family: 'Inter', -apple-system, sans-serif; color: #1E293B; line-height: 1.6; background: var(--navy); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
 
     /* ═══ GATE ═══ */
     #gate { position: fixed; inset: 0; z-index: 9999; display: flex; align-items: center; justify-content: center; background: var(--navy); }
     #gate.hidden { display: none; }
-    .gate-card { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); border-radius: 20px; padding: 52px 44px; max-width: 400px; width: 90%; text-align: center; backdrop-filter: blur(20px); }
-    .gate-card img { height: 42px; margin-bottom: 24px; }
+    .gate-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); border-radius: 24px; padding: 56px 48px; max-width: 420px; width: 90%; text-align: center; backdrop-filter: blur(24px); box-shadow: 0 32px 80px rgba(0,0,0,0.4); }
+    .gate-card img { height: 42px; margin-bottom: 28px; }
     .gate-badge { font-family: 'Space Grotesk'; text-transform: uppercase; letter-spacing: 0.16em; font-size: 0.68rem; font-weight: 600; color: var(--cyan); margin-bottom: 12px; }
-    .gate-title { font-family: 'Space Grotesk'; color: #fff; font-size: 1.4rem; font-weight: 700; margin-bottom: 8px; }
-    .gate-sub { color: rgba(255,255,255,0.55); font-size: 0.88rem; margin-bottom: 28px; }
-    #gate-input { width: 100%; padding: 14px 18px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.15); background: rgba(255,255,255,0.06); color: #fff; font-size: 0.95rem; font-family: 'Inter'; transition: border-color 0.2s, box-shadow 0.2s; }
-    #gate-input:focus { outline: none; border-color: var(--cyan); box-shadow: 0 0 0 3px rgba(0,212,255,0.15); }
+    .gate-title { font-family: 'Space Grotesk'; color: #fff; font-size: 1.5rem; font-weight: 700; margin-bottom: 8px; }
+    .gate-sub { color: rgba(255,255,255,0.5); font-size: 0.88rem; margin-bottom: 32px; }
+    #gate-input { width: 100%; padding: 16px 20px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.12); background: rgba(255,255,255,0.04); color: #fff; font-size: 0.95rem; font-family: 'Inter'; transition: all 0.2s var(--ease-out); }
+    #gate-input:focus { outline: none; border-color: var(--cyan); box-shadow: 0 0 0 4px rgba(0,212,255,0.12); }
     #gate-input.err { border-color: #ff6b6b; animation: shake 320ms var(--ease-out); }
     @keyframes shake { 10%,90%{transform:translateX(-2px)} 20%,80%{transform:translateX(3px)} 30%,50%,70%{transform:translateX(-4px)} 40%,60%{transform:translateX(4px)} }
-    #gate-btn { width: 100%; padding: 14px; border: none; border-radius: 10px; background: linear-gradient(135deg, var(--brand), var(--cyan)); color: #fff; font-weight: 700; font-size: 0.95rem; cursor: pointer; margin-top: 14px; transition: transform 0.16s var(--ease-out), filter 0.2s; }
-    #gate-btn:hover { filter: brightness(1.08); }
+    #gate-btn { width: 100%; padding: 16px; border: none; border-radius: 12px; background: linear-gradient(135deg, var(--brand), var(--cyan)); color: #fff; font-weight: 700; font-size: 0.95rem; cursor: pointer; margin-top: 16px; transition: transform 0.16s var(--ease-out), filter 0.2s; }
+    #gate-btn:hover { filter: brightness(1.1); }
     #gate-btn:active { transform: scale(0.97); }
     .gate-err { color: #ff9b9b; font-size: 0.82rem; min-height: 18px; margin-top: 14px; }
     body.locked { overflow: hidden; }
-    body.locked .page { filter: blur(10px); pointer-events: none; }
+    body.locked .page { filter: blur(12px); pointer-events: none; }
 
     /* ═══ STICKY BAR ═══ */
-    .topbar { position: sticky; top: 0; z-index: 900; background: rgba(11,19,64,0.96); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255,255,255,0.08); }
-    .topbar-inner { max-width: 1320px; margin: 0 auto; padding: 10px 28px; display: flex; align-items: center; gap: 14px; }
+    .topbar { position: sticky; top: 0; z-index: 900; background: rgba(10,15,46,0.92); backdrop-filter: blur(16px); border-bottom: 1px solid rgba(255,255,255,0.06); }
+    .topbar-inner { max-width: 1400px; margin: 0 auto; padding: 12px 32px; display: flex; align-items: center; gap: 14px; }
     .topbar img { height: 28px; }
     .topbar-badge { font-family: 'Space Grotesk'; text-transform: uppercase; letter-spacing: 0.12em; font-size: 0.65rem; font-weight: 600; color: var(--cyan); display: flex; align-items: center; gap: 6px; }
     .topbar-badge::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--cyan); animation: pulse 2s infinite; }
     @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
 
     /* ═══ SECTIONS ═══ */
-    .section { padding: 100px 28px; position: relative; }
-    .section--dark { background: linear-gradient(165deg, var(--navy) 0%, var(--navy-mid) 100%); color: #fff; }
+    .section { padding: 120px 32px; position: relative; }
+    .section--dark { background: linear-gradient(175deg, var(--navy) 0%, var(--navy-mid) 100%); color: #fff; }
+    .section--darker { background: linear-gradient(175deg, #060A1F 0%, var(--navy) 100%); color: #fff; }
     .section--gray { background: var(--surface); }
-    .section-inner { max-width: 1200px; margin: 0 auto; }
-    .section-narrow { max-width: 800px; margin: 0 auto; }
+    .section-inner { max-width: 1280px; margin: 0 auto; }
 
     /* ═══ TYPOGRAPHY ═══ */
-    .eyebrow { font-family: 'Space Grotesk'; text-transform: uppercase; letter-spacing: 0.14em; font-size: 0.7rem; font-weight: 600; color: var(--brand); margin-bottom: 14px; }
-    .section--dark .eyebrow { color: var(--cyan); }
-    h2 { font-family: 'Space Grotesk'; font-size: clamp(2rem, 4.5vw, 3.2rem); font-weight: 800; line-height: 1.08; margin-bottom: 16px; }
-    .section--dark h2 { color: #fff; }
-    .lead { font-size: 1.1rem; color: #475569; max-width: 680px; line-height: 1.7; }
-    .section--dark .lead { color: rgba(255,255,255,0.65); }
+    .eyebrow { font-family: 'Space Grotesk'; text-transform: uppercase; letter-spacing: 0.14em; font-size: 0.72rem; font-weight: 600; color: var(--cyan); margin-bottom: 16px; }
+    h2 { font-family: 'Space Grotesk'; font-size: clamp(2.2rem, 5vw, 3.6rem); font-weight: 800; line-height: 1.06; margin-bottom: 20px; color: #fff; }
+    .lead { font-size: 1.12rem; color: rgba(255,255,255,0.6); max-width: 700px; line-height: 1.75; }
+    .lead--dark { color: #475569; }
 
     /* ═══ HERO ═══ */
-    .hero { min-height: 70vh; display: flex; align-items: center; }
-    .hero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
-    .hero-left h1 { font-family: 'Space Grotesk'; font-size: clamp(2.2rem, 5vw, 3.6rem); font-weight: 900; line-height: 1.06; color: #fff; margin-bottom: 20px; }
-    .hero-left h1 span { background: linear-gradient(135deg, var(--cyan), #7DD3FC); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-    .hero-left p { color: rgba(255,255,255,0.6); font-size: 1.05rem; line-height: 1.7; max-width: 480px; margin-bottom: 32px; }
-    .hero-context { background: rgba(0,212,255,0.08); border: 1px solid rgba(0,212,255,0.2); border-radius: 12px; padding: 16px 20px; display: flex; align-items: center; gap: 12px; }
-    .hero-context svg { flex: none; color: var(--cyan); }
-    .hero-context span { color: rgba(255,255,255,0.75); font-size: 0.88rem; }
+    .hero { min-height: 85vh; display: flex; align-items: center; padding-top: 60px; }
+    .hero-grid { display: grid; grid-template-columns: 1fr 1.1fr; gap: 80px; align-items: center; }
+    .hero-left h1 { font-family: 'Space Grotesk'; font-size: clamp(2.4rem, 5.5vw, 4rem); font-weight: 900; line-height: 1.04; color: #fff; margin-bottom: 24px; }
+    .hero-left h1 .accent { background: linear-gradient(135deg, var(--cyan), #7DD3FC); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .hero-left .hero-sub { color: rgba(255,255,255,0.55); font-size: 1.08rem; line-height: 1.7; max-width: 500px; margin-bottom: 36px; }
+    .hero-context { background: rgba(0,212,255,0.06); border: 1px solid rgba(0,212,255,0.15); border-radius: 14px; padding: 18px 22px; display: flex; align-items: center; gap: 14px; }
+    .hero-context i { flex: none; color: var(--cyan); width: 20px; height: 20px; }
+    .hero-context span { color: rgba(255,255,255,0.7); font-size: 0.9rem; }
+    .hero-context a { color: var(--cyan); text-decoration: none; font-weight: 600; }
 
-    /* ═══ MINI DASHBOARD PREVIEW (Hero right) ═══ */
-    .dash-preview { background: #0F172A; border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; overflow: hidden; box-shadow: 0 20px 60px rgba(0,0,0,0.4), 0 0 0 1px rgba(255,255,255,0.05); }
-    .dash-titlebar { background: rgba(255,255,255,0.04); padding: 10px 16px; display: flex; align-items: center; gap: 8px; border-bottom: 1px solid rgba(255,255,255,0.06); }
-    .dash-dot { width: 8px; height: 8px; border-radius: 50%; }
-    .dash-dot--r { background: #ff5f57; }
-    .dash-dot--y { background: #febc2e; }
-    .dash-dot--g { background: #28c840; }
-    .dash-titlebar span { margin-left: 8px; font-size: 0.72rem; color: rgba(255,255,255,0.4); font-family: 'JetBrains Mono'; }
-    .dash-body { padding: 20px; }
-    .dash-kpis { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 16px; }
-    .dash-kpi { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 8px; padding: 12px 10px; text-align: center; }
-    .dash-kpi-val { font-family: 'Space Grotesk'; font-size: 1.1rem; font-weight: 800; color: var(--cyan); }
-    .dash-kpi-val.green { color: var(--positive); }
-    .dash-kpi-val.amber { color: var(--warn); }
-    .dash-kpi-val.red { color: var(--danger); }
-    .dash-kpi-label { font-size: 0.62rem; color: rgba(255,255,255,0.45); margin-top: 2px; text-transform: uppercase; letter-spacing: 0.06em; }
-    .dash-table { width: 100%; border-collapse: collapse; }
-    .dash-table th { font-size: 0.62rem; text-transform: uppercase; letter-spacing: 0.08em; color: rgba(255,255,255,0.35); text-align: left; padding: 6px 8px; border-bottom: 1px solid rgba(255,255,255,0.06); font-weight: 500; }
-    .dash-table td { font-size: 0.72rem; color: rgba(255,255,255,0.75); padding: 8px; border-bottom: 1px solid rgba(255,255,255,0.04); }
-    .dash-table .mono { font-family: 'JetBrains Mono'; font-size: 0.68rem; }
+    /* ═══ APP MOCK (Hero right) ═══ */
+    .app-mock { position: relative; perspective: 1200px; }
+    .app-frame { background: #0C1222; border: 1px solid rgba(255,255,255,0.08); border-radius: 20px; overflow: hidden; box-shadow: var(--depth-shadow); transform: rotateY(-2deg) rotateX(1deg); transition: transform 0.6s var(--ease-out); }
+    .app-frame:hover { transform: rotateY(0) rotateX(0); }
+    .app-titlebar { background: rgba(255,255,255,0.03); padding: 12px 18px; display: flex; align-items: center; gap: 8px; border-bottom: 1px solid rgba(255,255,255,0.06); }
+    .app-dot { width: 10px; height: 10px; border-radius: 50%; }
+    .app-dot--r { background: #ff5f57; } .app-dot--y { background: #febc2e; } .app-dot--g { background: #28c840; }
+    .app-url { margin-left: 12px; background: rgba(255,255,255,0.05); border-radius: 6px; padding: 4px 12px; font-family: 'JetBrains Mono'; font-size: 0.7rem; color: rgba(255,255,255,0.5); }
+    .app-body { padding: 20px; }
+    .app-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 16px; }
+    .app-stat { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.06); border-radius: 10px; padding: 14px; text-align: center; }
+    .app-stat .num { font-family: 'Space Grotesk'; font-size: 1.5rem; font-weight: 700; color: #fff; }
+    .app-stat .lbl { font-size: 0.68rem; color: rgba(255,255,255,0.45); text-transform: uppercase; letter-spacing: 0.06em; margin-top: 2px; }
+    .app-table { width: 100%; border-collapse: collapse; }
+    .app-table th { font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.08em; color: rgba(255,255,255,0.35); text-align: left; padding: 8px 10px; border-bottom: 1px solid rgba(255,255,255,0.06); }
+    .app-table td { font-size: 0.8rem; color: rgba(255,255,255,0.8); padding: 10px; border-bottom: 1px solid rgba(255,255,255,0.04); }
     .status-dot { width: 7px; height: 7px; border-radius: 50%; display: inline-block; margin-right: 6px; }
-    .status-dot.green { background: var(--positive); box-shadow: 0 0 6px rgba(16,185,129,0.5); }
-    .status-dot.amber { background: var(--warn); box-shadow: 0 0 6px rgba(245,158,11,0.5); }
-    .status-dot.red { background: var(--danger); box-shadow: 0 0 6px rgba(239,68,68,0.5); }
+    .status-dot--green { background: var(--positive); box-shadow: 0 0 6px rgba(16,185,129,0.5); }
+    .status-dot--blue { background: var(--brand-light); box-shadow: 0 0 6px rgba(79,106,255,0.5); }
+    .status-dot--amber { background: var(--warn); box-shadow: 0 0 6px rgba(245,158,11,0.5); }
+    .app-glow { position: absolute; width: 300px; height: 300px; border-radius: 50%; background: radial-gradient(circle, rgba(0,212,255,0.15), transparent 70%); top: -80px; right: -80px; pointer-events: none; }
 
     /* ═══ PROOF STATS ═══ */
-    .proof-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-top: 40px; }
-    .proof-stat { text-align: center; padding: 24px 16px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; }
-    .proof-stat-val { font-family: 'Space Grotesk'; font-size: 1.8rem; font-weight: 800; color: var(--cyan); }
-    .proof-stat-label { font-size: 0.78rem; color: rgba(255,255,255,0.5); margin-top: 4px; }
+    .proof-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-top: 48px; }
+    .proof-card { background: var(--glass); border: 1px solid var(--glass-border); border-radius: 14px; padding: 24px; text-align: center; backdrop-filter: blur(8px); }
+    .proof-card .val { font-family: 'Space Grotesk'; font-size: 1.8rem; font-weight: 700; color: var(--cyan); }
+    .proof-card .lbl { font-size: 0.78rem; color: rgba(255,255,255,0.5); margin-top: 4px; }
 
-    /* ═══ QUESTION BLOCK ═══ */
-    .question-block { background: linear-gradient(135deg, rgba(28,56,234,0.04), rgba(0,212,255,0.03)); border-left: 4px solid var(--brand); border-radius: 0 14px 14px 0; padding: 32px 36px; margin: 40px 0; }
-    .question-block p { font-size: 1.2rem; font-style: italic; color: #1E293B; line-height: 1.6; font-weight: 500; }
+    /* ═══ QUESTION SECTION ═══ */
+    .question-block { max-width: 860px; margin: 0 auto; text-align: center; }
+    .question-block blockquote { font-family: 'Space Grotesk'; font-size: clamp(1.3rem, 3vw, 1.8rem); font-weight: 600; color: #fff; line-height: 1.4; margin: 40px 0; padding: 40px; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.08); border-radius: 20px; position: relative; }
+    .question-block blockquote::before { content: '"'; position: absolute; top: 16px; left: 24px; font-size: 4rem; color: rgba(0,212,255,0.2); font-family: Georgia, serif; line-height: 1; }
+    .question-block .gap-text { color: rgba(255,255,255,0.5); font-size: 1.05rem; max-width: 600px; margin: 0 auto; line-height: 1.7; }
 
     /* ═══ SURFACE GRID ═══ */
-    .surface-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 10px; margin-top: 28px; }
-    .surface-item { background: #fff; border: 1px solid var(--border); border-radius: 10px; padding: 18px 12px; text-align: center; transition: transform 0.2s var(--ease-out), box-shadow 0.2s; }
-    .surface-item:hover { transform: translateY(-2px); box-shadow: var(--card-shadow); }
-    .surface-item.active { background: var(--brand); color: #fff; border-color: var(--brand); }
-    .surface-item svg { margin-bottom: 6px; }
-    .surface-item span { font-size: 0.76rem; font-weight: 600; display: block; }
+    .surface-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 48px; }
+    .surface-item { background: var(--glass); border: 1px solid var(--glass-border); border-radius: 14px; padding: 22px 18px; text-align: center; transition: all 0.3s var(--ease-out); position: relative; overflow: hidden; }
+    .surface-item:hover { background: var(--glass-hover); border-color: rgba(255,255,255,0.12); transform: translateY(-2px); }
+    .surface-item.active { background: rgba(0,212,255,0.08); border-color: rgba(0,212,255,0.3); }
+    .surface-item.active::after { content: "LIVE"; position: absolute; top: 8px; right: 8px; font-size: 0.55rem; font-weight: 700; letter-spacing: 0.1em; color: var(--cyan); background: rgba(0,212,255,0.12); padding: 2px 6px; border-radius: 4px; }
+    .surface-item i { color: rgba(255,255,255,0.5); margin-bottom: 10px; display: block; }
+    .surface-item.active i { color: var(--cyan); }
+    .surface-item .name { font-size: 0.82rem; font-weight: 600; color: rgba(255,255,255,0.8); }
+    .surface-item.active .name { color: #fff; }
 
-    /* ═══ DISCOVERY FLOW ═══ */
-    .flow { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 32px; position: relative; }
-    .flow::before { content: ""; position: absolute; top: 40px; left: 12%; right: 12%; height: 2px; background: linear-gradient(90deg, var(--brand), var(--cyan)); opacity: 0.3; }
-    .flow-step { position: relative; text-align: center; background: #fff; border: 1px solid var(--border); border-radius: 14px; padding: 28px 16px 20px; box-shadow: var(--card-shadow); }
-    .flow-num { position: absolute; top: -12px; left: 50%; transform: translateX(-50%); width: 24px; height: 24px; border-radius: 50%; background: var(--brand); color: #fff; font-family: 'Space Grotesk'; font-size: 0.7rem; font-weight: 700; display: flex; align-items: center; justify-content: center; }
-    .flow-step svg { color: var(--brand); margin-bottom: 10px; }
-    .flow-step strong { font-size: 0.85rem; color: #1E293B; display: block; margin-bottom: 4px; }
-    .flow-step span { font-size: 0.72rem; color: var(--muted); line-height: 1.4; }
+    /* ═══ DISCOVERY SECTION ═══ */
+    .discovery-flow { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-top: 48px; position: relative; }
+    .discovery-flow::before { content: ""; position: absolute; top: 50%; left: 10%; right: 10%; height: 2px; background: linear-gradient(90deg, var(--cyan), var(--brand), var(--cyan)); opacity: 0.2; }
+    .disc-step { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 28px 20px; text-align: center; position: relative; z-index: 1; backdrop-filter: blur(8px); transition: all 0.3s var(--ease-out); }
+    .disc-step:hover { background: rgba(255,255,255,0.05); border-color: rgba(0,212,255,0.2); transform: translateY(-4px); }
+    .disc-num { width: 32px; height: 32px; border-radius: 50%; background: linear-gradient(135deg, var(--brand), var(--cyan)); display: flex; align-items: center; justify-content: center; font-family: 'Space Grotesk'; font-size: 0.8rem; font-weight: 700; color: #fff; margin: 0 auto 14px; }
+    .disc-step h4 { font-family: 'Space Grotesk'; font-size: 1rem; font-weight: 700; color: #fff; margin-bottom: 6px; }
+    .disc-step p { font-size: 0.8rem; color: rgba(255,255,255,0.5); line-height: 1.5; }
 
-    /* ═══ FULL DASHBOARD MOCK ═══ */
-    .dashboard-mock { background: #0F172A; border-radius: 16px; overflow: hidden; border: 1px solid rgba(255,255,255,0.08); box-shadow: 0 24px 80px rgba(0,0,0,0.3); margin-top: 40px; }
-    .dm-header { background: rgba(255,255,255,0.03); padding: 14px 24px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid rgba(255,255,255,0.06); }
-    .dm-header-left { display: flex; align-items: center; gap: 12px; }
-    .dm-header-left svg { color: var(--cyan); }
-    .dm-header-left span { font-family: 'Space Grotesk'; font-size: 0.85rem; font-weight: 600; color: #fff; }
-    .dm-header-right { display: flex; align-items: center; gap: 8px; }
-    .dm-header-right .dm-user { width: 28px; height: 28px; border-radius: 50%; background: linear-gradient(135deg, var(--brand), var(--cyan)); display: flex; align-items: center; justify-content: center; font-size: 0.65rem; font-weight: 700; color: #fff; }
-    .dm-header-right span { font-size: 0.75rem; color: rgba(255,255,255,0.6); }
-    .dm-body { padding: 24px; }
-    .dm-kpi-row { display: grid; grid-template-columns: repeat(6, 1fr); gap: 12px; margin-bottom: 24px; }
-    .dm-kpi-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07); border-radius: 10px; padding: 16px 12px; text-align: center; position: relative; overflow: hidden; }
-    .dm-kpi-card::after { content: ""; position: absolute; bottom: 0; left: 0; right: 0; height: 3px; }
-    .dm-kpi-card.c-cyan::after { background: var(--cyan); }
-    .dm-kpi-card.c-green::after { background: var(--positive); }
-    .dm-kpi-card.c-amber::after { background: var(--warn); }
-    .dm-kpi-card.c-red::after { background: var(--danger); }
-    .dm-kpi-card.c-blue::after { background: var(--brand-light); }
-    .dm-kpi-card .kv { font-family: 'Space Grotesk'; font-size: 1.3rem; font-weight: 800; color: #fff; }
-    .dm-kpi-card .kl { font-size: 0.62rem; color: rgba(255,255,255,0.45); text-transform: uppercase; letter-spacing: 0.06em; margin-top: 4px; }
-    .dm-kpi-card .kt { font-size: 0.6rem; margin-top: 6px; display: flex; align-items: center; justify-content: center; gap: 3px; }
-    .dm-kpi-card .kt.up { color: var(--positive); }
-    .dm-kpi-card .kt.down { color: var(--danger); }
+    /* ═══ DASHBOARD MOCK ═══ */
+    .dash-container { margin-top: 56px; perspective: 1000px; }
+    .dash-frame { background: #080D24; border: 1px solid rgba(255,255,255,0.08); border-radius: 20px; overflow: hidden; box-shadow: 0 40px 120px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.04), inset 0 1px 0 rgba(255,255,255,0.05); transform: rotateX(2deg); transition: transform 0.6s var(--ease-out); }
+    .dash-frame:hover { transform: rotateX(0); }
+    .dash-header { background: rgba(255,255,255,0.03); padding: 14px 24px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid rgba(255,255,255,0.06); }
+    .dash-header-left { display: flex; align-items: center; gap: 12px; }
+    .dash-header-left i { color: var(--cyan); }
+    .dash-header-left span { font-family: 'Space Grotesk'; font-size: 0.9rem; font-weight: 700; color: #fff; }
+    .dash-user { display: flex; align-items: center; gap: 10px; }
+    .dash-user span { font-size: 0.82rem; color: rgba(255,255,255,0.6); }
+    .dash-avatar { width: 32px; height: 32px; border-radius: 50%; background: linear-gradient(135deg, var(--brand), var(--cyan)); display: flex; align-items: center; justify-content: center; font-family: 'Space Grotesk'; font-size: 0.7rem; font-weight: 700; color: #fff; }
+    .dash-body { padding: 24px; }
 
-    .dm-split { display: grid; grid-template-columns: 2fr 1fr; gap: 20px; }
-    .dm-panel { background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; padding: 18px; }
-    .dm-panel-title { font-family: 'Space Grotesk'; font-size: 0.78rem; font-weight: 600; color: rgba(255,255,255,0.7); margin-bottom: 14px; display: flex; align-items: center; gap: 8px; }
-    .dm-panel-title svg { width: 14px; height: 14px; color: var(--cyan); }
+    /* KPI Row */
+    .kpi-row { display: grid; grid-template-columns: repeat(6, 1fr); gap: 14px; margin-bottom: 24px; }
+    .kpi-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; padding: 18px 14px; position: relative; overflow: hidden; }
+    .kpi-card::after { content: ""; position: absolute; bottom: 0; left: 0; right: 0; height: 3px; border-radius: 0 0 12px 12px; }
+    .kpi-card.green::after { background: var(--positive); }
+    .kpi-card.amber::after { background: var(--warn); }
+    .kpi-card.red::after { background: var(--danger); }
+    .kpi-card.blue::after { background: var(--brand-light); }
+    .kpi-val { font-family: 'Space Grotesk'; font-size: 1.4rem; font-weight: 700; color: #fff; }
+    .kpi-lbl { font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.08em; color: rgba(255,255,255,0.4); margin-top: 4px; }
+    .kpi-trend { font-size: 0.7rem; margin-top: 6px; display: flex; align-items: center; gap: 4px; }
+    .kpi-trend.up { color: var(--positive); }
+    .kpi-trend.down { color: var(--danger); }
+    .kpi-trend.neutral { color: var(--warn); }
 
-    /* Project table inside dashboard */
-    .dm-proj-table { width: 100%; border-collapse: collapse; }
-    .dm-proj-table th { font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.08em; color: rgba(255,255,255,0.35); text-align: left; padding: 8px 10px; border-bottom: 1px solid rgba(255,255,255,0.06); font-weight: 500; }
-    .dm-proj-table td { font-size: 0.74rem; color: rgba(255,255,255,0.8); padding: 10px; border-bottom: 1px solid rgba(255,255,255,0.04); vertical-align: middle; }
-    .dm-proj-table tr:hover td { background: rgba(255,255,255,0.02); }
-    .dm-proj-table .mono { font-family: 'JetBrains Mono'; font-size: 0.7rem; }
-    .dm-proj-table .proj-name { font-weight: 600; color: #fff; }
-    .dm-proj-table .bar-cell { width: 100px; }
-    .progress-bar { height: 6px; border-radius: 3px; background: rgba(255,255,255,0.08); overflow: hidden; }
-    .progress-bar-fill { height: 100%; border-radius: 3px; transition: width 1s var(--ease-out); }
-    .progress-bar-fill.green { background: var(--positive); }
-    .progress-bar-fill.amber { background: var(--warn); }
-    .progress-bar-fill.red { background: var(--danger); }
+    /* Project Table */
+    .dash-split { display: grid; grid-template-columns: 1.6fr 1fr; gap: 20px; }
+    .dash-panel { background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06); border-radius: 14px; padding: 20px; }
+    .dash-panel-title { font-family: 'Space Grotesk'; font-size: 0.82rem; font-weight: 700; color: rgba(255,255,255,0.7); margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+    .dash-panel-title i { width: 16px; height: 16px; color: rgba(255,255,255,0.4); }
+    .proj-table { width: 100%; border-collapse: collapse; }
+    .proj-table th { font-size: 0.62rem; text-transform: uppercase; letter-spacing: 0.08em; color: rgba(255,255,255,0.35); text-align: left; padding: 8px 8px; border-bottom: 1px solid rgba(255,255,255,0.06); font-weight: 600; }
+    .proj-table td { font-size: 0.78rem; color: rgba(255,255,255,0.8); padding: 11px 8px; border-bottom: 1px solid rgba(255,255,255,0.04); }
+    .proj-table tr:hover td { background: rgba(255,255,255,0.02); }
+    .proj-table .proj-name { font-weight: 600; color: #fff; }
+    .health-bar { width: 48px; height: 6px; border-radius: 3px; background: rgba(255,255,255,0.08); overflow: hidden; display: inline-block; vertical-align: middle; }
+    .health-bar-fill { height: 100%; border-radius: 3px; }
+    .margin-pos { color: var(--positive); font-weight: 600; }
+    .margin-neg { color: var(--danger); font-weight: 600; }
 
-    /* Right panel - alerts */
-    .dm-alert { display: flex; align-items: flex-start; gap: 10px; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.04); }
-    .dm-alert:last-child { border-bottom: none; }
-    .dm-alert-icon { width: 28px; height: 28px; border-radius: 6px; display: flex; align-items: center; justify-content: center; flex: none; }
-    .dm-alert-icon.warn { background: var(--warn-bg); color: var(--warn); }
-    .dm-alert-icon.danger { background: var(--danger-bg); color: var(--danger); }
-    .dm-alert-icon.info { background: rgba(79,106,255,0.12); color: var(--brand-light); }
-    .dm-alert-text strong { font-size: 0.72rem; color: rgba(255,255,255,0.85); display: block; }
-    .dm-alert-text span { font-size: 0.65rem; color: rgba(255,255,255,0.45); }
+    /* Alerts Panel */
+    .alert-item { padding: 12px 14px; border-radius: 10px; margin-bottom: 10px; display: flex; align-items: flex-start; gap: 10px; }
+    .alert-item--red { background: var(--danger-bg); border: 1px solid rgba(239,68,68,0.15); }
+    .alert-item--amber { background: var(--warn-bg); border: 1px solid rgba(245,158,11,0.15); }
+    .alert-item--green { background: var(--positive-bg); border: 1px solid rgba(16,185,129,0.15); }
+    .alert-icon { width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex: none; margin-top: 1px; }
+    .alert-icon--red { background: rgba(239,68,68,0.2); color: var(--danger); }
+    .alert-icon--amber { background: rgba(245,158,11,0.2); color: var(--warn); }
+    .alert-icon--green { background: rgba(16,185,129,0.2); color: var(--positive); }
+    .alert-icon svg { width: 10px; height: 10px; }
+    .alert-text { font-size: 0.75rem; color: rgba(255,255,255,0.8); line-height: 1.4; }
+    .alert-text strong { display: block; margin-bottom: 2px; }
+    .alert-text span { color: rgba(255,255,255,0.5); }
 
-    /* ═══ DRILL-DOWN: Cost-to-Complete ═══ */
-    .drilldown { margin-top: 40px; background: #0F172A; border-radius: 16px; border: 1px solid rgba(255,255,255,0.08); overflow: hidden; box-shadow: 0 24px 80px rgba(0,0,0,0.3); }
-    .dd-header { padding: 18px 24px; border-bottom: 1px solid rgba(255,255,255,0.06); display: flex; align-items: center; gap: 12px; }
-    .dd-header svg { color: var(--cyan); }
-    .dd-header .dd-title { font-family: 'Space Grotesk'; font-size: 0.9rem; font-weight: 700; color: #fff; }
-    .dd-header .dd-sub { font-size: 0.72rem; color: rgba(255,255,255,0.45); margin-left: auto; }
-    .dd-body { padding: 28px; }
-    .dd-waterfall { display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px; align-items: end; height: 220px; margin-bottom: 20px; }
-    .dd-bar-wrap { display: flex; flex-direction: column; align-items: center; height: 100%; justify-content: flex-end; }
-    .dd-bar { width: 100%; max-width: 48px; border-radius: 6px 6px 0 0; position: relative; transition: height 1.2s var(--ease-out); min-height: 4px; }
-    .dd-bar-val { position: absolute; top: -22px; left: 50%; transform: translateX(-50%); font-family: 'JetBrains Mono'; font-size: 0.68rem; font-weight: 600; color: rgba(255,255,255,0.8); white-space: nowrap; }
-    .dd-bar-label { font-size: 0.6rem; color: rgba(255,255,255,0.4); text-align: center; margin-top: 8px; text-transform: uppercase; letter-spacing: 0.04em; line-height: 1.3; }
-    .dd-bar.b-blue { background: linear-gradient(180deg, var(--brand-light), var(--brand)); }
-    .dd-bar.b-lblue { background: linear-gradient(180deg, #93C5FD, #3B82F6); }
-    .dd-bar.b-red { background: linear-gradient(180deg, #FCA5A5, var(--danger)); }
-    .dd-bar.b-amber { background: linear-gradient(180deg, #FDE68A, var(--warn)); }
-    .dd-bar.b-gray { background: linear-gradient(180deg, #94A3B8, #64748B); }
-    .dd-bar.b-slate { background: linear-gradient(180deg, #475569, #334155); }
-    .dd-bar.b-green { background: linear-gradient(180deg, #6EE7B7, var(--positive)); }
+    /* ═══ DRILL DOWN ═══ */
+    .drill-container { margin-top: 56px; }
+    .drill-frame { background: #080D24; border: 1px solid rgba(255,255,255,0.08); border-radius: 20px; overflow: hidden; box-shadow: var(--depth-shadow); }
+    .drill-header { background: rgba(255,255,255,0.03); padding: 16px 24px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid rgba(255,255,255,0.06); }
+    .drill-header-left { display: flex; align-items: center; gap: 12px; }
+    .drill-back { width: 28px; height: 28px; border-radius: 6px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,0.6); }
+    .drill-title { font-family: 'Space Grotesk'; font-size: 0.95rem; font-weight: 700; color: #fff; }
+    .drill-subtitle { font-size: 0.72rem; color: rgba(255,255,255,0.4); }
+    .drill-tabs { display: flex; gap: 2px; background: rgba(255,255,255,0.04); border-radius: 8px; padding: 3px; }
+    .drill-tab { padding: 6px 14px; border-radius: 6px; font-size: 0.72rem; font-weight: 600; color: rgba(255,255,255,0.5); cursor: pointer; transition: all 0.2s; }
+    .drill-tab.active { background: rgba(0,212,255,0.12); color: var(--cyan); }
+    .drill-body { padding: 24px; }
 
-    .dd-summary { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.06); }
-    .dd-sum-item { text-align: center; }
-    .dd-sum-item .dd-sv { font-family: 'Space Grotesk'; font-size: 1.1rem; font-weight: 800; }
-    .dd-sum-item .dd-sv.cyan { color: var(--cyan); }
-    .dd-sum-item .dd-sv.green { color: var(--positive); }
-    .dd-sum-item .dd-sv.amber { color: var(--warn); }
-    .dd-sum-item .dd-sv.red { color: var(--danger); }
-    .dd-sum-item .dd-sl { font-size: 0.62rem; color: rgba(255,255,255,0.4); text-transform: uppercase; letter-spacing: 0.06em; margin-top: 4px; }
+    /* Cost Waterfall */
+    .waterfall { display: grid; grid-template-columns: repeat(7, 1fr); gap: 12px; margin-bottom: 32px; }
+    .wf-col { text-align: center; }
+    .wf-bar-wrap { height: 160px; display: flex; align-items: flex-end; justify-content: center; margin-bottom: 10px; position: relative; }
+    .wf-bar { width: 44px; border-radius: 6px 6px 0 0; position: relative; transition: height 0.8s var(--ease-out); }
+    .wf-bar-val { position: absolute; top: -22px; left: 50%; transform: translateX(-50%); font-family: 'JetBrains Mono'; font-size: 0.7rem; font-weight: 600; color: #fff; white-space: nowrap; }
+    .wf-lbl { font-size: 0.62rem; color: rgba(255,255,255,0.4); text-transform: uppercase; letter-spacing: 0.04em; line-height: 1.3; }
+    .wf-bar--contract { background: linear-gradient(180deg, var(--cyan), #0891B2); }
+    .wf-bar--budget { background: linear-gradient(180deg, var(--brand-light), var(--brand)); }
+    .wf-bar--actual { background: linear-gradient(180deg, #F97316, #EA580C); }
+    .wf-bar--committed { background: linear-gradient(180deg, var(--warn), #D97706); }
+    .wf-bar--remaining { background: linear-gradient(180deg, #6366F1, #4F46E5); }
+    .wf-bar--forecast { background: linear-gradient(180deg, #8B5CF6, #7C3AED); }
+    .wf-bar--variance { background: linear-gradient(180deg, var(--danger), #DC2626); }
+
+    /* Cost Breakdown Table */
+    .cost-breakdown { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .cb-panel { background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06); border-radius: 14px; padding: 20px; }
+    .cb-title { font-family: 'Space Grotesk'; font-size: 0.8rem; font-weight: 700; color: rgba(255,255,255,0.7); margin-bottom: 14px; }
+    .cb-row { display: flex; justify-content: space-between; align-items: center; padding: 9px 0; border-bottom: 1px solid rgba(255,255,255,0.04); }
+    .cb-row:last-child { border-bottom: none; }
+    .cb-cat { font-size: 0.78rem; color: rgba(255,255,255,0.7); }
+    .cb-vals { display: flex; gap: 20px; }
+    .cb-val { font-family: 'JetBrains Mono'; font-size: 0.75rem; color: rgba(255,255,255,0.8); min-width: 60px; text-align: right; }
+    .cb-val.over { color: var(--danger); }
+    .cb-val.under { color: var(--positive); }
+    .cb-bar { width: 100%; height: 4px; border-radius: 2px; background: rgba(255,255,255,0.06); margin-top: 6px; overflow: hidden; }
+    .cb-bar-fill { height: 100%; border-radius: 2px; transition: width 0.8s var(--ease-out); }
+
+    /* Summary Cards */
+    .drill-summary { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 24px; }
+    .ds-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; padding: 18px; text-align: center; }
+    .ds-val { font-family: 'Space Grotesk'; font-size: 1.5rem; font-weight: 700; }
+    .ds-val.green { color: var(--positive); }
+    .ds-val.red { color: var(--danger); }
+    .ds-val.blue { color: var(--cyan); }
+    .ds-val.amber { color: var(--warn); }
+    .ds-lbl { font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.06em; color: rgba(255,255,255,0.4); margin-top: 4px; }
+
+    /* ═══ AI SECTION ═══ */
+    .ai-container { margin-top: 56px; }
+    .ai-frame { background: #080D24; border: 1px solid rgba(255,255,255,0.08); border-radius: 20px; overflow: hidden; box-shadow: var(--depth-shadow); }
+    .ai-header { background: rgba(255,255,255,0.03); padding: 14px 24px; display: flex; align-items: center; gap: 12px; border-bottom: 1px solid rgba(255,255,255,0.06); }
+    .ai-header-icon { width: 28px; height: 28px; border-radius: 8px; background: linear-gradient(135deg, rgba(139,92,246,0.3), rgba(0,212,255,0.3)); display: flex; align-items: center; justify-content: center; }
+    .ai-header-icon i { color: #fff; width: 14px; height: 14px; }
+    .ai-header span { font-family: 'Space Grotesk'; font-size: 0.88rem; font-weight: 700; color: #fff; }
+    .ai-header .ai-badge { font-size: 0.6rem; background: rgba(139,92,246,0.15); color: #A78BFA; padding: 3px 8px; border-radius: 4px; font-weight: 600; letter-spacing: 0.05em; }
+    .ai-body { padding: 24px; display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .ai-insight { background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06); border-radius: 14px; padding: 20px; transition: all 0.3s var(--ease-out); }
+    .ai-insight:hover { background: rgba(255,255,255,0.04); border-color: rgba(255,255,255,0.1); }
+    .ai-insight-header { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+    .ai-insight-icon { width: 28px; height: 28px; border-radius: 8px; display: flex; align-items: center; justify-content: center; }
+    .ai-insight-icon.red { background: var(--danger-bg); color: var(--danger); }
+    .ai-insight-icon.amber { background: var(--warn-bg); color: var(--warn); }
+    .ai-insight-icon.blue { background: rgba(79,106,255,0.1); color: var(--brand-light); }
+    .ai-insight-icon.green { background: var(--positive-bg); color: var(--positive); }
+    .ai-insight-icon i { width: 14px; height: 14px; }
+    .ai-insight-type { font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 600; }
+    .ai-insight-type.red { color: var(--danger); }
+    .ai-insight-type.amber { color: var(--warn); }
+    .ai-insight-type.blue { color: var(--brand-light); }
+    .ai-insight-type.green { color: var(--positive); }
+    .ai-insight h4 { font-size: 0.88rem; font-weight: 700; color: #fff; margin-bottom: 8px; }
+    .ai-insight p { font-size: 0.8rem; color: rgba(255,255,255,0.55); line-height: 1.6; margin-bottom: 14px; }
+    .ai-actions { display: flex; gap: 8px; }
+    .ai-btn { padding: 6px 14px; border-radius: 6px; font-size: 0.7rem; font-weight: 600; border: none; cursor: pointer; transition: all 0.2s; }
+    .ai-btn--primary { background: rgba(0,212,255,0.12); color: var(--cyan); border: 1px solid rgba(0,212,255,0.2); }
+    .ai-btn--primary:hover { background: rgba(0,212,255,0.2); }
+    .ai-btn--dismiss { background: rgba(255,255,255,0.04); color: rgba(255,255,255,0.5); border: 1px solid rgba(255,255,255,0.08); }
+    .ai-btn--dismiss:hover { background: rgba(255,255,255,0.08); }
+    .ai-guardrail { grid-column: 1 / -1; background: rgba(139,92,246,0.04); border: 1px solid rgba(139,92,246,0.15); border-radius: 14px; padding: 18px 22px; display: flex; align-items: center; gap: 14px; }
+    .ai-guardrail i { color: #A78BFA; flex: none; }
+    .ai-guardrail p { font-size: 0.82rem; color: rgba(255,255,255,0.6); line-height: 1.5; }
+    .ai-guardrail strong { color: #fff; }
 
     /* ═══ ROADMAP ═══ */
-    .roadmap { margin-top: 32px; }
-    .rm-item { display: flex; align-items: flex-start; gap: 20px; padding: 20px 0; border-bottom: 1px solid var(--border); position: relative; }
-    .rm-item:last-child { border-bottom: none; }
-    .rm-num { width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Space Grotesk'; font-weight: 700; font-size: 0.82rem; flex: none; background: var(--brand); color: #fff; }
-    .rm-item.done .rm-num { background: var(--positive); }
-    .rm-body strong { font-size: 0.92rem; color: #1E293B; display: block; margin-bottom: 2px; }
-    .rm-body span { font-size: 0.82rem; color: var(--muted); }
-    .rm-tag { font-family: 'Space Grotesk'; font-weight: 700; font-size: 0.78rem; margin-left: auto; padding-top: 6px; flex: none; }
-    .rm-tag.live { color: var(--positive); }
-    .rm-tag.next { color: var(--brand); }
+    .roadmap { margin-top: 56px; position: relative; }
+    .roadmap::before { content: ""; position: absolute; left: 28px; top: 0; bottom: 0; width: 2px; background: linear-gradient(180deg, var(--cyan), var(--brand), rgba(255,255,255,0.06)); }
+    .rm-item { display: flex; gap: 24px; margin-bottom: 28px; position: relative; }
+    .rm-marker { width: 56px; flex: none; display: flex; flex-direction: column; align-items: center; }
+    .rm-dot { width: 16px; height: 16px; border-radius: 50%; border: 3px solid; position: relative; z-index: 1; }
+    .rm-dot--done { border-color: var(--positive); background: var(--positive); }
+    .rm-dot--next { border-color: var(--cyan); background: transparent; box-shadow: 0 0 12px rgba(0,212,255,0.4); }
+    .rm-dot--future { border-color: rgba(255,255,255,0.2); background: transparent; }
+    .rm-content { background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06); border-radius: 14px; padding: 20px 24px; flex: 1; transition: all 0.3s var(--ease-out); }
+    .rm-content:hover { background: rgba(255,255,255,0.04); border-color: rgba(255,255,255,0.1); }
+    .rm-content h4 { font-family: 'Space Grotesk'; font-size: 0.95rem; font-weight: 700; color: #fff; margin-bottom: 4px; }
+    .rm-content p { font-size: 0.82rem; color: rgba(255,255,255,0.5); line-height: 1.5; }
+    .rm-badge { display: inline-block; font-size: 0.6rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding: 3px 8px; border-radius: 4px; margin-left: 10px; }
+    .rm-badge--live { background: var(--positive-bg); color: var(--positive); }
+    .rm-badge--next { background: rgba(0,212,255,0.1); color: var(--cyan); }
 
     /* ═══ CTA ═══ */
-    .cta-card { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); border-radius: 20px; padding: 56px 48px; text-align: center; max-width: 720px; margin: 0 auto; }
-    .cta-card h2 { color: #fff; margin-bottom: 16px; font-size: clamp(1.6rem, 3vw, 2.4rem); }
-    .cta-card p { color: rgba(255,255,255,0.6); font-size: 1rem; line-height: 1.7; max-width: 560px; margin: 0 auto; }
+    .cta-section { text-align: center; padding: 140px 32px; }
+    .cta-section h2 { margin-bottom: 20px; }
+    .cta-section .lead { margin: 0 auto; }
 
     /* ═══ FOOTER ═══ */
-    .footer { text-align: center; padding: 28px; font-size: 0.72rem; color: #94A3B8; }
+    .footer { text-align: center; padding: 40px 32px; border-top: 1px solid rgba(255,255,255,0.06); }
+    .footer p { font-size: 0.75rem; color: rgba(255,255,255,0.3); }
 
     /* ═══ RESPONSIVE ═══ */
     @media (max-width: 1024px) {
-      .hero-grid { grid-template-columns: 1fr; gap: 40px; }
-      .dm-kpi-row { grid-template-columns: repeat(3, 1fr); }
-      .dm-split { grid-template-columns: 1fr; }
-      .dd-waterfall { height: 160px; }
+      .hero-grid { grid-template-columns: 1fr; gap: 48px; }
+      .kpi-row { grid-template-columns: repeat(3, 1fr); }
+      .dash-split { grid-template-columns: 1fr; }
+      .waterfall { grid-template-columns: repeat(4, 1fr); }
+      .ai-body { grid-template-columns: 1fr; }
+      .cost-breakdown { grid-template-columns: 1fr; }
     }
     @media (max-width: 768px) {
-      .section { padding: 64px 20px; }
-      .hero { min-height: auto; padding-top: 80px; }
-      .proof-stats { grid-template-columns: repeat(2, 1fr); }
-      .flow { grid-template-columns: repeat(2, 1fr); }
-      .flow::before { display: none; }
-      .dm-kpi-row { grid-template-columns: repeat(2, 1fr); }
-      .dd-waterfall { grid-template-columns: repeat(4, 1fr); height: auto; }
-      .dd-bar-wrap:nth-child(n+5) { margin-top: 12px; }
-      .dd-summary { grid-template-columns: repeat(2, 1fr); }
-      .surface-grid { grid-template-columns: repeat(3, 1fr); }
+      .section { padding: 80px 20px; }
+      .surface-grid { grid-template-columns: repeat(3, 1fr); gap: 10px; }
+      .discovery-flow { grid-template-columns: repeat(2, 1fr); }
+      .kpi-row { grid-template-columns: repeat(2, 1fr); }
+      .proof-row { grid-template-columns: repeat(2, 1fr); }
+      .waterfall { grid-template-columns: repeat(4, 1fr); gap: 8px; }
+      .drill-summary { grid-template-columns: repeat(2, 1fr); }
+      .drill-tabs { display: none; }
+      .app-frame { transform: none; }
     }
     @media (max-width: 480px) {
-      .dm-kpi-row { grid-template-columns: 1fr 1fr; }
       .surface-grid { grid-template-columns: repeat(2, 1fr); }
-      .flow { grid-template-columns: 1fr; }
+      .kpi-row { grid-template-columns: 1fr; }
+      .waterfall { grid-template-columns: repeat(3, 1fr); }
     }
 
     /* ═══ ANIMATIONS ═══ */
-    .fade-up { opacity: 0; transform: translateY(24px); transition: opacity 0.6s var(--ease-out), transform 0.6s var(--ease-out); }
+    .fade-up { opacity: 0; transform: translateY(24px); transition: opacity 0.7s var(--ease-out), transform 0.7s var(--ease-out); }
     .fade-up.visible { opacity: 1; transform: translateY(0); }
-    .stagger-1 { transition-delay: 0.1s; }
-    .stagger-2 { transition-delay: 0.2s; }
-    .stagger-3 { transition-delay: 0.3s; }
-    .stagger-4 { transition-delay: 0.4s; }
+    .stagger > * { opacity: 0; transform: translateY(16px); transition: opacity 0.5s var(--ease-out), transform 0.5s var(--ease-out); }
+    .stagger.visible > *:nth-child(1) { transition-delay: 0ms; opacity: 1; transform: translateY(0); }
+    .stagger.visible > *:nth-child(2) { transition-delay: 60ms; opacity: 1; transform: translateY(0); }
+    .stagger.visible > *:nth-child(3) { transition-delay: 120ms; opacity: 1; transform: translateY(0); }
+    .stagger.visible > *:nth-child(4) { transition-delay: 180ms; opacity: 1; transform: translateY(0); }
+    .stagger.visible > *:nth-child(5) { transition-delay: 240ms; opacity: 1; transform: translateY(0); }
+    .stagger.visible > *:nth-child(6) { transition-delay: 300ms; opacity: 1; transform: translateY(0); }
+    .stagger.visible > *:nth-child(7) { transition-delay: 360ms; opacity: 1; transform: translateY(0); }
+    .stagger.visible > *:nth-child(8) { transition-delay: 420ms; opacity: 1; transform: translateY(0); }
+    .stagger.visible > *:nth-child(9) { transition-delay: 480ms; opacity: 1; transform: translateY(0); }
+    .stagger.visible > *:nth-child(10) { transition-delay: 540ms; opacity: 1; transform: translateY(0); }
+    .stagger.visible > *:nth-child(11) { transition-delay: 600ms; opacity: 1; transform: translateY(0); }
+    .stagger.visible > *:nth-child(12) { transition-delay: 660ms; opacity: 1; transform: translateY(0); }
   </style>
 </head>
 <body class="locked">
 
-<!-- ═══ GATE ═══ -->
+<!-- ═══ PASSWORD GATE ═══ -->
 <div id="gate">
   <div class="gate-card">
     <img src="/assets/logo_footer_2x.png" alt="CleanSpace Stay" />
     <div class="gate-badge">Internal &amp; Confidential</div>
-    <div class="gate-title">Platform Overview</div>
-    <p class="gate-sub">Enter the access password to continue.</p>
-    <form id="gate-form" autocomplete="off">
-      <input type="password" id="gate-input" placeholder="Password" autocomplete="off" autofocus />
-      <button type="submit" id="gate-btn">Continue</button>
-      <div class="gate-err" id="gate-err"></div>
-    </form>
+    <div class="gate-title">Platform Demo Guide</div>
+    <div class="gate-sub">Enter the access code to continue</div>
+    <input type="password" id="gate-input" placeholder="Access code" autocomplete="off" />
+    <button id="gate-btn">Continue</button>
+    <div class="gate-err" id="gate-err"></div>
   </div>
 </div>
 
 <div class="page">
-  <!-- Bar -->
-  <div class="topbar">
-    <div class="topbar-inner">
-      <img src="/assets/logo_footer_2x.png" alt="CleanSpace Stay" />
-      <span class="topbar-badge">Internal &amp; Confidential</span>
+<!-- ═══ STICKY BAR ═══ -->
+<header class="topbar">
+  <div class="topbar-inner">
+    <img src="/assets/logo_footer_2x.png" alt="CleanSpace Stay" />
+    <div class="topbar-badge">Internal &amp; Confidential</div>
+  </div>
+</header>
+
+<!-- ═══ 1. HERO — WHAT KELLY BUILT ═══ -->
+<section class="section section--dark hero">
+  <div class="section-inner">
+    <div class="hero-grid">
+      <div class="hero-left">
+        <div class="eyebrow">What Kelly Built</div>
+        <h1>Travel was the <span class="accent">test case.</span></h1>
+        <p class="hero-sub">One function. One workflow. One proof that the pattern works: take a process that lives in people's heads and put it in a system the company owns.</p>
+        <p class="hero-sub" style="margin-bottom:20px;">Kelly will walk you through the live platform — bookings, approvals, reconciliation, and the mobile app.</p>
+        <div class="hero-context">
+          <i data-lucide="monitor-smartphone"></i>
+          <span>Live at <a href="https://app.cleanspacestay.com" target="_blank">app.cleanspacestay.com</a></span>
+        </div>
+      </div>
+      <div class="app-mock">
+        <div class="app-glow"></div>
+        <div class="app-frame">
+          <div class="app-titlebar">
+            <div class="app-dot app-dot--r"></div>
+            <div class="app-dot app-dot--y"></div>
+            <div class="app-dot app-dot--g"></div>
+            <div class="app-url">app.cleanspacestay.com</div>
+          </div>
+          <div class="app-body">
+            <div class="app-stats">
+              <div class="app-stat"><div class="num">47</div><div class="lbl">Active Bookings</div></div>
+              <div class="app-stat"><div class="num">$0</div><div class="lbl">Unreconciled</div></div>
+              <div class="app-stat"><div class="num">12</div><div class="lbl">Projects</div></div>
+            </div>
+            <table class="app-table">
+              <thead><tr><th>Traveler</th><th>Project</th><th>Status</th></tr></thead>
+              <tbody>
+                <tr><td>M. Rodriguez</td><td>ATL-2847</td><td><span class="status-dot status-dot--green"></span>Confirmed</td></tr>
+                <tr><td>J. Thompson</td><td>MIA-1923</td><td><span class="status-dot status-dot--blue"></span>Checked In</td></tr>
+                <tr><td>R. Williams</td><td>DFW-0412</td><td><span class="status-dot status-dot--amber"></span>Pending</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="proof-row stagger fade-up" style="margin-top:64px;">
+      <div class="proof-card"><div class="val">1</div><div class="lbl">Workflow digitized</div></div>
+      <div class="proof-card"><div class="val">100%</div><div class="lbl">Booking visibility</div></div>
+      <div class="proof-card"><div class="val">Real-time</div><div class="lbl">Spend by project</div></div>
+      <div class="proof-card"><div class="val">0</div><div class="lbl">Spreadsheets</div></div>
     </div>
   </div>
+</section>
 
-  <!-- ═══════════════════════════════════════════════════════════
-       SECTION 1: HERO — What Kelly Built + Mini Dashboard
-  ═══════════════════════════════════════════════════════════ -->
-  <section class="section section--dark hero">
-    <div class="section-inner">
-      <div class="hero-grid">
-        <div class="hero-left fade-up">
-          <div class="eyebrow">What Kelly Built</div>
-          <h1>Travel was the <span>test case.</span></h1>
-          <p>One function. One workflow. One proof that the pattern works: take a process that lives in people's heads and put it in a system the company owns.</p>
-          <div class="hero-context">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
-            <span>Kelly will walk you through the live platform — bookings, approvals, reconciliation, and the mobile app.</span>
-          </div>
-        </div>
-        <div class="fade-up stagger-2">
-          <div class="dash-preview">
-            <div class="dash-titlebar">
-              <span class="dash-dot dash-dot--r"></span>
-              <span class="dash-dot dash-dot--y"></span>
-              <span class="dash-dot dash-dot--g"></span>
-              <span>app.cleanspacestay.com</span>
-            </div>
-            <div class="dash-body">
-              <div class="dash-kpis">
-                <div class="dash-kpi"><div class="dash-kpi-val">47</div><div class="dash-kpi-label">Active Bookings</div></div>
-                <div class="dash-kpi"><div class="dash-kpi-val green">$0</div><div class="dash-kpi-label">Unreconciled</div></div>
-                <div class="dash-kpi"><div class="dash-kpi-val">12</div><div class="dash-kpi-label">Projects</div></div>
-              </div>
-              <table class="dash-table">
-                <thead><tr><th>Traveler</th><th>Project</th><th>Status</th></tr></thead>
-                <tbody>
-                  <tr><td>M. Rodriguez</td><td class="mono">ATL-2847</td><td><span class="status-dot green"></span>Confirmed</td></tr>
-                  <tr><td>J. Thompson</td><td class="mono">MIA-1923</td><td><span class="status-dot green"></span>Checked In</td></tr>
-                  <tr><td>R. Williams</td><td class="mono">DFW-0412</td><td><span class="status-dot amber"></span>Pending</td></tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="proof-stats fade-up stagger-3">
-        <div class="proof-stat"><div class="proof-stat-val" data-count="1">1</div><div class="proof-stat-label">Workflow digitized</div></div>
-        <div class="proof-stat"><div class="proof-stat-val">100%</div><div class="proof-stat-label">Booking visibility</div></div>
-        <div class="proof-stat"><div class="proof-stat-val">Real-time</div><div class="proof-stat-label">Spend by project</div></div>
-        <div class="proof-stat"><div class="proof-stat-val">0</div><div class="proof-stat-label">Spreadsheets</div></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ═══════════════════════════════════════════════════════════
-       SECTION 2: THE REAL QUESTION
-  ═══════════════════════════════════════════════════════════ -->
-  <section class="section">
-    <div class="section-narrow fade-up">
+<!-- ═══ 2. THE QUESTION ═══ -->
+<section class="section section--darker">
+  <div class="section-inner">
+    <div class="question-block fade-up">
       <div class="eyebrow">The Real Question</div>
       <h2>Can you answer this today?</h2>
-      <div class="question-block">
-        <p>"At any moment — based on actual cost, committed cost, production progress, schedule, and risk — are we still on track to finish each project profitably?"</p>
-      </div>
-      <p class="lead">If the answer requires calling three people, opening four spreadsheets, and waiting until month-end — that's the gap. Travel proved the fix. The question is: what else gets the same treatment?</p>
+      <blockquote>At any moment — based on actual cost, committed cost, production progress, schedule, and risk — are we still on track to finish each project profitably?</blockquote>
+      <p class="gap-text">If the answer requires calling three people, opening four spreadsheets, and waiting until month-end — that's the gap.<br><br>Travel proved the fix. The question is: what else gets the same treatment?</p>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- ═══════════════════════════════════════════════════════════
-       SECTION 3: THE FULL OPERATING SURFACE
-  ═══════════════════════════════════════════════════════════ -->
-  <section class="section section--gray">
-    <div class="section-inner fade-up">
+<!-- ═══ 3. THE FULL OPERATING SURFACE ═══ -->
+<section class="section section--dark">
+  <div class="section-inner">
+    <div class="fade-up">
       <div class="eyebrow">The Full Picture</div>
       <h2>Travel is one of twelve places where money and risk live.</h2>
       <p class="lead">Every box below is a workflow that currently depends on people, spreadsheets, or tribal knowledge. Travel was the first one we moved into a system. The rest follow the same playbook.</p>
-      <div class="surface-grid">
-        <div class="surface-item active"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.4-.1.9.3 1.1l5.7 3.5-2.2 2.2-2.4-.8c-.4-.1-.8 0-1 .3l-.2.3c-.2.3-.1.7.2.9l2.6 1.8 1.8 2.6c.2.3.6.4.9.2l.3-.2c.3-.2.4-.6.3-1l-.8-2.4 2.2-2.2 3.5 5.7c.2.4.7.5 1.1.3l.5-.3c.4-.2.6-.6.5-1.1z"/></svg><span>Travel</span></div>
-        <div class="surface-item"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg><span>Sales</span></div>
-        <div class="surface-item"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"/><path d="M18 14h-8"/><path d="M15 18h-5"/><path d="M10 6h8v4h-8V6Z"/></svg><span>Estimating</span></div>
-        <div class="surface-item"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m2 7 4.41-4.41A2 2 0 0 1 7.83 2h8.34a2 2 0 0 1 1.42.59L22 7"/><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><path d="M15 22v-4a2 2 0 0 0-2-2h-2a2 2 0 0 0-2 2v4"/><path d="M2 7h20"/><path d="M22 7v3a2 2 0 0 1-2 2v0a2.7 2.7 0 0 1-1.59-.63.7.7 0 0 0-.82 0A2.7 2.7 0 0 1 16 12a2.7 2.7 0 0 1-1.59-.63.7.7 0 0 0-.82 0A2.7 2.7 0 0 1 12 12a2.7 2.7 0 0 1-1.59-.63.7.7 0 0 0-.82 0A2.7 2.7 0 0 1 8 12a2.7 2.7 0 0 1-1.59-.63.7.7 0 0 0-.82 0A2.7 2.7 0 0 1 4 12v0a2 2 0 0 1-2-2V7"/></svg><span>Procurement</span></div>
-        <div class="surface-item"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="6" width="20" height="8" rx="1"/><path d="M17 14v7"/><path d="M7 14v7"/><path d="M17 3v3"/><path d="M7 3v3"/><path d="M10 14 2.3 6.3"/><path d="m14 6 7.7 7.7"/><path d="m8 6 8 8"/></svg><span>Manufacturing</span></div>
-        <div class="surface-item"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="6" width="20" height="8" rx="1"/><path d="M17 14v7"/><path d="M7 14v7"/><path d="M17 3v3"/><path d="M7 3v3"/></svg><span>Construction</span></div>
-        <div class="surface-item"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="m22 8-4 4"/><path d="m18 8 4 4"/></svg><span>Field Labor</span></div>
-        <div class="surface-item"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"/><path d="M13 5v2"/><path d="M13 17v2"/><path d="M13 11v2"/></svg><span>Subcontractors</span></div>
-        <div class="surface-item"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/></svg><span>AP / AR</span></div>
-        <div class="surface-item"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" x2="12" y1="20" y2="10"/><line x1="18" x2="18" y1="20" y2="4"/><line x1="6" x2="6" y1="20" y2="16"/></svg><span>Finance</span></div>
-        <div class="surface-item"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg><span>Engineering</span></div>
-        <div class="surface-item"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20a8 8 0 1 0 0-16 8 8 0 0 0 0 16Z"/><path d="M12 14a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z"/><path d="M12 2v2"/><path d="M12 22v-2"/><path d="m17 20.66-1-1.73"/><path d="M11 10.27 7 3.34"/><path d="m20.66 17-1.73-1"/><path d="m3.34 7 1.73 1"/><path d="M14 12h8"/><path d="M2 12h2"/><path d="m20.66 7-1.73 1"/><path d="m3.34 17 1.73-1"/><path d="m17 3.34-1 1.73"/><path d="m11 13.73-4 6.93"/></svg><span>Design</span></div>
-      </div>
-      <p style="margin-top:20px; font-size:0.82rem; color:var(--muted); text-align:center;">The highlighted box is live today. Everything else follows the same proven pattern.</p>
     </div>
-  </section>
+    <div class="surface-grid stagger fade-up" style="margin-top:48px;">
+      <div class="surface-item active"><i data-lucide="plane"></i><div class="name">Travel</div></div>
+      <div class="surface-item"><i data-lucide="handshake"></i><div class="name">Sales</div></div>
+      <div class="surface-item"><i data-lucide="calculator"></i><div class="name">Estimating</div></div>
+      <div class="surface-item"><i data-lucide="package"></i><div class="name">Procurement</div></div>
+      <div class="surface-item"><i data-lucide="factory"></i><div class="name">Manufacturing</div></div>
+      <div class="surface-item"><i data-lucide="hard-hat"></i><div class="name">Construction</div></div>
+      <div class="surface-item"><i data-lucide="users"></i><div class="name">Field Labor</div></div>
+      <div class="surface-item"><i data-lucide="truck"></i><div class="name">Subcontractors</div></div>
+      <div class="surface-item"><i data-lucide="receipt"></i><div class="name">AP / AR</div></div>
+      <div class="surface-item"><i data-lucide="landmark"></i><div class="name">Finance</div></div>
+      <div class="surface-item"><i data-lucide="drafting-compass"></i><div class="name">Engineering</div></div>
+      <div class="surface-item"><i data-lucide="pen-tool"></i><div class="name">Design</div></div>
+    </div>
+  </div>
+</section>
 
-  <!-- ═══════════════════════════════════════════════════════════
-       SECTION 4: HOW WE GET THERE — Discovery Engine
-  ═══════════════════════════════════════════════════════════ -->
-  <section class="section">
-    <div class="section-inner fade-up" style="text-align:center;">
+<!-- ═══ 4. DISCOVERY ENGINE ═══ -->
+<section class="section section--darker">
+  <div class="section-inner">
+    <div class="fade-up" style="text-align:center; max-width:800px; margin:0 auto;">
       <div class="eyebrow">How We Get There</div>
       <h2>We don't guess. We ask.</h2>
-      <p class="lead" style="margin:0 auto 16px;">Before building anything else, leadership completes an adaptive discovery process. The system interviews you — one question at a time — and generates the exact blueprint for your company.</p>
-      <div class="flow">
-        <div class="flow-step"><div class="flow-num">1</div><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg><strong>Discovery</strong><span>Adaptive interview across 20 business areas</span></div>
-        <div class="flow-step"><div class="flow-num">2</div><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" x2="8" y1="13" y2="13"/><line x1="16" x2="8" y1="17" y2="17"/></svg><strong>Blueprint</strong><span>BRD, PRD, workflows, roles &amp; permissions</span></div>
-        <div class="flow-step"><div class="flow-num">3</div><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg><strong>Architecture</strong><span>Data model, KPIs, AI guardrails</span></div>
-        <div class="flow-step"><div class="flow-num">4</div><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg><strong>Build</strong><span>Sprint backlog, MVP scope, delivery</span></div>
-      </div>
-      <p style="margin-top:28px; font-size:0.85rem; color:var(--muted); max-width:600px; margin-left:auto; margin-right:auto;">Nothing gets built on assumptions. The platform is configured to how your company actually operates — not how a generic software vendor thinks you should.</p>
+      <p class="lead" style="margin:0 auto;">Before building anything else, leadership completes an adaptive discovery process. The system interviews you — one question at a time — and generates the exact blueprint for your company.</p>
     </div>
-  </section>
-
-  <!-- ═══════════════════════════════════════════════════════════
-       SECTION 5: THE CEO DASHBOARD (Full Mock)
-  ═══════════════════════════════════════════════════════════ -->
-  <section class="section section--dark">
-    <div class="section-inner">
-      <div style="text-align:center; margin-bottom:32px;" class="fade-up">
-        <div class="eyebrow">The Destination</div>
-        <h2>What the CEO dashboard looks like.</h2>
-        <p class="lead" style="margin:0 auto;">Open one screen. Know the answer. No calls, no spreadsheets, no waiting for month-end.</p>
+    <div class="discovery-flow stagger fade-up">
+      <div class="disc-step">
+        <div class="disc-num">1</div>
+        <h4>Discovery</h4>
+        <p>Adaptive interview across 20 business areas — feels like TurboTax</p>
       </div>
+      <div class="disc-step">
+        <div class="disc-num">2</div>
+        <h4>Blueprint</h4>
+        <p>Auto-generates BRD, PRD, workflows, roles &amp; permissions</p>
+      </div>
+      <div class="disc-step">
+        <div class="disc-num">3</div>
+        <h4>Architecture</h4>
+        <p>Data model, KPIs, cost codes, AI guardrails</p>
+      </div>
+      <div class="disc-step">
+        <div class="disc-num">4</div>
+        <h4>Build</h4>
+        <p>Sprint backlog, MVP scope, delivery — configured to your company</p>
+      </div>
+    </div>
+    <p class="fade-up" style="text-align:center; color:rgba(255,255,255,0.4); font-size:0.88rem; margin-top:36px; max-width:600px; margin-left:auto; margin-right:auto;">Nothing gets built on assumptions. The platform is configured to how your company actually operates — not how a generic software vendor thinks you should.</p>
+  </div>
+</section>
 
-      <div class="dashboard-mock fade-up stagger-2">
-        <div class="dm-header">
-          <div class="dm-header-left">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+<!-- ═══ 5. CEO DASHBOARD ═══ -->
+<section class="section section--dark">
+  <div class="section-inner">
+    <div class="fade-up" style="text-align:center; max-width:800px; margin:0 auto;">
+      <div class="eyebrow">The Destination</div>
+      <h2>What the CEO dashboard looks like.</h2>
+      <p class="lead" style="margin:0 auto;">Open one screen. Know the answer. No calls, no spreadsheets, no waiting for month-end.</p>
+    </div>
+    <div class="dash-container fade-up">
+      <div class="dash-frame">
+        <div class="dash-header">
+          <div class="dash-header-left">
+            <i data-lucide="layout-dashboard" style="width:18px;height:18px;"></i>
             <span>BuildOS — Executive Dashboard</span>
           </div>
-          <div class="dm-header-right">
-            <span>Glenn Brechbill</span>
-            <div class="dm-user">GB</div>
+          <div class="dash-user">
+            <span>Glenn</span>
+            <div class="dash-avatar">G</div>
           </div>
         </div>
-        <div class="dm-body">
+        <div class="dash-body">
           <!-- KPI Row -->
-          <div class="dm-kpi-row">
-            <div class="dm-kpi-card c-cyan"><div class="kv">$42.3M</div><div class="kl">Active Backlog</div><div class="kt up"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/></svg> +12%</div></div>
-            <div class="dm-kpi-card c-green"><div class="kv">28.4%</div><div class="kl">Forecast Margin</div><div class="kt up"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/></svg> +1.2pp</div></div>
-            <div class="dm-kpi-card c-cyan"><div class="kv">$2.1M</div><div class="kl">Cash Position</div><div class="kt up"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/></svg> Healthy</div></div>
-            <div class="dm-kpi-card c-amber"><div class="kv">2</div><div class="kl">Projects at Risk</div><div class="kt down"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="23 18 13.5 8.5 8.5 13.5 1 6"/></svg> Was 0</div></div>
-            <div class="dm-kpi-card c-blue"><div class="kv">87%</div><div class="kl">Labor Utilization</div><div class="kt up"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/></svg> +3%</div></div>
-            <div class="dm-kpi-card c-red"><div class="kv">$1.4M</div><div class="kl">AR &gt; 60 Days</div><div class="kt down"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="23 18 13.5 8.5 8.5 13.5 1 6"/></svg> +$200K</div></div>
+          <div class="kpi-row stagger">
+            <div class="kpi-card green">
+              <div class="kpi-val">$42.3M</div>
+              <div class="kpi-lbl">Active Backlog</div>
+              <div class="kpi-trend up"><i data-lucide="trending-up" style="width:12px;height:12px;"></i> +12% YoY</div>
+            </div>
+            <div class="kpi-card green">
+              <div class="kpi-val">28.4%</div>
+              <div class="kpi-lbl">Forecast Margin</div>
+              <div class="kpi-trend up"><i data-lucide="trending-up" style="width:12px;height:12px;"></i> +1.2pp</div>
+            </div>
+            <div class="kpi-card green">
+              <div class="kpi-val">$2.1M</div>
+              <div class="kpi-lbl">Cash Position</div>
+              <div class="kpi-trend up"><i data-lucide="check-circle" style="width:12px;height:12px;"></i> Healthy</div>
+            </div>
+            <div class="kpi-card red">
+              <div class="kpi-val">2</div>
+              <div class="kpi-lbl">Projects at Risk</div>
+              <div class="kpi-trend down"><i data-lucide="alert-triangle" style="width:12px;height:12px;"></i> Was 0</div>
+            </div>
+            <div class="kpi-card blue">
+              <div class="kpi-val">87%</div>
+              <div class="kpi-lbl">Labor Utilization</div>
+              <div class="kpi-trend up"><i data-lucide="trending-up" style="width:12px;height:12px;"></i> +3%</div>
+            </div>
+            <div class="kpi-card amber">
+              <div class="kpi-val">$1.4M</div>
+              <div class="kpi-lbl">AR &gt; 60 Days</div>
+              <div class="kpi-trend neutral"><i data-lucide="clock" style="width:12px;height:12px;"></i> +$200K</div>
+            </div>
           </div>
 
-          <!-- Split: Project Table + Alerts -->
-          <div class="dm-split">
-            <div class="dm-panel">
-              <div class="dm-panel-title"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3h18v18H3z"/><path d="M3 9h18"/><path d="M9 21V9"/></svg> Active Projects — Cost to Complete</div>
-              <table class="dm-proj-table">
-                <thead><tr><th>Project</th><th>Contract</th><th>Actual</th><th>ETC</th><th>Forecast</th><th>Margin</th><th>Health</th></tr></thead>
+          <!-- Project Table + Alerts -->
+          <div class="dash-split">
+            <div class="dash-panel">
+              <div class="dash-panel-title"><i data-lucide="folder-open"></i> Active Projects — Cost to Complete</div>
+              <table class="proj-table">
+                <thead>
+                  <tr><th>Project</th><th>Contract</th><th>Actual</th><th>ETC</th><th>Forecast</th><th>Margin</th><th>Health</th></tr>
+                </thead>
                 <tbody>
-                  <tr><td class="proj-name">ATL Data Center</td><td class="mono">$8.2M</td><td class="mono">$3.1M</td><td class="mono">$4.4M</td><td class="mono">$7.5M</td><td class="mono" style="color:var(--positive)">8.5%</td><td><div class="progress-bar"><div class="progress-bar-fill green" style="width:85%"></div></div></td></tr>
-                  <tr><td class="proj-name">MIA Tower Fit-out</td><td class="mono">$12.6M</td><td class="mono">$7.8M</td><td class="mono">$5.1M</td><td class="mono">$12.9M</td><td class="mono" style="color:var(--danger)">-2.4%</td><td><div class="progress-bar"><div class="progress-bar-fill red" style="width:40%"></div></div></td></tr>
-                  <tr><td class="proj-name">DFW Campus Ph.2</td><td class="mono">$6.4M</td><td class="mono">$1.2M</td><td class="mono">$4.8M</td><td class="mono">$6.0M</td><td class="mono" style="color:var(--positive)">6.3%</td><td><div class="progress-bar"><div class="progress-bar-fill green" style="width:72%"></div></div></td></tr>
-                  <tr><td class="proj-name">ORD Warehouse</td><td class="mono">$4.8M</td><td class="mono">$2.9M</td><td class="mono">$2.1M</td><td class="mono">$5.0M</td><td class="mono" style="color:var(--warn)">-4.2%</td><td><div class="progress-bar"><div class="progress-bar-fill amber" style="width:55%"></div></div></td></tr>
-                  <tr><td class="proj-name">SEA Office Reno</td><td class="mono">$3.1M</td><td class="mono">$0.4M</td><td class="mono">$2.4M</td><td class="mono">$2.8M</td><td class="mono" style="color:var(--positive)">9.7%</td><td><div class="progress-bar"><div class="progress-bar-fill green" style="width:90%"></div></div></td></tr>
+                  <tr>
+                    <td class="proj-name">ATL Data Center</td><td>$8.2M</td><td>$3.1M</td><td>$4.4M</td><td>$7.5M</td>
+                    <td class="margin-pos">8.5%</td>
+                    <td><div class="health-bar"><div class="health-bar-fill" style="width:85%;background:var(--positive);"></div></div></td>
+                  </tr>
+                  <tr>
+                    <td class="proj-name">MIA Tower Fit-out</td><td>$12.6M</td><td>$7.8M</td><td>$5.1M</td><td>$12.9M</td>
+                    <td class="margin-neg">-2.4%</td>
+                    <td><div class="health-bar"><div class="health-bar-fill" style="width:25%;background:var(--danger);"></div></div></td>
+                  </tr>
+                  <tr>
+                    <td class="proj-name">DFW Campus Ph.2</td><td>$6.4M</td><td>$1.2M</td><td>$4.8M</td><td>$6.0M</td>
+                    <td class="margin-pos">6.3%</td>
+                    <td><div class="health-bar"><div class="health-bar-fill" style="width:72%;background:var(--positive);"></div></div></td>
+                  </tr>
+                  <tr>
+                    <td class="proj-name">ORD Warehouse</td><td>$4.8M</td><td>$2.9M</td><td>$2.1M</td><td>$5.0M</td>
+                    <td class="margin-neg">-4.2%</td>
+                    <td><div class="health-bar"><div class="health-bar-fill" style="width:30%;background:var(--danger);"></div></div></td>
+                  </tr>
+                  <tr>
+                    <td class="proj-name">SEA Office Reno</td><td>$3.1M</td><td>$0.4M</td><td>$2.4M</td><td>$2.8M</td>
+                    <td class="margin-pos">9.7%</td>
+                    <td><div class="health-bar"><div class="health-bar-fill" style="width:92%;background:var(--positive);"></div></div></td>
+                  </tr>
                 </tbody>
               </table>
             </div>
-            <div class="dm-panel">
-              <div class="dm-panel-title"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" x2="12" y1="9" y2="13"/><line x1="12" x2="12.01" y1="17" y2="17"/></svg> Attention Required</div>
-              <div class="dm-alert"><div class="dm-alert-icon danger"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" x2="12" y1="8" y2="12"/><line x1="12" x2="12.01" y1="16" y2="16"/></svg></div><div class="dm-alert-text"><strong>MIA Tower over budget</strong><span>ETC exceeds contract by $300K</span></div></div>
-              <div class="dm-alert"><div class="dm-alert-icon warn"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div><div class="dm-alert-text"><strong>ORD schedule slip</strong><span>2 weeks behind — labor shortage</span></div></div>
-              <div class="dm-alert"><div class="dm-alert-icon warn"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div><div class="dm-alert-text"><strong>AR aging: Apex Corp</strong><span>$480K outstanding 72 days</span></div></div>
-              <div class="dm-alert"><div class="dm-alert-icon info"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div><div class="dm-alert-text"><strong>DFW change order approved</strong><span>+$180K scope — margin preserved</span></div></div>
+            <div class="dash-panel">
+              <div class="dash-panel-title"><i data-lucide="bell"></i> Attention Required</div>
+              <div class="alert-item alert-item--red">
+                <div class="alert-icon alert-icon--red"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M12 9v4m0 4h.01"/></svg></div>
+                <div class="alert-text"><strong>MIA Tower over budget</strong><span>ETC exceeds contract by $300K — labor &amp; materials</span></div>
+              </div>
+              <div class="alert-item alert-item--amber">
+                <div class="alert-icon alert-icon--amber"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
+                <div class="alert-text"><strong>ORD schedule slip</strong><span>2 weeks behind — labor shortage on electrical</span></div>
+              </div>
+              <div class="alert-item alert-item--amber">
+                <div class="alert-icon alert-icon--amber"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M12 2v20M2 12h20"/></svg></div>
+                <div class="alert-text"><strong>AR aging: Apex Corp</strong><span>$480K outstanding 72 days — escalation recommended</span></div>
+              </div>
+              <div class="alert-item alert-item--green">
+                <div class="alert-icon alert-icon--green"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></div>
+                <div class="alert-text"><strong>DFW change order approved</strong><span>+$180K scope — margin preserved at 6.3%</span></div>
+              </div>
             </div>
           </div>
         </div>
       </div>
-      <p style="margin-top:20px; text-align:center; font-size:0.75rem; color:rgba(255,255,255,0.4);">Illustrative — real numbers come from the Discovery Engine process and live data feeds.</p>
     </div>
-  </section>
+    <p class="fade-up" style="text-align:center; color:rgba(255,255,255,0.35); font-size:0.8rem; margin-top:24px; font-style:italic;">Illustrative — real numbers come from the Discovery Engine process and live data feeds.</p>
+  </div>
+</section>
 
-  <!-- ═══════════════════════════════════════════════════════════
-       SECTION 6: DRILL-DOWN — Cost to Complete
-  ═══════════════════════════════════════════════════════════ -->
-  <section class="section">
-    <div class="section-inner">
-      <div style="text-align:center; margin-bottom:8px;" class="fade-up">
-        <div class="eyebrow">Drill Down</div>
-        <h2>Every project answers the one question.</h2>
-        <p class="lead" style="margin:0 auto;">Click any project and see the full cost waterfall: what was sold, what was estimated, what's been spent, what's committed, what remains — and whether you'll finish on budget.</p>
-      </div>
-
-      <div class="drilldown fade-up stagger-2">
-        <div class="dd-header">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
-          <div class="dd-title">MIA Tower Fit-out — Cost to Complete Analysis</div>
-          <div class="dd-sub">Updated: Today, 9:14 AM</div>
-        </div>
-        <div class="dd-body">
-          <div class="dd-waterfall" id="waterfall">
-            <div class="dd-bar-wrap"><div class="dd-bar b-blue" style="height:92%"><div class="dd-bar-val">$12.6M</div></div><div class="dd-bar-label">Contract<br/>Value</div></div>
-            <div class="dd-bar-wrap"><div class="dd-bar b-lblue" style="height:79%"><div class="dd-bar-val">$10.8M</div></div><div class="dd-bar-label">Original<br/>Budget</div></div>
-            <div class="dd-bar-wrap"><div class="dd-bar b-red" style="height:57%"><div class="dd-bar-val">$7.8M</div></div><div class="dd-bar-label">Actual<br/>Cost</div></div>
-            <div class="dd-bar-wrap"><div class="dd-bar b-amber" style="height:28%"><div class="dd-bar-val">$3.8M</div></div><div class="dd-bar-label">Committed<br/>Cost</div></div>
-            <div class="dd-bar-wrap"><div class="dd-bar b-gray" style="height:15%"><div class="dd-bar-val">$1.3M</div></div><div class="dd-bar-label">Est.<br/>Remaining</div></div>
-            <div class="dd-bar-wrap"><div class="dd-bar b-slate" style="height:94%"><div class="dd-bar-val">$12.9M</div></div><div class="dd-bar-label">Forecast<br/>Final Cost</div></div>
-            <div class="dd-bar-wrap"><div class="dd-bar b-red" style="height:5%"><div class="dd-bar-val">-$300K</div></div><div class="dd-bar-label">Forecast<br/>Variance</div></div>
+<!-- ═══ 6. DRILL DOWN — COST TO COMPLETE ═══ -->
+<section class="section section--darker">
+  <div class="section-inner">
+    <div class="fade-up" style="text-align:center; max-width:800px; margin:0 auto;">
+      <div class="eyebrow">Drill Down</div>
+      <h2>Every project answers the one question.</h2>
+      <p class="lead" style="margin:0 auto;">Click any project. See the full cost waterfall: what was sold, what was estimated, what's been spent, what's committed, what remains — and whether you'll finish on budget.</p>
+    </div>
+    <div class="drill-container fade-up">
+      <div class="drill-frame">
+        <div class="drill-header">
+          <div class="drill-header-left">
+            <div class="drill-back"><i data-lucide="chevron-left" style="width:14px;height:14px;"></i></div>
+            <div>
+              <div class="drill-title">MIA Tower Fit-out</div>
+              <div class="drill-subtitle">Client: Meridian Development Group — PM: Jake Harmon — Updated: Today, 9:14 AM</div>
+            </div>
           </div>
-          <div class="dd-summary">
-            <div class="dd-sum-item"><div class="dd-sv cyan">$5.1M</div><div class="dd-sl">Cost to Complete</div></div>
-            <div class="dd-sum-item"><div class="dd-sv red">-2.4%</div><div class="dd-sl">Forecast Margin</div></div>
-            <div class="dd-sum-item"><div class="dd-sv amber">62%</div><div class="dd-sl">% Complete</div></div>
-            <div class="dd-sum-item"><div class="dd-sv red">$300K</div><div class="dd-sl">Over Budget</div></div>
+          <div class="drill-tabs">
+            <div class="drill-tab active">Cost</div>
+            <div class="drill-tab">Schedule</div>
+            <div class="drill-tab">Change Orders</div>
+            <div class="drill-tab">Documents</div>
           </div>
         </div>
-      </div>
-      <p style="margin-top:16px; text-align:center; font-size:0.78rem; color:var(--muted);">This is the answer to the one question — for every project, in real time. No phone calls. No spreadsheets.</p>
-    </div>
-  </section>
+        <div class="drill-body">
+          <!-- Waterfall Chart -->
+          <div class="waterfall stagger">
+            <div class="wf-col">
+              <div class="wf-bar-wrap"><div class="wf-bar wf-bar--contract" style="height:140px;"><div class="wf-bar-val">$12.6M</div></div></div>
+              <div class="wf-lbl">Contract<br>Value</div>
+            </div>
+            <div class="wf-col">
+              <div class="wf-bar-wrap"><div class="wf-bar wf-bar--budget" style="height:120px;"><div class="wf-bar-val">$10.8M</div></div></div>
+              <div class="wf-lbl">Original<br>Budget</div>
+            </div>
+            <div class="wf-col">
+              <div class="wf-bar-wrap"><div class="wf-bar wf-bar--actual" style="height:87px;"><div class="wf-bar-val">$7.8M</div></div></div>
+              <div class="wf-lbl">Actual<br>Cost</div>
+            </div>
+            <div class="wf-col">
+              <div class="wf-bar-wrap"><div class="wf-bar wf-bar--committed" style="height:42px;"><div class="wf-bar-val">$3.8M</div></div></div>
+              <div class="wf-lbl">Committed<br>Cost</div>
+            </div>
+            <div class="wf-col">
+              <div class="wf-bar-wrap"><div class="wf-bar wf-bar--remaining" style="height:14px;"><div class="wf-bar-val">$1.3M</div></div></div>
+              <div class="wf-lbl">Est.<br>Remaining</div>
+            </div>
+            <div class="wf-col">
+              <div class="wf-bar-wrap"><div class="wf-bar wf-bar--forecast" style="height:143px;"><div class="wf-bar-val">$12.9M</div></div></div>
+              <div class="wf-lbl">Forecast<br>Final Cost</div>
+            </div>
+            <div class="wf-col">
+              <div class="wf-bar-wrap"><div class="wf-bar wf-bar--variance" style="height:4px;"><div class="wf-bar-val">-$300K</div></div></div>
+              <div class="wf-lbl">Forecast<br>Variance</div>
+            </div>
+          </div>
 
-  <!-- ═══════════════════════════════════════════════════════════
-       SECTION 7: ROADMAP
-  ═══════════════════════════════════════════════════════════ -->
-  <section class="section section--gray">
-    <div class="section-inner fade-up">
+          <!-- Cost Category Breakdown -->
+          <div class="cost-breakdown">
+            <div class="cb-panel">
+              <div class="cb-title">Cost by Category — Budget vs. Actual</div>
+              <div class="cb-row"><span class="cb-cat">Labor</span><div class="cb-vals"><span class="cb-val">$4.2M</span><span class="cb-val over">$4.6M</span></div></div>
+              <div class="cb-row"><span class="cb-cat">Materials</span><div class="cb-vals"><span class="cb-val">$3.1M</span><span class="cb-val over">$3.4M</span></div></div>
+              <div class="cb-row"><span class="cb-cat">Subcontractors</span><div class="cb-vals"><span class="cb-val">$1.8M</span><span class="cb-val under">$1.6M</span></div></div>
+              <div class="cb-row"><span class="cb-cat">Equipment</span><div class="cb-vals"><span class="cb-val">$0.9M</span><span class="cb-val">$0.9M</span></div></div>
+              <div class="cb-row"><span class="cb-cat">Engineering</span><div class="cb-vals"><span class="cb-val">$0.4M</span><span class="cb-val">$0.4M</span></div></div>
+              <div class="cb-row"><span class="cb-cat">Travel</span><div class="cb-vals"><span class="cb-val">$0.2M</span><span class="cb-val over">$0.3M</span></div></div>
+              <div class="cb-row"><span class="cb-cat">General Conditions</span><div class="cb-vals"><span class="cb-val">$0.2M</span><span class="cb-val">$0.2M</span></div></div>
+            </div>
+            <div class="cb-panel">
+              <div class="cb-title">Change Orders</div>
+              <div class="cb-row"><span class="cb-cat">CO-001: Electrical reroute</span><div class="cb-vals"><span class="cb-val" style="color:var(--positive);">Approved</span><span class="cb-val">+$120K</span></div></div>
+              <div class="cb-row"><span class="cb-cat">CO-002: HVAC upgrade</span><div class="cb-vals"><span class="cb-val" style="color:var(--warn);">Pending</span><span class="cb-val">+$85K</span></div></div>
+              <div class="cb-row"><span class="cb-cat">CO-003: Fire suppression</span><div class="cb-vals"><span class="cb-val" style="color:var(--warn);">Pending</span><span class="cb-val">+$62K</span></div></div>
+              <div style="margin-top:16px; padding-top:14px; border-top:1px solid rgba(255,255,255,0.06);">
+                <div class="cb-row"><span class="cb-cat" style="font-weight:600; color:#fff;">Approved Total</span><div class="cb-vals"><span class="cb-val" style="color:var(--positive);">+$120K</span></div></div>
+                <div class="cb-row"><span class="cb-cat" style="font-weight:600; color:#fff;">Pending Exposure</span><div class="cb-vals"><span class="cb-val" style="color:var(--warn);">+$147K</span></div></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Summary Cards -->
+          <div class="drill-summary stagger">
+            <div class="ds-card"><div class="ds-val red">$5.1M</div><div class="ds-lbl">Cost to Complete</div></div>
+            <div class="ds-card"><div class="ds-val red">-2.4%</div><div class="ds-lbl">Forecast Margin</div></div>
+            <div class="ds-card"><div class="ds-val blue">62%</div><div class="ds-lbl">% Complete</div></div>
+            <div class="ds-card"><div class="ds-val amber">$300K</div><div class="ds-lbl">Over Budget</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p class="fade-up" style="text-align:center; color:rgba(255,255,255,0.5); font-size:0.92rem; margin-top:32px; max-width:640px; margin-left:auto; margin-right:auto;">This is the answer to the one question — for every project, in real time. No phone calls. No spreadsheets. No waiting for month-end.</p>
+  </div>
+</section>
+
+<!-- ═══ 7. AI LAYER ═══ -->
+<section class="section section--dark">
+  <div class="section-inner">
+    <div class="fade-up" style="text-align:center; max-width:800px; margin:0 auto;">
+      <div class="eyebrow">The Intelligence Layer</div>
+      <h2>AI that watches every project 24/7.</h2>
+      <p class="lead" style="margin:0 auto;">Like having a CFO-level analyst monitoring every cost line, every schedule slip, every change order — and surfacing what matters before you ask.</p>
+    </div>
+    <div class="ai-container fade-up">
+      <div class="ai-frame">
+        <div class="ai-header">
+          <div class="ai-header-icon"><i data-lucide="sparkles"></i></div>
+          <span>AI Router — Project Insights</span>
+          <span class="ai-badge">Real-time</span>
+        </div>
+        <div class="ai-body">
+          <div class="ai-insight">
+            <div class="ai-insight-header">
+              <div class="ai-insight-icon red"><i data-lucide="trending-up"></i></div>
+              <span class="ai-insight-type red">Budget Alert</span>
+            </div>
+            <h4>MIA Tower labor trending 9.5% over estimate</h4>
+            <p>3 electricians added last week to recover schedule. At current burn rate, labor will exceed budget by $380K at completion. Recommend reviewing scope with PM before next draw.</p>
+            <div class="ai-actions">
+              <button class="ai-btn ai-btn--primary">Review with PM</button>
+              <button class="ai-btn ai-btn--dismiss">Dismiss</button>
+            </div>
+          </div>
+          <div class="ai-insight">
+            <div class="ai-insight-header">
+              <div class="ai-insight-icon amber"><i data-lucide="clock"></i></div>
+              <span class="ai-insight-type amber">Schedule Risk</span>
+            </div>
+            <h4>ORD Warehouse has 4 open RFIs blocking procurement</h4>
+            <p>If RFI-012 and RFI-014 are not resolved by Friday, structural steel PO cannot issue — likely 2-week delay. Similar pattern on ATL project last year led to 3-week slip.</p>
+            <div class="ai-actions">
+              <button class="ai-btn ai-btn--primary">Escalate RFIs</button>
+              <button class="ai-btn ai-btn--dismiss">Dismiss</button>
+            </div>
+          </div>
+          <div class="ai-insight">
+            <div class="ai-insight-header">
+              <div class="ai-insight-icon blue"><i data-lucide="file-text"></i></div>
+              <span class="ai-insight-type blue">Change Order</span>
+            </div>
+            <h4>CO-002 HVAC upgrade: AI-drafted description ready</h4>
+            <p>Based on RFI-008 response and drawing rev C, drafted change order description with cost breakdown: $52K materials, $28K labor, $5K engineering. Awaiting PM review.</p>
+            <div class="ai-actions">
+              <button class="ai-btn ai-btn--primary">Review Draft</button>
+              <button class="ai-btn ai-btn--dismiss">Dismiss</button>
+            </div>
+          </div>
+          <div class="ai-insight">
+            <div class="ai-insight-header">
+              <div class="ai-insight-icon green"><i data-lucide="bar-chart-3"></i></div>
+              <span class="ai-insight-type green">Weekly Report</span>
+            </div>
+            <h4>Executive weekly report generated</h4>
+            <p>Portfolio summary: 3 of 5 projects on track, 2 flagged. Total forecast profit $2.8M (down $180K from last week). Cash position stable. AR aging improved on 2 accounts.</p>
+            <div class="ai-actions">
+              <button class="ai-btn ai-btn--primary">View Report</button>
+              <button class="ai-btn ai-btn--dismiss">Dismiss</button>
+            </div>
+          </div>
+          <div class="ai-guardrail">
+            <i data-lucide="shield-check" style="width:20px;height:20px;"></i>
+            <p><strong>AI recommends. Humans approve.</strong> The AI Router can summarize, draft, compare, forecast, and flag risk — but it cannot approve purchase orders, release invoices, alter contract values, or mark projects complete. Every financial action requires human approval.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 8. ROADMAP ═══ -->
+<section class="section section--darker">
+  <div class="section-inner">
+    <div class="fade-up">
       <div class="eyebrow">The Roadmap</div>
       <h2>Travel is live. Here's what comes next.</h2>
       <p class="lead">Each milestone builds on the last. The Discovery Engine defines the exact scope before anything else gets built.</p>
-      <div class="roadmap">
-        <div class="rm-item done"><div class="rm-num"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div><div class="rm-body"><strong>Crew Travel &amp; Spend</strong><span>Live today — bookings, approvals, reconciliation, mobile app</span></div><div class="rm-tag live">Live</div></div>
-        <div class="rm-item"><div class="rm-num">1</div><div class="rm-body"><strong>Enterprise Discovery Engine</strong><span>Adaptive interview across 20 business areas — generates the full blueprint</span></div><div class="rm-tag next">Next</div></div>
-        <div class="rm-item"><div class="rm-num">2</div><div class="rm-body"><strong>Core Platform &amp; Budget Tracking</strong><span>Projects, budgets, actual cost, committed cost, cost-to-complete dashboard</span></div><div class="rm-tag"></div></div>
-        <div class="rm-item"><div class="rm-num">3</div><div class="rm-body"><strong>Workflow Engine &amp; Approvals</strong><span>States, transitions, audit trail, notifications — across all functions</span></div><div class="rm-tag"></div></div>
-        <div class="rm-item"><div class="rm-num">4</div><div class="rm-body"><strong>AI Router &amp; Guardrails</strong><span>Provider-agnostic AI that assists but never approves — context-aware, auditable</span></div><div class="rm-tag"></div></div>
-        <div class="rm-item"><div class="rm-num">5</div><div class="rm-body"><strong>Executive KPI Dashboard</strong><span>The single screen — revenue, margin, cash, risk, schedule, profit forecast</span></div><div class="rm-tag"></div></div>
-        <div class="rm-item"><div class="rm-num">6</div><div class="rm-body"><strong>Mobile Field App (Expanded)</strong><span>Daily reports, photos, labor, punch lists, inspections — same system</span></div><div class="rm-tag"></div></div>
+    </div>
+    <div class="roadmap fade-up" style="margin-top:56px;">
+      <div class="rm-item">
+        <div class="rm-marker"><div class="rm-dot rm-dot--done"></div></div>
+        <div class="rm-content">
+          <h4>Crew Travel &amp; Spend <span class="rm-badge rm-badge--live">Live</span></h4>
+          <p>Bookings, approvals, reconciliation, mobile app — fully operational today.</p>
+        </div>
+      </div>
+      <div class="rm-item">
+        <div class="rm-marker"><div class="rm-dot rm-dot--next"></div></div>
+        <div class="rm-content">
+          <h4>Enterprise Discovery Engine <span class="rm-badge rm-badge--next">Next</span></h4>
+          <p>Adaptive interview across 20 business areas — generates the full blueprint, BRD, PRD, workflow maps, role matrix, KPI requirements, and AI guardrails.</p>
+        </div>
+      </div>
+      <div class="rm-item">
+        <div class="rm-marker"><div class="rm-dot rm-dot--future"></div></div>
+        <div class="rm-content">
+          <h4>Core Platform &amp; Budget Tracking</h4>
+          <p>Organizations, users, roles, projects, budgets, actual cost, committed cost, cost-to-complete dashboard.</p>
+        </div>
+      </div>
+      <div class="rm-item">
+        <div class="rm-marker"><div class="rm-dot rm-dot--future"></div></div>
+        <div class="rm-content">
+          <h4>Workflow Engine &amp; Approvals</h4>
+          <p>States, transitions, audit trail, notifications — across all functions. Human approval guardrails enforced.</p>
+        </div>
+      </div>
+      <div class="rm-item">
+        <div class="rm-marker"><div class="rm-dot rm-dot--future"></div></div>
+        <div class="rm-content">
+          <h4>AI Router &amp; Guardrails</h4>
+          <p>Provider-agnostic AI that summarizes, drafts, compares, forecasts, and flags risk — but never approves financial actions.</p>
+        </div>
+      </div>
+      <div class="rm-item">
+        <div class="rm-marker"><div class="rm-dot rm-dot--future"></div></div>
+        <div class="rm-content">
+          <h4>Mobile Field App</h4>
+          <p>Daily reports, photos, labor tracking, punch lists, inspections — offline-friendly, task-first design.</p>
+        </div>
+      </div>
+      <div class="rm-item">
+        <div class="rm-marker"><div class="rm-dot rm-dot--future"></div></div>
+        <div class="rm-content">
+          <h4>SaaS Readiness</h4>
+          <p>Multi-tenant onboarding, white labeling, templates, billing — the platform becomes a product for similar companies.</p>
+        </div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- ═══════════════════════════════════════════════════════════
-       SECTION 8: CTA
-  ═══════════════════════════════════════════════════════════ -->
-  <section class="section section--dark">
-    <div class="section-inner fade-up">
-      <div class="cta-card">
-        <h2>One system. Every project.<br/>Every dollar. Every answer.</h2>
-        <p>Travel proved the pattern. The Discovery Engine defines the scope. The platform gives you the dashboard you've never had — real-time visibility into whether every project will finish on time and at the expected profit.</p>
-        <p style="margin-top:20px; color:rgba(255,255,255,0.4); font-size:0.82rem;">Built on infrastructure you own. No vendor lock-in. No single point of failure.</p>
-      </div>
-    </div>
-  </section>
+<!-- ═══ 9. CTA ═══ -->
+<section class="section section--dark cta-section">
+  <div class="section-inner fade-up" style="text-align:center;">
+    <div class="eyebrow">The Outcome</div>
+    <h2>One system. Every project.<br>Every dollar. Every answer.</h2>
+    <p class="lead" style="margin:24px auto 0;">Travel proved the pattern. The Discovery Engine defines the scope. BuildOS delivers the visibility — from bid to closeout, across every function, in real time.</p>
+  </div>
+</section>
 
-  <div class="footer">CleanSpace Stay &middot; Internal &amp; Confidential</div>
+<!-- ═══ FOOTER ═══ -->
+<footer class="footer">
+  <p>&copy; 2025 CleanSpace Stay — Internal &amp; Confidential</p>
+</footer>
 </div>
 
 <script>
 // Gate
-(function(){
-  var PW="0123456",K="po_unlocked_v2";
-  function unlock(){document.getElementById("gate").classList.add("hidden");document.body.classList.remove("locked");initPage();}
-  var f=document.getElementById("gate-form"),inp=document.getElementById("gate-input"),err=document.getElementById("gate-err");
-  f.addEventListener("submit",function(e){e.preventDefault();if(inp.value===PW){unlock();try{sessionStorage.setItem(K,"1")}catch(x){}}else{inp.classList.add("err");err.textContent="Incorrect password.";setTimeout(function(){inp.classList.remove("err")},600);}});
-  try{if(sessionStorage.getItem(K)==="1")unlock();}catch(x){}
-})();
-
-function initPage(){
-  // Scroll animations
-  var els=document.querySelectorAll('.fade-up');
-  var obs=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);}});},{threshold:0.15});
-  els.forEach(function(el){obs.observe(el);});
-
-  // Initialize Lucide icons
-  if(window.lucide)lucide.createIcons();
+const PASS = '0123456';
+const gate = document.getElementById('gate');
+const inp = document.getElementById('gate-input');
+const btn = document.getElementById('gate-btn');
+const err = document.getElementById('gate-err');
+function tryUnlock() {
+  if (inp.value === PASS) { gate.classList.add('hidden'); document.body.classList.remove('locked'); }
+  else { inp.classList.add('err'); err.textContent = 'Incorrect code'; setTimeout(() => inp.classList.remove('err'), 400); }
 }
+btn.addEventListener('click', tryUnlock);
+inp.addEventListener('keydown', e => { if (e.key === 'Enter') tryUnlock(); });
+
+// Scroll animations
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('visible'); } });
+}, { threshold: 0.15, rootMargin: '0px 0px -60px 0px' });
+document.querySelectorAll('.fade-up, .stagger').forEach(el => observer.observe(el));
+
+// Lucide icons
+lucide.createIcons();
 </script>
 </body>
 </html>
