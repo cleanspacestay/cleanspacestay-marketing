@@ -3,3 +3,5 @@ Disallow: /value-calculator
 Disallow: /value-calculator.html
 Disallow: /executive-briefing
 Disallow: /executive-briefing.html
+Disallow: /demo-script
+Disallow: /demo-script.html

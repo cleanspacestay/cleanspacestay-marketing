@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Live Demo Script — CleanSpace Stay (Internal &amp; Confidential)</title>
+  <meta name="description" content="Internal demo walkthrough guide." />
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon_32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon_16x16.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css?v=20260521" />
+  <style>
+    :root { --brand-blue: #1C38EA; --cyan: #00C8FF; --navy: #0A1A81; --navy-deep: #061058; --positive: #16A34A; --warn: #F59E0B; --danger: #EF4444; }
+
+    /* ── Gate ── */
+    #ds-gate {
+      position: fixed; inset: 0; z-index: 9999;
+      display: flex; align-items: center; justify-content: center;
+      background: linear-gradient(160deg, var(--navy-deep) 0%, var(--navy) 100%);
+    }
+    #ds-gate.hidden { display: none; }
+    .ds-gate-card {
+      background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.14);
+      border-radius: 18px; padding: 48px 40px; max-width: 380px; width: 90%; text-align: center;
+      backdrop-filter: blur(12px);
+    }
+    .ds-gate-card img { height: 46px; width: auto; margin-bottom: 22px; }
+    .ds-gate-kicker { font-family: 'Space Grotesk', sans-serif; text-transform: uppercase; letter-spacing: 0.14em; font-size: 0.72rem; font-weight: 600; color: var(--cyan); margin-bottom: 10px; }
+    .ds-gate-title { font-family: 'Space Grotesk', sans-serif; color: #fff; font-size: 1.5rem; font-weight: 700; margin: 0 0 8px; line-height: 1.2; }
+    .ds-gate-sub { color: rgba(255,255,255,0.66); font-size: 0.92rem; margin: 0 0 26px; line-height: 1.5; }
+    #ds-gate-input {
+      width: 100%; padding: 14px 18px; border-radius: 10px;
+      border: 1px solid rgba(255,255,255,0.22); background: rgba(255,255,255,0.08);
+      color: #fff; font-size: 1rem; font-family: 'Inter', sans-serif;
+      margin-bottom: 14px; box-sizing: border-box;
+    }
+    #ds-gate-input::placeholder { color: rgba(255,255,255,0.4); }
+    #ds-gate-input:focus { outline: none; border-color: var(--cyan); box-shadow: 0 0 0 3px rgba(0,200,255,0.18); }
+    #ds-gate-input.err { border-color: #ff6b6b; box-shadow: 0 0 0 3px rgba(255,107,107,0.18); animation: ds-shake 320ms cubic-bezier(0.36,0.07,0.19,0.97); }
+    @keyframes ds-shake { 10%,90%{transform:translateX(-2px)} 20%,80%{transform:translateX(3px)} 30%,50%,70%{transform:translateX(-4px)} 40%,60%{transform:translateX(4px)} }
+    #ds-gate-btn {
+      width: 100%; padding: 14px; border: none; border-radius: 10px;
+      background: linear-gradient(135deg, var(--brand-blue), var(--cyan)); color: #fff;
+      font-weight: 700; font-size: 1rem; cursor: pointer; transition: filter 0.15s, transform 0.12s;
+    }
+    #ds-gate-btn:hover { filter: brightness(1.08); }
+    #ds-gate-btn:active { transform: scale(0.97); }
+    .ds-gate-err { color: #ff9b9b; font-size: 0.85rem; min-height: 18px; margin-top: 12px; }
+    .ds-gate-foot { color: rgba(255,255,255,0.4); font-size: 0.74rem; margin-top: 22px; }
+    body.ds-locked { overflow: hidden; }
+    body.ds-locked .ds-page { filter: blur(8px); pointer-events: none; user-select: none; }
+
+    /* ── Identifier bar ── */
+    .ds-bar {
+      position: sticky; top: 0; z-index: 900;
+      background: rgba(6,16,88,0.92); backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(255,255,255,0.12); color: #fff;
+    }
+    .ds-bar-inner {
+      max-width: 1120px; margin: 0 auto; padding: 11px 24px;
+      display: flex; align-items: center; gap: 14px;
+    }
+    .ds-bar-inner img { height: 30px; width: auto; flex: none; }
+    .ds-bar-badge {
+      font-family: 'Space Grotesk', sans-serif; text-transform: uppercase;
+      letter-spacing: 0.12em; font-size: 0.68rem; font-weight: 600;
+      color: var(--cyan); display: flex; align-items: center; gap: 6px;
+    }
+    .ds-bar-badge::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--cyan); }
+
+    /* ── Page layout ── */
+    .ds-page { background: #fff; min-height: 100vh; }
+    .ds-container { max-width: 900px; margin: 0 auto; padding: 0 24px; }
+    .ds-hero {
+      background: linear-gradient(160deg, var(--navy-deep) 0%, var(--navy) 100%);
+      padding: 64px 24px 56px; color: #fff; text-align: center;
+    }
+    .ds-hero h1 { font-family: 'Space Grotesk', sans-serif; font-size: clamp(1.8rem, 4vw, 2.6rem); font-weight: 700; margin: 0 0 12px; line-height: 1.15; }
+    .ds-hero p { color: rgba(255,255,255,0.72); font-size: 1.05rem; max-width: 600px; margin: 0 auto; line-height: 1.6; }
+
+    /* ── Sections ── */
+    .ds-section { padding: 48px 0; border-bottom: 1px solid #E5E7EB; }
+    .ds-section:last-child { border-bottom: none; }
+    .ds-section-label {
+      font-family: 'Space Grotesk', sans-serif; text-transform: uppercase;
+      letter-spacing: 0.12em; font-size: 0.72rem; font-weight: 600;
+      color: var(--brand-blue); margin-bottom: 12px;
+    }
+    .ds-section h2 { font-family: 'Space Grotesk', sans-serif; font-size: 1.5rem; font-weight: 700; color: #1E293B; margin: 0 0 8px; }
+    .ds-section h3 { font-family: 'Space Grotesk', sans-serif; font-size: 1.15rem; font-weight: 600; color: #1E293B; margin: 24px 0 8px; }
+    .ds-section p { color: #475569; font-size: 0.95rem; line-height: 1.7; margin: 0 0 16px; }
+
+    /* ── Talk track callouts ── */
+    .ds-talk {
+      background: linear-gradient(135deg, rgba(28,56,234,0.06), rgba(0,200,255,0.04));
+      border-left: 3px solid var(--brand-blue); border-radius: 0 10px 10px 0;
+      padding: 16px 20px; margin: 16px 0; font-style: italic; color: #334155; font-size: 0.93rem; line-height: 1.6;
+    }
+    .ds-talk::before { content: "SAY:"; font-style: normal; font-weight: 700; color: var(--brand-blue); display: block; font-size: 0.7rem; letter-spacing: 0.1em; margin-bottom: 4px; }
+
+    /* ── CEO takeaway callouts ── */
+    .ds-ceo {
+      background: rgba(22,163,74,0.06); border-left: 3px solid var(--positive);
+      border-radius: 0 10px 10px 0; padding: 14px 20px; margin: 16px 0;
+      color: #1E293B; font-size: 0.9rem; line-height: 1.6;
+    }
+    .ds-ceo::before { content: "CEO TAKEAWAY"; font-weight: 700; color: var(--positive); display: block; font-size: 0.68rem; letter-spacing: 0.1em; margin-bottom: 4px; }
+
+    /* ── Point-out lists ── */
+    .ds-points { list-style: none; padding: 0; margin: 12px 0; }
+    .ds-points li { position: relative; padding-left: 20px; margin-bottom: 8px; color: #475569; font-size: 0.92rem; line-height: 1.5; }
+    .ds-points li::before { content: ""; position: absolute; left: 0; top: 8px; width: 8px; height: 8px; border-radius: 50%; background: var(--cyan); }
+
+    /* ── Tables ── */
+    .ds-table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 0.88rem; }
+    .ds-table th { background: var(--navy); color: #fff; font-family: 'Space Grotesk', sans-serif; font-weight: 600; padding: 12px 14px; text-align: left; }
+    .ds-table th:first-child { border-radius: 8px 0 0 0; }
+    .ds-table th:last-child { border-radius: 0 8px 0 0; }
+    .ds-table td { padding: 12px 14px; border-bottom: 1px solid #E5E7EB; color: #334155; vertical-align: top; }
+    .ds-table tr:last-child td { border-bottom: none; }
+    .ds-table .col-pain { color: var(--danger); font-weight: 500; }
+    .ds-table .col-good { color: var(--positive); font-weight: 500; }
+
+    /* ── Quick-ref cheat sheet ── */
+    .ds-cheat {
+      background: #F8FAFC; border: 1px solid #E5E7EB; border-radius: 12px;
+      padding: 24px 28px; margin: 24px 0;
+    }
+    .ds-cheat h3 { margin-top: 0; }
+    .ds-cheat ol { padding-left: 20px; margin: 12px 0 0; }
+    .ds-cheat li { color: #334155; font-size: 0.9rem; margin-bottom: 6px; line-height: 1.5; }
+    .ds-cheat li strong { color: #1E293B; }
+
+    /* ── Q&A section ── */
+    .ds-qa { margin: 16px 0; }
+    .ds-qa-item { background: #F8FAFC; border-radius: 10px; padding: 16px 20px; margin-bottom: 12px; }
+    .ds-qa-q { font-weight: 700; color: #1E293B; font-size: 0.9rem; margin-bottom: 6px; }
+    .ds-qa-a { color: #475569; font-size: 0.9rem; line-height: 1.6; }
+
+    /* ── Remember box ── */
+    .ds-remember {
+      background: linear-gradient(135deg, var(--navy-deep), var(--navy));
+      border-radius: 14px; padding: 32px 28px; margin: 32px 0; text-align: center;
+    }
+    .ds-remember p { color: #fff; font-size: 1.1rem; font-weight: 600; line-height: 1.5; max-width: 700px; margin: 0 auto; }
+
+    /* ── Footer ── */
+    .ds-footer { text-align: center; padding: 32px 24px; color: #94A3B8; font-size: 0.78rem; }
+
+    /* ── Mobile ── */
+    @media (max-width: 640px) {
+      .ds-hero { padding: 48px 20px 40px; }
+      .ds-hero h1 { font-size: 1.6rem; }
+      .ds-section { padding: 32px 0; }
+      .ds-container { padding: 0 16px; }
+      .ds-table { font-size: 0.82rem; }
+      .ds-table th, .ds-table td { padding: 10px 10px; }
+      .ds-talk, .ds-ceo { padding: 14px 16px; }
+      .ds-cheat { padding: 18px 16px; }
+      .ds-qa-item { padding: 14px 16px; }
+      .ds-remember { padding: 24px 20px; }
+      .ds-remember p { font-size: 1rem; }
+    }
+  </style>
+</head>
+<body style="background:#ffffff;" class="ds-locked">
+  <!-- Password gate -->
+  <div id="ds-gate">
+    <div class="ds-gate-card">
+      <img src="/assets/logo_footer_2x.png" alt="CleanSpace Stay" />
+      <div class="ds-gate-kicker">Internal &amp; Confidential</div>
+      <div class="ds-gate-title">Live Demo Script</div>
+      <p class="ds-gate-sub">This page is private. Enter the access password to continue.</p>
+      <form id="ds-gate-form" autocomplete="off">
+        <input type="password" id="ds-gate-input" placeholder="Access password" autocomplete="off" autofocus />
+        <button type="submit" id="ds-gate-btn">View the script</button>
+        <div class="ds-gate-err" id="ds-gate-err"></div>
+      </form>
+      <div class="ds-gate-foot">CleanSpace Stay &middot; Shared in confidence</div>
+    </div>
+  </div>
+
+  <div class="ds-page">
+    <!-- Identifier bar -->
+    <div class="ds-bar">
+      <div class="ds-bar-inner">
+        <img src="/assets/logo_footer_2x.png" alt="CleanSpace Stay" />
+        <span class="ds-bar-badge">Internal &amp; Confidential</span>
+      </div>
+    </div>
+
+    <!-- Hero -->
+    <div class="ds-hero">
+      <h1>Live Demo Walkthrough for Glenn</h1>
+      <p>A screen-by-screen guide for the live platform demo. Keep it high-level, conversational, and anchored to what a CEO cares about: visibility, risk, and enterprise value.</p>
+    </div>
+
+    <div class="ds-container">
+
+      <!-- BEFORE YOU START -->
+      <div class="ds-section">
+        <div class="ds-section-label">Before You Start</div>
+        <h2>Have These Open</h2>
+        <p>Pull these up ahead of time so you can flip between them without fumbling:</p>
+        <ul class="ds-points">
+          <li><strong>Platform dashboard</strong> &mdash; logged in at app.cleanspacestay.com</li>
+          <li><strong>A sample project</strong> with at least one active booking and one pending request</li>
+          <li><strong>Your phone</strong> with the mobile app open (you'll hold it up or describe it &mdash; Glenn won't have it installed)</li>
+        </ul>
+      </div>
+
+      <!-- OPENING FRAME -->
+      <div class="ds-section">
+        <div class="ds-section-label">The Opening (30 Seconds)</div>
+        <h2>Frame It as Enterprise Value, Not Travel</h2>
+        <div class="ds-talk">Glenn, what I want to show you isn't a travel tool. It's what happens when you take a process that lives in people's heads &mdash; texts, emails, spreadsheets &mdash; and put it into a system the company actually owns. Travel is just the first one we built. The playbook applies anywhere.</div>
+        <div class="ds-ceo">Tribal knowledge is key-person risk. Key-person risk holds the multiple down at exit. Owned systems with clean data lift it. That's the real story here.</div>
+      </div>
+
+      <!-- THE PROBLEM -->
+      <div class="ds-section">
+        <div class="ds-section-label">Section 1 &mdash; 2 Minutes</div>
+        <h2>The Problem Glenn Will Recognize</h2>
+        <div class="ds-talk">Right now, crew travel across CleanSpace and Allied probably looks something like this&hellip;</div>
+        <table class="ds-table">
+          <thead>
+            <tr><th>Pain Point</th><th>What It Looks Like Today</th><th>What It Costs</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>No single source of truth</strong></td><td class="col-pain">Confirmations in email, rates in Excel, receipts in a folder somewhere</td><td>Nobody has the full picture &mdash; decisions are made blind</td></tr>
+            <tr><td><strong>No visibility by project</strong></td><td class="col-pain">Labor is tracked to the hour, but travel spend is invisible until the job closes</td><td>Margin hits are baked in before anyone knows</td></tr>
+            <tr><td><strong>Accounting plays catch-up</strong></td><td class="col-pain">Charges hit the card, then someone scrambles to match them to a project</td><td>Month-end reconciliation is a fire drill every time</td></tr>
+            <tr><td><strong>Lives in one person's head</strong></td><td class="col-pain">The process can't be audited, scaled, or handed off</td><td>That's not just a staffing risk &mdash; it's a capability the business doesn't own</td></tr>
+          </tbody>
+        </table>
+        <div class="ds-ceo">Across a multi-project operation, crew travel is one of the few major cost centers with no system of record. The bigger the operation, the more that blind spot costs &mdash; in dollars, in margin, and in risk.</div>
+      </div>
+
+      <!-- PLATFORM WALKTHROUGH -->
+      <div class="ds-section">
+        <div class="ds-section-label">Section 2 &mdash; 5&ndash;7 Minutes</div>
+        <h2>The Platform Walkthrough</h2>
+
+        <!-- Stop 1 -->
+        <h3>Stop 1: The Dashboard</h3>
+        <div class="ds-talk">This is the command center. Every active booking across every project is here. No digging through emails, no calling someone to ask where a crew is staying.</div>
+        <ul class="ds-points">
+          <li>Project-based view &mdash; spend per job, per category</li>
+          <li>Active travelers and their status</li>
+          <li>Pending requests waiting for approval</li>
+        </ul>
+        <div class="ds-ceo">This is the visibility you don't have today. Every dollar is tied to a project before it's spent, not after.</div>
+
+        <!-- Stop 2 -->
+        <h3>Stop 2: A Booking Request</h3>
+        <div class="ds-talk">Here's what a request looks like when it comes in. It's already tied to the project, the traveler, and the billing company. The person approving it has everything they need &mdash; no back-and-forth.</div>
+        <ul class="ds-points">
+          <li>Project, traveler, dates, travel type &mdash; all captured at the point of request</li>
+          <li>Approval workflow (approve, deny, send back for changes)</li>
+          <li>Full audit trail &mdash; who requested, who approved, when</li>
+        </ul>
+        <div class="ds-ceo">Every action is logged. If you ever need to answer "who approved this?" or "why did we spend this?" &mdash; it's right here.</div>
+
+        <!-- Stop 3 -->
+        <h3>Stop 3: Project-Level Spend</h3>
+        <div class="ds-talk">Pick any project. You can see exactly what's been spent on crew travel &mdash; broken down by hotel, flights, cars. In real time, not after the fact.</div>
+        <ul class="ds-points">
+          <li>Total travel spend for the project</li>
+          <li>Breakdown by category</li>
+          <li>Budget tracking (if set)</li>
+        </ul>
+        <div class="ds-ceo">You track labor to the hour. Now travel is tracked the same way. No more margin surprises at job close.</div>
+
+        <!-- Stop 4 -->
+        <h3>Stop 4: QuickBooks Reconciliation</h3>
+        <div class="ds-talk">This is where accounting lives. Charges are matched to bookings proactively &mdash; before month-end, not during the scramble.</div>
+        <ul class="ds-points">
+          <li>Bookings matched to transactions</li>
+          <li>One-click reconciliation</li>
+          <li>No detective work &mdash; the system already knows which charge goes where</li>
+        </ul>
+        <div class="ds-ceo">Your accounting team stops being reactive and starts being proactive. That's not just efficiency &mdash; that's margin protection.</div>
+
+        <!-- Stop 5 -->
+        <h3>Stop 5: Crew Map &amp; Messaging</h3>
+        <div class="ds-talk">Real-time visibility. You can see where every crew is deployed right now &mdash; who's checked in, who's traveling, who's on-site. And you can message them directly from here.</div>
+        <ul class="ds-points">
+          <li>Live map with crew locations</li>
+          <li>Check-in status (GPS-verified)</li>
+          <li>Direct and group messaging &mdash; no phone tag</li>
+        </ul>
+        <div class="ds-ceo">No more calling around to find out where people are. The system tells you.</div>
+      </div>
+
+      <!-- MOBILE APP -->
+      <div class="ds-section">
+        <div class="ds-section-label">Section 3 &mdash; 2&ndash;3 Minutes</div>
+        <h2>The Mobile App</h2>
+        <p>Glenn won't have the app installed. Hold up your phone or describe the screens.</p>
+        <div class="ds-talk">Everything I just showed you on the web &mdash; your crews do it from their phone. It's not a stripped-down companion app. It's the same system, built for a phone on a job site with a weak signal.</div>
+        <table class="ds-table">
+          <thead>
+            <tr><th>Screen</th><th>What It Does</th><th>Why It Matters</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>Request Travel</strong></td><td>Worker or foreman requests hotel, flight, car &mdash; tied to the project from the first tap</td><td class="col-good">No more texts or phone calls to the office</td></tr>
+            <tr><td><strong>One-Tap Check-In</strong></td><td>GPS-verified arrival on-site</td><td class="col-good">Office sees who's there without calling</td></tr>
+            <tr><td><strong>Approve On the Go</strong></td><td>Foreman gets a push notification, approves right from the phone</td><td class="col-good">No delays, no laptop required</td></tr>
+            <tr><td><strong>Travel Profile</strong></td><td>Driver's license, TSA, Global Entry &mdash; captured once, ready for every booking</td><td class="col-good">Office never chases documents again</td></tr>
+            <tr><td><strong>Messaging</strong></td><td>Direct and group messaging inside the app</td><td class="col-good">Everything stays in one system</td></tr>
+          </tbody>
+        </table>
+        <div class="ds-talk">Sign-in is invitation-only with a one-time code &mdash; no passwords to manage. Updates roll out over the air, so every crew member is always on the current version. We control who has access and can revoke it instantly.</div>
+        <div class="ds-ceo">Your field crews get a tool that's simpler than texting &mdash; and every action they take feeds the system of record the office is looking at. One system, not two.</div>
+      </div>
+
+      <!-- BIGGER PICTURE -->
+      <div class="ds-section">
+        <div class="ds-section-label">Section 4 &mdash; 2 Minutes</div>
+        <h2>The Bigger Picture</h2>
+        <div class="ds-talk">Glenn, this is one workflow &mdash; crew travel. But the pattern is the same everywhere: knowledge lives in people's heads, there's no system of record, and it can't be audited or transferred. Every workflow you move into an owned system does three things&hellip;</div>
+        <table class="ds-table">
+          <thead>
+            <tr><th>What It Does</th><th>Why It Matters at Exit</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>Reduces key-person risk</strong></td><td class="col-good">A buyer sees a business that runs on systems, not on individuals who might leave</td></tr>
+            <tr><td><strong>Creates clean, auditable data</strong></td><td class="col-good">Due diligence goes faster and smoother &mdash; fewer surprises, fewer discounts</td></tr>
+            <tr><td><strong>Lifts the EBITDA multiple</strong></td><td class="col-good">Specialty contractors sell for 3.5&ndash;7&times;. The gap is almost entirely about how transferable and de-risked the business looks</td></tr>
+          </tbody>
+        </table>
+        <div class="ds-talk">Travel was the proof of concept. It's working. The question now is: what's the next workflow worth owning?</div>
+      </div>
+
+      <!-- Q&A -->
+      <div class="ds-section">
+        <div class="ds-section-label">If Glenn Asks</div>
+        <h2>Ready Answers</h2>
+        <div class="ds-qa">
+          <div class="ds-qa-item">
+            <div class="ds-qa-q">"What does this cost?"</div>
+            <div class="ds-qa-a">It's not a subscription &mdash; it's owned software built for your operation. The investment is a fraction of what it saves, and unlike a subscription, it shows up as an asset on the balance sheet, not a recurring cost.</div>
+          </div>
+          <div class="ds-qa-item">
+            <div class="ds-qa-q">"Who built this?"</div>
+            <div class="ds-qa-a">We worked with a development partner who specializes in operational platforms for specialty contractors. The code, the data, and the infrastructure are all ours.</div>
+          </div>
+          <div class="ds-qa-item">
+            <div class="ds-qa-q">"Can it do [other workflow]?"</div>
+            <div class="ds-qa-a">That's exactly the conversation we want to have. The architecture is built to extend. Travel was first because it was the clearest pain point, but the same pattern applies to anything that currently lives in someone's head.</div>
+          </div>
+          <div class="ds-qa-item">
+            <div class="ds-qa-q">"How long did this take?"</div>
+            <div class="ds-qa-a">We went from concept to working platform in a few months. The mobile app is live on iOS and Android. It's not a prototype &mdash; it's running in production today.</div>
+          </div>
+          <div class="ds-qa-item">
+            <div class="ds-qa-q">"What about Procore / other tools?"</div>
+            <div class="ds-qa-a">This complements tools like Procore &mdash; it handles the operational workflows they don't cover. Crew travel, field coordination, real-time spend tracking by project. It fills the gap, it doesn't compete.</div>
+          </div>
+          <div class="ds-qa-item">
+            <div class="ds-qa-q">"What data do we get?"</div>
+            <div class="ds-qa-a">Project-level travel spend, crew utilization, booking history, vendor costs, budget burn-down, reconciliation status &mdash; all exportable, all auditable, all tied to the job.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- REMEMBER -->
+      <div class="ds-section">
+        <div class="ds-section-label">The One Thing to Remember</div>
+        <div class="ds-remember">
+          <p>"The difference between a 3.5&times; company and a 7&times; company isn't revenue &mdash; it's how much of the operation runs on owned systems with clean data versus how much lives in people's heads. This is the first proof point. The playbook is repeatable."</p>
+        </div>
+      </div>
+
+      <!-- CHEAT SHEET -->
+      <div class="ds-section">
+        <div class="ds-section-label">Quick Reference</div>
+        <div class="ds-cheat">
+          <h3>Demo Flow &mdash; ~12 Minutes Total</h3>
+          <ol>
+            <li><strong>Open:</strong> Frame it as enterprise value, not travel software (30 sec)</li>
+            <li><strong>Problem:</strong> The 4 pain points he'll recognize (2 min)</li>
+            <li><strong>Dashboard:</strong> Full visibility in one place (1 min)</li>
+            <li><strong>Booking request:</strong> Tied to project from day one, full audit trail (1 min)</li>
+            <li><strong>Project spend:</strong> Real-time, by job, by category (1 min)</li>
+            <li><strong>QuickBooks:</strong> Proactive reconciliation, not reactive (1 min)</li>
+            <li><strong>Crew map + messaging:</strong> Know where everyone is, reach them instantly (1 min)</li>
+            <li><strong>Mobile app:</strong> Same system, built for the field (2 min)</li>
+            <li><strong>Bigger picture:</strong> Enterprise value, transferability, what's next (2 min)</li>
+          </ol>
+        </div>
+      </div>
+
+    </div><!-- /.ds-container -->
+
+    <!-- Footer -->
+    <div class="ds-footer">CleanSpace Stay &middot; Internal &amp; Confidential</div>
+  </div><!-- /.ds-page -->
+
+  <!-- Gate script -->
+  <script>
+    (function () {
+      var PASSWORD = "0123456";
+      var KEY = "ds_unlocked";
+      function unlock() { document.getElementById("ds-gate").classList.add("hidden"); document.body.classList.remove("ds-locked"); }
+      var form = document.getElementById("ds-gate-form");
+      var input = document.getElementById("ds-gate-input");
+      var err = document.getElementById("ds-gate-err");
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
+        if (input.value === PASSWORD) {
+          unlock();
+          try { sessionStorage.setItem(KEY, "1"); } catch (x) {}
+        } else {
+          input.classList.add("err");
+          err.textContent = "Incorrect password. Please try again.";
+          setTimeout(function () { input.classList.remove("err"); }, 600);
+        }
+      });
+      try { if (sessionStorage.getItem(KEY) === "1") { unlock(); } } catch (x) {}
+    })();
+  </script>
+</body>
+</html>
