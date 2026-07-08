@@ -197,10 +197,14 @@
     .drill-header { padding: 20px 24px; border-bottom: 1px solid var(--gray-200); }
     .drill-title { font-size: 18px; font-weight: 700; color: var(--gray-900); }
     .drill-subtitle { font-size: 13px; color: var(--gray-500); margin-top: 4px; }
-    .drill-tabs { display: flex; gap: 4px; margin-top: 16px; }
-    .drill-tab { padding: 8px 16px; border-radius: 8px; font-size: 13px; font-weight: 600; color: var(--gray-500); cursor: pointer; transition: all 150ms var(--ease-out); border: 1px solid transparent; }
-    .drill-tab:hover { color: var(--brand); background: var(--brand-light); }
-    .drill-tab.active { color: var(--brand); background: var(--brand-light); border-color: var(--brand-border); }
+    .drill-tabs { display: flex; gap: 4px; margin-top: 16px; position: relative; }
+    .drill-tabs::after { content: "← Click tabs to explore"; position: absolute; right: 0; top: 50%; transform: translateY(-50%); font-size: 12px; color: var(--brand); font-weight: 500; animation: tabHint 2s ease-in-out infinite; }
+    @keyframes tabHint { 0%,100%{opacity:1} 50%{opacity:0.4} }
+    .drill-tabs.interacted::after { display: none; }
+    .drill-tab { padding: 10px 20px; border-radius: 8px; font-size: 13px; font-weight: 600; color: var(--gray-500); cursor: pointer; transition: all 150ms var(--ease-out); border: 1px solid transparent; position: relative; }
+    .drill-tab:hover { color: var(--brand); background: var(--brand-light); transform: translateY(-1px); }
+    .drill-tab.active { color: #fff; background: var(--brand); border-color: var(--brand); box-shadow: 0 2px 8px rgba(28,56,234,0.3); }
+    .drill-tab.cycling { color: #fff; background: var(--brand); border-color: var(--brand); box-shadow: 0 2px 8px rgba(28,56,234,0.3); }
     .drill-body { padding: 24px; }
     .drill-tab-content { display: none; }
     .drill-tab-content.active { display: block; }
@@ -386,7 +390,7 @@
 <!-- ═══ PASSWORD GATE ═══ -->
 <div id="gate">
   <div class="gate-card">
-    <img src="/assets/logo_nav_dark_2x.png" alt="CleanSpace Stay" />
+    <img src="/assets/logo_nav_light_2x.png" alt="CleanSpace Stay" />
     <div class="gate-badge">Internal & Confidential</div>
     <div class="gate-title">Platform Overview</div>
     <div class="gate-sub">Enter the access code to continue</div>
@@ -929,14 +933,49 @@ const observer = new IntersectionObserver((entries) => {
 document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
 
 // Drill-down tabs
+let tabCycleInterval = null;
+let userInteracted = false;
+
 document.querySelectorAll('.drill-tab').forEach(tab => {
   tab.addEventListener('click', () => {
+    userInteracted = true;
+    if (tabCycleInterval) { clearInterval(tabCycleInterval); tabCycleInterval = null; }
+    document.querySelector('.drill-tabs').classList.add('interacted');
     document.querySelectorAll('.drill-tab').forEach(t => t.classList.remove('active'));
     document.querySelectorAll('.drill-tab-content').forEach(c => c.classList.remove('active'));
     tab.classList.add('active');
     document.getElementById('tab-' + tab.dataset.tab).classList.add('active');
   });
 });
+
+// Auto-cycle tabs to show they're interactive
+const tabNames = ['cost', 'schedule', 'labor', 'risk', 'changes'];
+let cycleIndex = 0;
+function cycleTab() {
+  if (userInteracted) return;
+  cycleIndex = (cycleIndex + 1) % tabNames.length;
+  document.querySelectorAll('.drill-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.drill-tab-content').forEach(c => c.classList.remove('active'));
+  const targetTab = document.querySelector(`.drill-tab[data-tab="${tabNames[cycleIndex]}"]`);
+  const targetContent = document.getElementById('tab-' + tabNames[cycleIndex]);
+  if (targetTab) targetTab.classList.add('active');
+  if (targetContent) targetContent.classList.add('active');
+}
+
+// Start cycling after 3 seconds, cycle every 2.5 seconds
+const drillObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting && !userInteracted && !tabCycleInterval) {
+      setTimeout(() => {
+        if (!userInteracted) {
+          tabCycleInterval = setInterval(cycleTab, 2500);
+        }
+      }, 3000);
+    }
+  });
+}, { threshold: 0.3 });
+const drillPanel = document.getElementById('drill-panel');
+if (drillPanel) drillObserver.observe(drillPanel);
 
 // Project card click → expand drill-down
 document.querySelectorAll('.project-card').forEach(card => {
