@@ -125,16 +125,33 @@
     .disc-step h4 { font-size: 15px; font-weight: 700; color: var(--gray-900); margin-bottom: 6px; }
     .disc-step p { font-size: 13px; color: var(--gray-500); line-height: 1.5; }
 
-    /* ═══ DASHBOARD MOCK (LIGHT) ═══ */
+    /* ═══ CONCEPT MOCK BADGE ═══ */
+    .mock-badge { display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px; background: linear-gradient(135deg, rgba(28,56,234,0.06), rgba(0,200,255,0.04)); border: 1px dashed var(--brand); border-radius: 8px; font-size: 12px; font-weight: 600; color: var(--brand); margin-bottom: 20px; letter-spacing: 0.03em; }
+    .mock-badge i { width: 14px; height: 14px; }
+
+    /* ═══ DASHBOARD MOCK (LIGHT + SIDEBAR) ═══ */
     .dash-container { margin-top: 48px; }
-    .dash-frame { background: var(--white); border: 1px solid var(--gray-200); border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-xl); }
-    .dash-header { background: var(--gray-50); padding: 14px 24px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--gray-200); }
+    .dash-frame { background: var(--white); border: 1px solid var(--gray-200); border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-xl); display: grid; grid-template-columns: 220px 1fr; grid-template-rows: auto 1fr; min-height: 600px; }
+    .dash-sidebar { grid-row: 1 / -1; background: var(--gray-900); padding: 20px 0; display: flex; flex-direction: column; }
+    .dash-sidebar-logo { padding: 0 20px 20px; border-bottom: 1px solid rgba(255,255,255,0.08); margin-bottom: 16px; display: flex; align-items: center; gap: 10px; }
+    .dash-sidebar-logo i { width: 24px; height: 24px; color: var(--cyan); }
+    .dash-sidebar-logo span { font-size: 14px; font-weight: 700; color: #fff; }
+    .dash-nav { display: flex; flex-direction: column; gap: 2px; padding: 0 12px; }
+    .dash-nav-item { display: flex; align-items: center; gap: 10px; padding: 10px 12px; border-radius: 8px; font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.5); cursor: default; transition: all 150ms; }
+    .dash-nav-item:hover { color: rgba(255,255,255,0.8); background: rgba(255,255,255,0.04); }
+    .dash-nav-item.active { color: #fff; background: rgba(28,56,234,0.3); font-weight: 600; }
+    .dash-nav-item i { width: 18px; height: 18px; }
+    .dash-nav-section { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: rgba(255,255,255,0.25); padding: 16px 12px 6px; }
+    .dash-sidebar-user { margin-top: auto; padding: 16px 20px; border-top: 1px solid rgba(255,255,255,0.08); display: flex; align-items: center; gap: 10px; }
+    .dash-sidebar-user .dash-avatar { width: 28px; height: 28px; font-size: 11px; }
+    .dash-sidebar-user span { font-size: 13px; color: rgba(255,255,255,0.7); }
+    .dash-header { padding: 14px 24px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--gray-200); background: var(--white); }
     .dash-header-left { display: flex; align-items: center; gap: 10px; }
     .dash-header-left i { color: var(--brand); width: 20px; height: 20px; }
     .dash-header-left span { font-size: 14px; font-weight: 700; color: var(--gray-900); }
-    .dash-user { display: flex; align-items: center; gap: 8px; }
-    .dash-user span { font-size: 13px; color: var(--gray-500); }
-    .dash-avatar { width: 32px; height: 32px; border-radius: 50%; background: var(--brand); display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; color: #fff; }
+    .dash-header-right { display: flex; align-items: center; gap: 12px; }
+    .dash-header-right .dash-search { display: flex; align-items: center; gap: 6px; padding: 7px 14px; background: var(--gray-50); border: 1px solid var(--gray-200); border-radius: 8px; font-size: 12px; color: var(--gray-400); }
+    .dash-header-right .dash-search i { width: 14px; height: 14px; }
     .dash-body { padding: 24px; }
 
     /* KPI Cards */
@@ -170,9 +187,8 @@
     .project-card-header { display: grid; grid-template-columns: repeat(6, 1fr); gap: 8px; font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--gray-400); font-weight: 600; padding: 0 24px 8px; margin-top: 16px; }
     .project-card-header span:first-child { grid-column: 1 / 2; padding-left: 0; }
 
-    /* Pulse indicator on first card */
-    .project-card.pulse-hint::before { content: "Click to explore"; position: absolute; top: -10px; right: 20px; font-size: 11px; font-weight: 600; color: var(--brand); background: var(--white); border: 1px solid var(--brand); padding: 3px 10px; border-radius: 6px; animation: hintPulse 2s infinite; z-index: 2; }
-    @keyframes hintPulse { 0%,100%{opacity:1; transform:translateY(0);} 50%{opacity:0.7; transform:translateY(-2px);} }
+    /* Hint for other cards */
+    .project-card:not(.expanded):hover::after { content: "Click to drill down"; position: absolute; top: -10px; right: 20px; font-size: 11px; font-weight: 600; color: var(--brand); background: var(--white); border: 1px solid var(--brand); padding: 3px 10px; border-radius: 6px; z-index: 2; pointer-events: none; }
 
     /* ═══ DRILL-DOWN ═══ */
     .drill-section { margin-top: 0; border: 2px solid var(--brand); border-top: 3px solid var(--brand); border-radius: 0 0 var(--radius) var(--radius); background: var(--white); overflow: hidden; animation: slideDown 0.35s var(--ease-out); display: none; }
@@ -344,6 +360,8 @@
 
     /* ═══ RESPONSIVE ═══ */
     @media (max-width: 900px) {
+      .dash-frame { grid-template-columns: 1fr; }
+      .dash-sidebar { display: none; }
       .kpi-row { grid-template-columns: repeat(3, 1fr); }
       .surface-grid { grid-template-columns: repeat(3, 1fr); }
       .disc-flow { grid-template-columns: repeat(2, 1fr); }
@@ -442,7 +460,7 @@
     <div class="fade-up">
       <div class="tag">Responsible Rollout</div>
       <h2>We don't guess. We ask.</h2>
-      <p class="desc">Before building anything else, leadership completes an adaptive discovery process. The system interviews you — one question at a time — and generates the exact blueprint configured to how your company actually operates.</p>
+      <p class="desc">Before building anything else, leadership completes a fast, guided discovery — like TurboTax for your business operations. Answer questions, the system adapts, and in 2–3 weeks you have the exact blueprint configured to how your company actually operates.</p>
     </div>
     <div class="disc-flow fade-up">
       <div class="disc-step"><div class="disc-num">1</div><h4>Discovery</h4><p>Adaptive interview across 20 business areas — feels like TurboTax</p></div>
@@ -454,8 +472,8 @@
       <h3>Each phase delivers standalone value.</h3>
       <p>This isn't a two-year project that only pays off at the end. Every milestone produces a working system that saves time, recovers margin, or eliminates risk — starting from week one of the build.</p>
       <div class="roi-points">
-        <div class="roi-point"><div class="roi-point-val">4–6 wks</div><div class="roi-point-lbl">Discovery to Blueprint</div></div>
-        <div class="roi-point"><div class="roi-point-val">8–12 wks</div><div class="roi-point-lbl">Core Platform + Budget</div></div>
+        <div class="roi-point"><div class="roi-point-val">2–3 wks</div><div class="roi-point-lbl">Discovery to Blueprint</div></div>
+        <div class="roi-point"><div class="roi-point-val">2–3 wks</div><div class="roi-point-lbl">Core Platform + Dashboard</div></div>
         <div class="roi-point"><div class="roi-point-val">Every Phase</div><div class="roi-point-lbl">Delivers working value</div></div>
       </div>
     </div>
@@ -469,12 +487,34 @@
       <div class="tag">The Destination</div>
       <h2>What the CEO dashboard looks like.</h2>
       <p class="desc">Open one screen. Know the answer. No calls, no spreadsheets, no waiting for month-end.</p>
+      <div class="mock-badge"><i data-lucide="info"></i> Concept Mock — Illustrative of the final product. Real data comes from the Discovery Engine process.</div>
     </div>
     <div class="dash-container fade-up">
       <div class="dash-frame">
+        <!-- Sidebar -->
+        <div class="dash-sidebar">
+          <div class="dash-sidebar-logo"><i data-lucide="hexagon"></i><span>BuildOS</span></div>
+          <div class="dash-nav">
+            <div class="dash-nav-item active"><i data-lucide="layout-dashboard"></i>Dashboard</div>
+            <div class="dash-nav-item"><i data-lucide="folder-open"></i>Projects</div>
+            <div class="dash-nav-item"><i data-lucide="dollar-sign"></i>Budget & Cost</div>
+            <div class="dash-nav-item"><i data-lucide="calendar"></i>Schedule</div>
+            <div class="dash-nav-item"><i data-lucide="users"></i>Workforce</div>
+            <div class="dash-nav-section">Operations</div>
+            <div class="dash-nav-item"><i data-lucide="shopping-cart"></i>Procurement</div>
+            <div class="dash-nav-item"><i data-lucide="file-text"></i>Change Orders</div>
+            <div class="dash-nav-item"><i data-lucide="alert-triangle"></i>Risk Register</div>
+            <div class="dash-nav-item"><i data-lucide="plane"></i>Travel</div>
+            <div class="dash-nav-section">Intelligence</div>
+            <div class="dash-nav-item"><i data-lucide="sparkles"></i>AI Insights</div>
+            <div class="dash-nav-item"><i data-lucide="bar-chart-3"></i>Reports</div>
+          </div>
+          <div class="dash-sidebar-user"><div class="dash-avatar">G</div><span>Glenn</span></div>
+        </div>
+        <!-- Main Content -->
         <div class="dash-header">
-          <div class="dash-header-left"><i data-lucide="layout-dashboard"></i><span>BuildOS — Executive Dashboard</span></div>
-          <div class="dash-user"><span>Glenn</span><div class="dash-avatar">G</div></div>
+          <div class="dash-header-left"><i data-lucide="layout-dashboard"></i><span>Executive Dashboard</span></div>
+          <div class="dash-header-right"><div class="dash-search"><i data-lucide="search"></i>Search projects...</div></div>
         </div>
         <div class="dash-body">
           <div class="kpi-row">
@@ -487,12 +527,12 @@
           </div>
 
           <!-- Project Cards -->
-          <div style="font-size:13px; font-weight:700; color:var(--gray-700); margin-bottom:8px; display:flex; align-items:center; gap:8px;"><i data-lucide="folder-open" style="width:16px;height:16px; color:var(--gray-400);"></i> Active Projects — Click any project to see full detail</div>
+          <div style="font-size:13px; font-weight:700; color:var(--gray-700); margin-bottom:8px; display:flex; align-items:center; justify-content:space-between;"><span style="display:flex; align-items:center; gap:8px;"><i data-lucide="folder-open" style="width:16px;height:16px; color:var(--gray-400);"></i> Active Projects</span><span style="font-size:12px; font-weight:500; color:var(--brand); display:flex; align-items:center; gap:6px; cursor:pointer;"><i data-lucide="mouse-pointer-click" style="width:14px;height:14px;"></i> Click any row to drill down</span></div>
           <div class="project-card-header">
             <span>Project</span><span>Contract</span><span>Actual</span><span>ETC</span><span>Forecast</span><span>Margin</span>
           </div>
           <div class="project-cards" id="project-cards">
-            <div class="project-card pulse-hint" data-project="mia">
+            <div class="project-card expanded" data-project="mia">
               <div><div class="proj-name">MIA Tower Fit-out</div><div class="proj-meta">Meridian Dev Group</div></div>
               <div class="proj-val">$12.6M</div>
               <div class="proj-val">$7.8M</div>
@@ -540,7 +580,7 @@
           </div>
 
           <!-- Drill-Down Panel -->
-          <div class="drill-section" id="drill-panel">
+          <div class="drill-section open" id="drill-panel">
             <div class="drill-header">
               <div>
                 <div class="drill-title">MIA Tower Fit-out</div>
@@ -689,6 +729,7 @@
       <div class="tag">The Intelligence Layer</div>
       <h2>AI that watches every project 24/7.</h2>
       <p class="desc">Like having a CFO-level analyst monitoring every cost line, every schedule slip, every change order — and surfacing what matters before you ask.</p>
+      <div class="mock-badge" style="margin-top:16px;"><i data-lucide="info"></i> Concept Mock — AI capabilities powered by your data, configured during Discovery.</div>
     </div>
     <div class="ai-container fade-up">
       <div class="ai-frame">
@@ -768,7 +809,7 @@
             <span class="rm-deliverable">Role & Permission Matrix</span>
             <span class="rm-deliverable">KPI Definitions</span>
           </div>
-          <div class="rm-duration"><i data-lucide="clock" style="width:14px;height:14px;"></i> 4–6 weeks</div>
+          <div class="rm-duration"><i data-lucide="clock" style="width:14px;height:14px;"></i> 2–3 weeks</div>
         </div>
       </div>
       <div class="rm-item">
@@ -784,7 +825,7 @@
             <span class="rm-deliverable">ETC Dashboard</span>
             <span class="rm-deliverable">Executive KPIs</span>
           </div>
-          <div class="rm-duration"><i data-lucide="clock" style="width:14px;height:14px;"></i> 8–12 weeks</div>
+          <div class="rm-duration"><i data-lucide="clock" style="width:14px;height:14px;"></i> 2–3 weeks</div>
         </div>
       </div>
       <div class="rm-item">
@@ -799,7 +840,7 @@
             <span class="rm-deliverable">Notifications</span>
             <span class="rm-deliverable">Exception Handling</span>
           </div>
-          <div class="rm-duration"><i data-lucide="clock" style="width:14px;height:14px;"></i> 6–8 weeks</div>
+          <div class="rm-duration"><i data-lucide="clock" style="width:14px;height:14px;"></i> 2–3 weeks</div>
         </div>
       </div>
       <div class="rm-item">
@@ -815,7 +856,7 @@
             <span class="rm-deliverable">Weekly Reports</span>
             <span class="rm-deliverable">Historical Search</span>
           </div>
-          <div class="rm-duration"><i data-lucide="clock" style="width:14px;height:14px;"></i> 6–8 weeks</div>
+          <div class="rm-duration"><i data-lucide="clock" style="width:14px;height:14px;"></i> 1–2 weeks</div>
         </div>
       </div>
       <div class="rm-item">
@@ -831,7 +872,7 @@
             <span class="rm-deliverable">Inspections</span>
             <span class="rm-deliverable">Offline Mode</span>
           </div>
-          <div class="rm-duration"><i data-lucide="clock" style="width:14px;height:14px;"></i> 8–10 weeks</div>
+          <div class="rm-duration"><i data-lucide="clock" style="width:14px;height:14px;"></i> 2–3 weeks</div>
         </div>
       </div>
       <div class="rm-item">
@@ -846,7 +887,7 @@
             <span class="rm-deliverable">Billing</span>
             <span class="rm-deliverable">Onboarding Flow</span>
           </div>
-          <div class="rm-duration"><i data-lucide="clock" style="width:14px;height:14px;"></i> 10–14 weeks</div>
+          <div class="rm-duration"><i data-lucide="clock" style="width:14px;height:14px;"></i> 3–4 weeks</div>
         </div>
       </div>
     </div>
@@ -922,13 +963,7 @@ document.querySelectorAll('.project-card').forEach(card => {
   });
 });
 
-// Auto-expand first card after 3 seconds to show the drill-down
-setTimeout(() => {
-  const firstCard = document.querySelector('.project-card.pulse-hint');
-  if (firstCard && !firstCard.classList.contains('expanded')) {
-    firstCard.click();
-  }
-}, 3000);
+// First card starts expanded — no auto-expand needed
 
 // Lucide icons
 lucide.createIcons();
