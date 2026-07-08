@@ -86,34 +86,32 @@
     /* ═══ TYPOGRAPHY ═══ */
     .tag { display: inline-block; font-size: 13px; font-weight: 600; color: var(--brand); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 12px; }
     .tag--light { color: var(--cyan); }
-    h2 { font-size: clamp(28px, 4vw, 40px); font-weight: 800; line-height: 1.15; color: var(--gray-900); margin-bottom: 16px; letter-spacing: -0.01em; }
+    h2 { font-size: clamp(28px, 4vw, 42px); font-weight: 800; line-height: 1.15; color: var(--gray-900); margin-bottom: 16px; letter-spacing: -0.01em; }
     h2.light { color: #fff; }
     .desc { font-size: 16px; color: var(--gray-600); max-width: 640px; line-height: 1.7; }
     .desc--light { color: rgba(255,255,255,0.7); }
 
-    /* ═══ INTRO ═══ */
-    .intro { padding: 60px 24px 40px; background: var(--white); }
-    .intro-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; gap: 40px; }
-    .intro-text { flex: 1; }
-    .intro-text h1 { font-size: clamp(24px, 3.5vw, 32px); font-weight: 800; color: var(--gray-900); line-height: 1.2; margin-bottom: 12px; }
-    .intro-text p { font-size: 16px; color: var(--gray-600); line-height: 1.7; max-width: 560px; }
-    .intro-link { display: inline-flex; align-items: center; gap: 8px; margin-top: 16px; font-size: 14px; font-weight: 600; color: var(--brand); text-decoration: none; }
-    .intro-link:hover { text-decoration: underline; }
-    .intro-img { flex: 0 0 320px; }
-    .intro-img img { width: 100%; border-radius: var(--radius); box-shadow: var(--shadow-lg); border: 1px solid var(--gray-200); }
+    /* ═══ HERO (Minimal + Big Screenshot) ═══ */
+    .hero { padding: 60px 24px 0; background: linear-gradient(180deg, var(--gray-50) 0%, var(--white) 100%); }
+    .hero-inner { max-width: 1200px; margin: 0 auto; text-align: center; }
+    .hero-tag { display: inline-flex; align-items: center; gap: 8px; padding: 6px 14px; background: var(--brand-light); border: 1px solid var(--brand-border); border-radius: 100px; font-size: 13px; font-weight: 500; color: var(--brand); margin-bottom: 20px; }
+    .hero-tag::before { content: ""; width: 6px; height: 6px; background: var(--positive); border-radius: 50%; }
+    .hero h1 { font-size: clamp(28px, 4vw, 38px); font-weight: 800; color: var(--gray-900); line-height: 1.2; margin-bottom: 14px; letter-spacing: -0.01em; }
+    .hero p { font-size: 17px; color: var(--gray-600); max-width: 680px; margin: 0 auto 32px; line-height: 1.7; }
+    .hero-screenshot { max-width: 1000px; margin: 0 auto; border-radius: 12px; overflow: hidden; box-shadow: 0 20px 60px rgba(0,0,0,0.15), 0 8px 20px rgba(0,0,0,0.1); border: 1px solid var(--gray-200); }
+    .hero-screenshot img { width: 100%; height: auto; display: block; }
 
-    /* ═══ QUESTION ═══ */
-    .question-box { max-width: 800px; margin: 0 auto; text-align: center; }
-    .question-box blockquote { font-size: clamp(18px, 2.5vw, 24px); font-weight: 600; color: var(--gray-900); line-height: 1.45; margin: 32px 0; padding: 40px; background: var(--white); border: 2px solid var(--brand-border); border-radius: var(--radius-lg); position: relative; box-shadow: var(--shadow-md); }
-    .question-box .gap-text { color: var(--gray-600); font-size: 15px; max-width: 560px; margin: 0 auto; line-height: 1.7; }
+    /* ═══ CAPABILITY STATEMENT ═══ */
+    .capability-box { max-width: 800px; margin: 0 auto; text-align: center; }
+    .capability-box blockquote { font-size: clamp(18px, 2.5vw, 22px); font-weight: 600; color: var(--gray-900); line-height: 1.45; margin: 32px 0; padding: 36px 40px; background: var(--white); border: 2px solid var(--brand-border); border-radius: var(--radius-lg); box-shadow: var(--shadow-md); }
+    .capability-box .body-text { color: var(--gray-600); font-size: 15px; max-width: 600px; margin: 0 auto; line-height: 1.7; }
 
     /* ═══ SURFACE GRID ═══ */
     .surface-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 40px; }
-    .surface-item { background: var(--white); border: 1px solid var(--gray-200); border-radius: var(--radius); padding: 24px 16px; text-align: center; transition: all 200ms var(--ease-out); cursor: default; }
+    .surface-item { background: var(--white); border: 1px solid var(--gray-200); border-radius: var(--radius); padding: 24px 16px; text-align: center; transition: all 200ms var(--ease-out); cursor: default; position: relative; }
     .surface-item:hover { border-color: var(--brand); transform: translateY(-2px); box-shadow: var(--shadow-md); }
     .surface-item.active { background: var(--brand-light); border-color: var(--brand); }
     .surface-item.active::after { content: "LIVE"; position: absolute; top: 8px; right: 8px; font-size: 10px; font-weight: 700; letter-spacing: 0.08em; color: var(--positive); background: var(--positive-bg); padding: 2px 6px; border-radius: 4px; }
-    .surface-item { position: relative; }
     .surface-icon { width: 44px; height: 44px; background: var(--brand-medium); border-radius: 10px; display: flex; align-items: center; justify-content: center; margin: 0 auto 12px; color: var(--brand); }
     .surface-item.active .surface-icon { background: rgba(28,56,234,0.15); }
     .surface-item .name { font-size: 13px; font-weight: 600; color: var(--gray-700); }
@@ -154,83 +152,72 @@
     .kpi-trend.down { color: var(--danger); }
     .kpi-trend.neutral { color: var(--warn); }
 
-    /* Project Table */
-    .dash-split { display: grid; grid-template-columns: 1.6fr 1fr; gap: 20px; }
-    .dash-panel { background: var(--gray-50); border: 1px solid var(--gray-200); border-radius: var(--radius); padding: 20px; }
-    .dash-panel-title { font-size: 13px; font-weight: 700; color: var(--gray-700); margin-bottom: 14px; display: flex; align-items: center; gap: 8px; }
-    .dash-panel-title i { width: 16px; height: 16px; color: var(--gray-400); }
-    .proj-table { width: 100%; border-collapse: collapse; }
-    .proj-table th { font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--gray-400); text-align: left; padding: 8px 8px; border-bottom: 1px solid var(--gray-200); font-weight: 600; }
-    .proj-table td { font-size: 13px; color: var(--gray-700); padding: 12px 8px; border-bottom: 1px solid var(--gray-100); transition: background 0.15s; }
-    .proj-table tr.clickable { cursor: pointer; }
-    .proj-table tr.clickable:hover td { background: var(--brand-light); }
-    .proj-table tr.clickable.selected td { background: rgba(28,56,234,0.08); }
-    .proj-table .proj-name { font-weight: 600; color: var(--gray-900); display: flex; align-items: center; gap: 6px; }
-    .proj-table .proj-name::after { content: ""; width: 16px; height: 16px; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%231C38EA' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m9 18 6-6-6-6'/%3E%3C/svg%3E"); opacity: 0; transition: opacity 0.15s; }
-    .proj-table tr.clickable:hover .proj-name::after { opacity: 1; }
-    .health-bar { width: 48px; height: 6px; border-radius: 3px; background: var(--gray-200); overflow: hidden; display: inline-block; vertical-align: middle; }
-    .health-bar-fill { height: 100%; border-radius: 3px; }
-    .margin-pos { color: var(--positive); font-weight: 600; }
-    .margin-neg { color: var(--danger); font-weight: 600; }
-    .click-hint { font-size: 12px; color: var(--gray-400); text-align: center; margin-top: 14px; display: flex; align-items: center; justify-content: center; gap: 6px; padding: 8px; background: var(--brand-light); border-radius: 8px; border: 1px dashed var(--brand-border); }
-    .click-hint i { width: 14px; height: 14px; color: var(--brand); }
+    /* ═══ PROJECT CARDS (Clickable) ═══ */
+    .project-cards { display: grid; gap: 12px; margin-top: 24px; }
+    .project-card { background: var(--white); border: 2px solid var(--gray-200); border-radius: var(--radius); padding: 20px 24px; display: grid; grid-template-columns: 1.5fr repeat(5, 1fr) auto; align-items: center; gap: 16px; cursor: pointer; transition: all 200ms var(--ease-out); position: relative; }
+    .project-card:hover { border-color: var(--brand); box-shadow: 0 4px 20px rgba(28,56,234,0.12); transform: translateY(-2px); }
+    .project-card.expanded { border-color: var(--brand); background: var(--brand-light); box-shadow: 0 4px 20px rgba(28,56,234,0.12); }
+    .project-card .proj-name { font-weight: 700; color: var(--gray-900); font-size: 14px; }
+    .project-card .proj-meta { font-size: 12px; color: var(--gray-500); }
+    .project-card .proj-val { font-size: 14px; color: var(--gray-700); font-weight: 500; }
+    .project-card .margin-pos { color: var(--positive); font-weight: 700; }
+    .project-card .margin-neg { color: var(--danger); font-weight: 700; }
+    .project-card .health-bar { width: 56px; height: 8px; border-radius: 4px; background: var(--gray-200); overflow: hidden; }
+    .project-card .health-bar-fill { height: 100%; border-radius: 4px; }
+    .project-card .expand-icon { width: 32px; height: 32px; border-radius: 8px; background: var(--brand-light); display: flex; align-items: center; justify-content: center; color: var(--brand); transition: all 200ms var(--ease-out); }
+    .project-card:hover .expand-icon { background: var(--brand); color: #fff; }
+    .project-card.expanded .expand-icon { background: var(--brand); color: #fff; transform: rotate(90deg); }
+    .project-card-header { display: grid; grid-template-columns: repeat(6, 1fr); gap: 8px; font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--gray-400); font-weight: 600; padding: 0 24px 8px; margin-top: 16px; }
+    .project-card-header span:first-child { grid-column: 1 / 2; padding-left: 0; }
 
-    /* Alerts */
-    .alert-item { padding: 12px 14px; border-radius: 10px; margin-bottom: 10px; display: flex; align-items: flex-start; gap: 10px; }
-    .alert-item--red { background: var(--danger-bg); border: 1px solid rgba(239,68,68,0.15); }
-    .alert-item--amber { background: var(--warn-bg); border: 1px solid rgba(245,158,11,0.15); }
-    .alert-item--green { background: var(--positive-bg); border: 1px solid rgba(16,185,129,0.15); }
-    .alert-icon { width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex: none; margin-top: 1px; }
-    .alert-icon--red { background: rgba(239,68,68,0.15); color: var(--danger); }
-    .alert-icon--amber { background: rgba(245,158,11,0.15); color: var(--warn); }
-    .alert-icon--green { background: rgba(16,185,129,0.15); color: var(--positive); }
-    .alert-text strong { font-size: 12px; color: var(--gray-900); display: block; }
-    .alert-text span { font-size: 11px; color: var(--gray-500); }
+    /* Pulse indicator on first card */
+    .project-card.pulse-hint::before { content: "Click to explore"; position: absolute; top: -10px; right: 20px; font-size: 11px; font-weight: 600; color: var(--brand); background: var(--white); border: 1px solid var(--brand); padding: 3px 10px; border-radius: 6px; animation: hintPulse 2s infinite; z-index: 2; }
+    @keyframes hintPulse { 0%,100%{opacity:1; transform:translateY(0);} 50%{opacity:0.7; transform:translateY(-2px);} }
 
     /* ═══ DRILL-DOWN ═══ */
-    .drill-section { margin-top: 24px; border-top: 2px solid var(--brand); border-radius: 0 0 var(--radius) var(--radius); background: var(--white); padding: 0; animation: slideDown 0.3s var(--ease-out); }
-    @keyframes slideDown { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: translateY(0); } }
+    .drill-section { margin-top: 0; border: 2px solid var(--brand); border-top: 3px solid var(--brand); border-radius: 0 0 var(--radius) var(--radius); background: var(--white); overflow: hidden; animation: slideDown 0.35s var(--ease-out); display: none; }
+    .drill-section.open { display: block; }
+    @keyframes slideDown { from { opacity: 0; max-height: 0; } to { opacity: 1; max-height: 2000px; } }
     .drill-header { padding: 20px 24px; border-bottom: 1px solid var(--gray-200); }
     .drill-title { font-size: 18px; font-weight: 700; color: var(--gray-900); }
     .drill-subtitle { font-size: 13px; color: var(--gray-500); margin-top: 4px; }
     .drill-tabs { display: flex; gap: 4px; margin-top: 16px; }
-    .drill-tab { padding: 8px 16px; border-radius: 8px; font-size: 13px; font-weight: 600; color: var(--gray-500); cursor: pointer; transition: all 0.15s var(--ease-out); }
-    .drill-tab:hover { background: var(--gray-100); color: var(--gray-700); }
-    .drill-tab.active { background: var(--brand); color: #fff; }
+    .drill-tab { padding: 8px 16px; border-radius: 8px; font-size: 13px; font-weight: 600; color: var(--gray-500); cursor: pointer; transition: all 150ms var(--ease-out); border: 1px solid transparent; }
+    .drill-tab:hover { color: var(--brand); background: var(--brand-light); }
+    .drill-tab.active { color: var(--brand); background: var(--brand-light); border-color: var(--brand-border); }
     .drill-body { padding: 24px; }
     .drill-tab-content { display: none; }
-    .drill-tab-content.active { display: block; animation: fadeIn 0.2s var(--ease-out); }
-    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    .drill-tab-content.active { display: block; }
 
     /* Waterfall */
-    .waterfall { display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px; margin-bottom: 32px; }
-    .wf-col { text-align: center; }
-    .wf-bar-wrap { height: 160px; display: flex; align-items: flex-end; justify-content: center; padding-bottom: 4px; }
-    .wf-bar { width: 100%; max-width: 48px; border-radius: 6px 6px 2px 2px; display: flex; align-items: flex-start; justify-content: center; padding-top: 8px; transition: height 0.4s var(--ease-out); }
-    .wf-bar-val { font-size: 11px; font-weight: 700; color: var(--white); }
+    .waterfall { display: flex; align-items: flex-end; gap: 12px; height: 160px; margin-bottom: 32px; padding: 0 8px; }
+    .wf-col { flex: 1; display: flex; flex-direction: column; align-items: center; }
+    .wf-bar-wrap { height: 140px; display: flex; align-items: flex-end; width: 100%; }
+    .wf-bar { width: 100%; border-radius: 6px 6px 0 0; display: flex; align-items: flex-start; justify-content: center; padding-top: 8px; min-height: 12px; }
+    .wf-bar-val { font-size: 11px; font-weight: 700; color: #fff; }
     .wf-bar--contract { background: var(--brand); }
-    .wf-bar--budget { background: var(--gray-700); }
+    .wf-bar--budget { background: var(--navy); }
     .wf-bar--actual { background: var(--warn); }
     .wf-bar--committed { background: #8B5CF6; }
     .wf-bar--remaining { background: var(--gray-400); }
     .wf-bar--forecast { background: var(--danger); }
     .wf-bar--variance { background: var(--danger); }
-    .wf-lbl { font-size: 10px; color: var(--gray-500); margin-top: 8px; line-height: 1.3; }
+    .wf-lbl { font-size: 10px; color: var(--gray-500); text-align: center; margin-top: 8px; line-height: 1.3; }
 
-    /* Cost Breakdown */
+    /* Cost Split */
     .cost-split { display: grid; grid-template-columns: 1.2fr 1fr; gap: 24px; }
     .cost-panel { background: var(--gray-50); border: 1px solid var(--gray-200); border-radius: var(--radius); padding: 20px; }
-    .cost-panel-title { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--gray-500); margin-bottom: 14px; }
-    .cost-row { display: flex; align-items: center; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid var(--gray-100); }
+    .cost-panel-title { font-size: 13px; font-weight: 700; color: var(--gray-700); margin-bottom: 14px; }
+    .cost-row { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid var(--gray-100); }
     .cost-row:last-child { border-bottom: none; }
-    .cost-cat { font-size: 13px; color: var(--gray-700); font-weight: 500; }
+    .cost-cat { font-size: 13px; color: var(--gray-600); }
     .cost-vals { display: flex; gap: 16px; }
-    .cost-val { font-size: 13px; font-weight: 600; color: var(--gray-600); }
+    .cost-val { font-size: 13px; font-weight: 600; color: var(--gray-700); }
     .cost-val.over { color: var(--danger); }
     .cost-val.under { color: var(--positive); }
-    .cost-val.total { color: var(--gray-900); font-weight: 700; }
+    .cost-val.total { font-size: 15px; }
 
-    /* Summary Cards */
+    /* Drill Summary */
     .drill-summary { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 24px; }
     .ds-card { background: var(--gray-50); border: 1px solid var(--gray-200); border-radius: var(--radius); padding: 16px; text-align: center; }
     .ds-val { font-size: 22px; font-weight: 800; }
@@ -238,149 +225,141 @@
     .ds-val.green { color: var(--positive); }
     .ds-val.blue { color: var(--brand); }
     .ds-val.amber { color: var(--warn); }
-    .ds-lbl { font-size: 11px; color: var(--gray-500); margin-top: 4px; text-transform: uppercase; letter-spacing: 0.04em; }
+    .ds-lbl { font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--gray-500); margin-top: 4px; }
 
     /* Gantt */
-    .gantt { margin-bottom: 16px; }
-    .gantt-row { display: grid; grid-template-columns: 120px 1fr; align-items: center; padding: 8px 0; border-bottom: 1px solid var(--gray-100); }
-    .gantt-label { font-size: 12px; font-weight: 500; color: var(--gray-700); }
-    .gantt-bar-track { position: relative; height: 20px; background: var(--gray-100); border-radius: 4px; overflow: hidden; }
+    .gantt { display: flex; flex-direction: column; gap: 10px; margin-bottom: 24px; }
+    .gantt-row { display: flex; align-items: center; gap: 12px; }
+    .gantt-label { width: 120px; font-size: 12px; font-weight: 500; color: var(--gray-600); flex: none; }
+    .gantt-bar-track { flex: 1; height: 20px; background: var(--gray-100); border-radius: 4px; position: relative; }
     .gantt-bar-planned { position: absolute; height: 100%; background: var(--gray-300); border-radius: 4px; opacity: 0.5; }
     .gantt-bar-actual { position: absolute; height: 100%; border-radius: 4px; }
     .gantt-bar-actual.on-track { background: var(--positive); }
     .gantt-bar-actual.behind { background: var(--danger); }
-    .gantt-legend { display: flex; gap: 16px; margin-top: 12px; }
-    .gantt-legend-item { display: flex; align-items: center; gap: 6px; font-size: 11px; color: var(--gray-500); }
+    .gantt-legend { display: flex; gap: 20px; margin-bottom: 20px; }
+    .gantt-legend-item { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--gray-500); }
     .gantt-legend-dot { width: 10px; height: 10px; border-radius: 3px; }
 
     /* Labor */
     .labor-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
     .labor-card { background: var(--gray-50); border: 1px solid var(--gray-200); border-radius: var(--radius); padding: 20px; }
-    .labor-card-title { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--gray-500); margin-bottom: 14px; }
-    .labor-row { display: flex; align-items: center; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid var(--gray-100); }
-    .labor-row:last-child { border-bottom: none; }
-    .labor-trade { font-size: 13px; color: var(--gray-700); font-weight: 500; }
-    .labor-hours { font-size: 12px; color: var(--gray-500); }
+    .labor-card-title { font-size: 13px; font-weight: 700; color: var(--gray-700); margin-bottom: 14px; }
+    .labor-row { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid var(--gray-100); font-size: 13px; }
+    .labor-trade { color: var(--gray-600); }
+    .labor-hours { color: var(--gray-700); font-weight: 500; }
     .labor-flag { font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 4px; }
     .labor-flag.overtime { background: var(--danger-bg); color: var(--danger); }
     .labor-flag.normal { background: var(--positive-bg); color: var(--positive); }
-    .labor-util { font-size: 14px; font-weight: 700; }
+    .labor-util { font-weight: 600; }
 
-    /* Risk Table */
+    /* Risk */
     .risk-table { width: 100%; border-collapse: collapse; }
-    .risk-table th { font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--gray-400); text-align: left; padding: 10px 8px; border-bottom: 1px solid var(--gray-200); font-weight: 600; }
+    .risk-table th { font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--gray-400); text-align: left; padding: 10px 8px; border-bottom: 1px solid var(--gray-200); font-weight: 600; }
     .risk-table td { font-size: 13px; color: var(--gray-700); padding: 12px 8px; border-bottom: 1px solid var(--gray-100); }
     .risk-badge { font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 4px; }
     .risk-badge.high { background: var(--danger-bg); color: var(--danger); }
     .risk-badge.medium { background: var(--warn-bg); color: var(--warn); }
     .risk-badge.low { background: var(--positive-bg); color: var(--positive); }
-    .risk-status { font-size: 11px; font-weight: 600; }
-    .risk-status.mitigating { color: var(--warn); }
-    .risk-status.monitoring { color: var(--positive); }
+    .risk-status { font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 4px; }
+    .risk-status.mitigating { background: var(--warn-bg); color: var(--warn); }
+    .risk-status.monitoring { background: var(--brand-light); color: var(--brand); }
 
-    /* ═══ COO SECTION ═══ */
+    /* ═══ COO GRID ═══ */
     .coo-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 40px; }
-    .coo-card { background: var(--white); border: 1px solid var(--gray-200); border-radius: var(--radius); padding: 24px; box-shadow: var(--shadow-sm); }
+    .coo-card { background: var(--white); border: 1px solid var(--gray-200); border-radius: var(--radius); padding: 24px; }
     .coo-card-title { font-size: 13px; font-weight: 700; color: var(--gray-700); margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
-    .coo-card-title i { width: 18px; height: 18px; color: var(--brand); }
-    .coo-row { display: flex; align-items: center; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid var(--gray-100); font-size: 13px; }
-    .coo-row:last-child { border-bottom: none; }
+    .coo-row { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid var(--gray-100); font-size: 13px; }
     .coo-label { color: var(--gray-600); }
-    .coo-value { font-weight: 600; color: var(--gray-900); }
+    .coo-value { font-weight: 600; color: var(--gray-700); }
     .coo-bar { width: 80px; height: 6px; background: var(--gray-200); border-radius: 3px; overflow: hidden; }
     .coo-bar-fill { height: 100%; border-radius: 3px; }
 
-    /* ═══ AI SECTION (DARK) ═══ */
-    .ai-container { margin-top: 48px; }
-    .ai-frame { background: #0B1437; border: 1px solid rgba(255,255,255,0.08); border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-xl); }
-    .ai-header { background: rgba(255,255,255,0.03); padding: 14px 24px; display: flex; align-items: center; gap: 10px; border-bottom: 1px solid rgba(255,255,255,0.06); }
-    .ai-header i { color: var(--cyan); width: 18px; height: 18px; }
-    .ai-header span { font-size: 14px; font-weight: 700; color: #fff; }
-    .ai-badge { margin-left: auto; font-size: 10px; font-weight: 600; color: var(--positive); background: rgba(16,185,129,0.1); padding: 3px 8px; border-radius: 4px; letter-spacing: 0.04em; }
-    .ai-body { padding: 20px 24px; }
-    .ai-insight { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); border-radius: var(--radius); padding: 20px; margin-bottom: 14px; }
-    .ai-insight-header { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+    /* ═══ AI SECTION ═══ */
+    .ai-container { margin-top: 40px; }
+    .ai-frame { background: var(--gray-900); border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-xl); }
+    .ai-header { padding: 16px 24px; background: rgba(255,255,255,0.04); border-bottom: 1px solid rgba(255,255,255,0.08); display: flex; align-items: center; gap: 10px; color: #fff; }
+    .ai-header i { width: 18px; height: 18px; color: var(--cyan); }
+    .ai-header span { font-size: 14px; font-weight: 600; }
+    .ai-badge { margin-left: auto; font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 6px; background: rgba(0,200,255,0.1); color: var(--cyan); }
+    .ai-body { padding: 24px; display: grid; gap: 16px; }
+    .ai-insight { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); border-radius: var(--radius); padding: 20px; }
+    .ai-insight-header { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
     .ai-insight-icon { width: 28px; height: 28px; border-radius: 8px; display: flex; align-items: center; justify-content: center; }
     .ai-insight-icon i { width: 14px; height: 14px; }
     .ai-insight-icon.red { background: rgba(239,68,68,0.15); color: var(--danger); }
     .ai-insight-icon.amber { background: rgba(245,158,11,0.15); color: var(--warn); }
-    .ai-insight-icon.blue { background: rgba(79,106,255,0.15); color: #4F6AFF; }
+    .ai-insight-icon.blue { background: rgba(28,56,234,0.15); color: var(--cyan); }
     .ai-insight-icon.green { background: rgba(16,185,129,0.15); color: var(--positive); }
     .ai-insight-type { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; }
     .ai-insight-type.red { color: var(--danger); }
     .ai-insight-type.amber { color: var(--warn); }
-    .ai-insight-type.blue { color: #4F6AFF; }
+    .ai-insight-type.blue { color: var(--cyan); }
     .ai-insight-type.green { color: var(--positive); }
     .ai-insight h4 { font-size: 14px; font-weight: 700; color: #fff; margin-bottom: 6px; }
     .ai-insight p { font-size: 13px; color: rgba(255,255,255,0.6); line-height: 1.6; }
     .ai-actions { display: flex; gap: 8px; margin-top: 12px; }
-    .ai-btn { padding: 6px 14px; border-radius: 6px; font-size: 12px; font-weight: 600; border: none; cursor: pointer; transition: all 0.15s; }
+    .ai-btn { padding: 6px 14px; border-radius: 6px; font-size: 12px; font-weight: 600; cursor: pointer; border: none; transition: all 150ms; }
     .ai-btn--primary { background: var(--brand); color: #fff; }
     .ai-btn--primary:hover { background: var(--brand-hover); }
     .ai-btn--dismiss { background: rgba(255,255,255,0.06); color: rgba(255,255,255,0.5); border: 1px solid rgba(255,255,255,0.08); }
-    .ai-guardrail { margin-top: 16px; padding: 14px 20px; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06); border-radius: var(--radius); display: flex; align-items: flex-start; gap: 12px; }
-    .ai-guardrail i { color: var(--positive); flex: none; width: 18px; height: 18px; margin-top: 2px; }
-    .ai-guardrail p { font-size: 12px; color: rgba(255,255,255,0.5); line-height: 1.6; }
-    .ai-guardrail strong { color: rgba(255,255,255,0.8); }
+    .ai-guardrail { display: flex; align-items: flex-start; gap: 12px; padding: 16px 20px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); border-radius: var(--radius); margin-top: 8px; }
+    .ai-guardrail i { width: 20px; height: 20px; color: var(--positive); flex: none; margin-top: 2px; }
+    .ai-guardrail p { font-size: 13px; color: rgba(255,255,255,0.6); line-height: 1.6; }
+    .ai-guardrail strong { color: #fff; }
 
     /* ═══ ROADMAP ═══ */
     .roadmap-timeline { margin-top: 40px; position: relative; padding-left: 32px; }
-    .roadmap-timeline::before { content: ""; position: absolute; left: 11px; top: 0; bottom: 0; width: 2px; background: var(--gray-200); }
+    .roadmap-timeline::before { content: ""; position: absolute; left: 11px; top: 8px; bottom: 8px; width: 2px; background: var(--gray-200); }
     .rm-item { position: relative; margin-bottom: 32px; }
-    .rm-item:last-child { margin-bottom: 0; }
-    .rm-dot { position: absolute; left: -32px; top: 4px; width: 22px; height: 22px; border-radius: 50%; border: 3px solid var(--white); box-shadow: var(--shadow-sm); }
-    .rm-dot--done { background: var(--positive); }
-    .rm-dot--next { background: var(--brand); animation: pulse 2s infinite; }
-    .rm-dot--future { background: var(--gray-300); }
+    .rm-dot { position: absolute; left: -32px; top: 4px; width: 22px; height: 22px; border-radius: 50%; border: 3px solid; display: flex; align-items: center; justify-content: center; background: var(--white); }
+    .rm-dot--done { border-color: var(--positive); background: var(--positive); }
+    .rm-dot--done::after { content: ""; width: 8px; height: 8px; background: #fff; border-radius: 50%; }
+    .rm-dot--next { border-color: var(--brand); }
+    .rm-dot--next::after { content: ""; width: 8px; height: 8px; background: var(--brand); border-radius: 50%; animation: pulse 2s infinite; }
+    .rm-dot--future { border-color: var(--gray-300); }
     .rm-content h4 { font-size: 16px; font-weight: 700; color: var(--gray-900); margin-bottom: 6px; }
-    .rm-badge { font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 4px; text-transform: uppercase; letter-spacing: 0.06em; vertical-align: middle; margin-left: 8px; }
+    .rm-content p { font-size: 14px; color: var(--gray-600); line-height: 1.6; margin-bottom: 10px; }
+    .rm-badge { font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 4px; margin-left: 8px; }
     .rm-badge--live { background: var(--positive-bg); color: var(--positive); }
     .rm-badge--next { background: var(--brand-light); color: var(--brand); }
-    .rm-content p { font-size: 14px; color: var(--gray-600); line-height: 1.6; margin-bottom: 10px; }
     .rm-deliverables { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 8px; }
-    .rm-deliverable { font-size: 11px; font-weight: 500; color: var(--gray-600); background: var(--gray-100); border: 1px solid var(--gray-200); padding: 3px 10px; border-radius: 6px; }
-    .rm-duration { font-size: 12px; color: var(--gray-400); display: flex; align-items: center; gap: 6px; margin-top: 8px; }
-    .rm-duration i { width: 14px; height: 14px; }
+    .rm-deliverable { font-size: 11px; font-weight: 500; padding: 3px 10px; border-radius: 6px; background: var(--gray-100); color: var(--gray-600); border: 1px solid var(--gray-200); }
+    .rm-duration { font-size: 12px; color: var(--gray-400); display: flex; align-items: center; gap: 4px; }
 
-    /* ═══ CTA ═══ */
-    .cta-section { padding: 100px 24px; text-align: center; }
+    /* ═══ ROI CALLOUT ═══ */
+    .roi-callout { background: linear-gradient(135deg, var(--brand-light) 0%, rgba(0,200,255,0.04) 100%); border: 1px solid var(--brand-border); border-radius: var(--radius-lg); padding: 40px; margin-top: 48px; }
+    .roi-callout h3 { font-size: 20px; font-weight: 800; color: var(--gray-900); margin-bottom: 12px; }
+    .roi-callout p { font-size: 15px; color: var(--gray-600); line-height: 1.7; max-width: 700px; }
+    .roi-points { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 24px; }
+    .roi-point { text-align: center; }
+    .roi-point-val { font-size: 28px; font-weight: 800; color: var(--brand); }
+    .roi-point-lbl { font-size: 12px; color: var(--gray-500); margin-top: 4px; }
 
     /* ═══ FOOTER ═══ */
-    .footer { padding: 20px 24px; text-align: center; background: var(--navy-deep); border-top: 1px solid rgba(255,255,255,0.06); }
-    .footer p { font-size: 12px; color: rgba(255,255,255,0.4); }
+    .footer { padding: 24px; text-align: center; font-size: 12px; color: var(--gray-400); border-top: 1px solid var(--gray-200); }
 
     /* ═══ ANIMATIONS ═══ */
     .fade-up { opacity: 0; transform: translateY(20px); transition: opacity 0.5s var(--ease-out), transform 0.5s var(--ease-out); }
     .fade-up.visible { opacity: 1; transform: translateY(0); }
 
     /* ═══ RESPONSIVE ═══ */
-    @media (max-width: 1024px) {
+    @media (max-width: 900px) {
       .kpi-row { grid-template-columns: repeat(3, 1fr); }
-      .dash-split { grid-template-columns: 1fr; }
       .surface-grid { grid-template-columns: repeat(3, 1fr); }
       .disc-flow { grid-template-columns: repeat(2, 1fr); }
       .coo-grid { grid-template-columns: 1fr; }
-      .labor-grid { grid-template-columns: 1fr; }
       .cost-split { grid-template-columns: 1fr; }
+      .labor-grid { grid-template-columns: 1fr; }
+      .drill-summary { grid-template-columns: repeat(2, 1fr); }
+      .project-card { grid-template-columns: 1fr; gap: 8px; padding: 16px; }
+      .project-card-header { display: none; }
+      .roi-points { grid-template-columns: 1fr; }
     }
-    @media (max-width: 768px) {
-      .section { padding: 60px 16px; }
+    @media (max-width: 600px) {
       .kpi-row { grid-template-columns: repeat(2, 1fr); }
       .surface-grid { grid-template-columns: repeat(2, 1fr); }
       .disc-flow { grid-template-columns: 1fr; }
-      .waterfall { grid-template-columns: repeat(4, 1fr); }
-      .drill-summary { grid-template-columns: repeat(2, 1fr); }
-      .drill-tabs { flex-wrap: wrap; }
-      .intro-inner { flex-direction: column; }
-      .intro-img { flex: none; width: 100%; max-width: 400px; }
-      .gantt-row { grid-template-columns: 80px 1fr; }
-      .risk-table { font-size: 11px; }
-      .risk-table th, .risk-table td { padding: 8px 4px; }
-    }
-    @media (max-width: 480px) {
-      .kpi-row { grid-template-columns: 1fr 1fr; }
-      .surface-grid { grid-template-columns: 1fr 1fr; }
-      .waterfall { grid-template-columns: repeat(3, 1fr); }
+      .waterfall { gap: 6px; }
     }
   </style>
 </head>
@@ -389,7 +368,7 @@
 <!-- ═══ PASSWORD GATE ═══ -->
 <div id="gate">
   <div class="gate-card">
-    <img src="/assets/logo_nav_light_2x.png" alt="CleanSpace Stay" />
+    <img src="/assets/logo_nav_dark_2x.png" alt="CleanSpace Stay" />
     <div class="gate-badge">Internal & Confidential</div>
     <div class="gate-title">Platform Overview</div>
     <div class="gate-sub">Enter the access code to continue</div>
@@ -401,89 +380,90 @@
 
 <!-- ═══ PAGE ═══ -->
 <div class="page">
-
-<!-- Topbar -->
-<div class="topbar">
+<nav class="topbar">
   <div class="topbar-inner">
     <img src="/assets/logo_nav_light_2x.png" alt="CleanSpace Stay" />
     <div class="topbar-badge">Internal & Confidential</div>
   </div>
-</div>
+</nav>
 
-<!-- ═══ 1. INTRO (Minimal) ═══ -->
-<section class="intro">
-  <div class="intro-inner">
-    <div class="intro-text">
-      <div class="tag">What Kelly Built</div>
-      <h1>Travel was the proof of concept.</h1>
-      <p>One workflow. One system. Full visibility from booking request through QuickBooks reconciliation. Kelly will walk you through the live platform — then show you what comes next.</p>
-      <a href="https://app.cleanspacestay.com" class="intro-link" target="_blank">
-        <i data-lucide="external-link" style="width:14px;height:14px;"></i> Live at app.cleanspacestay.com
-      </a>
-    </div>
-    <div class="intro-img">
+<!-- ═══ 1. HERO — Minimal intro + Big Screenshot ═══ -->
+<section class="hero">
+  <div class="hero-inner fade-up">
+    <div class="hero-tag">Travel module is live at app.cleanspacestay.com</div>
+    <h1>This is what we built for one workflow.<br>Here's how we scale it across the company.</h1>
+    <p>Kelly will walk you through the live travel platform — then show you the system we can build to give you real-time visibility into every project, every dollar, and every decision across the entire business.</p>
+    <div class="hero-screenshot">
       <img src="/assets/dashboard_real.png" alt="CleanSpace Stay — Live Platform" />
     </div>
   </div>
 </section>
 
-<!-- ═══ 2. THE QUESTION ═══ -->
-<section class="section section--gray">
+<!-- ═══ 2. THE CAPABILITY ═══ -->
+<section class="section section--white">
   <div class="section-inner">
-    <div class="question-box fade-up">
-      <div class="tag">The Real Question</div>
-      <h2>Can you answer this today?</h2>
+    <div class="capability-box fade-up">
+      <div class="tag">The Capability</div>
+      <h2>We can answer the one question that matters.</h2>
       <blockquote>At any moment — based on actual cost, committed cost, production progress, schedule, and risk — are we still on track to finish each project profitably?</blockquote>
-      <p class="gap-text">If the answer requires calling three people, opening four spreadsheets, and waiting until month-end — that's the gap. Travel proved the fix. The question is: what else gets the same treatment?</p>
+      <p class="body-text">Travel proved the pattern: take a process that lives in people's heads and spreadsheets, move it into a system the company owns, and suddenly you have real-time visibility where you had none. The same approach applies to every workflow where money and risk live — and we have the architecture to do it.</p>
     </div>
   </div>
 </section>
 
 <!-- ═══ 3. THE FULL SURFACE ═══ -->
-<section class="section section--white">
+<section class="section section--gray">
   <div class="section-inner">
     <div class="fade-up">
       <div class="tag">The Full Picture</div>
-      <h2>Travel is one of twelve places where money and risk live.</h2>
-      <p class="desc">Every box below is a workflow that currently depends on people, spreadsheets, or tribal knowledge. Travel was the first one we moved into a system. The rest follow the same playbook.</p>
+      <h2>Travel is one of twelve places where this pattern applies.</h2>
+      <p class="desc">Every box below is a workflow that currently depends on people, spreadsheets, or tribal knowledge. We built Travel first. The rest follow the same playbook — and each one adds visibility to the CEO dashboard.</p>
     </div>
     <div class="surface-grid fade-up">
-      <div class="surface-item active"><div class="surface-icon"><i data-lucide="plane" style="width:20px;height:20px;"></i></div><div class="name">Travel</div></div>
-      <div class="surface-item"><div class="surface-icon"><i data-lucide="handshake" style="width:20px;height:20px;"></i></div><div class="name">Sales</div></div>
-      <div class="surface-item"><div class="surface-icon"><i data-lucide="calculator" style="width:20px;height:20px;"></i></div><div class="name">Estimating</div></div>
-      <div class="surface-item"><div class="surface-icon"><i data-lucide="package" style="width:20px;height:20px;"></i></div><div class="name">Procurement</div></div>
-      <div class="surface-item"><div class="surface-icon"><i data-lucide="factory" style="width:20px;height:20px;"></i></div><div class="name">Manufacturing</div></div>
-      <div class="surface-item"><div class="surface-icon"><i data-lucide="hard-hat" style="width:20px;height:20px;"></i></div><div class="name">Construction</div></div>
-      <div class="surface-item"><div class="surface-icon"><i data-lucide="users" style="width:20px;height:20px;"></i></div><div class="name">Field Labor</div></div>
-      <div class="surface-item"><div class="surface-icon"><i data-lucide="building-2" style="width:20px;height:20px;"></i></div><div class="name">Subcontractors</div></div>
-      <div class="surface-item"><div class="surface-icon"><i data-lucide="receipt" style="width:20px;height:20px;"></i></div><div class="name">AP / AR</div></div>
-      <div class="surface-item"><div class="surface-icon"><i data-lucide="bar-chart-3" style="width:20px;height:20px;"></i></div><div class="name">Finance</div></div>
-      <div class="surface-item"><div class="surface-icon"><i data-lucide="ruler" style="width:20px;height:20px;"></i></div><div class="name">Engineering</div></div>
-      <div class="surface-item"><div class="surface-icon"><i data-lucide="pen-tool" style="width:20px;height:20px;"></i></div><div class="name">Design</div></div>
+      <div class="surface-item active"><div class="surface-icon"><i data-lucide="plane"></i></div><div class="name">Travel</div></div>
+      <div class="surface-item"><div class="surface-icon"><i data-lucide="handshake"></i></div><div class="name">Sales</div></div>
+      <div class="surface-item"><div class="surface-icon"><i data-lucide="calculator"></i></div><div class="name">Estimating</div></div>
+      <div class="surface-item"><div class="surface-icon"><i data-lucide="shopping-cart"></i></div><div class="name">Procurement</div></div>
+      <div class="surface-item"><div class="surface-icon"><i data-lucide="factory"></i></div><div class="name">Manufacturing</div></div>
+      <div class="surface-item"><div class="surface-icon"><i data-lucide="hard-hat"></i></div><div class="name">Construction</div></div>
+      <div class="surface-item"><div class="surface-icon"><i data-lucide="users"></i></div><div class="name">Field Labor</div></div>
+      <div class="surface-item"><div class="surface-icon"><i data-lucide="building-2"></i></div><div class="name">Subcontractors</div></div>
+      <div class="surface-item"><div class="surface-icon"><i data-lucide="receipt"></i></div><div class="name">AP / AR</div></div>
+      <div class="surface-item"><div class="surface-icon"><i data-lucide="bar-chart-3"></i></div><div class="name">Finance</div></div>
+      <div class="surface-item"><div class="surface-icon"><i data-lucide="drafting-compass"></i></div><div class="name">Engineering</div></div>
+      <div class="surface-item"><div class="surface-icon"><i data-lucide="palette"></i></div><div class="name">Design</div></div>
     </div>
   </div>
 </section>
 
 <!-- ═══ 4. DISCOVERY ═══ -->
-<section class="section section--gray">
+<section class="section section--white">
   <div class="section-inner">
     <div class="fade-up">
-      <div class="tag">How We Get There</div>
+      <div class="tag">Responsible Rollout</div>
       <h2>We don't guess. We ask.</h2>
-      <p class="desc">Before building anything else, leadership completes an adaptive discovery process. The system interviews you — one question at a time — and generates the exact blueprint for your company.</p>
+      <p class="desc">Before building anything else, leadership completes an adaptive discovery process. The system interviews you — one question at a time — and generates the exact blueprint configured to how your company actually operates.</p>
     </div>
     <div class="disc-flow fade-up">
       <div class="disc-step"><div class="disc-num">1</div><h4>Discovery</h4><p>Adaptive interview across 20 business areas — feels like TurboTax</p></div>
       <div class="disc-step"><div class="disc-num">2</div><h4>Blueprint</h4><p>Auto-generates BRD, PRD, workflows, roles & permissions</p></div>
-      <div class="disc-step"><div class="disc-num">3</div><h4>Architecture</h4><p>Data model, KPIs, cost codes, AI guardrails</p></div>
-      <div class="disc-step"><div class="disc-num">4</div><h4>Build</h4><p>Sprint backlog, MVP scope, delivery — configured to your company</p></div>
+      <div class="disc-step"><div class="disc-num">3</div><h4>Architecture</h4><p>Data model, KPIs, cost codes, AI guardrails — all configured to you</p></div>
+      <div class="disc-step"><div class="disc-num">4</div><h4>Build</h4><p>Sprint backlog, MVP scope, delivery — ROI at every milestone</p></div>
     </div>
-    <p class="fade-up" style="text-align:center; color:var(--gray-500); font-size:14px; margin-top:32px; max-width:600px; margin-left:auto; margin-right:auto;">Nothing gets built on assumptions. The platform is configured to how your company actually operates — not how a generic software vendor thinks you should.</p>
+    <div class="roi-callout fade-up">
+      <h3>Each phase delivers standalone value.</h3>
+      <p>This isn't a two-year project that only pays off at the end. Every milestone produces a working system that saves time, recovers margin, or eliminates risk — starting from week one of the build.</p>
+      <div class="roi-points">
+        <div class="roi-point"><div class="roi-point-val">4–6 wks</div><div class="roi-point-lbl">Discovery to Blueprint</div></div>
+        <div class="roi-point"><div class="roi-point-val">8–12 wks</div><div class="roi-point-lbl">Core Platform + Budget</div></div>
+        <div class="roi-point"><div class="roi-point-val">Every Phase</div><div class="roi-point-lbl">Delivers working value</div></div>
+      </div>
+    </div>
   </div>
 </section>
 
-<!-- ═══ 5. CEO DASHBOARD (LIGHT) ═══ -->
-<section class="section section--white">
+<!-- ═══ 5. CEO DASHBOARD ═══ -->
+<section class="section section--gray">
   <div class="section-inner">
     <div class="fade-up">
       <div class="tag">The Destination</div>
@@ -497,7 +477,6 @@
           <div class="dash-user"><span>Glenn</span><div class="dash-avatar">G</div></div>
         </div>
         <div class="dash-body">
-          <!-- KPIs -->
           <div class="kpi-row">
             <div class="kpi-card blue"><div class="kpi-val">$42.3M</div><div class="kpi-lbl">Active Backlog</div><div class="kpi-trend up">+12% YoY</div></div>
             <div class="kpi-card green"><div class="kpi-val">28.4%</div><div class="kpi-lbl">Forecast Margin</div><div class="kpi-trend up">+1.2pp</div></div>
@@ -507,32 +486,60 @@
             <div class="kpi-card amber"><div class="kpi-val">$1.4M</div><div class="kpi-lbl">AR > 60 Days</div><div class="kpi-trend down">+$200K</div></div>
           </div>
 
-          <!-- Split: Table + Alerts -->
-          <div class="dash-split">
-            <div class="dash-panel">
-              <div class="dash-panel-title"><i data-lucide="folder-open"></i> Active Projects — Cost to Complete</div>
-              <table class="proj-table">
-                <thead><tr><th>Project</th><th>Contract</th><th>Actual</th><th>ETC</th><th>Forecast</th><th>Margin</th><th>Health</th></tr></thead>
-                <tbody>
-                  <tr class="clickable" data-project="atl"><td class="proj-name">ATL Data Center</td><td>$8.2M</td><td>$3.1M</td><td>$4.4M</td><td>$7.5M</td><td class="margin-pos">8.5%</td><td><div class="health-bar"><div class="health-bar-fill" style="width:85%;background:var(--positive);"></div></div></td></tr>
-                  <tr class="clickable selected" data-project="mia"><td class="proj-name">MIA Tower Fit-out</td><td>$12.6M</td><td>$7.8M</td><td>$5.1M</td><td>$12.9M</td><td class="margin-neg">-2.4%</td><td><div class="health-bar"><div class="health-bar-fill" style="width:35%;background:var(--danger);"></div></div></td></tr>
-                  <tr class="clickable" data-project="dfw"><td class="proj-name">DFW Campus Ph.2</td><td>$6.4M</td><td>$1.2M</td><td>$4.8M</td><td>$6.0M</td><td class="margin-pos">6.3%</td><td><div class="health-bar"><div class="health-bar-fill" style="width:70%;background:var(--positive);"></div></div></td></tr>
-                  <tr class="clickable" data-project="ord"><td class="proj-name">ORD Warehouse</td><td>$4.8M</td><td>$2.9M</td><td>$2.1M</td><td>$5.0M</td><td class="margin-neg">-4.2%</td><td><div class="health-bar"><div class="health-bar-fill" style="width:30%;background:var(--danger);"></div></div></td></tr>
-                  <tr class="clickable" data-project="sea"><td class="proj-name">SEA Office Reno</td><td>$3.1M</td><td>$0.4M</td><td>$2.4M</td><td>$2.8M</td><td class="margin-pos">9.7%</td><td><div class="health-bar"><div class="health-bar-fill" style="width:90%;background:var(--positive);"></div></div></td></tr>
-                </tbody>
-              </table>
-              <div class="click-hint"><i data-lucide="mouse-pointer-click"></i> Click any project row to drill down into full detail</div>
+          <!-- Project Cards -->
+          <div style="font-size:13px; font-weight:700; color:var(--gray-700); margin-bottom:8px; display:flex; align-items:center; gap:8px;"><i data-lucide="folder-open" style="width:16px;height:16px; color:var(--gray-400);"></i> Active Projects — Click any project to see full detail</div>
+          <div class="project-card-header">
+            <span>Project</span><span>Contract</span><span>Actual</span><span>ETC</span><span>Forecast</span><span>Margin</span>
+          </div>
+          <div class="project-cards" id="project-cards">
+            <div class="project-card pulse-hint" data-project="mia">
+              <div><div class="proj-name">MIA Tower Fit-out</div><div class="proj-meta">Meridian Dev Group</div></div>
+              <div class="proj-val">$12.6M</div>
+              <div class="proj-val">$7.8M</div>
+              <div class="proj-val">$5.1M</div>
+              <div class="proj-val">$12.9M</div>
+              <div class="margin-neg">-2.4%</div>
+              <div class="expand-icon"><i data-lucide="chevron-right" style="width:16px;height:16px;"></i></div>
             </div>
-            <div class="dash-panel">
-              <div class="dash-panel-title"><i data-lucide="alert-triangle"></i> Attention Required</div>
-              <div class="alert-item alert-item--red"><div class="alert-icon alert-icon--red"><i data-lucide="alert-circle" style="width:12px;height:12px;"></i></div><div class="alert-text"><strong>MIA Tower over budget</strong><span>ETC exceeds contract by $300K — labor & materials</span></div></div>
-              <div class="alert-item alert-item--amber"><div class="alert-icon alert-icon--amber"><i data-lucide="clock" style="width:12px;height:12px;"></i></div><div class="alert-text"><strong>ORD schedule slip</strong><span>2 weeks behind — labor shortage on electrical</span></div></div>
-              <div class="alert-item alert-item--green"><div class="alert-icon alert-icon--green"><i data-lucide="dollar-sign" style="width:12px;height:12px;"></i></div><div class="alert-text"><strong>AR aging: Apex Corp</strong><span>$480K outstanding 72 days — escalation recommended</span></div></div>
-              <div class="alert-item alert-item--green"><div class="alert-icon alert-icon--green"><i data-lucide="check" style="width:12px;height:12px;"></i></div><div class="alert-text"><strong>DFW change order approved</strong><span>+$180K scope — margin preserved at 6.3%</span></div></div>
+            <div class="project-card" data-project="atl">
+              <div><div class="proj-name">ATL Data Center</div><div class="proj-meta">Apex Technologies</div></div>
+              <div class="proj-val">$8.2M</div>
+              <div class="proj-val">$3.1M</div>
+              <div class="proj-val">$4.4M</div>
+              <div class="proj-val">$7.5M</div>
+              <div class="margin-pos">8.5%</div>
+              <div class="expand-icon"><i data-lucide="chevron-right" style="width:16px;height:16px;"></i></div>
+            </div>
+            <div class="project-card" data-project="dfw">
+              <div><div class="proj-name">DFW Campus Ph.2</div><div class="proj-meta">Lone Star Properties</div></div>
+              <div class="proj-val">$6.4M</div>
+              <div class="proj-val">$1.2M</div>
+              <div class="proj-val">$4.8M</div>
+              <div class="proj-val">$6.0M</div>
+              <div class="margin-pos">6.3%</div>
+              <div class="expand-icon"><i data-lucide="chevron-right" style="width:16px;height:16px;"></i></div>
+            </div>
+            <div class="project-card" data-project="ord">
+              <div><div class="proj-name">ORD Warehouse</div><div class="proj-meta">Midwest Logistics</div></div>
+              <div class="proj-val">$4.8M</div>
+              <div class="proj-val">$2.9M</div>
+              <div class="proj-val">$2.1M</div>
+              <div class="proj-val">$5.0M</div>
+              <div class="margin-neg">-4.2%</div>
+              <div class="expand-icon"><i data-lucide="chevron-right" style="width:16px;height:16px;"></i></div>
+            </div>
+            <div class="project-card" data-project="sea">
+              <div><div class="proj-name">SEA Office Reno</div><div class="proj-meta">Pacific Northwest Corp</div></div>
+              <div class="proj-val">$3.1M</div>
+              <div class="proj-val">$0.4M</div>
+              <div class="proj-val">$2.4M</div>
+              <div class="proj-val">$2.8M</div>
+              <div class="margin-pos">9.7%</div>
+              <div class="expand-icon"><i data-lucide="chevron-right" style="width:16px;height:16px;"></i></div>
             </div>
           </div>
 
-          <!-- ═══ DRILL-DOWN (Pre-expanded) ═══ -->
+          <!-- Drill-Down Panel -->
           <div class="drill-section" id="drill-panel">
             <div class="drill-header">
               <div>
@@ -589,7 +596,6 @@
                   <div class="ds-card"><div class="ds-val amber">$300K</div><div class="ds-lbl">Over Budget</div></div>
                 </div>
               </div>
-
               <!-- SCHEDULE TAB -->
               <div class="drill-tab-content" id="tab-schedule">
                 <div class="gantt">
@@ -614,7 +620,6 @@
                   <div class="ds-card"><div class="ds-val green">Mar 2026</div><div class="ds-lbl">Target Completion</div></div>
                 </div>
               </div>
-
               <!-- LABOR TAB -->
               <div class="drill-tab-content" id="tab-labor">
                 <div class="labor-grid">
@@ -629,7 +634,7 @@
                   </div>
                   <div class="labor-card">
                     <div class="labor-card-title">Crew Utilization This Week</div>
-                    <div class="labor-row"><span class="labor-trade">Total Headcount</span><span class="labor-util" style="color:var(--brand);">42</span></div>
+                    <div class="labor-row"><span class="labor-trade">Total Headcount</span><span class="labor-util">42</span></div>
                     <div class="labor-row"><span class="labor-trade">Avg. Utilization</span><span class="labor-util" style="color:var(--positive);">91%</span></div>
                     <div class="labor-row"><span class="labor-trade">Overtime Hours</span><span class="labor-util" style="color:var(--danger);">186 hrs</span></div>
                     <div class="labor-row"><span class="labor-trade">Overtime Cost (week)</span><span class="labor-util" style="color:var(--danger);">$14,200</span></div>
@@ -638,7 +643,6 @@
                   </div>
                 </div>
               </div>
-
               <!-- RISK TAB -->
               <div class="drill-tab-content" id="tab-risk">
                 <table class="risk-table">
@@ -652,7 +656,6 @@
                   </tbody>
                 </table>
               </div>
-
               <!-- CHANGE ORDERS TAB -->
               <div class="drill-tab-content" id="tab-changes">
                 <div class="cost-panel" style="background:var(--gray-50); border:1px solid var(--gray-200); border-radius:var(--radius); padding:20px;">
@@ -679,47 +682,7 @@
   </div>
 </section>
 
-<!-- ═══ 6. COO VIEW ═══ -->
-<section class="section section--gray">
-  <div class="section-inner">
-    <div class="fade-up">
-      <div class="tag">Operational Layer</div>
-      <h2>What the COO sees.</h2>
-      <p class="desc">Resource allocation, approval queues, and vendor performance — across every active project.</p>
-    </div>
-    <div class="coo-grid fade-up">
-      <div class="coo-card">
-        <div class="coo-card-title"><i data-lucide="users" style="width:18px;height:18px;"></i> Resource Allocation</div>
-        <div class="coo-row"><span class="coo-label">Electricians</span><span class="coo-value">42 / 38 needed</span></div>
-        <div class="coo-row"><span class="coo-label">Plumbers</span><span class="coo-value" style="color:var(--danger);">18 / 20 needed</span></div>
-        <div class="coo-row"><span class="coo-label">HVAC</span><span class="coo-value">12 / 12 needed</span></div>
-        <div class="coo-row"><span class="coo-label">Iron Workers</span><span class="coo-value" style="color:var(--danger);">24 / 28 needed</span></div>
-        <div class="coo-row"><span class="coo-label">Carpenters</span><span class="coo-value">16 / 14 needed</span></div>
-        <div class="coo-row"><span class="coo-label">Laborers</span><span class="coo-value">56 / 52 needed</span></div>
-      </div>
-      <div class="coo-card">
-        <div class="coo-card-title"><i data-lucide="check-circle" style="width:18px;height:18px;"></i> Approval Queue</div>
-        <div class="coo-row"><span class="coo-label">POs awaiting approval</span><span class="coo-value" style="color:var(--warn);">4</span></div>
-        <div class="coo-row"><span class="coo-label">Change orders pending</span><span class="coo-value" style="color:var(--warn);">2</span></div>
-        <div class="coo-row"><span class="coo-label">Invoices to release</span><span class="coo-value">7</span></div>
-        <div class="coo-row"><span class="coo-label">RFIs open > 5 days</span><span class="coo-value" style="color:var(--danger);">3</span></div>
-        <div class="coo-row"><span class="coo-label">Submittals pending</span><span class="coo-value">5</span></div>
-        <div class="coo-row"><span class="coo-label">Avg. approval time</span><span class="coo-value" style="color:var(--positive);">1.8 days</span></div>
-      </div>
-      <div class="coo-card">
-        <div class="coo-card-title"><i data-lucide="truck" style="width:18px;height:18px;"></i> Vendor Scorecard</div>
-        <div class="coo-row"><span class="coo-label">Apex Electrical</span><div class="coo-bar"><div class="coo-bar-fill" style="width:92%; background:var(--positive);"></div></div></div>
-        <div class="coo-row"><span class="coo-label">Metro Plumbing</span><div class="coo-bar"><div class="coo-bar-fill" style="width:85%; background:var(--positive);"></div></div></div>
-        <div class="coo-row"><span class="coo-label">SteelCo Fabrication</span><div class="coo-bar"><div class="coo-bar-fill" style="width:78%; background:var(--brand);"></div></div></div>
-        <div class="coo-row"><span class="coo-label">CoolAir HVAC</span><div class="coo-bar"><div class="coo-bar-fill" style="width:65%; background:var(--warn);"></div></div></div>
-        <div class="coo-row"><span class="coo-label">FastTrack Logistics</span><div class="coo-bar"><div class="coo-bar-fill" style="width:88%; background:var(--positive);"></div></div></div>
-        <div class="coo-row"><span class="coo-label">ProFinish Interiors</span><div class="coo-bar"><div class="coo-bar-fill" style="width:71%; background:var(--brand);"></div></div></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══ 7. AI LAYER ═══ -->
+<!-- ═══ 6. AI LAYER ═══ -->
 <section class="section section--white">
   <div class="section-inner">
     <div class="fade-up">
@@ -769,20 +732,20 @@
   </div>
 </section>
 
-<!-- ═══ 8. ROADMAP ═══ -->
+<!-- ═══ 7. ROADMAP ═══ -->
 <section class="section section--gray">
   <div class="section-inner">
     <div class="fade-up">
       <div class="tag">The Roadmap</div>
-      <h2>Travel is live. Here's what comes next.</h2>
-      <p class="desc">Each milestone builds on the last. The Discovery Engine defines the exact scope before anything else gets built.</p>
+      <h2>A logical rollout that delivers value at every stage.</h2>
+      <p class="desc">Each milestone builds on the last and produces a working system. The Discovery Engine defines the exact scope before anything else gets built — no assumptions, no wasted effort.</p>
     </div>
     <div class="roadmap-timeline fade-up">
       <div class="rm-item">
         <div class="rm-dot rm-dot--done"></div>
         <div class="rm-content">
           <h4>Crew Travel & Spend <span class="rm-badge rm-badge--live">Live</span></h4>
-          <p>Bookings, approvals, reconciliation, mobile app — fully operational today.</p>
+          <p>Bookings, approvals, reconciliation, mobile app — fully operational today. Proving the pattern works.</p>
           <div class="rm-deliverables">
             <span class="rm-deliverable">Booking Engine</span>
             <span class="rm-deliverable">Approval Workflow</span>
@@ -796,7 +759,7 @@
         <div class="rm-dot rm-dot--next"></div>
         <div class="rm-content">
           <h4>Enterprise Discovery Engine <span class="rm-badge rm-badge--next">Next</span></h4>
-          <p>Adaptive interview across 20 business areas. Generates the full blueprint — BRD, PRD, workflow maps, role matrix, KPI requirements, AI guardrails.</p>
+          <p>Adaptive interview across 20 business areas. Generates the full blueprint — configured to how your company actually operates.</p>
           <div class="rm-deliverables">
             <span class="rm-deliverable">Adaptive Questionnaire</span>
             <span class="rm-deliverable">Auto-Generated BRD</span>
@@ -843,7 +806,7 @@
         <div class="rm-dot rm-dot--future"></div>
         <div class="rm-content">
           <h4>AI Router & Guardrails</h4>
-          <p>Provider-agnostic AI that summarizes daily reports, drafts RFIs and change orders, explains cost-to-complete changes, flags over-budget categories, and generates the executive weekly report.</p>
+          <p>Provider-agnostic AI that explains cost changes, flags risk, drafts documents, and generates the executive weekly report — with human-only approval on every financial action.</p>
           <div class="rm-deliverables">
             <span class="rm-deliverable">Context Retrieval</span>
             <span class="rm-deliverable">Cost Explanation</span>
@@ -859,7 +822,7 @@
         <div class="rm-dot rm-dot--future"></div>
         <div class="rm-content">
           <h4>Mobile Field App</h4>
-          <p>Daily reports, photos, labor tracking, punch lists, inspections. Offline-friendly, task-first design.</p>
+          <p>Daily reports, photos, labor tracking, punch lists, inspections. Offline-friendly, task-first design for the field.</p>
           <div class="rm-deliverables">
             <span class="rm-deliverable">Daily Reports</span>
             <span class="rm-deliverable">Photo Capture</span>
@@ -875,7 +838,7 @@
         <div class="rm-dot rm-dot--future"></div>
         <div class="rm-content">
           <h4>SaaS Readiness</h4>
-          <p>Multi-tenant onboarding, white labeling, templates, billing. The platform becomes a product for similar companies.</p>
+          <p>Multi-tenant onboarding, white labeling, templates, billing. The platform becomes a product you can deploy across every company in the portfolio.</p>
           <div class="rm-deliverables">
             <span class="rm-deliverable">Multi-Tenant</span>
             <span class="rm-deliverable">White Labeling</span>
@@ -890,12 +853,12 @@
   </div>
 </section>
 
-<!-- ═══ 9. CTA ═══ -->
-<section class="section section--dark cta-section">
+<!-- ═══ 8. CTA ═══ -->
+<section class="section section--dark">
   <div class="section-inner fade-up" style="text-align:center;">
     <div class="tag tag--light">The Outcome</div>
-    <h2 class="light">One system. Every project.<br>Every dollar. Every answer.</h2>
-    <p class="desc desc--light" style="margin:24px auto 0;">Travel proved the pattern. The Discovery Engine defines the scope. BuildOS delivers the visibility — from bid to closeout, across every function, in real time.</p>
+    <h2 class="light">One platform. A repeatable playbook.<br>ROI at every milestone.</h2>
+    <p class="desc desc--light" style="margin:24px auto 0;">Travel proved the pattern works. The Discovery Engine ensures nothing gets built on assumptions. Every phase delivers a working system that saves time, recovers margin, or eliminates risk — and the whole thing compounds as it scales across the company.</p>
   </div>
 </section>
 
@@ -934,18 +897,38 @@ document.querySelectorAll('.drill-tab').forEach(tab => {
   });
 });
 
-// Project row click
-document.querySelectorAll('.proj-table tr.clickable').forEach(row => {
-  row.addEventListener('click', () => {
-    document.querySelectorAll('.proj-table tr.clickable').forEach(r => r.classList.remove('selected'));
-    row.classList.add('selected');
+// Project card click → expand drill-down
+document.querySelectorAll('.project-card').forEach(card => {
+  card.addEventListener('click', () => {
+    // Toggle expanded state
+    const wasExpanded = card.classList.contains('expanded');
+    document.querySelectorAll('.project-card').forEach(c => c.classList.remove('expanded'));
     const panel = document.getElementById('drill-panel');
-    panel.style.animation = 'none';
-    void panel.offsetWidth;
-    panel.style.animation = 'slideDown 0.3s var(--ease-out)';
-    panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    
+    if (wasExpanded) {
+      panel.classList.remove('open');
+    } else {
+      card.classList.add('expanded');
+      card.classList.remove('pulse-hint');
+      panel.classList.add('open');
+      panel.style.animation = 'none';
+      void panel.offsetWidth;
+      panel.style.animation = 'slideDown 0.35s var(--ease-out)';
+      // Scroll drill-down into view
+      setTimeout(() => {
+        panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }, 100);
+    }
   });
 });
+
+// Auto-expand first card after 3 seconds to show the drill-down
+setTimeout(() => {
+  const firstCard = document.querySelector('.project-card.pulse-hint');
+  if (firstCard && !firstCard.classList.contains('expanded')) {
+    firstCard.click();
+  }
+}, 3000);
 
 // Lucide icons
 lucide.createIcons();
