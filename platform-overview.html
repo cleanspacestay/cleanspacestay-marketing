@@ -362,26 +362,87 @@
     .fade-up { opacity: 0; transform: translateY(20px); transition: opacity 0.5s var(--ease-out), transform 0.5s var(--ease-out); }
     .fade-up.visible { opacity: 1; transform: translateY(0); }
 
+    /* ═══ APP STORE BADGES ═══ */
+    .app-badges { display: flex; gap: 16px; justify-content: center; margin-top: 32px; flex-wrap: wrap; }
+    .app-badges a { display: inline-block; transition: transform 0.16s var(--ease-out), opacity 0.2s; }
+    .app-badges a:hover { transform: scale(1.05); }
+    .app-badges a:active { transform: scale(0.97); }
+    .app-badges img { height: 48px; width: auto; }
+    .app-badges-label { font-size: 13px; color: rgba(255,255,255,0.5); margin-top: 16px; text-align: center; }
+
     /* ═══ RESPONSIVE ═══ */
     @media (max-width: 900px) {
-      .dash-frame { grid-template-columns: 1fr; }
+      .section { padding: 56px 20px; }
+      .dash-frame { grid-template-columns: 1fr; min-height: auto; }
       .dash-sidebar { display: none; }
-      .kpi-row { grid-template-columns: repeat(3, 1fr); }
-      .surface-grid { grid-template-columns: repeat(3, 1fr); }
-      .disc-flow { grid-template-columns: repeat(2, 1fr); }
+      .dash-header { padding: 12px 16px; }
+      .dash-body { padding: 16px; }
+      .kpi-row { grid-template-columns: repeat(3, 1fr); gap: 8px; }
+      .kpi-val { font-size: 16px; }
+      .kpi-lbl { font-size: 10px; }
+      .surface-grid { grid-template-columns: repeat(3, 1fr); gap: 12px; }
+      .disc-flow { grid-template-columns: repeat(2, 1fr); gap: 12px; }
       .coo-grid { grid-template-columns: 1fr; }
       .cost-split { grid-template-columns: 1fr; }
       .labor-grid { grid-template-columns: 1fr; }
       .drill-summary { grid-template-columns: repeat(2, 1fr); }
       .project-card { grid-template-columns: 1fr; gap: 8px; padding: 16px; }
+      .project-card .proj-val { display: inline-block; }
+      .project-card .proj-val::before { font-size: 10px; color: var(--gray-400); display: block; text-transform: uppercase; letter-spacing: 0.06em; }
       .project-card-header { display: none; }
       .roi-points { grid-template-columns: 1fr; }
+      .drill-tabs { flex-wrap: wrap; gap: 6px; }
+      .drill-tabs::after { display: none; }
+      .drill-tab { padding: 8px 14px; font-size: 12px; }
+      .drill-header { padding: 16px; }
+      .drill-body { padding: 16px; }
+      .drill-subtitle { font-size: 12px; }
+      .waterfall { height: 120px; gap: 6px; }
+      .wf-bar-val { font-size: 9px; }
+      .wf-lbl { font-size: 9px; }
+      .gantt-label { width: 80px; font-size: 11px; }
+      .risk-table { font-size: 12px; }
+      .risk-table th, .risk-table td { padding: 8px 4px; }
+      .ai-body { padding: 16px; }
+      .ai-insight { padding: 16px; }
+      .capability-box blockquote { padding: 24px 20px; font-size: 16px; }
+      .hero h1 { font-size: 24px; }
+      .hero p { font-size: 15px; }
+      .roadmap-timeline { padding-left: 28px; }
+      .rm-content h4 { font-size: 15px; }
+      .rm-content p { font-size: 13px; }
+      .roi-callout { padding: 24px 20px; }
+      .roi-point-val { font-size: 24px; }
     }
     @media (max-width: 600px) {
+      .section { padding: 40px 16px; }
       .kpi-row { grid-template-columns: repeat(2, 1fr); }
-      .surface-grid { grid-template-columns: repeat(2, 1fr); }
+      .kpi-card { padding: 12px 10px; }
+      .kpi-val { font-size: 15px; }
+      .surface-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+      .surface-item { padding: 16px 12px; }
+      .surface-icon { width: 36px; height: 36px; }
+      .surface-item .name { font-size: 11px; }
       .disc-flow { grid-template-columns: 1fr; }
-      .waterfall { gap: 6px; }
+      .waterfall { height: 100px; gap: 4px; }
+      .wf-bar-val { font-size: 8px; }
+      .wf-lbl { font-size: 8px; }
+      .drill-summary { grid-template-columns: 1fr 1fr; gap: 8px; }
+      .ds-val { font-size: 18px; }
+      .gantt-label { width: 60px; font-size: 10px; }
+      .gantt-bar-track { height: 14px; }
+      .coo-card { padding: 16px; }
+      .hero { padding: 40px 16px 0; }
+      .hero-screenshot { border-radius: 8px; }
+      .topbar-inner { padding: 10px 16px; }
+      .topbar img { height: 24px; }
+      .gate-card { padding: 40px 24px; }
+      .app-badges img { height: 40px; }
+    }
+    @media (max-width: 380px) {
+      .kpi-row { grid-template-columns: 1fr; }
+      .drill-tabs { gap: 4px; }
+      .drill-tab { padding: 6px 10px; font-size: 11px; }
     }
   </style>
 </head>
@@ -904,6 +965,15 @@
     <div class="tag tag--light">The Outcome</div>
     <h2 class="light">One platform. A repeatable playbook.<br>ROI at every milestone.</h2>
     <p class="desc desc--light" style="margin:24px auto 0;">Travel proved the pattern works. The Discovery Engine ensures nothing gets built on assumptions. Every phase delivers a working system that saves time, recovers margin, or eliminates risk — and the whole thing compounds as it scales across the company.</p>
+    <div class="app-badges">
+      <a href="https://apps.apple.com/us/app/cleanspace-stay/id6779867377" target="_blank" rel="noopener">
+        <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg" alt="Download on the App Store" />
+      </a>
+      <a href="https://play.google.com/store/apps/details?id=com.cleanspacestay.app" target="_blank" rel="noopener">
+        <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="Get it on Google Play" />
+      </a>
+    </div>
+    <p class="app-badges-label">The travel module is live — download the mobile app today.</p>
   </div>
 </section>
 
