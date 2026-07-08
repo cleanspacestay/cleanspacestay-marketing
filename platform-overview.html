@@ -9,20 +9,42 @@
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon_32x32.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
   <script src="https://unpkg.com/lucide@latest"></script>
   <style>
     :root {
-      --brand: #1C38EA; --brand-light: #4F6AFF; --brand-bg: rgba(28,56,234,0.06); --brand-border: rgba(28,56,234,0.12);
-      --cyan: #00C8FF; --navy: #0A1A81; --navy-deep: #061058;
-      --positive: #10B981; --positive-bg: rgba(16,185,129,0.08); --warn: #F59E0B; --warn-bg: rgba(245,158,11,0.08);
-      --danger: #EF4444; --danger-bg: rgba(239,68,68,0.08);
-      --white: #ffffff; --gray-50: #F8FAFC; --gray-100: #F1F5F9; --gray-200: #E2E8F0; --gray-300: #CBD5E1;
-      --gray-400: #94A3B8; --gray-500: #64748B; --gray-600: #475569; --gray-700: #334155; --gray-800: #1E293B; --gray-900: #0F172A;
-      --dark-surface: #0B1437; --dark-card: #101D4F; --dark-border: rgba(255,255,255,0.08);
-      --text-on-dark: #ffffff; --text-on-dark-muted: #B8C8F0; --text-on-dark-dim: #7A8FCC;
-      --shadow-sm: 0 1px 3px rgba(0,0,0,0.06); --shadow-md: 0 4px 12px rgba(0,0,0,0.08); --shadow-lg: 0 12px 40px rgba(0,0,0,0.12);
-      --ease-out: cubic-bezier(0.23, 1, 0.32, 1); --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+      --brand: #1C38EA;
+      --brand-hover: #1530CC;
+      --brand-light: rgba(28,56,234,0.06);
+      --brand-medium: rgba(28,56,234,0.1);
+      --brand-border: rgba(28,56,234,0.15);
+      --cyan: #00C8FF;
+      --navy: #0A1A81;
+      --navy-deep: #061058;
+      --positive: #10B981;
+      --positive-bg: rgba(16,185,129,0.08);
+      --warn: #F59E0B;
+      --warn-bg: rgba(245,158,11,0.08);
+      --danger: #EF4444;
+      --danger-bg: rgba(239,68,68,0.08);
+      --white: #ffffff;
+      --gray-50: #F8FAFC;
+      --gray-100: #F1F5F9;
+      --gray-200: #E2E8F0;
+      --gray-300: #CBD5E1;
+      --gray-400: #94A3B8;
+      --gray-500: #64748B;
+      --gray-600: #475569;
+      --gray-700: #334155;
+      --gray-800: #1E293B;
+      --gray-900: #0F172A;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.06);
+      --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
+      --shadow-lg: 0 12px 40px rgba(0,0,0,0.1);
+      --shadow-xl: 0 20px 60px rgba(0,0,0,0.12);
+      --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+      --radius: 12px;
+      --radius-lg: 16px;
     }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     body { font-family: 'Inter', -apple-system, sans-serif; color: var(--gray-800); line-height: 1.6; background: var(--white); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
@@ -30,10 +52,10 @@
     /* ═══ GATE ═══ */
     #gate { position: fixed; inset: 0; z-index: 9999; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, var(--navy-deep) 0%, var(--navy) 100%); }
     #gate.hidden { display: none; }
-    .gate-card { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); border-radius: 24px; padding: 56px 48px; max-width: 420px; width: 90%; text-align: center; backdrop-filter: blur(24px); box-shadow: 0 32px 80px rgba(0,0,0,0.4); }
+    .gate-card { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); border-radius: 24px; padding: 56px 48px; max-width: 420px; width: 90%; text-align: center; backdrop-filter: blur(24px); }
     .gate-card img { height: 42px; margin-bottom: 28px; }
-    .gate-badge { font-family: 'Space Grotesk'; text-transform: uppercase; letter-spacing: 0.16em; font-size: 0.68rem; font-weight: 600; color: var(--cyan); margin-bottom: 12px; }
-    .gate-title { font-family: 'Space Grotesk'; color: #fff; font-size: 1.5rem; font-weight: 700; margin-bottom: 8px; }
+    .gate-badge { text-transform: uppercase; letter-spacing: 0.16em; font-size: 0.68rem; font-weight: 600; color: var(--cyan); margin-bottom: 12px; }
+    .gate-title { color: #fff; font-size: 1.5rem; font-weight: 700; margin-bottom: 8px; }
     .gate-sub { color: rgba(255,255,255,0.5); font-size: 0.88rem; margin-bottom: 32px; }
     #gate-input { width: 100%; padding: 16px 20px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.12); background: rgba(255,255,255,0.04); color: #fff; font-size: 0.95rem; font-family: 'Inter'; transition: all 0.2s var(--ease-out); }
     #gate-input:focus { outline: none; border-color: var(--cyan); box-shadow: 0 0 0 4px rgba(0,200,255,0.12); }
@@ -48,306 +70,317 @@
 
     /* ═══ TOPBAR ═══ */
     .topbar { position: sticky; top: 0; z-index: 900; background: rgba(255,255,255,0.97); backdrop-filter: blur(16px); border-bottom: 1px solid var(--gray-200); }
-    .topbar-inner { max-width: 1400px; margin: 0 auto; padding: 12px 32px; display: flex; align-items: center; gap: 14px; }
+    .topbar-inner { max-width: 1200px; margin: 0 auto; padding: 12px 24px; display: flex; align-items: center; gap: 14px; }
     .topbar img { height: 28px; }
-    .topbar-badge { font-family: 'Space Grotesk'; text-transform: uppercase; letter-spacing: 0.12em; font-size: 0.65rem; font-weight: 600; color: var(--brand); display: flex; align-items: center; gap: 6px; }
+    .topbar-badge { text-transform: uppercase; letter-spacing: 0.12em; font-size: 0.65rem; font-weight: 600; color: var(--brand); display: flex; align-items: center; gap: 6px; }
     .topbar-badge::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--brand); animation: pulse 2s infinite; }
     @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
 
     /* ═══ SECTIONS ═══ */
-    .section { padding: 100px 32px; position: relative; }
+    .section { padding: 80px 24px; }
     .section--white { background: var(--white); }
     .section--gray { background: var(--gray-50); }
-    .section--dark { background: linear-gradient(175deg, var(--navy-deep) 0%, #0D1F6B 50%, var(--navy) 100%); color: #fff; }
-    .section-inner { max-width: 1400px; margin: 0 auto; }
+    .section--dark { background: linear-gradient(175deg, var(--navy-deep) 0%, var(--navy) 100%); color: #fff; }
+    .section-inner { max-width: 1200px; margin: 0 auto; }
 
     /* ═══ TYPOGRAPHY ═══ */
-    .eyebrow { font-family: 'Space Grotesk'; text-transform: uppercase; letter-spacing: 0.14em; font-size: 0.72rem; font-weight: 600; color: var(--brand); margin-bottom: 16px; }
-    .eyebrow--light { color: var(--cyan); }
-    h2 { font-family: 'Space Grotesk'; font-size: clamp(2rem, 4.5vw, 3.2rem); font-weight: 800; line-height: 1.1; margin-bottom: 20px; color: var(--gray-900); }
+    .tag { display: inline-block; font-size: 13px; font-weight: 600; color: var(--brand); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 12px; }
+    .tag--light { color: var(--cyan); }
+    h2 { font-size: clamp(28px, 4vw, 40px); font-weight: 800; line-height: 1.15; color: var(--gray-900); margin-bottom: 16px; letter-spacing: -0.01em; }
     h2.light { color: #fff; }
-    .lead { font-size: 1.08rem; color: var(--gray-600); max-width: 720px; line-height: 1.75; }
-    .lead--light { color: var(--text-on-dark-muted); }
+    .desc { font-size: 16px; color: var(--gray-600); max-width: 640px; line-height: 1.7; }
+    .desc--light { color: rgba(255,255,255,0.7); }
 
-    /* ═══ HERO ═══ */
-    .hero { min-height: 80vh; display: flex; align-items: center; padding-top: 40px; background: linear-gradient(180deg, var(--gray-50) 0%, var(--white) 100%); }
-    .hero-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 60px; align-items: center; }
-    .hero-left h1 { font-family: 'Space Grotesk'; font-size: clamp(2.2rem, 5vw, 3.4rem); font-weight: 900; line-height: 1.08; color: var(--gray-900); margin-bottom: 24px; }
-    .hero-left h1 .accent { color: var(--brand); }
-    .hero-left .hero-sub { color: var(--gray-600); font-size: 1.05rem; line-height: 1.7; max-width: 500px; margin-bottom: 24px; }
-    .hero-context { background: var(--brand-bg); border: 1px solid var(--brand-border); border-radius: 14px; padding: 16px 20px; display: flex; align-items: center; gap: 12px; }
-    .hero-context i { flex: none; color: var(--brand); width: 20px; height: 20px; }
-    .hero-context span { color: var(--gray-600); font-size: 0.9rem; }
-    .hero-context a { color: var(--brand); text-decoration: none; font-weight: 600; }
-    .hero-right { position: relative; }
-    .hero-right img { width: 100%; height: auto; display: block; border-radius: 16px; box-shadow: 0 24px 80px rgba(28,56,234,0.15), 0 8px 24px rgba(0,0,0,0.08); border: 1px solid var(--gray-200); }
-    .proof-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 48px; }
-    .proof-card { background: var(--white); border: 1px solid var(--gray-200); border-radius: 14px; padding: 20px; text-align: center; box-shadow: var(--shadow-sm); }
-    .proof-card .val { font-family: 'Space Grotesk'; font-size: 1.6rem; font-weight: 700; color: var(--brand); }
-    .proof-card .lbl { font-size: 0.75rem; color: var(--gray-500); margin-top: 4px; }
+    /* ═══ INTRO ═══ */
+    .intro { padding: 60px 24px 40px; background: var(--white); }
+    .intro-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; gap: 40px; }
+    .intro-text { flex: 1; }
+    .intro-text h1 { font-size: clamp(24px, 3.5vw, 32px); font-weight: 800; color: var(--gray-900); line-height: 1.2; margin-bottom: 12px; }
+    .intro-text p { font-size: 16px; color: var(--gray-600); line-height: 1.7; max-width: 560px; }
+    .intro-link { display: inline-flex; align-items: center; gap: 8px; margin-top: 16px; font-size: 14px; font-weight: 600; color: var(--brand); text-decoration: none; }
+    .intro-link:hover { text-decoration: underline; }
+    .intro-img { flex: 0 0 320px; }
+    .intro-img img { width: 100%; border-radius: var(--radius); box-shadow: var(--shadow-lg); border: 1px solid var(--gray-200); }
 
     /* ═══ QUESTION ═══ */
-    .question-block { max-width: 860px; margin: 0 auto; text-align: center; }
-    .question-block blockquote { font-family: 'Space Grotesk'; font-size: clamp(1.15rem, 2.5vw, 1.5rem); font-weight: 600; color: var(--gray-900); line-height: 1.45; margin: 40px 0; padding: 40px; background: var(--white); border: 1px solid var(--gray-200); border-radius: 20px; position: relative; box-shadow: var(--shadow-md); }
-    .question-block blockquote::before { content: open-quote; position: absolute; top: 16px; left: 24px; font-size: 4rem; color: rgba(28,56,234,0.12); font-family: Georgia, serif; line-height: 1; }
-    .question-block .gap-text { color: var(--gray-600); font-size: 1rem; max-width: 600px; margin: 0 auto; line-height: 1.7; }
+    .question-box { max-width: 800px; margin: 0 auto; text-align: center; }
+    .question-box blockquote { font-size: clamp(18px, 2.5vw, 24px); font-weight: 600; color: var(--gray-900); line-height: 1.45; margin: 32px 0; padding: 40px; background: var(--white); border: 2px solid var(--brand-border); border-radius: var(--radius-lg); position: relative; box-shadow: var(--shadow-md); }
+    .question-box .gap-text { color: var(--gray-600); font-size: 15px; max-width: 560px; margin: 0 auto; line-height: 1.7; }
 
     /* ═══ SURFACE GRID ═══ */
-    .surface-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 48px; }
-    .surface-item { background: var(--white); border: 1px solid var(--gray-200); border-radius: 14px; padding: 24px 16px; text-align: center; transition: all 0.3s var(--ease-out); position: relative; overflow: hidden; box-shadow: var(--shadow-sm); }
-    .surface-item:hover { border-color: var(--brand-border); transform: translateY(-3px); box-shadow: var(--shadow-md); }
-    .surface-item.active { background: var(--brand-bg); border-color: var(--brand); }
-    .surface-item.active::after { content: "LIVE"; position: absolute; top: 8px; right: 8px; font-size: 0.55rem; font-weight: 700; letter-spacing: 0.1em; color: var(--positive); background: var(--positive-bg); padding: 2px 6px; border-radius: 4px; }
-    .surface-item i { color: var(--gray-400); margin-bottom: 10px; display: block; }
-    .surface-item.active i { color: var(--brand); }
-    .surface-item .name { font-size: 0.8rem; font-weight: 600; color: var(--gray-700); }
+    .surface-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 40px; }
+    .surface-item { background: var(--white); border: 1px solid var(--gray-200); border-radius: var(--radius); padding: 24px 16px; text-align: center; transition: all 200ms var(--ease-out); cursor: default; }
+    .surface-item:hover { border-color: var(--brand); transform: translateY(-2px); box-shadow: var(--shadow-md); }
+    .surface-item.active { background: var(--brand-light); border-color: var(--brand); }
+    .surface-item.active::after { content: "LIVE"; position: absolute; top: 8px; right: 8px; font-size: 10px; font-weight: 700; letter-spacing: 0.08em; color: var(--positive); background: var(--positive-bg); padding: 2px 6px; border-radius: 4px; }
+    .surface-item { position: relative; }
+    .surface-icon { width: 44px; height: 44px; background: var(--brand-medium); border-radius: 10px; display: flex; align-items: center; justify-content: center; margin: 0 auto 12px; color: var(--brand); }
+    .surface-item.active .surface-icon { background: rgba(28,56,234,0.15); }
+    .surface-item .name { font-size: 13px; font-weight: 600; color: var(--gray-700); }
     .surface-item.active .name { color: var(--brand); }
 
-    /* ═══ DISCOVERY ═══ */
-    .discovery-flow { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-top: 48px; }
-    .disc-step { background: var(--white); border: 1px solid var(--gray-200); border-radius: 16px; padding: 28px 20px; text-align: center; box-shadow: var(--shadow-sm); transition: all 0.3s var(--ease-out); }
-    .disc-step:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); border-color: var(--brand-border); }
-    .disc-num { width: 32px; height: 32px; border-radius: 50%; background: linear-gradient(135deg, var(--brand), var(--cyan)); display: flex; align-items: center; justify-content: center; font-family: 'Space Grotesk'; font-size: 0.8rem; font-weight: 700; color: #fff; margin: 0 auto 14px; }
-    .disc-step h4 { font-family: 'Space Grotesk'; font-size: 0.95rem; font-weight: 700; color: var(--gray-900); margin-bottom: 6px; }
-    .disc-step p { font-size: 0.78rem; color: var(--gray-500); line-height: 1.5; }
+    /* ═══ DISCOVERY FLOW ═══ */
+    .disc-flow { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-top: 40px; }
+    .disc-step { background: var(--white); border: 1px solid var(--gray-200); border-radius: var(--radius); padding: 28px 20px; text-align: center; transition: all 200ms var(--ease-out); }
+    .disc-step:hover { border-color: var(--brand); transform: translateY(-3px); box-shadow: var(--shadow-md); }
+    .disc-num { width: 32px; height: 32px; border-radius: 50%; background: var(--brand); display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 700; color: #fff; margin: 0 auto 14px; }
+    .disc-step h4 { font-size: 15px; font-weight: 700; color: var(--gray-900); margin-bottom: 6px; }
+    .disc-step p { font-size: 13px; color: var(--gray-500); line-height: 1.5; }
 
-    /* ═══ DASHBOARD MOCK ═══ */
-    .dash-container { margin-top: 56px; }
-    .dash-frame { background: var(--dark-surface); border: 1px solid var(--dark-border); border-radius: 20px; overflow: hidden; box-shadow: 0 40px 120px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.04); }
-    .dash-header { background: rgba(255,255,255,0.02); padding: 14px 24px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--dark-border); }
-    .dash-header-left { display: flex; align-items: center; gap: 12px; }
-    .dash-header-left i { color: var(--cyan); }
-    .dash-header-left span { font-family: 'Space Grotesk'; font-size: 0.9rem; font-weight: 700; color: #fff; }
-    .dash-user { display: flex; align-items: center; gap: 10px; }
-    .dash-user span { font-size: 0.82rem; color: rgba(255,255,255,0.6); }
-    .dash-avatar { width: 32px; height: 32px; border-radius: 50%; background: linear-gradient(135deg, var(--brand), var(--cyan)); display: flex; align-items: center; justify-content: center; font-family: 'Space Grotesk'; font-size: 0.7rem; font-weight: 700; color: #fff; }
+    /* ═══ DASHBOARD MOCK (LIGHT) ═══ */
+    .dash-container { margin-top: 48px; }
+    .dash-frame { background: var(--white); border: 1px solid var(--gray-200); border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-xl); }
+    .dash-header { background: var(--gray-50); padding: 14px 24px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--gray-200); }
+    .dash-header-left { display: flex; align-items: center; gap: 10px; }
+    .dash-header-left i { color: var(--brand); width: 20px; height: 20px; }
+    .dash-header-left span { font-size: 14px; font-weight: 700; color: var(--gray-900); }
+    .dash-user { display: flex; align-items: center; gap: 8px; }
+    .dash-user span { font-size: 13px; color: var(--gray-500); }
+    .dash-avatar { width: 32px; height: 32px; border-radius: 50%; background: var(--brand); display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; color: #fff; }
     .dash-body { padding: 24px; }
-    .kpi-row { display: grid; grid-template-columns: repeat(6, 1fr); gap: 12px; margin-bottom: 24px; }
-    .kpi-card { background: var(--dark-card); border: 1px solid var(--dark-border); border-radius: 12px; padding: 16px 14px; position: relative; overflow: hidden; }
-    .kpi-card::after { content: ""; position: absolute; bottom: 0; left: 0; right: 0; height: 3px; border-radius: 0 0 12px 12px; }
-    .kpi-card.green::after { background: var(--positive); } .kpi-card.amber::after { background: var(--warn); }
-    .kpi-card.red::after { background: var(--danger); } .kpi-card.blue::after { background: var(--brand-light); }
-    .kpi-val { font-family: 'Space Grotesk'; font-size: 1.3rem; font-weight: 700; color: #fff; }
-    .kpi-lbl { font-size: 0.62rem; text-transform: uppercase; letter-spacing: 0.08em; color: rgba(255,255,255,0.4); margin-top: 4px; }
-    .kpi-trend { font-size: 0.68rem; margin-top: 6px; }
-    .kpi-trend.up { color: var(--positive); } .kpi-trend.down { color: var(--danger); } .kpi-trend.neutral { color: var(--warn); }
 
-    /* ═══ PROJECT TABLE ═══ */
+    /* KPI Cards */
+    .kpi-row { display: grid; grid-template-columns: repeat(6, 1fr); gap: 12px; margin-bottom: 24px; }
+    .kpi-card { background: var(--gray-50); border: 1px solid var(--gray-200); border-radius: var(--radius); padding: 16px 14px; position: relative; overflow: hidden; }
+    .kpi-card::after { content: ""; position: absolute; bottom: 0; left: 0; right: 0; height: 3px; }
+    .kpi-card.green::after { background: var(--positive); }
+    .kpi-card.amber::after { background: var(--warn); }
+    .kpi-card.red::after { background: var(--danger); }
+    .kpi-card.blue::after { background: var(--brand); }
+    .kpi-val { font-size: 20px; font-weight: 800; color: var(--gray-900); }
+    .kpi-lbl { font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--gray-500); margin-top: 4px; }
+    .kpi-trend { font-size: 12px; margin-top: 6px; font-weight: 500; }
+    .kpi-trend.up { color: var(--positive); }
+    .kpi-trend.down { color: var(--danger); }
+    .kpi-trend.neutral { color: var(--warn); }
+
+    /* Project Table */
     .dash-split { display: grid; grid-template-columns: 1.6fr 1fr; gap: 20px; }
-    .dash-panel { background: rgba(255,255,255,0.02); border: 1px solid var(--dark-border); border-radius: 14px; padding: 20px; }
-    .dash-panel-title { font-family: 'Space Grotesk'; font-size: 0.8rem; font-weight: 700; color: rgba(255,255,255,0.7); margin-bottom: 14px; display: flex; align-items: center; gap: 8px; }
-    .dash-panel-title i { width: 16px; height: 16px; color: rgba(255,255,255,0.4); }
+    .dash-panel { background: var(--gray-50); border: 1px solid var(--gray-200); border-radius: var(--radius); padding: 20px; }
+    .dash-panel-title { font-size: 13px; font-weight: 700; color: var(--gray-700); margin-bottom: 14px; display: flex; align-items: center; gap: 8px; }
+    .dash-panel-title i { width: 16px; height: 16px; color: var(--gray-400); }
     .proj-table { width: 100%; border-collapse: collapse; }
-    .proj-table th { font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.08em; color: rgba(255,255,255,0.35); text-align: left; padding: 8px 6px; border-bottom: 1px solid var(--dark-border); font-weight: 600; }
-    .proj-table td { font-size: 0.75rem; color: rgba(255,255,255,0.8); padding: 10px 6px; border-bottom: 1px solid rgba(255,255,255,0.03); cursor: pointer; transition: background 0.2s; }
-    .proj-table tr.clickable:hover td { background: rgba(79,106,255,0.08); }
-    .proj-table tr.clickable.selected td { background: rgba(79,106,255,0.12); }
-    .proj-table .proj-name { font-weight: 600; color: #fff; }
-    .health-bar { width: 48px; height: 6px; border-radius: 3px; background: rgba(255,255,255,0.08); overflow: hidden; display: inline-block; vertical-align: middle; }
+    .proj-table th { font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--gray-400); text-align: left; padding: 8px 8px; border-bottom: 1px solid var(--gray-200); font-weight: 600; }
+    .proj-table td { font-size: 13px; color: var(--gray-700); padding: 12px 8px; border-bottom: 1px solid var(--gray-100); transition: background 0.15s; }
+    .proj-table tr.clickable { cursor: pointer; }
+    .proj-table tr.clickable:hover td { background: var(--brand-light); }
+    .proj-table tr.clickable.selected td { background: rgba(28,56,234,0.08); }
+    .proj-table .proj-name { font-weight: 600; color: var(--gray-900); display: flex; align-items: center; gap: 6px; }
+    .proj-table .proj-name::after { content: ""; width: 16px; height: 16px; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%231C38EA' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m9 18 6-6-6-6'/%3E%3C/svg%3E"); opacity: 0; transition: opacity 0.15s; }
+    .proj-table tr.clickable:hover .proj-name::after { opacity: 1; }
+    .health-bar { width: 48px; height: 6px; border-radius: 3px; background: var(--gray-200); overflow: hidden; display: inline-block; vertical-align: middle; }
     .health-bar-fill { height: 100%; border-radius: 3px; }
     .margin-pos { color: var(--positive); font-weight: 600; }
     .margin-neg { color: var(--danger); font-weight: 600; }
-    .click-hint { font-size: 0.68rem; color: rgba(255,255,255,0.3); text-align: center; margin-top: 12px; display: flex; align-items: center; justify-content: center; gap: 6px; }
-    .click-hint i { width: 14px; height: 14px; }
+    .click-hint { font-size: 12px; color: var(--gray-400); text-align: center; margin-top: 14px; display: flex; align-items: center; justify-content: center; gap: 6px; padding: 8px; background: var(--brand-light); border-radius: 8px; border: 1px dashed var(--brand-border); }
+    .click-hint i { width: 14px; height: 14px; color: var(--brand); }
 
-    /* ═══ ALERTS ═══ */
+    /* Alerts */
     .alert-item { padding: 12px 14px; border-radius: 10px; margin-bottom: 10px; display: flex; align-items: flex-start; gap: 10px; }
-    .alert-item--red { background: rgba(239,68,68,0.06); border: 1px solid rgba(239,68,68,0.12); }
-    .alert-item--amber { background: rgba(245,158,11,0.06); border: 1px solid rgba(245,158,11,0.12); }
-    .alert-item--green { background: rgba(16,185,129,0.06); border: 1px solid rgba(16,185,129,0.12); }
-    .alert-icon { width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex: none; margin-top: 1px; font-size: 0.6rem; }
-    .alert-icon--red { background: rgba(239,68,68,0.2); color: var(--danger); }
-    .alert-icon--amber { background: rgba(245,158,11,0.2); color: var(--warn); }
-    .alert-icon--green { background: rgba(16,185,129,0.2); color: var(--positive); }
-    .alert-text strong { font-size: 0.72rem; color: #fff; display: block; margin-bottom: 2px; }
-    .alert-text span { font-size: 0.68rem; color: rgba(255,255,255,0.5); }
+    .alert-item--red { background: var(--danger-bg); border: 1px solid rgba(239,68,68,0.15); }
+    .alert-item--amber { background: var(--warn-bg); border: 1px solid rgba(245,158,11,0.15); }
+    .alert-item--green { background: var(--positive-bg); border: 1px solid rgba(16,185,129,0.15); }
+    .alert-icon { width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex: none; margin-top: 1px; }
+    .alert-icon--red { background: rgba(239,68,68,0.15); color: var(--danger); }
+    .alert-icon--amber { background: rgba(245,158,11,0.15); color: var(--warn); }
+    .alert-icon--green { background: rgba(16,185,129,0.15); color: var(--positive); }
+    .alert-text strong { font-size: 12px; color: var(--gray-900); display: block; }
+    .alert-text span { font-size: 11px; color: var(--gray-500); }
 
-    /* ═══ PROJECT DRILL-DOWN ═══ */
-    .drill-section { margin-top: 32px; display: none; animation: slideDown 0.4s var(--ease-out); }
-    .drill-section.active { display: block; }
-    @keyframes slideDown { from { opacity: 0; transform: translateY(-12px); } to { opacity: 1; transform: translateY(0); } }
-    .drill-frame { background: var(--dark-card); border: 1px solid var(--dark-border); border-radius: 16px; overflow: hidden; }
-    .drill-header { padding: 20px 24px; border-bottom: 1px solid var(--dark-border); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
-    .drill-title { font-family: 'Space Grotesk'; font-size: 1.1rem; font-weight: 700; color: #fff; }
-    .drill-subtitle { font-size: 0.75rem; color: rgba(255,255,255,0.5); }
-    .drill-tabs { display: flex; gap: 4px; background: rgba(255,255,255,0.03); border-radius: 10px; padding: 4px; }
-    .drill-tab { font-size: 0.72rem; font-weight: 600; padding: 8px 16px; border-radius: 8px; color: rgba(255,255,255,0.5); cursor: pointer; transition: all 0.2s var(--ease-out); }
-    .drill-tab:hover { color: rgba(255,255,255,0.8); }
+    /* ═══ DRILL-DOWN ═══ */
+    .drill-section { margin-top: 24px; border-top: 2px solid var(--brand); border-radius: 0 0 var(--radius) var(--radius); background: var(--white); padding: 0; animation: slideDown 0.3s var(--ease-out); }
+    @keyframes slideDown { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: translateY(0); } }
+    .drill-header { padding: 20px 24px; border-bottom: 1px solid var(--gray-200); }
+    .drill-title { font-size: 18px; font-weight: 700; color: var(--gray-900); }
+    .drill-subtitle { font-size: 13px; color: var(--gray-500); margin-top: 4px; }
+    .drill-tabs { display: flex; gap: 4px; margin-top: 16px; }
+    .drill-tab { padding: 8px 16px; border-radius: 8px; font-size: 13px; font-weight: 600; color: var(--gray-500); cursor: pointer; transition: all 0.15s var(--ease-out); }
+    .drill-tab:hover { background: var(--gray-100); color: var(--gray-700); }
     .drill-tab.active { background: var(--brand); color: #fff; }
     .drill-body { padding: 24px; }
     .drill-tab-content { display: none; }
-    .drill-tab-content.active { display: block; }
+    .drill-tab-content.active { display: block; animation: fadeIn 0.2s var(--ease-out); }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
     /* Waterfall */
-    .waterfall { display: flex; gap: 12px; justify-content: center; align-items: flex-end; padding: 20px 0 0; }
-    .wf-col { text-align: center; flex: 1; max-width: 100px; }
-    .wf-bar-wrap { height: 160px; display: flex; align-items: flex-end; justify-content: center; }
-    .wf-bar { width: 100%; border-radius: 6px 6px 0 0; display: flex; align-items: flex-start; justify-content: center; padding-top: 8px; position: relative; }
-    .wf-bar-val { font-family: 'JetBrains Mono'; font-size: 0.68rem; font-weight: 600; color: #fff; }
-    .wf-bar--contract { background: linear-gradient(180deg, #4F6AFF, #1C38EA); }
-    .wf-bar--budget { background: linear-gradient(180deg, #6B8AFF, #3B5BFF); }
-    .wf-bar--actual { background: linear-gradient(180deg, #FF8A65, #E65100); }
-    .wf-bar--committed { background: linear-gradient(180deg, #FFB74D, #F57C00); }
-    .wf-bar--remaining { background: linear-gradient(180deg, #81C784, #388E3C); }
-    .wf-bar--forecast { background: linear-gradient(180deg, #CE93D8, #7B1FA2); }
-    .wf-bar--variance { background: linear-gradient(180deg, #EF5350, #B71C1C); }
-    .wf-lbl { font-size: 0.62rem; color: rgba(255,255,255,0.5); margin-top: 8px; line-height: 1.3; }
+    .waterfall { display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px; margin-bottom: 32px; }
+    .wf-col { text-align: center; }
+    .wf-bar-wrap { height: 160px; display: flex; align-items: flex-end; justify-content: center; padding-bottom: 4px; }
+    .wf-bar { width: 100%; max-width: 48px; border-radius: 6px 6px 2px 2px; display: flex; align-items: flex-start; justify-content: center; padding-top: 8px; transition: height 0.4s var(--ease-out); }
+    .wf-bar-val { font-size: 11px; font-weight: 700; color: var(--white); }
+    .wf-bar--contract { background: var(--brand); }
+    .wf-bar--budget { background: var(--gray-700); }
+    .wf-bar--actual { background: var(--warn); }
+    .wf-bar--committed { background: #8B5CF6; }
+    .wf-bar--remaining { background: var(--gray-400); }
+    .wf-bar--forecast { background: var(--danger); }
+    .wf-bar--variance { background: var(--danger); }
+    .wf-lbl { font-size: 10px; color: var(--gray-500); margin-top: 8px; line-height: 1.3; }
 
-    /* Cost breakdown */
-    .cost-breakdown { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 28px; }
-    .cb-panel { background: rgba(255,255,255,0.02); border: 1px solid var(--dark-border); border-radius: 12px; padding: 18px; }
-    .cb-title { font-family: 'Space Grotesk'; font-size: 0.75rem; font-weight: 700; color: rgba(255,255,255,0.7); margin-bottom: 14px; }
-    .cb-row { display: flex; align-items: center; justify-content: space-between; padding: 7px 0; border-bottom: 1px solid rgba(255,255,255,0.04); }
-    .cb-cat { font-size: 0.72rem; color: rgba(255,255,255,0.6); }
-    .cb-vals { display: flex; gap: 16px; }
-    .cb-val { font-family: 'JetBrains Mono'; font-size: 0.72rem; color: rgba(255,255,255,0.8); }
-    .cb-val.over { color: var(--danger); }
-    .cb-val.under { color: var(--positive); }
-    .cb-bar-wrap { flex: 1; max-width: 120px; height: 6px; background: rgba(255,255,255,0.06); border-radius: 3px; overflow: hidden; margin: 0 12px; }
-    .cb-bar-fill { height: 100%; border-radius: 3px; }
+    /* Cost Breakdown */
+    .cost-split { display: grid; grid-template-columns: 1.2fr 1fr; gap: 24px; }
+    .cost-panel { background: var(--gray-50); border: 1px solid var(--gray-200); border-radius: var(--radius); padding: 20px; }
+    .cost-panel-title { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--gray-500); margin-bottom: 14px; }
+    .cost-row { display: flex; align-items: center; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid var(--gray-100); }
+    .cost-row:last-child { border-bottom: none; }
+    .cost-cat { font-size: 13px; color: var(--gray-700); font-weight: 500; }
+    .cost-vals { display: flex; gap: 16px; }
+    .cost-val { font-size: 13px; font-weight: 600; color: var(--gray-600); }
+    .cost-val.over { color: var(--danger); }
+    .cost-val.under { color: var(--positive); }
+    .cost-val.total { color: var(--gray-900); font-weight: 700; }
 
-    /* Drill summary cards */
-    .drill-summary { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 24px; }
-    .ds-card { background: rgba(255,255,255,0.03); border: 1px solid var(--dark-border); border-radius: 12px; padding: 18px; text-align: center; }
-    .ds-val { font-family: 'Space Grotesk'; font-size: 1.4rem; font-weight: 700; }
-    .ds-val.red { color: var(--danger); } .ds-val.green { color: var(--positive); }
-    .ds-val.blue { color: var(--brand-light); } .ds-val.amber { color: var(--warn); }
-    .ds-lbl { font-size: 0.68rem; color: rgba(255,255,255,0.4); margin-top: 4px; }
+    /* Summary Cards */
+    .drill-summary { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 24px; }
+    .ds-card { background: var(--gray-50); border: 1px solid var(--gray-200); border-radius: var(--radius); padding: 16px; text-align: center; }
+    .ds-val { font-size: 22px; font-weight: 800; }
+    .ds-val.red { color: var(--danger); }
+    .ds-val.green { color: var(--positive); }
+    .ds-val.blue { color: var(--brand); }
+    .ds-val.amber { color: var(--warn); }
+    .ds-lbl { font-size: 11px; color: var(--gray-500); margin-top: 4px; text-transform: uppercase; letter-spacing: 0.04em; }
 
-    /* ═══ SCHEDULE TAB ═══ */
-    .gantt { margin-top: 12px; }
-    .gantt-row { display: grid; grid-template-columns: 140px 1fr; gap: 16px; align-items: center; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.04); }
-    .gantt-label { font-size: 0.72rem; color: rgba(255,255,255,0.7); font-weight: 500; }
-    .gantt-bar-track { height: 24px; background: rgba(255,255,255,0.04); border-radius: 6px; position: relative; overflow: hidden; }
-    .gantt-bar-planned { position: absolute; top: 2px; height: 8px; background: rgba(79,106,255,0.3); border-radius: 4px; }
-    .gantt-bar-actual { position: absolute; bottom: 2px; height: 8px; border-radius: 4px; }
+    /* Gantt */
+    .gantt { margin-bottom: 16px; }
+    .gantt-row { display: grid; grid-template-columns: 120px 1fr; align-items: center; padding: 8px 0; border-bottom: 1px solid var(--gray-100); }
+    .gantt-label { font-size: 12px; font-weight: 500; color: var(--gray-700); }
+    .gantt-bar-track { position: relative; height: 20px; background: var(--gray-100); border-radius: 4px; overflow: hidden; }
+    .gantt-bar-planned { position: absolute; height: 100%; background: var(--gray-300); border-radius: 4px; opacity: 0.5; }
+    .gantt-bar-actual { position: absolute; height: 100%; border-radius: 4px; }
     .gantt-bar-actual.on-track { background: var(--positive); }
     .gantt-bar-actual.behind { background: var(--danger); }
-    .gantt-bar-actual.ahead { background: var(--brand-light); }
-    .gantt-milestone { position: absolute; top: 50%; transform: translateY(-50%); width: 10px; height: 10px; border-radius: 2px; transform: translateY(-50%) rotate(45deg); background: var(--cyan); }
-    .gantt-legend { display: flex; gap: 20px; margin-top: 16px; padding-top: 12px; border-top: 1px solid var(--dark-border); }
-    .gantt-legend-item { display: flex; align-items: center; gap: 6px; font-size: 0.65rem; color: rgba(255,255,255,0.5); }
-    .gantt-legend-dot { width: 10px; height: 6px; border-radius: 3px; }
+    .gantt-legend { display: flex; gap: 16px; margin-top: 12px; }
+    .gantt-legend-item { display: flex; align-items: center; gap: 6px; font-size: 11px; color: var(--gray-500); }
+    .gantt-legend-dot { width: 10px; height: 10px; border-radius: 3px; }
 
-    /* ═══ LABOR TAB ═══ */
-    .labor-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 12px; }
-    .labor-card { background: rgba(255,255,255,0.02); border: 1px solid var(--dark-border); border-radius: 12px; padding: 18px; }
-    .labor-card-title { font-size: 0.72rem; font-weight: 600; color: rgba(255,255,255,0.6); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.06em; }
-    .labor-row { display: flex; align-items: center; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.04); }
-    .labor-trade { font-size: 0.75rem; color: rgba(255,255,255,0.8); }
-    .labor-hours { font-family: 'JetBrains Mono'; font-size: 0.72rem; color: rgba(255,255,255,0.6); }
-    .labor-util { font-family: 'JetBrains Mono'; font-size: 0.72rem; font-weight: 600; }
-    .labor-flag { font-size: 0.62rem; padding: 2px 6px; border-radius: 4px; font-weight: 600; }
-    .labor-flag.overtime { background: rgba(239,68,68,0.12); color: var(--danger); }
-    .labor-flag.normal { background: rgba(16,185,129,0.12); color: var(--positive); }
+    /* Labor */
+    .labor-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .labor-card { background: var(--gray-50); border: 1px solid var(--gray-200); border-radius: var(--radius); padding: 20px; }
+    .labor-card-title { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--gray-500); margin-bottom: 14px; }
+    .labor-row { display: flex; align-items: center; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid var(--gray-100); }
+    .labor-row:last-child { border-bottom: none; }
+    .labor-trade { font-size: 13px; color: var(--gray-700); font-weight: 500; }
+    .labor-hours { font-size: 12px; color: var(--gray-500); }
+    .labor-flag { font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 4px; }
+    .labor-flag.overtime { background: var(--danger-bg); color: var(--danger); }
+    .labor-flag.normal { background: var(--positive-bg); color: var(--positive); }
+    .labor-util { font-size: 14px; font-weight: 700; }
 
-    /* ═══ RISK TAB ═══ */
-    .risk-table { width: 100%; border-collapse: collapse; margin-top: 12px; }
-    .risk-table th { font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.08em; color: rgba(255,255,255,0.35); text-align: left; padding: 8px; border-bottom: 1px solid var(--dark-border); }
-    .risk-table td { font-size: 0.72rem; color: rgba(255,255,255,0.8); padding: 12px 8px; border-bottom: 1px solid rgba(255,255,255,0.04); }
-    .risk-badge { font-size: 0.6rem; font-weight: 700; padding: 3px 8px; border-radius: 4px; text-transform: uppercase; letter-spacing: 0.06em; }
-    .risk-badge.high { background: rgba(239,68,68,0.15); color: var(--danger); }
-    .risk-badge.medium { background: rgba(245,158,11,0.15); color: var(--warn); }
-    .risk-badge.low { background: rgba(16,185,129,0.15); color: var(--positive); }
-    .risk-status { font-size: 0.65rem; padding: 2px 6px; border-radius: 4px; }
-    .risk-status.mitigating { background: rgba(79,106,255,0.12); color: var(--brand-light); }
-    .risk-status.monitoring { background: rgba(255,255,255,0.06); color: rgba(255,255,255,0.5); }
+    /* Risk Table */
+    .risk-table { width: 100%; border-collapse: collapse; }
+    .risk-table th { font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--gray-400); text-align: left; padding: 10px 8px; border-bottom: 1px solid var(--gray-200); font-weight: 600; }
+    .risk-table td { font-size: 13px; color: var(--gray-700); padding: 12px 8px; border-bottom: 1px solid var(--gray-100); }
+    .risk-badge { font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 4px; }
+    .risk-badge.high { background: var(--danger-bg); color: var(--danger); }
+    .risk-badge.medium { background: var(--warn-bg); color: var(--warn); }
+    .risk-badge.low { background: var(--positive-bg); color: var(--positive); }
+    .risk-status { font-size: 11px; font-weight: 600; }
+    .risk-status.mitigating { color: var(--warn); }
+    .risk-status.monitoring { color: var(--positive); }
 
-    /* ═══ AI SECTION ═══ */
+    /* ═══ COO SECTION ═══ */
+    .coo-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 40px; }
+    .coo-card { background: var(--white); border: 1px solid var(--gray-200); border-radius: var(--radius); padding: 24px; box-shadow: var(--shadow-sm); }
+    .coo-card-title { font-size: 13px; font-weight: 700; color: var(--gray-700); margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+    .coo-card-title i { width: 18px; height: 18px; color: var(--brand); }
+    .coo-row { display: flex; align-items: center; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid var(--gray-100); font-size: 13px; }
+    .coo-row:last-child { border-bottom: none; }
+    .coo-label { color: var(--gray-600); }
+    .coo-value { font-weight: 600; color: var(--gray-900); }
+    .coo-bar { width: 80px; height: 6px; background: var(--gray-200); border-radius: 3px; overflow: hidden; }
+    .coo-bar-fill { height: 100%; border-radius: 3px; }
+
+    /* ═══ AI SECTION (DARK) ═══ */
     .ai-container { margin-top: 48px; }
-    .ai-frame { background: var(--dark-card); border: 1px solid var(--dark-border); border-radius: 16px; overflow: hidden; box-shadow: 0 20px 60px rgba(0,0,0,0.3); }
-    .ai-header { padding: 14px 20px; border-bottom: 1px solid var(--dark-border); display: flex; align-items: center; gap: 10px; }
+    .ai-frame { background: #0B1437; border: 1px solid rgba(255,255,255,0.08); border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-xl); }
+    .ai-header { background: rgba(255,255,255,0.03); padding: 14px 24px; display: flex; align-items: center; gap: 10px; border-bottom: 1px solid rgba(255,255,255,0.06); }
     .ai-header i { color: var(--cyan); width: 18px; height: 18px; }
-    .ai-header span { font-family: 'Space Grotesk'; font-size: 0.82rem; font-weight: 700; color: #fff; }
-    .ai-badge { font-size: 0.58rem; font-weight: 700; padding: 3px 8px; border-radius: 4px; background: rgba(16,185,129,0.12); color: var(--positive); text-transform: uppercase; letter-spacing: 0.08em; margin-left: auto; }
-    .ai-body { padding: 20px; display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-    .ai-insight { background: rgba(255,255,255,0.02); border: 1px solid var(--dark-border); border-radius: 12px; padding: 18px; }
-    .ai-insight-header { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; }
-    .ai-insight-icon { width: 24px; height: 24px; border-radius: 6px; display: flex; align-items: center; justify-content: center; }
+    .ai-header span { font-size: 14px; font-weight: 700; color: #fff; }
+    .ai-badge { margin-left: auto; font-size: 10px; font-weight: 600; color: var(--positive); background: rgba(16,185,129,0.1); padding: 3px 8px; border-radius: 4px; letter-spacing: 0.04em; }
+    .ai-body { padding: 20px 24px; }
+    .ai-insight { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); border-radius: var(--radius); padding: 20px; margin-bottom: 14px; }
+    .ai-insight-header { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+    .ai-insight-icon { width: 28px; height: 28px; border-radius: 8px; display: flex; align-items: center; justify-content: center; }
     .ai-insight-icon i { width: 14px; height: 14px; }
     .ai-insight-icon.red { background: rgba(239,68,68,0.15); color: var(--danger); }
     .ai-insight-icon.amber { background: rgba(245,158,11,0.15); color: var(--warn); }
-    .ai-insight-icon.blue { background: rgba(79,106,255,0.15); color: var(--brand-light); }
+    .ai-insight-icon.blue { background: rgba(79,106,255,0.15); color: #4F6AFF; }
     .ai-insight-icon.green { background: rgba(16,185,129,0.15); color: var(--positive); }
-    .ai-insight-type { font-size: 0.6rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; }
-    .ai-insight-type.red { color: var(--danger); } .ai-insight-type.amber { color: var(--warn); }
-    .ai-insight-type.blue { color: var(--brand-light); } .ai-insight-type.green { color: var(--positive); }
-    .ai-insight h4 { font-size: 0.82rem; font-weight: 700; color: #fff; margin-bottom: 6px; }
-    .ai-insight p { font-size: 0.72rem; color: rgba(255,255,255,0.5); line-height: 1.5; }
-    .ai-insight .ai-actions { margin-top: 12px; display: flex; gap: 8px; }
-    .ai-btn { font-size: 0.68rem; font-weight: 600; padding: 6px 12px; border-radius: 6px; border: none; cursor: pointer; transition: all 0.16s var(--ease-out); }
+    .ai-insight-type { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; }
+    .ai-insight-type.red { color: var(--danger); }
+    .ai-insight-type.amber { color: var(--warn); }
+    .ai-insight-type.blue { color: #4F6AFF; }
+    .ai-insight-type.green { color: var(--positive); }
+    .ai-insight h4 { font-size: 14px; font-weight: 700; color: #fff; margin-bottom: 6px; }
+    .ai-insight p { font-size: 13px; color: rgba(255,255,255,0.6); line-height: 1.6; }
+    .ai-actions { display: flex; gap: 8px; margin-top: 12px; }
+    .ai-btn { padding: 6px 14px; border-radius: 6px; font-size: 12px; font-weight: 600; border: none; cursor: pointer; transition: all 0.15s; }
     .ai-btn--primary { background: var(--brand); color: #fff; }
-    .ai-btn--primary:hover { background: var(--brand-light); }
-    .ai-btn--dismiss { background: rgba(255,255,255,0.06); color: rgba(255,255,255,0.5); }
-    .ai-btn--dismiss:hover { background: rgba(255,255,255,0.1); }
-    .ai-guardrail { grid-column: 1 / -1; background: rgba(255,255,255,0.02); border: 1px solid var(--dark-border); border-radius: 10px; padding: 14px 18px; display: flex; align-items: flex-start; gap: 12px; }
-    .ai-guardrail i { color: var(--positive); flex: none; width: 20px; height: 20px; margin-top: 1px; }
-    .ai-guardrail p { font-size: 0.72rem; color: rgba(255,255,255,0.5); line-height: 1.5; }
-    .ai-guardrail strong { color: #fff; }
-
-    /* ═══ COO VIEW ═══ */
-    .coo-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; margin-top: 48px; }
-    .coo-card { background: var(--dark-card); border: 1px solid var(--dark-border); border-radius: 14px; padding: 22px; }
-    .coo-card-title { font-family: 'Space Grotesk'; font-size: 0.75rem; font-weight: 700; color: rgba(255,255,255,0.6); margin-bottom: 16px; text-transform: uppercase; letter-spacing: 0.06em; display: flex; align-items: center; gap: 8px; }
-    .coo-card-title i { width: 16px; height: 16px; color: var(--cyan); }
-    .coo-row { display: flex; align-items: center; justify-content: space-between; padding: 9px 0; border-bottom: 1px solid rgba(255,255,255,0.04); }
-    .coo-row:last-child { border-bottom: none; }
-    .coo-label { font-size: 0.72rem; color: rgba(255,255,255,0.7); }
-    .coo-value { font-family: 'JetBrains Mono'; font-size: 0.72rem; font-weight: 600; color: #fff; }
-    .coo-bar { width: 60px; height: 6px; background: rgba(255,255,255,0.06); border-radius: 3px; overflow: hidden; }
-    .coo-bar-fill { height: 100%; border-radius: 3px; }
+    .ai-btn--primary:hover { background: var(--brand-hover); }
+    .ai-btn--dismiss { background: rgba(255,255,255,0.06); color: rgba(255,255,255,0.5); border: 1px solid rgba(255,255,255,0.08); }
+    .ai-guardrail { margin-top: 16px; padding: 14px 20px; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06); border-radius: var(--radius); display: flex; align-items: flex-start; gap: 12px; }
+    .ai-guardrail i { color: var(--positive); flex: none; width: 18px; height: 18px; margin-top: 2px; }
+    .ai-guardrail p { font-size: 12px; color: rgba(255,255,255,0.5); line-height: 1.6; }
+    .ai-guardrail strong { color: rgba(255,255,255,0.8); }
 
     /* ═══ ROADMAP ═══ */
-    .roadmap-timeline { margin-top: 48px; position: relative; padding-left: 40px; }
-    .roadmap-timeline::before { content: ""; position: absolute; left: 15px; top: 0; bottom: 0; width: 2px; background: linear-gradient(180deg, var(--brand), var(--gray-300)); border-radius: 1px; }
-    .rm-item { position: relative; padding: 0 0 40px; }
-    .rm-item:last-child { padding-bottom: 0; }
-    .rm-dot { position: absolute; left: -33px; top: 4px; width: 14px; height: 14px; border-radius: 50%; border: 3px solid; }
-    .rm-dot--done { border-color: var(--positive); background: var(--positive); }
-    .rm-dot--next { border-color: var(--brand); background: var(--brand); box-shadow: 0 0 0 4px rgba(28,56,234,0.2); }
-    .rm-dot--future { border-color: var(--gray-300); background: var(--white); }
-    .rm-content { background: var(--white); border: 1px solid var(--gray-200); border-radius: 14px; padding: 22px 24px; box-shadow: var(--shadow-sm); transition: all 0.3s var(--ease-out); }
-    .rm-content:hover { box-shadow: var(--shadow-md); transform: translateX(4px); }
-    .rm-content h4 { font-family: 'Space Grotesk'; font-size: 1rem; font-weight: 700; color: var(--gray-900); margin-bottom: 6px; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
-    .rm-badge { font-size: 0.58rem; font-weight: 700; padding: 3px 8px; border-radius: 4px; text-transform: uppercase; letter-spacing: 0.08em; }
+    .roadmap-timeline { margin-top: 40px; position: relative; padding-left: 32px; }
+    .roadmap-timeline::before { content: ""; position: absolute; left: 11px; top: 0; bottom: 0; width: 2px; background: var(--gray-200); }
+    .rm-item { position: relative; margin-bottom: 32px; }
+    .rm-item:last-child { margin-bottom: 0; }
+    .rm-dot { position: absolute; left: -32px; top: 4px; width: 22px; height: 22px; border-radius: 50%; border: 3px solid var(--white); box-shadow: var(--shadow-sm); }
+    .rm-dot--done { background: var(--positive); }
+    .rm-dot--next { background: var(--brand); animation: pulse 2s infinite; }
+    .rm-dot--future { background: var(--gray-300); }
+    .rm-content h4 { font-size: 16px; font-weight: 700; color: var(--gray-900); margin-bottom: 6px; }
+    .rm-badge { font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 4px; text-transform: uppercase; letter-spacing: 0.06em; vertical-align: middle; margin-left: 8px; }
     .rm-badge--live { background: var(--positive-bg); color: var(--positive); }
-    .rm-badge--next { background: rgba(28,56,234,0.08); color: var(--brand); }
-    .rm-content p { font-size: 0.82rem; color: var(--gray-500); line-height: 1.6; margin-bottom: 8px; }
-    .rm-deliverables { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
-    .rm-deliverable { font-size: 0.62rem; font-weight: 600; padding: 3px 8px; border-radius: 4px; background: var(--gray-100); color: var(--gray-600); border: 1px solid var(--gray-200); }
-    .rm-duration { font-size: 0.68rem; color: var(--gray-400); font-weight: 500; margin-top: 8px; display: flex; align-items: center; gap: 6px; }
-    .rm-duration i { width: 12px; height: 12px; }
+    .rm-badge--next { background: var(--brand-light); color: var(--brand); }
+    .rm-content p { font-size: 14px; color: var(--gray-600); line-height: 1.6; margin-bottom: 10px; }
+    .rm-deliverables { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 8px; }
+    .rm-deliverable { font-size: 11px; font-weight: 500; color: var(--gray-600); background: var(--gray-100); border: 1px solid var(--gray-200); padding: 3px 10px; border-radius: 6px; }
+    .rm-duration { font-size: 12px; color: var(--gray-400); display: flex; align-items: center; gap: 6px; margin-top: 8px; }
+    .rm-duration i { width: 14px; height: 14px; }
 
     /* ═══ CTA ═══ */
-    .cta-section { padding: 120px 32px; }
-    .footer { padding: 20px 32px; text-align: center; }
-    .footer p { font-size: 0.72rem; color: rgba(255,255,255,0.4); }
+    .cta-section { padding: 100px 24px; text-align: center; }
+
+    /* ═══ FOOTER ═══ */
+    .footer { padding: 20px 24px; text-align: center; background: var(--navy-deep); border-top: 1px solid rgba(255,255,255,0.06); }
+    .footer p { font-size: 12px; color: rgba(255,255,255,0.4); }
 
     /* ═══ ANIMATIONS ═══ */
-    .fade-up { opacity: 0; transform: translateY(24px); transition: opacity 0.6s var(--ease-out), transform 0.6s var(--ease-out); }
+    .fade-up { opacity: 0; transform: translateY(20px); transition: opacity 0.5s var(--ease-out), transform 0.5s var(--ease-out); }
     .fade-up.visible { opacity: 1; transform: translateY(0); }
-    .stagger { opacity: 0; transform: translateY(16px); transition: opacity 0.5s var(--ease-out), transform 0.5s var(--ease-out); }
-    .stagger.visible { opacity: 1; transform: translateY(0); }
 
     /* ═══ RESPONSIVE ═══ */
     @media (max-width: 1024px) {
-      .hero-grid { grid-template-columns: 1fr; gap: 40px; }
       .kpi-row { grid-template-columns: repeat(3, 1fr); }
       .dash-split { grid-template-columns: 1fr; }
-      .cost-breakdown { grid-template-columns: 1fr; }
-      .ai-body { grid-template-columns: 1fr; }
+      .surface-grid { grid-template-columns: repeat(3, 1fr); }
+      .disc-flow { grid-template-columns: repeat(2, 1fr); }
       .coo-grid { grid-template-columns: 1fr; }
       .labor-grid { grid-template-columns: 1fr; }
+      .cost-split { grid-template-columns: 1fr; }
     }
     @media (max-width: 768px) {
-      .section { padding: 64px 20px; }
-      .surface-grid { grid-template-columns: repeat(3, 1fr); }
-      .discovery-flow { grid-template-columns: repeat(2, 1fr); }
+      .section { padding: 60px 16px; }
       .kpi-row { grid-template-columns: repeat(2, 1fr); }
-      .proof-row { grid-template-columns: repeat(2, 1fr); }
+      .surface-grid { grid-template-columns: repeat(2, 1fr); }
+      .disc-flow { grid-template-columns: 1fr; }
+      .waterfall { grid-template-columns: repeat(4, 1fr); }
       .drill-summary { grid-template-columns: repeat(2, 1fr); }
-      .waterfall { flex-wrap: wrap; }
-      .wf-col { min-width: 60px; }
+      .drill-tabs { flex-wrap: wrap; }
+      .intro-inner { flex-direction: column; }
+      .intro-img { flex: none; width: 100%; max-width: 400px; }
+      .gantt-row { grid-template-columns: 80px 1fr; }
+      .risk-table { font-size: 11px; }
+      .risk-table th, .risk-table td { padding: 8px 4px; }
+    }
+    @media (max-width: 480px) {
+      .kpi-row { grid-template-columns: 1fr 1fr; }
+      .surface-grid { grid-template-columns: 1fr 1fr; }
+      .waterfall { grid-template-columns: repeat(3, 1fr); }
     }
   </style>
 </head>
@@ -356,9 +389,9 @@
 <!-- ═══ PASSWORD GATE ═══ -->
 <div id="gate">
   <div class="gate-card">
-    <img src="/assets/logo_footer_2x.png" alt="CleanSpace Stay" />
+    <img src="/assets/logo_nav_light_2x.png" alt="CleanSpace Stay" />
     <div class="gate-badge">Internal & Confidential</div>
-    <div class="gate-title">Platform Demo Guide</div>
+    <div class="gate-title">Platform Overview</div>
     <div class="gate-sub">Enter the access code to continue</div>
     <input type="password" id="gate-input" placeholder="Access code" autocomplete="off" />
     <button id="gate-btn">Continue</button>
@@ -368,102 +401,94 @@
 
 <!-- ═══ PAGE ═══ -->
 <div class="page">
-<nav class="topbar">
+
+<!-- Topbar -->
+<div class="topbar">
   <div class="topbar-inner">
     <img src="/assets/logo_nav_light_2x.png" alt="CleanSpace Stay" />
     <div class="topbar-badge">Internal & Confidential</div>
   </div>
-</nav>
+</div>
 
-<!-- ═══ 1. HERO ═══ -->
-<section class="section section--gray hero">
-  <div class="section-inner">
-    <div class="hero-grid">
-      <div class="hero-left fade-up">
-        <div class="eyebrow">What Kelly Built</div>
-        <h1>Travel was the <span class="accent">test case.</span></h1>
-        <p class="hero-sub">One function. One workflow. One proof that the pattern works: take a process that lives in people's heads and put it in a system the company owns.</p>
-        <p class="hero-sub">Kelly will walk you through the live platform — bookings, approvals, reconciliation, and the mobile app.</p>
-        <div class="hero-context">
-          <i data-lucide="external-link"></i>
-          <span>Live at <a href="https://app.cleanspacestay.com" target="_blank">app.cleanspacestay.com</a></span>
-        </div>
-      </div>
-      <div class="hero-right fade-up">
-        <img src="/assets/dashboard_real.png" alt="CleanSpace Stay Dashboard — Live Platform" />
-      </div>
+<!-- ═══ 1. INTRO (Minimal) ═══ -->
+<section class="intro">
+  <div class="intro-inner">
+    <div class="intro-text">
+      <div class="tag">What Kelly Built</div>
+      <h1>Travel was the proof of concept.</h1>
+      <p>One workflow. One system. Full visibility from booking request through QuickBooks reconciliation. Kelly will walk you through the live platform — then show you what comes next.</p>
+      <a href="https://app.cleanspacestay.com" class="intro-link" target="_blank">
+        <i data-lucide="external-link" style="width:14px;height:14px;"></i> Live at app.cleanspacestay.com
+      </a>
     </div>
-    <div class="proof-row fade-up">
-      <div class="proof-card"><div class="val">1</div><div class="lbl">Workflow digitized</div></div>
-      <div class="proof-card"><div class="val">100%</div><div class="lbl">Booking visibility</div></div>
-      <div class="proof-card"><div class="val">Real-time</div><div class="lbl">Spend by project</div></div>
-      <div class="proof-card"><div class="val">0</div><div class="lbl">Spreadsheets</div></div>
+    <div class="intro-img">
+      <img src="/assets/dashboard_real.png" alt="CleanSpace Stay — Live Platform" />
     </div>
   </div>
 </section>
 
 <!-- ═══ 2. THE QUESTION ═══ -->
-<section class="section section--white">
+<section class="section section--gray">
   <div class="section-inner">
-    <div class="question-block fade-up">
-      <div class="eyebrow">The Real Question</div>
+    <div class="question-box fade-up">
+      <div class="tag">The Real Question</div>
       <h2>Can you answer this today?</h2>
       <blockquote>At any moment — based on actual cost, committed cost, production progress, schedule, and risk — are we still on track to finish each project profitably?</blockquote>
-      <p class="gap-text">If the answer requires calling three people, opening four spreadsheets, and waiting until month-end — that's the gap.<br><br>Travel proved the fix. The question is: what else gets the same treatment?</p>
+      <p class="gap-text">If the answer requires calling three people, opening four spreadsheets, and waiting until month-end — that's the gap. Travel proved the fix. The question is: what else gets the same treatment?</p>
     </div>
   </div>
 </section>
 
 <!-- ═══ 3. THE FULL SURFACE ═══ -->
-<section class="section section--gray">
+<section class="section section--white">
   <div class="section-inner">
     <div class="fade-up">
-      <div class="eyebrow">The Full Picture</div>
+      <div class="tag">The Full Picture</div>
       <h2>Travel is one of twelve places where money and risk live.</h2>
-      <p class="lead">Every box below is a workflow that currently depends on people, spreadsheets, or tribal knowledge. Travel was the first one we moved into a system. The rest follow the same playbook.</p>
+      <p class="desc">Every box below is a workflow that currently depends on people, spreadsheets, or tribal knowledge. Travel was the first one we moved into a system. The rest follow the same playbook.</p>
     </div>
     <div class="surface-grid fade-up">
-      <div class="surface-item active"><i data-lucide="plane"></i><div class="name">Travel</div></div>
-      <div class="surface-item"><i data-lucide="handshake"></i><div class="name">Sales</div></div>
-      <div class="surface-item"><i data-lucide="calculator"></i><div class="name">Estimating</div></div>
-      <div class="surface-item"><i data-lucide="package"></i><div class="name">Procurement</div></div>
-      <div class="surface-item"><i data-lucide="factory"></i><div class="name">Manufacturing</div></div>
-      <div class="surface-item"><i data-lucide="hard-hat"></i><div class="name">Construction</div></div>
-      <div class="surface-item"><i data-lucide="users"></i><div class="name">Field Labor</div></div>
-      <div class="surface-item"><i data-lucide="truck"></i><div class="name">Subcontractors</div></div>
-      <div class="surface-item"><i data-lucide="receipt"></i><div class="name">AP / AR</div></div>
-      <div class="surface-item"><i data-lucide="landmark"></i><div class="name">Finance</div></div>
-      <div class="surface-item"><i data-lucide="ruler"></i><div class="name">Engineering</div></div>
-      <div class="surface-item"><i data-lucide="pen-tool"></i><div class="name">Design</div></div>
+      <div class="surface-item active"><div class="surface-icon"><i data-lucide="plane" style="width:20px;height:20px;"></i></div><div class="name">Travel</div></div>
+      <div class="surface-item"><div class="surface-icon"><i data-lucide="handshake" style="width:20px;height:20px;"></i></div><div class="name">Sales</div></div>
+      <div class="surface-item"><div class="surface-icon"><i data-lucide="calculator" style="width:20px;height:20px;"></i></div><div class="name">Estimating</div></div>
+      <div class="surface-item"><div class="surface-icon"><i data-lucide="package" style="width:20px;height:20px;"></i></div><div class="name">Procurement</div></div>
+      <div class="surface-item"><div class="surface-icon"><i data-lucide="factory" style="width:20px;height:20px;"></i></div><div class="name">Manufacturing</div></div>
+      <div class="surface-item"><div class="surface-icon"><i data-lucide="hard-hat" style="width:20px;height:20px;"></i></div><div class="name">Construction</div></div>
+      <div class="surface-item"><div class="surface-icon"><i data-lucide="users" style="width:20px;height:20px;"></i></div><div class="name">Field Labor</div></div>
+      <div class="surface-item"><div class="surface-icon"><i data-lucide="building-2" style="width:20px;height:20px;"></i></div><div class="name">Subcontractors</div></div>
+      <div class="surface-item"><div class="surface-icon"><i data-lucide="receipt" style="width:20px;height:20px;"></i></div><div class="name">AP / AR</div></div>
+      <div class="surface-item"><div class="surface-icon"><i data-lucide="bar-chart-3" style="width:20px;height:20px;"></i></div><div class="name">Finance</div></div>
+      <div class="surface-item"><div class="surface-icon"><i data-lucide="ruler" style="width:20px;height:20px;"></i></div><div class="name">Engineering</div></div>
+      <div class="surface-item"><div class="surface-icon"><i data-lucide="pen-tool" style="width:20px;height:20px;"></i></div><div class="name">Design</div></div>
     </div>
   </div>
 </section>
 
 <!-- ═══ 4. DISCOVERY ═══ -->
-<section class="section section--white">
+<section class="section section--gray">
   <div class="section-inner">
-    <div class="fade-up" style="text-align:center; max-width:800px; margin:0 auto;">
-      <div class="eyebrow">How We Get There</div>
+    <div class="fade-up">
+      <div class="tag">How We Get There</div>
       <h2>We don't guess. We ask.</h2>
-      <p class="lead" style="margin:0 auto;">Before building anything else, leadership completes an adaptive discovery process. The system interviews you — one question at a time — and generates the exact blueprint for your company.</p>
+      <p class="desc">Before building anything else, leadership completes an adaptive discovery process. The system interviews you — one question at a time — and generates the exact blueprint for your company.</p>
     </div>
-    <div class="discovery-flow fade-up">
+    <div class="disc-flow fade-up">
       <div class="disc-step"><div class="disc-num">1</div><h4>Discovery</h4><p>Adaptive interview across 20 business areas — feels like TurboTax</p></div>
       <div class="disc-step"><div class="disc-num">2</div><h4>Blueprint</h4><p>Auto-generates BRD, PRD, workflows, roles & permissions</p></div>
       <div class="disc-step"><div class="disc-num">3</div><h4>Architecture</h4><p>Data model, KPIs, cost codes, AI guardrails</p></div>
       <div class="disc-step"><div class="disc-num">4</div><h4>Build</h4><p>Sprint backlog, MVP scope, delivery — configured to your company</p></div>
     </div>
-    <p class="fade-up" style="text-align:center; color:var(--gray-500); font-size:0.88rem; margin-top:32px; max-width:640px; margin-left:auto; margin-right:auto;">Nothing gets built on assumptions. The platform is configured to how your company actually operates — not how a generic software vendor thinks you should.</p>
+    <p class="fade-up" style="text-align:center; color:var(--gray-500); font-size:14px; margin-top:32px; max-width:600px; margin-left:auto; margin-right:auto;">Nothing gets built on assumptions. The platform is configured to how your company actually operates — not how a generic software vendor thinks you should.</p>
   </div>
 </section>
 
-<!-- ═══ 5. CEO DASHBOARD (DARK) ═══ -->
-<section class="section section--dark">
+<!-- ═══ 5. CEO DASHBOARD (LIGHT) ═══ -->
+<section class="section section--white">
   <div class="section-inner">
-    <div class="fade-up" style="text-align:center; max-width:800px; margin:0 auto;">
-      <div class="eyebrow eyebrow--light">The Destination</div>
-      <h2 class="light">What the CEO dashboard looks like.</h2>
-      <p class="lead lead--light" style="margin:0 auto;">Open one screen. Know the answer. No calls, no spreadsheets, no waiting for month-end.</p>
+    <div class="fade-up">
+      <div class="tag">The Destination</div>
+      <h2>What the CEO dashboard looks like.</h2>
+      <p class="desc">Open one screen. Know the answer. No calls, no spreadsheets, no waiting for month-end.</p>
     </div>
     <div class="dash-container fade-up">
       <div class="dash-frame">
@@ -472,177 +497,176 @@
           <div class="dash-user"><span>Glenn</span><div class="dash-avatar">G</div></div>
         </div>
         <div class="dash-body">
+          <!-- KPIs -->
           <div class="kpi-row">
-            <div class="kpi-card green"><div class="kpi-val">$42.3M</div><div class="kpi-lbl">Active Backlog</div><div class="kpi-trend up">+12% YoY</div></div>
+            <div class="kpi-card blue"><div class="kpi-val">$42.3M</div><div class="kpi-lbl">Active Backlog</div><div class="kpi-trend up">+12% YoY</div></div>
             <div class="kpi-card green"><div class="kpi-val">28.4%</div><div class="kpi-lbl">Forecast Margin</div><div class="kpi-trend up">+1.2pp</div></div>
-            <div class="kpi-card green"><div class="kpi-val">$2.1M</div><div class="kpi-lbl">Cash Position</div><div class="kpi-trend neutral">Healthy</div></div>
+            <div class="kpi-card green"><div class="kpi-val">$2.1M</div><div class="kpi-lbl">Cash Position</div><div class="kpi-trend up">Healthy</div></div>
             <div class="kpi-card red"><div class="kpi-val">2</div><div class="kpi-lbl">Projects at Risk</div><div class="kpi-trend down">Was 0</div></div>
-            <div class="kpi-card blue"><div class="kpi-val">87%</div><div class="kpi-lbl">Labor Utilization</div><div class="kpi-trend up">+3%</div></div>
+            <div class="kpi-card green"><div class="kpi-val">87%</div><div class="kpi-lbl">Labor Utilization</div><div class="kpi-trend up">+3%</div></div>
             <div class="kpi-card amber"><div class="kpi-val">$1.4M</div><div class="kpi-lbl">AR > 60 Days</div><div class="kpi-trend down">+$200K</div></div>
           </div>
+
+          <!-- Split: Table + Alerts -->
           <div class="dash-split">
             <div class="dash-panel">
-              <div class="dash-panel-title"><i data-lucide="folder-kanban"></i> Active Projects — Cost to Complete</div>
+              <div class="dash-panel-title"><i data-lucide="folder-open"></i> Active Projects — Cost to Complete</div>
               <table class="proj-table">
                 <thead><tr><th>Project</th><th>Contract</th><th>Actual</th><th>ETC</th><th>Forecast</th><th>Margin</th><th>Health</th></tr></thead>
                 <tbody>
-                  <tr class="clickable" data-project="atl"><td class="proj-name">ATL Data Center</td><td>$8.2M</td><td>$3.1M</td><td>$4.4M</td><td>$7.5M</td><td class="margin-pos">8.5%</td><td><div class="health-bar"><div class="health-bar-fill" style="width:85%; background:var(--positive);"></div></div></td></tr>
-                  <tr class="clickable selected" data-project="mia"><td class="proj-name">MIA Tower Fit-out</td><td>$12.6M</td><td>$7.8M</td><td>$5.1M</td><td>$12.9M</td><td class="margin-neg">-2.4%</td><td><div class="health-bar"><div class="health-bar-fill" style="width:35%; background:var(--danger);"></div></div></td></tr>
-                  <tr class="clickable" data-project="dfw"><td class="proj-name">DFW Campus Ph.2</td><td>$6.4M</td><td>$1.2M</td><td>$4.8M</td><td>$6.0M</td><td class="margin-pos">6.3%</td><td><div class="health-bar"><div class="health-bar-fill" style="width:70%; background:var(--positive);"></div></div></td></tr>
-                  <tr class="clickable" data-project="ord"><td class="proj-name">ORD Warehouse</td><td>$4.8M</td><td>$2.9M</td><td>$2.1M</td><td>$5.0M</td><td class="margin-neg">-4.2%</td><td><div class="health-bar"><div class="health-bar-fill" style="width:30%; background:var(--danger);"></div></div></td></tr>
-                  <tr class="clickable" data-project="sea"><td class="proj-name">SEA Office Reno</td><td>$3.1M</td><td>$0.4M</td><td>$2.4M</td><td>$2.8M</td><td class="margin-pos">9.7%</td><td><div class="health-bar"><div class="health-bar-fill" style="width:92%; background:var(--positive);"></div></div></td></tr>
+                  <tr class="clickable" data-project="atl"><td class="proj-name">ATL Data Center</td><td>$8.2M</td><td>$3.1M</td><td>$4.4M</td><td>$7.5M</td><td class="margin-pos">8.5%</td><td><div class="health-bar"><div class="health-bar-fill" style="width:85%;background:var(--positive);"></div></div></td></tr>
+                  <tr class="clickable selected" data-project="mia"><td class="proj-name">MIA Tower Fit-out</td><td>$12.6M</td><td>$7.8M</td><td>$5.1M</td><td>$12.9M</td><td class="margin-neg">-2.4%</td><td><div class="health-bar"><div class="health-bar-fill" style="width:35%;background:var(--danger);"></div></div></td></tr>
+                  <tr class="clickable" data-project="dfw"><td class="proj-name">DFW Campus Ph.2</td><td>$6.4M</td><td>$1.2M</td><td>$4.8M</td><td>$6.0M</td><td class="margin-pos">6.3%</td><td><div class="health-bar"><div class="health-bar-fill" style="width:70%;background:var(--positive);"></div></div></td></tr>
+                  <tr class="clickable" data-project="ord"><td class="proj-name">ORD Warehouse</td><td>$4.8M</td><td>$2.9M</td><td>$2.1M</td><td>$5.0M</td><td class="margin-neg">-4.2%</td><td><div class="health-bar"><div class="health-bar-fill" style="width:30%;background:var(--danger);"></div></div></td></tr>
+                  <tr class="clickable" data-project="sea"><td class="proj-name">SEA Office Reno</td><td>$3.1M</td><td>$0.4M</td><td>$2.4M</td><td>$2.8M</td><td class="margin-pos">9.7%</td><td><div class="health-bar"><div class="health-bar-fill" style="width:90%;background:var(--positive);"></div></div></td></tr>
                 </tbody>
               </table>
-              <div class="click-hint"><i data-lucide="mouse-pointer-click"></i> Click any project to drill down</div>
+              <div class="click-hint"><i data-lucide="mouse-pointer-click"></i> Click any project row to drill down into full detail</div>
             </div>
             <div class="dash-panel">
               <div class="dash-panel-title"><i data-lucide="alert-triangle"></i> Attention Required</div>
-              <div class="alert-item alert-item--red"><div class="alert-icon alert-icon--red">!</div><div class="alert-text"><strong>MIA Tower over budget</strong><span>ETC exceeds contract by $300K — labor & materials</span></div></div>
-              <div class="alert-item alert-item--amber"><div class="alert-icon alert-icon--amber">!</div><div class="alert-text"><strong>ORD schedule slip</strong><span>2 weeks behind — labor shortage on electrical</span></div></div>
-              <div class="alert-item alert-item--green"><div class="alert-icon alert-icon--green">+</div><div class="alert-text"><strong>AR aging: Apex Corp</strong><span>$480K outstanding 72 days — escalation recommended</span></div></div>
-              <div class="alert-item alert-item--green"><div class="alert-icon alert-icon--green">✓</div><div class="alert-text"><strong>DFW change order approved</strong><span>+$180K scope — margin preserved at 6.3%</span></div></div>
+              <div class="alert-item alert-item--red"><div class="alert-icon alert-icon--red"><i data-lucide="alert-circle" style="width:12px;height:12px;"></i></div><div class="alert-text"><strong>MIA Tower over budget</strong><span>ETC exceeds contract by $300K — labor & materials</span></div></div>
+              <div class="alert-item alert-item--amber"><div class="alert-icon alert-icon--amber"><i data-lucide="clock" style="width:12px;height:12px;"></i></div><div class="alert-text"><strong>ORD schedule slip</strong><span>2 weeks behind — labor shortage on electrical</span></div></div>
+              <div class="alert-item alert-item--green"><div class="alert-icon alert-icon--green"><i data-lucide="dollar-sign" style="width:12px;height:12px;"></i></div><div class="alert-text"><strong>AR aging: Apex Corp</strong><span>$480K outstanding 72 days — escalation recommended</span></div></div>
+              <div class="alert-item alert-item--green"><div class="alert-icon alert-icon--green"><i data-lucide="check" style="width:12px;height:12px;"></i></div><div class="alert-text"><strong>DFW change order approved</strong><span>+$180K scope — margin preserved at 6.3%</span></div></div>
             </div>
           </div>
 
-          <!-- ═══ DRILL-DOWN PANEL ═══ -->
-          <div class="drill-section active" id="drill-panel">
-            <div class="drill-frame">
-              <div class="drill-header">
-                <div>
-                  <div class="drill-title" id="drill-project-name">MIA Tower Fit-out</div>
-                  <div class="drill-subtitle" id="drill-project-meta">Client: Meridian Development Group — PM: Jake Harmon — Status: Construction — Updated: Today, 9:14 AM</div>
+          <!-- ═══ DRILL-DOWN (Pre-expanded) ═══ -->
+          <div class="drill-section" id="drill-panel">
+            <div class="drill-header">
+              <div>
+                <div class="drill-title">MIA Tower Fit-out</div>
+                <div class="drill-subtitle">Client: Meridian Development Group — PM: Jake Harmon — Status: Construction — Updated: Today, 9:14 AM</div>
+              </div>
+              <div class="drill-tabs">
+                <div class="drill-tab active" data-tab="cost">Cost</div>
+                <div class="drill-tab" data-tab="schedule">Schedule</div>
+                <div class="drill-tab" data-tab="labor">Labor</div>
+                <div class="drill-tab" data-tab="risk">Risk</div>
+                <div class="drill-tab" data-tab="changes">Change Orders</div>
+              </div>
+            </div>
+            <div class="drill-body">
+              <!-- COST TAB -->
+              <div class="drill-tab-content active" id="tab-cost">
+                <div class="waterfall">
+                  <div class="wf-col"><div class="wf-bar-wrap"><div class="wf-bar wf-bar--contract" style="height:140px;"><div class="wf-bar-val">$12.6M</div></div></div><div class="wf-lbl">Contract<br>Value</div></div>
+                  <div class="wf-col"><div class="wf-bar-wrap"><div class="wf-bar wf-bar--budget" style="height:120px;"><div class="wf-bar-val">$10.8M</div></div></div><div class="wf-lbl">Original<br>Budget</div></div>
+                  <div class="wf-col"><div class="wf-bar-wrap"><div class="wf-bar wf-bar--actual" style="height:87px;"><div class="wf-bar-val">$7.8M</div></div></div><div class="wf-lbl">Actual<br>Cost</div></div>
+                  <div class="wf-col"><div class="wf-bar-wrap"><div class="wf-bar wf-bar--committed" style="height:42px;"><div class="wf-bar-val">$3.8M</div></div></div><div class="wf-lbl">Committed<br>Cost</div></div>
+                  <div class="wf-col"><div class="wf-bar-wrap"><div class="wf-bar wf-bar--remaining" style="height:14px;"><div class="wf-bar-val">$1.3M</div></div></div><div class="wf-lbl">Est.<br>Remaining</div></div>
+                  <div class="wf-col"><div class="wf-bar-wrap"><div class="wf-bar wf-bar--forecast" style="height:143px;"><div class="wf-bar-val">$12.9M</div></div></div><div class="wf-lbl">Forecast<br>Final</div></div>
+                  <div class="wf-col"><div class="wf-bar-wrap"><div class="wf-bar wf-bar--variance" style="height:8px;"><div class="wf-bar-val">-$300K</div></div></div><div class="wf-lbl">Variance</div></div>
                 </div>
-                <div class="drill-tabs">
-                  <div class="drill-tab active" data-tab="cost">Cost</div>
-                  <div class="drill-tab" data-tab="schedule">Schedule</div>
-                  <div class="drill-tab" data-tab="labor">Labor</div>
-                  <div class="drill-tab" data-tab="risk">Risk</div>
-                  <div class="drill-tab" data-tab="changes">Change Orders</div>
+                <div class="cost-split">
+                  <div class="cost-panel">
+                    <div class="cost-panel-title">Cost by Category — Budget vs. Actual</div>
+                    <div class="cost-row"><span class="cost-cat">Labor</span><div class="cost-vals"><span class="cost-val">$4.2M</span><span class="cost-val over">$4.6M</span></div></div>
+                    <div class="cost-row"><span class="cost-cat">Materials</span><div class="cost-vals"><span class="cost-val">$3.1M</span><span class="cost-val over">$3.4M</span></div></div>
+                    <div class="cost-row"><span class="cost-cat">Subcontractors</span><div class="cost-vals"><span class="cost-val">$1.8M</span><span class="cost-val under">$1.6M</span></div></div>
+                    <div class="cost-row"><span class="cost-cat">Equipment</span><div class="cost-vals"><span class="cost-val">$0.9M</span><span class="cost-val">$0.9M</span></div></div>
+                    <div class="cost-row"><span class="cost-cat">Engineering</span><div class="cost-vals"><span class="cost-val">$0.4M</span><span class="cost-val">$0.4M</span></div></div>
+                    <div class="cost-row"><span class="cost-cat">Travel</span><div class="cost-vals"><span class="cost-val">$0.2M</span><span class="cost-val over">$0.3M</span></div></div>
+                    <div class="cost-row"><span class="cost-cat">General Conditions</span><div class="cost-vals"><span class="cost-val">$0.2M</span><span class="cost-val">$0.2M</span></div></div>
+                  </div>
+                  <div class="cost-panel">
+                    <div class="cost-panel-title">Forecast Formula</div>
+                    <div class="cost-row"><span class="cost-cat">Actual Cost</span><div class="cost-vals"><span class="cost-val">$7.8M</span></div></div>
+                    <div class="cost-row"><span class="cost-cat">+ Committed Cost</span><div class="cost-vals"><span class="cost-val">$3.8M</span></div></div>
+                    <div class="cost-row"><span class="cost-cat">+ Est. Remaining</span><div class="cost-vals"><span class="cost-val">$1.3M</span></div></div>
+                    <div style="margin-top:12px; padding-top:12px; border-top:2px solid var(--gray-200);">
+                      <div class="cost-row"><span class="cost-cat" style="font-weight:700; color:var(--gray-900);">= Forecast Final Cost</span><div class="cost-vals"><span class="cost-val total" style="color:var(--danger);">$12.9M</span></div></div>
+                      <div class="cost-row"><span class="cost-cat" style="font-weight:700; color:var(--gray-900);">Forecast Gross Profit</span><div class="cost-vals"><span class="cost-val" style="color:var(--danger); font-weight:700;">-$300K</span></div></div>
+                      <div class="cost-row"><span class="cost-cat" style="font-weight:700; color:var(--gray-900);">Forecast Gross Margin</span><div class="cost-vals"><span class="cost-val" style="color:var(--danger); font-weight:700;">-2.4%</span></div></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="drill-summary">
+                  <div class="ds-card"><div class="ds-val red">$5.1M</div><div class="ds-lbl">Cost to Complete</div></div>
+                  <div class="ds-card"><div class="ds-val red">-2.4%</div><div class="ds-lbl">Forecast Margin</div></div>
+                  <div class="ds-card"><div class="ds-val blue">62%</div><div class="ds-lbl">% Complete</div></div>
+                  <div class="ds-card"><div class="ds-val amber">$300K</div><div class="ds-lbl">Over Budget</div></div>
                 </div>
               </div>
-              <div class="drill-body">
-                <!-- COST TAB -->
-                <div class="drill-tab-content active" id="tab-cost">
-                  <div class="waterfall">
-                    <div class="wf-col"><div class="wf-bar-wrap"><div class="wf-bar wf-bar--contract" style="height:140px;"><div class="wf-bar-val">$12.6M</div></div></div><div class="wf-lbl">Contract<br>Value</div></div>
-                    <div class="wf-col"><div class="wf-bar-wrap"><div class="wf-bar wf-bar--budget" style="height:120px;"><div class="wf-bar-val">$10.8M</div></div></div><div class="wf-lbl">Original<br>Budget</div></div>
-                    <div class="wf-col"><div class="wf-bar-wrap"><div class="wf-bar wf-bar--actual" style="height:87px;"><div class="wf-bar-val">$7.8M</div></div></div><div class="wf-lbl">Actual<br>Cost</div></div>
-                    <div class="wf-col"><div class="wf-bar-wrap"><div class="wf-bar wf-bar--committed" style="height:42px;"><div class="wf-bar-val">$3.8M</div></div></div><div class="wf-lbl">Committed<br>Cost</div></div>
-                    <div class="wf-col"><div class="wf-bar-wrap"><div class="wf-bar wf-bar--remaining" style="height:14px;"><div class="wf-bar-val">$1.3M</div></div></div><div class="wf-lbl">Est.<br>Remaining</div></div>
-                    <div class="wf-col"><div class="wf-bar-wrap"><div class="wf-bar wf-bar--forecast" style="height:143px;"><div class="wf-bar-val">$12.9M</div></div></div><div class="wf-lbl">Forecast<br>Final</div></div>
-                    <div class="wf-col"><div class="wf-bar-wrap"><div class="wf-bar wf-bar--variance" style="height:6px;"><div class="wf-bar-val">-$300K</div></div></div><div class="wf-lbl">Variance</div></div>
+
+              <!-- SCHEDULE TAB -->
+              <div class="drill-tab-content" id="tab-schedule">
+                <div class="gantt">
+                  <div class="gantt-row"><div class="gantt-label">Design</div><div class="gantt-bar-track"><div class="gantt-bar-planned" style="left:0%;width:15%;"></div><div class="gantt-bar-actual on-track" style="left:0%;width:15%;"></div></div></div>
+                  <div class="gantt-row"><div class="gantt-label">Engineering</div><div class="gantt-bar-track"><div class="gantt-bar-planned" style="left:10%;width:20%;"></div><div class="gantt-bar-actual on-track" style="left:10%;width:20%;"></div></div></div>
+                  <div class="gantt-row"><div class="gantt-label">Procurement</div><div class="gantt-bar-track"><div class="gantt-bar-planned" style="left:20%;width:25%;"></div><div class="gantt-bar-actual on-track" style="left:20%;width:25%;"></div></div></div>
+                  <div class="gantt-row"><div class="gantt-label">Structural</div><div class="gantt-bar-track"><div class="gantt-bar-planned" style="left:30%;width:30%;"></div><div class="gantt-bar-actual on-track" style="left:30%;width:30%;"></div></div></div>
+                  <div class="gantt-row"><div class="gantt-label">MEP Rough-in</div><div class="gantt-bar-track"><div class="gantt-bar-planned" style="left:45%;width:25%;"></div><div class="gantt-bar-actual behind" style="left:45%;width:20%;"></div></div></div>
+                  <div class="gantt-row"><div class="gantt-label">Electrical</div><div class="gantt-bar-track"><div class="gantt-bar-planned" style="left:50%;width:25%;"></div><div class="gantt-bar-actual behind" style="left:52%;width:18%;"></div></div></div>
+                  <div class="gantt-row"><div class="gantt-label">Finishes</div><div class="gantt-bar-track"><div class="gantt-bar-planned" style="left:70%;width:20%;"></div></div></div>
+                  <div class="gantt-row"><div class="gantt-label">Commissioning</div><div class="gantt-bar-track"><div class="gantt-bar-planned" style="left:88%;width:12%;"></div></div></div>
+                </div>
+                <div class="gantt-legend">
+                  <div class="gantt-legend-item"><div class="gantt-legend-dot" style="background:var(--gray-300);"></div>Planned</div>
+                  <div class="gantt-legend-item"><div class="gantt-legend-dot" style="background:var(--positive);"></div>On Track</div>
+                  <div class="gantt-legend-item"><div class="gantt-legend-dot" style="background:var(--danger);"></div>Behind</div>
+                </div>
+                <div class="drill-summary">
+                  <div class="ds-card"><div class="ds-val blue">62%</div><div class="ds-lbl">Schedule Complete</div></div>
+                  <div class="ds-card"><div class="ds-val amber">-2 wks</div><div class="ds-lbl">Schedule Variance</div></div>
+                  <div class="ds-card"><div class="ds-val red">MEP</div><div class="ds-lbl">Critical Path Item</div></div>
+                  <div class="ds-card"><div class="ds-val green">Mar 2026</div><div class="ds-lbl">Target Completion</div></div>
+                </div>
+              </div>
+
+              <!-- LABOR TAB -->
+              <div class="drill-tab-content" id="tab-labor">
+                <div class="labor-grid">
+                  <div class="labor-card">
+                    <div class="labor-card-title">Hours by Trade — Budget vs. Actual</div>
+                    <div class="labor-row"><span class="labor-trade">Electricians</span><span class="labor-hours">4,200 / 3,600 budgeted</span><span class="labor-flag overtime">+17% OT</span></div>
+                    <div class="labor-row"><span class="labor-trade">Plumbers</span><span class="labor-hours">2,100 / 2,200 budgeted</span><span class="labor-flag normal">On track</span></div>
+                    <div class="labor-row"><span class="labor-trade">HVAC Techs</span><span class="labor-hours">1,800 / 1,900 budgeted</span><span class="labor-flag normal">On track</span></div>
+                    <div class="labor-row"><span class="labor-trade">Iron Workers</span><span class="labor-hours">3,400 / 3,200 budgeted</span><span class="labor-flag overtime">+6% OT</span></div>
+                    <div class="labor-row"><span class="labor-trade">Carpenters</span><span class="labor-hours">1,600 / 1,800 budgeted</span><span class="labor-flag normal">Under</span></div>
+                    <div class="labor-row"><span class="labor-trade">Laborers</span><span class="labor-hours">5,200 / 5,000 budgeted</span><span class="labor-flag normal">On track</span></div>
                   </div>
-                  <div class="cost-breakdown">
-                    <div class="cb-panel">
-                      <div class="cb-title">Cost by Category — Budget vs. Actual</div>
-                      <div class="cb-row"><span class="cb-cat">Labor</span><div class="cb-vals"><span class="cb-val">$4.2M</span><span class="cb-val over">$4.6M</span></div></div>
-                      <div class="cb-row"><span class="cb-cat">Materials</span><div class="cb-vals"><span class="cb-val">$3.1M</span><span class="cb-val over">$3.4M</span></div></div>
-                      <div class="cb-row"><span class="cb-cat">Subcontractors</span><div class="cb-vals"><span class="cb-val">$1.8M</span><span class="cb-val under">$1.6M</span></div></div>
-                      <div class="cb-row"><span class="cb-cat">Equipment</span><div class="cb-vals"><span class="cb-val">$0.9M</span><span class="cb-val">$0.9M</span></div></div>
-                      <div class="cb-row"><span class="cb-cat">Engineering</span><div class="cb-vals"><span class="cb-val">$0.4M</span><span class="cb-val">$0.4M</span></div></div>
-                      <div class="cb-row"><span class="cb-cat">Travel</span><div class="cb-vals"><span class="cb-val">$0.2M</span><span class="cb-val over">$0.3M</span></div></div>
-                      <div class="cb-row"><span class="cb-cat">General Conditions</span><div class="cb-vals"><span class="cb-val">$0.2M</span><span class="cb-val">$0.2M</span></div></div>
-                    </div>
-                    <div class="cb-panel">
-                      <div class="cb-title">Forecast Formula</div>
-                      <div class="cb-row"><span class="cb-cat">Actual Cost</span><div class="cb-vals"><span class="cb-val">$7.8M</span></div></div>
-                      <div class="cb-row"><span class="cb-cat">+ Committed Cost</span><div class="cb-vals"><span class="cb-val">$3.8M</span></div></div>
-                      <div class="cb-row"><span class="cb-cat">+ Est. Remaining</span><div class="cb-vals"><span class="cb-val">$1.3M</span></div></div>
-                      <div style="margin-top:12px; padding-top:12px; border-top:1px solid rgba(255,255,255,0.06);">
-                        <div class="cb-row"><span class="cb-cat" style="font-weight:700; color:#fff;">= Forecast Final Cost</span><div class="cb-vals"><span class="cb-val" style="color:var(--danger); font-weight:700;">$12.9M</span></div></div>
-                        <div class="cb-row"><span class="cb-cat" style="font-weight:700; color:#fff;">Forecast Gross Profit</span><div class="cb-vals"><span class="cb-val" style="color:var(--danger);">-$300K</span></div></div>
-                        <div class="cb-row"><span class="cb-cat" style="font-weight:700; color:#fff;">Forecast Gross Margin</span><div class="cb-vals"><span class="cb-val" style="color:var(--danger);">-2.4%</span></div></div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="drill-summary">
-                    <div class="ds-card"><div class="ds-val red">$5.1M</div><div class="ds-lbl">Cost to Complete</div></div>
-                    <div class="ds-card"><div class="ds-val red">-2.4%</div><div class="ds-lbl">Forecast Margin</div></div>
-                    <div class="ds-card"><div class="ds-val blue">62%</div><div class="ds-lbl">% Complete</div></div>
-                    <div class="ds-card"><div class="ds-val amber">$300K</div><div class="ds-lbl">Over Budget</div></div>
+                  <div class="labor-card">
+                    <div class="labor-card-title">Crew Utilization This Week</div>
+                    <div class="labor-row"><span class="labor-trade">Total Headcount</span><span class="labor-util" style="color:var(--brand);">42</span></div>
+                    <div class="labor-row"><span class="labor-trade">Avg. Utilization</span><span class="labor-util" style="color:var(--positive);">91%</span></div>
+                    <div class="labor-row"><span class="labor-trade">Overtime Hours</span><span class="labor-util" style="color:var(--danger);">186 hrs</span></div>
+                    <div class="labor-row"><span class="labor-trade">Overtime Cost (week)</span><span class="labor-util" style="color:var(--danger);">$14,200</span></div>
+                    <div class="labor-row"><span class="labor-trade">Open Positions</span><span class="labor-util" style="color:var(--warn);">3</span></div>
+                    <div class="labor-row"><span class="labor-trade">Safety Incidents (MTD)</span><span class="labor-util" style="color:var(--positive);">0</span></div>
                   </div>
                 </div>
+              </div>
 
-                <!-- SCHEDULE TAB -->
-                <div class="drill-tab-content" id="tab-schedule">
-                  <div class="gantt">
-                    <div class="gantt-row"><div class="gantt-label">Design</div><div class="gantt-bar-track"><div class="gantt-bar-planned" style="left:0%;width:15%;"></div><div class="gantt-bar-actual on-track" style="left:0%;width:15%;"></div></div></div>
-                    <div class="gantt-row"><div class="gantt-label">Engineering</div><div class="gantt-bar-track"><div class="gantt-bar-planned" style="left:10%;width:20%;"></div><div class="gantt-bar-actual on-track" style="left:10%;width:20%;"></div></div></div>
-                    <div class="gantt-row"><div class="gantt-label">Procurement</div><div class="gantt-bar-track"><div class="gantt-bar-planned" style="left:20%;width:25%;"></div><div class="gantt-bar-actual on-track" style="left:20%;width:25%;"></div></div></div>
-                    <div class="gantt-row"><div class="gantt-label">Structural</div><div class="gantt-bar-track"><div class="gantt-bar-planned" style="left:30%;width:30%;"></div><div class="gantt-bar-actual on-track" style="left:30%;width:30%;"></div></div></div>
-                    <div class="gantt-row"><div class="gantt-label">MEP Rough-in</div><div class="gantt-bar-track"><div class="gantt-bar-planned" style="left:45%;width:25%;"></div><div class="gantt-bar-actual behind" style="left:45%;width:20%;"></div></div></div>
-                    <div class="gantt-row"><div class="gantt-label">Electrical</div><div class="gantt-bar-track"><div class="gantt-bar-planned" style="left:50%;width:25%;"></div><div class="gantt-bar-actual behind" style="left:52%;width:18%;"></div></div></div>
-                    <div class="gantt-row"><div class="gantt-label">Finishes</div><div class="gantt-bar-track"><div class="gantt-bar-planned" style="left:70%;width:20%;"></div></div></div>
-                    <div class="gantt-row"><div class="gantt-label">Commissioning</div><div class="gantt-bar-track"><div class="gantt-bar-planned" style="left:88%;width:12%;"></div></div></div>
-                  </div>
-                  <div class="gantt-legend">
-                    <div class="gantt-legend-item"><div class="gantt-legend-dot" style="background:rgba(79,106,255,0.3);"></div>Planned</div>
-                    <div class="gantt-legend-item"><div class="gantt-legend-dot" style="background:var(--positive);"></div>On Track</div>
-                    <div class="gantt-legend-item"><div class="gantt-legend-dot" style="background:var(--danger);"></div>Behind</div>
-                  </div>
-                  <div class="drill-summary" style="margin-top:20px;">
-                    <div class="ds-card"><div class="ds-val blue">62%</div><div class="ds-lbl">Schedule Complete</div></div>
-                    <div class="ds-card"><div class="ds-val amber">-2 wks</div><div class="ds-lbl">Schedule Variance</div></div>
-                    <div class="ds-card"><div class="ds-val red">MEP</div><div class="ds-lbl">Critical Path Item</div></div>
-                    <div class="ds-card"><div class="ds-val green">Mar 2026</div><div class="ds-lbl">Target Completion</div></div>
-                  </div>
-                </div>
+              <!-- RISK TAB -->
+              <div class="drill-tab-content" id="tab-risk">
+                <table class="risk-table">
+                  <thead><tr><th>Risk</th><th>Probability</th><th>Impact</th><th>Score</th><th>Mitigation</th><th>Status</th></tr></thead>
+                  <tbody>
+                    <tr><td>Electrical labor overrun</td><td><span class="risk-badge high">High</span></td><td><span class="risk-badge high">High</span></td><td style="color:var(--danger); font-weight:700;">9</td><td style="font-size:12px; color:var(--gray-500);">Added 3 electricians; reviewing scope reduction on Level 4</td><td><span class="risk-status mitigating">Mitigating</span></td></tr>
+                    <tr><td>MEP schedule delay</td><td><span class="risk-badge high">High</span></td><td><span class="risk-badge medium">Med</span></td><td style="color:var(--warn); font-weight:700;">6</td><td style="font-size:12px; color:var(--gray-500);">Weekend shifts approved; monitoring daily</td><td><span class="risk-status mitigating">Mitigating</span></td></tr>
+                    <tr><td>Material price escalation</td><td><span class="risk-badge medium">Med</span></td><td><span class="risk-badge medium">Med</span></td><td style="color:var(--warn); font-weight:700;">4</td><td style="font-size:12px; color:var(--gray-500);">Locked pricing on 80% of remaining POs</td><td><span class="risk-status monitoring">Monitoring</span></td></tr>
+                    <tr><td>Client scope creep</td><td><span class="risk-badge low">Low</span></td><td><span class="risk-badge high">High</span></td><td style="color:var(--warn); font-weight:700;">3</td><td style="font-size:12px; color:var(--gray-500);">Change order process enforced; CO-002/003 pending</td><td><span class="risk-status monitoring">Monitoring</span></td></tr>
+                    <tr><td>Weather delays</td><td><span class="risk-badge low">Low</span></td><td><span class="risk-badge low">Low</span></td><td style="color:var(--positive); font-weight:700;">1</td><td style="font-size:12px; color:var(--gray-500);">Interior work only remaining; no exposure</td><td><span class="risk-status monitoring">Monitoring</span></td></tr>
+                  </tbody>
+                </table>
+              </div>
 
-                <!-- LABOR TAB -->
-                <div class="drill-tab-content" id="tab-labor">
-                  <div class="labor-grid">
-                    <div class="labor-card">
-                      <div class="labor-card-title">Hours by Trade — Budget vs. Actual</div>
-                      <div class="labor-row"><span class="labor-trade">Electricians</span><span class="labor-hours">4,200 / 3,600 budgeted</span><span class="labor-flag overtime">+17% OT</span></div>
-                      <div class="labor-row"><span class="labor-trade">Plumbers</span><span class="labor-hours">2,100 / 2,200 budgeted</span><span class="labor-flag normal">On track</span></div>
-                      <div class="labor-row"><span class="labor-trade">HVAC Techs</span><span class="labor-hours">1,800 / 1,900 budgeted</span><span class="labor-flag normal">On track</span></div>
-                      <div class="labor-row"><span class="labor-trade">Iron Workers</span><span class="labor-hours">3,400 / 3,200 budgeted</span><span class="labor-flag overtime">+6% OT</span></div>
-                      <div class="labor-row"><span class="labor-trade">Carpenters</span><span class="labor-hours">1,600 / 1,800 budgeted</span><span class="labor-flag normal">Under</span></div>
-                      <div class="labor-row"><span class="labor-trade">Laborers</span><span class="labor-hours">5,200 / 5,000 budgeted</span><span class="labor-flag normal">On track</span></div>
-                    </div>
-                    <div class="labor-card">
-                      <div class="labor-card-title">Crew Utilization This Week</div>
-                      <div class="labor-row"><span class="labor-trade">Total Headcount</span><span class="labor-util" style="color:var(--brand-light);">42</span></div>
-                      <div class="labor-row"><span class="labor-trade">Avg. Utilization</span><span class="labor-util" style="color:var(--positive);">91%</span></div>
-                      <div class="labor-row"><span class="labor-trade">Overtime Hours</span><span class="labor-util" style="color:var(--danger);">186 hrs</span></div>
-                      <div class="labor-row"><span class="labor-trade">Overtime Cost (week)</span><span class="labor-util" style="color:var(--danger);">$14,200</span></div>
-                      <div class="labor-row"><span class="labor-trade">Open Positions</span><span class="labor-util" style="color:var(--warn);">3</span></div>
-                      <div class="labor-row"><span class="labor-trade">Safety Incidents (MTD)</span><span class="labor-util" style="color:var(--positive);">0</span></div>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- RISK TAB -->
-                <div class="drill-tab-content" id="tab-risk">
-                  <table class="risk-table">
-                    <thead><tr><th>Risk</th><th>Probability</th><th>Impact</th><th>Score</th><th>Mitigation</th><th>Status</th></tr></thead>
-                    <tbody>
-                      <tr><td>Electrical labor overrun</td><td><span class="risk-badge high">High</span></td><td><span class="risk-badge high">High</span></td><td style="color:var(--danger); font-weight:700;">9</td><td style="font-size:0.68rem; color:rgba(255,255,255,0.5);">Added 3 electricians; reviewing scope reduction on Level 4</td><td><span class="risk-status mitigating">Mitigating</span></td></tr>
-                      <tr><td>MEP schedule delay</td><td><span class="risk-badge high">High</span></td><td><span class="risk-badge medium">Med</span></td><td style="color:var(--warn); font-weight:700;">6</td><td style="font-size:0.68rem; color:rgba(255,255,255,0.5);">Weekend shifts approved; monitoring daily</td><td><span class="risk-status mitigating">Mitigating</span></td></tr>
-                      <tr><td>Material price escalation</td><td><span class="risk-badge medium">Med</span></td><td><span class="risk-badge medium">Med</span></td><td style="color:var(--warn); font-weight:700;">4</td><td style="font-size:0.68rem; color:rgba(255,255,255,0.5);">Locked pricing on 80% of remaining POs</td><td><span class="risk-status monitoring">Monitoring</span></td></tr>
-                      <tr><td>Client scope creep</td><td><span class="risk-badge low">Low</span></td><td><span class="risk-badge high">High</span></td><td style="color:var(--warn); font-weight:700;">3</td><td style="font-size:0.68rem; color:rgba(255,255,255,0.5);">Change order process enforced; CO-002/003 pending</td><td><span class="risk-status monitoring">Monitoring</span></td></tr>
-                      <tr><td>Weather delays</td><td><span class="risk-badge low">Low</span></td><td><span class="risk-badge low">Low</span></td><td style="color:var(--positive); font-weight:700;">1</td><td style="font-size:0.68rem; color:rgba(255,255,255,0.5);">Interior work only remaining; no exposure</td><td><span class="risk-status monitoring">Monitoring</span></td></tr>
-                    </tbody>
-                  </table>
-                </div>
-
-                <!-- CHANGE ORDERS TAB -->
-                <div class="drill-tab-content" id="tab-changes">
-                  <div class="cost-breakdown" style="margin-top:0;">
-                    <div class="cb-panel" style="grid-column: 1 / -1;">
-                      <div class="cb-title">Change Order Log</div>
-                      <div class="cb-row" style="padding:12px 0;"><span class="cb-cat" style="font-weight:600; color:#fff;">CO-001: Electrical reroute — Level 3 conflict</span><div class="cb-vals"><span class="cb-val" style="color:var(--positive); font-weight:600;">Approved</span><span class="cb-val">+$120K</span></div></div>
-                      <div style="padding:0 0 12px; font-size:0.68rem; color:rgba(255,255,255,0.4); border-bottom:1px solid rgba(255,255,255,0.04);">Submitted: Jan 14 — Approved: Jan 18 — Approved by: Glenn — Impact: 0 days schedule</div>
-                      <div class="cb-row" style="padding:12px 0;"><span class="cb-cat" style="font-weight:600; color:#fff;">CO-002: HVAC upgrade — client-requested</span><div class="cb-vals"><span class="cb-val" style="color:var(--warn); font-weight:600;">Pending</span><span class="cb-val">+$85K</span></div></div>
-                      <div style="padding:0 0 12px; font-size:0.68rem; color:rgba(255,255,255,0.4); border-bottom:1px solid rgba(255,255,255,0.04);">Submitted: Feb 3 — Awaiting client signature — Impact: +5 days if approved</div>
-                      <div class="cb-row" style="padding:12px 0;"><span class="cb-cat" style="font-weight:600; color:#fff;">CO-003: Fire suppression — code compliance</span><div class="cb-vals"><span class="cb-val" style="color:var(--warn); font-weight:600;">Pending</span><span class="cb-val">+$62K</span></div></div>
-                      <div style="padding:0 0 12px; font-size:0.68rem; color:rgba(255,255,255,0.4);">Submitted: Feb 10 — Under internal review — Impact: 0 days (parallel path)</div>
-                      <div style="margin-top:16px; padding-top:14px; border-top:1px solid rgba(255,255,255,0.06);">
-                        <div class="cb-row"><span class="cb-cat" style="font-weight:700; color:#fff;">Approved Total</span><div class="cb-vals"><span class="cb-val" style="color:var(--positive); font-weight:700;">+$120K</span></div></div>
-                        <div class="cb-row"><span class="cb-cat" style="font-weight:700; color:#fff;">Pending Exposure</span><div class="cb-vals"><span class="cb-val" style="color:var(--warn); font-weight:700;">+$147K</span></div></div>
-                        <div class="cb-row"><span class="cb-cat" style="font-weight:700; color:#fff;">Net Contract Impact</span><div class="cb-vals"><span class="cb-val" style="color:var(--brand-light); font-weight:700;">+$267K (if all approved)</span></div></div>
-                      </div>
-                    </div>
+              <!-- CHANGE ORDERS TAB -->
+              <div class="drill-tab-content" id="tab-changes">
+                <div class="cost-panel" style="background:var(--gray-50); border:1px solid var(--gray-200); border-radius:var(--radius); padding:20px;">
+                  <div class="cost-panel-title">Change Order Log</div>
+                  <div class="cost-row" style="padding:12px 0;"><span class="cost-cat" style="font-weight:600; color:var(--gray-900);">CO-001: Structural reinforcement — design revision</span><div class="cost-vals"><span class="cost-val" style="color:var(--positive); font-weight:600;">Approved</span><span class="cost-val">+$180K</span></div></div>
+                  <div style="padding:0 0 12px; font-size:12px; color:var(--gray-400); border-bottom:1px solid var(--gray-100);">Submitted: Jan 14 — Approved: Jan 18 — Impact: 0 days schedule</div>
+                  <div class="cost-row" style="padding:12px 0;"><span class="cost-cat" style="font-weight:600; color:var(--gray-900);">CO-002: HVAC upgrade — client-requested</span><div class="cost-vals"><span class="cost-val" style="color:var(--warn); font-weight:600;">Pending</span><span class="cost-val">+$85K</span></div></div>
+                  <div style="padding:0 0 12px; font-size:12px; color:var(--gray-400); border-bottom:1px solid var(--gray-100);">Submitted: Feb 3 — Awaiting client signature — Impact: +5 days if approved</div>
+                  <div class="cost-row" style="padding:12px 0;"><span class="cost-cat" style="font-weight:600; color:var(--gray-900);">CO-003: Fire suppression — code compliance</span><div class="cost-vals"><span class="cost-val" style="color:var(--warn); font-weight:600;">Pending</span><span class="cost-val">+$62K</span></div></div>
+                  <div style="padding:0 0 12px; font-size:12px; color:var(--gray-400);">Submitted: Feb 10 — Under internal review — Impact: 0 days (parallel path)</div>
+                  <div style="margin-top:16px; padding-top:14px; border-top:2px solid var(--gray-200);">
+                    <div class="cost-row"><span class="cost-cat" style="font-weight:700; color:var(--gray-900);">Approved Total</span><div class="cost-vals"><span class="cost-val" style="color:var(--positive); font-weight:700;">+$180K</span></div></div>
+                    <div class="cost-row"><span class="cost-cat" style="font-weight:700; color:var(--gray-900);">Pending Exposure</span><div class="cost-vals"><span class="cost-val" style="color:var(--warn); font-weight:700;">+$147K</span></div></div>
+                    <div class="cost-row"><span class="cost-cat" style="font-weight:700; color:var(--gray-900);">Net Contract Impact</span><div class="cost-vals"><span class="cost-val" style="color:var(--brand); font-weight:700;">+$267K (if all approved)</span></div></div>
                   </div>
                 </div>
               </div>
@@ -651,30 +675,30 @@
         </div>
       </div>
     </div>
-    <p class="fade-up" style="text-align:center; color:var(--text-on-dark-dim); font-size:0.82rem; margin-top:24px; font-style:italic;">Illustrative — real numbers come from the Discovery Engine process and live data feeds.</p>
+    <p class="fade-up" style="text-align:center; color:var(--gray-400); font-size:13px; margin-top:20px; font-style:italic;">Illustrative — real numbers come from the Discovery Engine process and live data feeds.</p>
   </div>
 </section>
 
-<!-- ═══ 6. COO OPERATIONAL VIEW (DARK) ═══ -->
-<section class="section section--dark" style="padding-top:60px;">
+<!-- ═══ 6. COO VIEW ═══ -->
+<section class="section section--gray">
   <div class="section-inner">
-    <div class="fade-up" style="text-align:center; max-width:800px; margin:0 auto;">
-      <div class="eyebrow eyebrow--light">Operational Layer</div>
-      <h2 class="light">What the COO sees.</h2>
-      <p class="lead lead--light" style="margin:0 auto;">Resource allocation, approval queues, and vendor performance — across every active project.</p>
+    <div class="fade-up">
+      <div class="tag">Operational Layer</div>
+      <h2>What the COO sees.</h2>
+      <p class="desc">Resource allocation, approval queues, and vendor performance — across every active project.</p>
     </div>
     <div class="coo-grid fade-up">
       <div class="coo-card">
-        <div class="coo-card-title"><i data-lucide="users"></i> Resource Allocation</div>
+        <div class="coo-card-title"><i data-lucide="users" style="width:18px;height:18px;"></i> Resource Allocation</div>
         <div class="coo-row"><span class="coo-label">Electricians</span><span class="coo-value">42 / 38 needed</span></div>
-        <div class="coo-row"><span class="coo-label">Plumbers</span><span class="coo-value">18 / 20 needed</span></div>
+        <div class="coo-row"><span class="coo-label">Plumbers</span><span class="coo-value" style="color:var(--danger);">18 / 20 needed</span></div>
         <div class="coo-row"><span class="coo-label">HVAC</span><span class="coo-value">12 / 12 needed</span></div>
-        <div class="coo-row"><span class="coo-label">Iron Workers</span><span class="coo-value">24 / 28 needed</span></div>
+        <div class="coo-row"><span class="coo-label">Iron Workers</span><span class="coo-value" style="color:var(--danger);">24 / 28 needed</span></div>
         <div class="coo-row"><span class="coo-label">Carpenters</span><span class="coo-value">16 / 14 needed</span></div>
         <div class="coo-row"><span class="coo-label">Laborers</span><span class="coo-value">56 / 52 needed</span></div>
       </div>
       <div class="coo-card">
-        <div class="coo-card-title"><i data-lucide="check-circle"></i> Approval Queue</div>
+        <div class="coo-card-title"><i data-lucide="check-circle" style="width:18px;height:18px;"></i> Approval Queue</div>
         <div class="coo-row"><span class="coo-label">POs awaiting approval</span><span class="coo-value" style="color:var(--warn);">4</span></div>
         <div class="coo-row"><span class="coo-label">Change orders pending</span><span class="coo-value" style="color:var(--warn);">2</span></div>
         <div class="coo-row"><span class="coo-label">Invoices to release</span><span class="coo-value">7</span></div>
@@ -683,25 +707,25 @@
         <div class="coo-row"><span class="coo-label">Avg. approval time</span><span class="coo-value" style="color:var(--positive);">1.8 days</span></div>
       </div>
       <div class="coo-card">
-        <div class="coo-card-title"><i data-lucide="truck"></i> Vendor Scorecard</div>
+        <div class="coo-card-title"><i data-lucide="truck" style="width:18px;height:18px;"></i> Vendor Scorecard</div>
         <div class="coo-row"><span class="coo-label">Apex Electrical</span><div class="coo-bar"><div class="coo-bar-fill" style="width:92%; background:var(--positive);"></div></div></div>
         <div class="coo-row"><span class="coo-label">Metro Plumbing</span><div class="coo-bar"><div class="coo-bar-fill" style="width:85%; background:var(--positive);"></div></div></div>
-        <div class="coo-row"><span class="coo-label">SteelCo Fabrication</span><div class="coo-bar"><div class="coo-bar-fill" style="width:78%; background:var(--brand-light);"></div></div></div>
+        <div class="coo-row"><span class="coo-label">SteelCo Fabrication</span><div class="coo-bar"><div class="coo-bar-fill" style="width:78%; background:var(--brand);"></div></div></div>
         <div class="coo-row"><span class="coo-label">CoolAir HVAC</span><div class="coo-bar"><div class="coo-bar-fill" style="width:65%; background:var(--warn);"></div></div></div>
         <div class="coo-row"><span class="coo-label">FastTrack Logistics</span><div class="coo-bar"><div class="coo-bar-fill" style="width:88%; background:var(--positive);"></div></div></div>
-        <div class="coo-row"><span class="coo-label">ProFinish Interiors</span><div class="coo-bar"><div class="coo-bar-fill" style="width:71%; background:var(--brand-light);"></div></div></div>
+        <div class="coo-row"><span class="coo-label">ProFinish Interiors</span><div class="coo-bar"><div class="coo-bar-fill" style="width:71%; background:var(--brand);"></div></div></div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ═══ 7. AI LAYER (DARK) ═══ -->
-<section class="section section--dark" style="padding-top:60px;">
+<!-- ═══ 7. AI LAYER ═══ -->
+<section class="section section--white">
   <div class="section-inner">
-    <div class="fade-up" style="text-align:center; max-width:800px; margin:0 auto;">
-      <div class="eyebrow eyebrow--light">The Intelligence Layer</div>
-      <h2 class="light">AI that watches every project 24/7.</h2>
-      <p class="lead lead--light" style="margin:0 auto;">Like having a CFO-level analyst monitoring every cost line, every schedule slip, every change order — and surfacing what matters before you ask.</p>
+    <div class="fade-up">
+      <div class="tag">The Intelligence Layer</div>
+      <h2>AI that watches every project 24/7.</h2>
+      <p class="desc">Like having a CFO-level analyst monitoring every cost line, every schedule slip, every change order — and surfacing what matters before you ask.</p>
     </div>
     <div class="ai-container fade-up">
       <div class="ai-frame">
@@ -724,7 +748,7 @@
             <div class="ai-actions"><button class="ai-btn ai-btn--primary">Escalate RFIs</button><button class="ai-btn ai-btn--dismiss">Dismiss</button></div>
           </div>
           <div class="ai-insight">
-            <div class="ai-insight-header"><div class="ai-insight-icon blue"><i data-lucide="file-text"></i></div><span class="ai-insight-type blue">Change Order</span></div>
+            <div class="ai-insight-header"><div class="ai-insight-icon blue"><i data-lucide="file-text"></i></div><span class="ai-insight-type blue">Change Order Draft</span></div>
             <h4>CO-002 HVAC upgrade: AI-drafted description ready</h4>
             <p>Based on RFI-008 response and drawing rev C, drafted change order description with cost breakdown: $52K materials, $28K labor, $5K engineering. Awaiting PM review.</p>
             <div class="ai-actions"><button class="ai-btn ai-btn--primary">Review Draft</button><button class="ai-btn ai-btn--dismiss">Dismiss</button></div>
@@ -745,20 +769,20 @@
   </div>
 </section>
 
-<!-- ═══ 8. ROADMAP (LIGHT) ═══ -->
+<!-- ═══ 8. ROADMAP ═══ -->
 <section class="section section--gray">
   <div class="section-inner">
     <div class="fade-up">
-      <div class="eyebrow">The Roadmap</div>
+      <div class="tag">The Roadmap</div>
       <h2>Travel is live. Here's what comes next.</h2>
-      <p class="lead">Each milestone builds on the last. The Discovery Engine defines the exact scope before anything else gets built. No guessing, no wasted sprints.</p>
+      <p class="desc">Each milestone builds on the last. The Discovery Engine defines the exact scope before anything else gets built.</p>
     </div>
     <div class="roadmap-timeline fade-up">
       <div class="rm-item">
         <div class="rm-dot rm-dot--done"></div>
         <div class="rm-content">
           <h4>Crew Travel & Spend <span class="rm-badge rm-badge--live">Live</span></h4>
-          <p>Bookings, approvals, reconciliation, mobile app — fully operational today. Proved the pattern works.</p>
+          <p>Bookings, approvals, reconciliation, mobile app — fully operational today.</p>
           <div class="rm-deliverables">
             <span class="rm-deliverable">Booking Engine</span>
             <span class="rm-deliverable">Approval Workflow</span>
@@ -772,7 +796,7 @@
         <div class="rm-dot rm-dot--next"></div>
         <div class="rm-content">
           <h4>Enterprise Discovery Engine <span class="rm-badge rm-badge--next">Next</span></h4>
-          <p>Adaptive interview across 20 business areas. Generates the full blueprint — BRD, PRD, workflow maps, role matrix, KPI requirements, AI guardrails. Configured to how your company actually operates.</p>
+          <p>Adaptive interview across 20 business areas. Generates the full blueprint — BRD, PRD, workflow maps, role matrix, KPI requirements, AI guardrails.</p>
           <div class="rm-deliverables">
             <span class="rm-deliverable">Adaptive Questionnaire</span>
             <span class="rm-deliverable">Auto-Generated BRD</span>
@@ -781,14 +805,14 @@
             <span class="rm-deliverable">Role & Permission Matrix</span>
             <span class="rm-deliverable">KPI Definitions</span>
           </div>
-          <div class="rm-duration"><i data-lucide="clock"></i> 4–6 weeks</div>
+          <div class="rm-duration"><i data-lucide="clock" style="width:14px;height:14px;"></i> 4–6 weeks</div>
         </div>
       </div>
       <div class="rm-item">
         <div class="rm-dot rm-dot--future"></div>
         <div class="rm-content">
           <h4>Core Platform & Budget Tracking</h4>
-          <p>Organizations, users, roles, projects, documents. Budget entry, actual cost capture, committed cost tracking, and the cost-to-complete dashboard Glenn sees above.</p>
+          <p>Organizations, users, roles, projects, documents. Budget entry, actual cost capture, committed cost tracking, and the cost-to-complete dashboard.</p>
           <div class="rm-deliverables">
             <span class="rm-deliverable">Org & User Management</span>
             <span class="rm-deliverable">Project Setup</span>
@@ -797,14 +821,14 @@
             <span class="rm-deliverable">ETC Dashboard</span>
             <span class="rm-deliverable">Executive KPIs</span>
           </div>
-          <div class="rm-duration"><i data-lucide="clock"></i> 8–12 weeks</div>
+          <div class="rm-duration"><i data-lucide="clock" style="width:14px;height:14px;"></i> 8–12 weeks</div>
         </div>
       </div>
       <div class="rm-item">
         <div class="rm-dot rm-dot--future"></div>
         <div class="rm-content">
           <h4>Workflow Engine & Approvals</h4>
-          <p>State machines for every business process — from PO approval to project closeout. Audit trail, notifications, exception handling. Human guardrails enforced at every financial boundary.</p>
+          <p>State machines for every business process — from PO approval to project closeout. Audit trail, notifications, exception handling.</p>
           <div class="rm-deliverables">
             <span class="rm-deliverable">State Machine Engine</span>
             <span class="rm-deliverable">Approval Chains</span>
@@ -812,14 +836,14 @@
             <span class="rm-deliverable">Notifications</span>
             <span class="rm-deliverable">Exception Handling</span>
           </div>
-          <div class="rm-duration"><i data-lucide="clock"></i> 6–8 weeks</div>
+          <div class="rm-duration"><i data-lucide="clock" style="width:14px;height:14px;"></i> 6–8 weeks</div>
         </div>
       </div>
       <div class="rm-item">
         <div class="rm-dot rm-dot--future"></div>
         <div class="rm-content">
           <h4>AI Router & Guardrails</h4>
-          <p>Provider-agnostic AI that summarizes daily reports, drafts RFIs and change orders, explains cost-to-complete changes, flags over-budget categories, identifies schedule risk, and generates the executive weekly report. Never approves — only recommends.</p>
+          <p>Provider-agnostic AI that summarizes daily reports, drafts RFIs and change orders, explains cost-to-complete changes, flags over-budget categories, and generates the executive weekly report.</p>
           <div class="rm-deliverables">
             <span class="rm-deliverable">Context Retrieval</span>
             <span class="rm-deliverable">Cost Explanation</span>
@@ -828,14 +852,14 @@
             <span class="rm-deliverable">Weekly Reports</span>
             <span class="rm-deliverable">Historical Search</span>
           </div>
-          <div class="rm-duration"><i data-lucide="clock"></i> 6–8 weeks</div>
+          <div class="rm-duration"><i data-lucide="clock" style="width:14px;height:14px;"></i> 6–8 weeks</div>
         </div>
       </div>
       <div class="rm-item">
         <div class="rm-dot rm-dot--future"></div>
         <div class="rm-content">
           <h4>Mobile Field App</h4>
-          <p>Daily reports, photos, labor tracking, punch lists, inspections. Offline-friendly, task-first design. Field users complete daily tasks in under 2 minutes.</p>
+          <p>Daily reports, photos, labor tracking, punch lists, inspections. Offline-friendly, task-first design.</p>
           <div class="rm-deliverables">
             <span class="rm-deliverable">Daily Reports</span>
             <span class="rm-deliverable">Photo Capture</span>
@@ -844,14 +868,14 @@
             <span class="rm-deliverable">Inspections</span>
             <span class="rm-deliverable">Offline Mode</span>
           </div>
-          <div class="rm-duration"><i data-lucide="clock"></i> 8–10 weeks</div>
+          <div class="rm-duration"><i data-lucide="clock" style="width:14px;height:14px;"></i> 8–10 weeks</div>
         </div>
       </div>
       <div class="rm-item">
         <div class="rm-dot rm-dot--future"></div>
         <div class="rm-content">
           <h4>SaaS Readiness</h4>
-          <p>Multi-tenant onboarding, white labeling, templates, billing. The platform becomes a product for similar companies — recurring revenue from the system you already built for yourself.</p>
+          <p>Multi-tenant onboarding, white labeling, templates, billing. The platform becomes a product for similar companies.</p>
           <div class="rm-deliverables">
             <span class="rm-deliverable">Multi-Tenant</span>
             <span class="rm-deliverable">White Labeling</span>
@@ -859,7 +883,7 @@
             <span class="rm-deliverable">Billing</span>
             <span class="rm-deliverable">Onboarding Flow</span>
           </div>
-          <div class="rm-duration"><i data-lucide="clock"></i> 10–14 weeks</div>
+          <div class="rm-duration"><i data-lucide="clock" style="width:14px;height:14px;"></i> 10–14 weeks</div>
         </div>
       </div>
     </div>
@@ -869,13 +893,13 @@
 <!-- ═══ 9. CTA ═══ -->
 <section class="section section--dark cta-section">
   <div class="section-inner fade-up" style="text-align:center;">
-    <div class="eyebrow eyebrow--light">The Outcome</div>
+    <div class="tag tag--light">The Outcome</div>
     <h2 class="light">One system. Every project.<br>Every dollar. Every answer.</h2>
-    <p class="lead lead--light" style="margin:24px auto 0;">Travel proved the pattern. The Discovery Engine defines the scope. BuildOS delivers the visibility — from bid to closeout, across every function, in real time.</p>
+    <p class="desc desc--light" style="margin:24px auto 0;">Travel proved the pattern. The Discovery Engine defines the scope. BuildOS delivers the visibility — from bid to closeout, across every function, in real time.</p>
   </div>
 </section>
 
-<footer class="footer" style="background: var(--navy-deep); border-top: 1px solid rgba(255,255,255,0.06);">
+<footer class="footer">
   <p>&copy; 2025 CleanSpace Stay. Internal & Confidential.</p>
 </footer>
 </div>
@@ -897,8 +921,8 @@ inp.addEventListener('keydown', e => { if (e.key === 'Enter') tryUnlock(); });
 // Scroll animations
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('visible'); } });
-}, { threshold: 0.02, rootMargin: '0px 0px -20px 0px' });
-document.querySelectorAll('.fade-up, .stagger').forEach(el => observer.observe(el));
+}, { threshold: 0.01, rootMargin: '0px 0px -10px 0px' });
+document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
 
 // Drill-down tabs
 document.querySelectorAll('.drill-tab').forEach(tab => {
@@ -916,10 +940,9 @@ document.querySelectorAll('.proj-table tr.clickable').forEach(row => {
     document.querySelectorAll('.proj-table tr.clickable').forEach(r => r.classList.remove('selected'));
     row.classList.add('selected');
     const panel = document.getElementById('drill-panel');
-    panel.classList.remove('active');
-    void panel.offsetWidth; // trigger reflow
-    panel.classList.add('active');
-    // Scroll to drill panel
+    panel.style.animation = 'none';
+    void panel.offsetWidth;
+    panel.style.animation = 'slideDown 0.3s var(--ease-out)';
     panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
   });
 });
