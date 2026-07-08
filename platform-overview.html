@@ -13,16 +13,15 @@
   <script src="https://unpkg.com/lucide@latest"></script>
   <style>
     :root {
-      --brand: #1C38EA; --brand-light: #4F6AFF; --brand-bg: rgba(28,56,234,0.06); --brand-border: rgba(28,56,234,0.1);
+      --brand: #1C38EA; --brand-light: #4F6AFF; --brand-bg: rgba(28,56,234,0.06); --brand-border: rgba(28,56,234,0.12);
       --cyan: #00C8FF; --navy: #0A1A81; --navy-deep: #061058;
       --positive: #10B981; --positive-bg: rgba(16,185,129,0.08); --warn: #F59E0B; --warn-bg: rgba(245,158,11,0.08);
       --danger: #EF4444; --danger-bg: rgba(239,68,68,0.08);
       --white: #ffffff; --gray-50: #F8FAFC; --gray-100: #F1F5F9; --gray-200: #E2E8F0; --gray-300: #CBD5E1;
       --gray-400: #94A3B8; --gray-500: #64748B; --gray-600: #475569; --gray-700: #334155; --gray-800: #1E293B; --gray-900: #0F172A;
-      --dark-border: #1A3AAE; --text-on-dark: #ffffff; --text-on-dark-muted: #B8C8F0; --text-on-dark-dim: #7A8FCC;
-      --glass: rgba(255,255,255,0.03); --glass-border: rgba(255,255,255,0.08);
-      --shadow-sm: 0 1px 3px rgba(0,0,0,0.06); --shadow-md: 0 4px 12px rgba(0,0,0,0.08); --shadow-lg: 0 12px 40px rgba(0,0,0,0.1);
-      --depth-shadow: 0 24px 80px rgba(0,0,0,0.35), 0 8px 32px rgba(0,0,0,0.2);
+      --dark-surface: #0B1437; --dark-card: #101D4F; --dark-border: rgba(255,255,255,0.08);
+      --text-on-dark: #ffffff; --text-on-dark-muted: #B8C8F0; --text-on-dark-dim: #7A8FCC;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.06); --shadow-md: 0 4px 12px rgba(0,0,0,0.08); --shadow-lg: 0 12px 40px rgba(0,0,0,0.12);
       --ease-out: cubic-bezier(0.23, 1, 0.32, 1); --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
     }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -47,32 +46,32 @@
     body.locked { overflow: hidden; }
     body.locked .page { filter: blur(12px); pointer-events: none; }
 
-    /* ═══ STICKY BAR ═══ */
-    .topbar { position: sticky; top: 0; z-index: 900; background: rgba(255,255,255,0.95); backdrop-filter: blur(16px); border-bottom: 1px solid var(--gray-200); }
-    .topbar-inner { max-width: 1280px; margin: 0 auto; padding: 12px 32px; display: flex; align-items: center; gap: 14px; }
+    /* ═══ TOPBAR ═══ */
+    .topbar { position: sticky; top: 0; z-index: 900; background: rgba(255,255,255,0.97); backdrop-filter: blur(16px); border-bottom: 1px solid var(--gray-200); }
+    .topbar-inner { max-width: 1400px; margin: 0 auto; padding: 12px 32px; display: flex; align-items: center; gap: 14px; }
     .topbar img { height: 28px; }
     .topbar-badge { font-family: 'Space Grotesk'; text-transform: uppercase; letter-spacing: 0.12em; font-size: 0.65rem; font-weight: 600; color: var(--brand); display: flex; align-items: center; gap: 6px; }
     .topbar-badge::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--brand); animation: pulse 2s infinite; }
     @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
 
     /* ═══ SECTIONS ═══ */
-    .section { padding: 120px 32px; position: relative; }
-    .section--white { background: var(--white); color: var(--gray-800); }
-    .section--gray { background: var(--gray-50); color: var(--gray-800); }
-    .section--dark { background: linear-gradient(175deg, var(--navy-deep) 0%, var(--navy) 100%); color: #fff; }
-    .section-inner { max-width: 1280px; margin: 0 auto; }
+    .section { padding: 100px 32px; position: relative; }
+    .section--white { background: var(--white); }
+    .section--gray { background: var(--gray-50); }
+    .section--dark { background: linear-gradient(175deg, var(--navy-deep) 0%, #0D1F6B 50%, var(--navy) 100%); color: #fff; }
+    .section-inner { max-width: 1400px; margin: 0 auto; }
 
     /* ═══ TYPOGRAPHY ═══ */
     .eyebrow { font-family: 'Space Grotesk'; text-transform: uppercase; letter-spacing: 0.14em; font-size: 0.72rem; font-weight: 600; color: var(--brand); margin-bottom: 16px; }
     .eyebrow--light { color: var(--cyan); }
-    h2 { font-family: 'Space Grotesk'; font-size: clamp(2.2rem, 5vw, 3.4rem); font-weight: 800; line-height: 1.08; margin-bottom: 20px; color: var(--gray-900); }
+    h2 { font-family: 'Space Grotesk'; font-size: clamp(2rem, 4.5vw, 3.2rem); font-weight: 800; line-height: 1.1; margin-bottom: 20px; color: var(--gray-900); }
     h2.light { color: #fff; }
-    .lead { font-size: 1.1rem; color: var(--gray-600); max-width: 700px; line-height: 1.75; }
+    .lead { font-size: 1.08rem; color: var(--gray-600); max-width: 720px; line-height: 1.75; }
     .lead--light { color: var(--text-on-dark-muted); }
 
     /* ═══ HERO ═══ */
-    .hero { min-height: 80vh; display: flex; align-items: center; padding-top: 60px; background: linear-gradient(180deg, var(--gray-50) 0%, var(--white) 100%); }
-    .hero-grid { display: grid; grid-template-columns: 1fr 1.1fr; gap: 60px; align-items: center; }
+    .hero { min-height: 80vh; display: flex; align-items: center; padding-top: 40px; background: linear-gradient(180deg, var(--gray-50) 0%, var(--white) 100%); }
+    .hero-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 60px; align-items: center; }
     .hero-left h1 { font-family: 'Space Grotesk'; font-size: clamp(2.2rem, 5vw, 3.4rem); font-weight: 900; line-height: 1.08; color: var(--gray-900); margin-bottom: 24px; }
     .hero-left h1 .accent { color: var(--brand); }
     .hero-left .hero-sub { color: var(--gray-600); font-size: 1.05rem; line-height: 1.7; max-width: 500px; margin-bottom: 24px; }
@@ -81,45 +80,41 @@
     .hero-context span { color: var(--gray-600); font-size: 0.9rem; }
     .hero-context a { color: var(--brand); text-decoration: none; font-weight: 600; }
     .hero-right { position: relative; }
-    .hero-right img { width: 100%; height: auto; display: block; border-radius: 12px; box-shadow: 0 20px 60px rgba(0,0,0,0.15), 0 8px 20px rgba(0,0,0,0.1); }
+    .hero-right img { width: 100%; height: auto; display: block; border-radius: 16px; box-shadow: 0 24px 80px rgba(28,56,234,0.15), 0 8px 24px rgba(0,0,0,0.08); border: 1px solid var(--gray-200); }
+    .proof-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 48px; }
+    .proof-card { background: var(--white); border: 1px solid var(--gray-200); border-radius: 14px; padding: 20px; text-align: center; box-shadow: var(--shadow-sm); }
+    .proof-card .val { font-family: 'Space Grotesk'; font-size: 1.6rem; font-weight: 700; color: var(--brand); }
+    .proof-card .lbl { font-size: 0.75rem; color: var(--gray-500); margin-top: 4px; }
 
-    /* ═══ PROOF STATS ═══ */
-    .proof-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-top: 48px; }
-    .proof-card { background: var(--white); border: 1px solid var(--gray-200); border-radius: 14px; padding: 24px; text-align: center; box-shadow: var(--shadow-sm); }
-    .proof-card .val { font-family: 'Space Grotesk'; font-size: 1.8rem; font-weight: 700; color: var(--brand); }
-    .proof-card .lbl { font-size: 0.78rem; color: var(--gray-500); margin-top: 4px; }
-
-    /* ═══ QUESTION SECTION ═══ */
+    /* ═══ QUESTION ═══ */
     .question-block { max-width: 860px; margin: 0 auto; text-align: center; }
-    .question-block blockquote { font-family: 'Space Grotesk'; font-size: clamp(1.2rem, 2.8vw, 1.6rem); font-weight: 600; color: var(--gray-900); line-height: 1.45; margin: 40px 0; padding: 40px; background: var(--white); border: 1px solid var(--gray-200); border-radius: 20px; position: relative; box-shadow: var(--shadow-md); }
-    .question-block blockquote::before { content: open-quote; position: absolute; top: 16px; left: 24px; font-size: 4rem; color: rgba(28,56,234,0.15); font-family: Georgia, serif; line-height: 1; }
-    .question-block .gap-text { color: var(--gray-600); font-size: 1.05rem; max-width: 600px; margin: 0 auto; line-height: 1.7; }
+    .question-block blockquote { font-family: 'Space Grotesk'; font-size: clamp(1.15rem, 2.5vw, 1.5rem); font-weight: 600; color: var(--gray-900); line-height: 1.45; margin: 40px 0; padding: 40px; background: var(--white); border: 1px solid var(--gray-200); border-radius: 20px; position: relative; box-shadow: var(--shadow-md); }
+    .question-block blockquote::before { content: open-quote; position: absolute; top: 16px; left: 24px; font-size: 4rem; color: rgba(28,56,234,0.12); font-family: Georgia, serif; line-height: 1; }
+    .question-block .gap-text { color: var(--gray-600); font-size: 1rem; max-width: 600px; margin: 0 auto; line-height: 1.7; }
 
     /* ═══ SURFACE GRID ═══ */
     .surface-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 48px; }
-    .surface-item { background: var(--white); border: 1px solid var(--gray-200); border-radius: 14px; padding: 24px 18px; text-align: center; transition: all 0.3s var(--ease-out); position: relative; overflow: hidden; box-shadow: var(--shadow-sm); }
+    .surface-item { background: var(--white); border: 1px solid var(--gray-200); border-radius: 14px; padding: 24px 16px; text-align: center; transition: all 0.3s var(--ease-out); position: relative; overflow: hidden; box-shadow: var(--shadow-sm); }
     .surface-item:hover { border-color: var(--brand-border); transform: translateY(-3px); box-shadow: var(--shadow-md); }
     .surface-item.active { background: var(--brand-bg); border-color: var(--brand); }
     .surface-item.active::after { content: "LIVE"; position: absolute; top: 8px; right: 8px; font-size: 0.55rem; font-weight: 700; letter-spacing: 0.1em; color: var(--positive); background: var(--positive-bg); padding: 2px 6px; border-radius: 4px; }
     .surface-item i { color: var(--gray-400); margin-bottom: 10px; display: block; }
     .surface-item.active i { color: var(--brand); }
-    .surface-item .name { font-size: 0.82rem; font-weight: 600; color: var(--gray-700); }
+    .surface-item .name { font-size: 0.8rem; font-weight: 600; color: var(--gray-700); }
     .surface-item.active .name { color: var(--brand); }
 
-    /* ═══ DISCOVERY SECTION ═══ */
-    .discovery-flow { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-top: 48px; position: relative; }
-    .discovery-flow::before { content: ""; position: absolute; top: 50%; left: 10%; right: 10%; height: 2px; background: linear-gradient(90deg, var(--brand), var(--cyan), var(--brand)); opacity: 0.15; }
-    .disc-step { background: var(--white); border: 1px solid var(--gray-200); border-radius: 16px; padding: 28px 20px; text-align: center; position: relative; z-index: 1; box-shadow: var(--shadow-sm); transition: all 0.3s var(--ease-out); }
+    /* ═══ DISCOVERY ═══ */
+    .discovery-flow { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-top: 48px; }
+    .disc-step { background: var(--white); border: 1px solid var(--gray-200); border-radius: 16px; padding: 28px 20px; text-align: center; box-shadow: var(--shadow-sm); transition: all 0.3s var(--ease-out); }
     .disc-step:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); border-color: var(--brand-border); }
     .disc-num { width: 32px; height: 32px; border-radius: 50%; background: linear-gradient(135deg, var(--brand), var(--cyan)); display: flex; align-items: center; justify-content: center; font-family: 'Space Grotesk'; font-size: 0.8rem; font-weight: 700; color: #fff; margin: 0 auto 14px; }
-    .disc-step h4 { font-family: 'Space Grotesk'; font-size: 1rem; font-weight: 700; color: var(--gray-900); margin-bottom: 6px; }
-    .disc-step p { font-size: 0.8rem; color: var(--gray-500); line-height: 1.5; }
+    .disc-step h4 { font-family: 'Space Grotesk'; font-size: 0.95rem; font-weight: 700; color: var(--gray-900); margin-bottom: 6px; }
+    .disc-step p { font-size: 0.78rem; color: var(--gray-500); line-height: 1.5; }
 
-    /* ═══ DASHBOARD MOCK (DARK SECTION) ═══ */
-    .dash-container { margin-top: 56px; perspective: 1000px; }
-    .dash-frame { background: #080D24; border: 1px solid rgba(255,255,255,0.08); border-radius: 20px; overflow: hidden; box-shadow: 0 40px 120px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.04), inset 0 1px 0 rgba(255,255,255,0.05); transform: rotateX(2deg); transition: transform 0.6s var(--ease-out); }
-    .dash-frame:hover { transform: rotateX(0); }
-    .dash-header { background: rgba(255,255,255,0.03); padding: 14px 24px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid rgba(255,255,255,0.06); }
+    /* ═══ DASHBOARD MOCK ═══ */
+    .dash-container { margin-top: 56px; }
+    .dash-frame { background: var(--dark-surface); border: 1px solid var(--dark-border); border-radius: 20px; overflow: hidden; box-shadow: 0 40px 120px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.04); }
+    .dash-header { background: rgba(255,255,255,0.02); padding: 14px 24px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--dark-border); }
     .dash-header-left { display: flex; align-items: center; gap: 12px; }
     .dash-header-left i { color: var(--cyan); }
     .dash-header-left span { font-family: 'Space Grotesk'; font-size: 0.9rem; font-weight: 700; color: #fff; }
@@ -127,182 +122,233 @@
     .dash-user span { font-size: 0.82rem; color: rgba(255,255,255,0.6); }
     .dash-avatar { width: 32px; height: 32px; border-radius: 50%; background: linear-gradient(135deg, var(--brand), var(--cyan)); display: flex; align-items: center; justify-content: center; font-family: 'Space Grotesk'; font-size: 0.7rem; font-weight: 700; color: #fff; }
     .dash-body { padding: 24px; }
-    .kpi-row { display: grid; grid-template-columns: repeat(6, 1fr); gap: 14px; margin-bottom: 24px; }
-    .kpi-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; padding: 18px 14px; position: relative; overflow: hidden; }
+    .kpi-row { display: grid; grid-template-columns: repeat(6, 1fr); gap: 12px; margin-bottom: 24px; }
+    .kpi-card { background: var(--dark-card); border: 1px solid var(--dark-border); border-radius: 12px; padding: 16px 14px; position: relative; overflow: hidden; }
     .kpi-card::after { content: ""; position: absolute; bottom: 0; left: 0; right: 0; height: 3px; border-radius: 0 0 12px 12px; }
     .kpi-card.green::after { background: var(--positive); } .kpi-card.amber::after { background: var(--warn); }
     .kpi-card.red::after { background: var(--danger); } .kpi-card.blue::after { background: var(--brand-light); }
-    .kpi-val { font-family: 'Space Grotesk'; font-size: 1.4rem; font-weight: 700; color: #fff; }
-    .kpi-lbl { font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.08em; color: rgba(255,255,255,0.4); margin-top: 4px; }
-    .kpi-trend { font-size: 0.7rem; margin-top: 6px; display: flex; align-items: center; gap: 4px; }
+    .kpi-val { font-family: 'Space Grotesk'; font-size: 1.3rem; font-weight: 700; color: #fff; }
+    .kpi-lbl { font-size: 0.62rem; text-transform: uppercase; letter-spacing: 0.08em; color: rgba(255,255,255,0.4); margin-top: 4px; }
+    .kpi-trend { font-size: 0.68rem; margin-top: 6px; }
     .kpi-trend.up { color: var(--positive); } .kpi-trend.down { color: var(--danger); } .kpi-trend.neutral { color: var(--warn); }
+
+    /* ═══ PROJECT TABLE ═══ */
     .dash-split { display: grid; grid-template-columns: 1.6fr 1fr; gap: 20px; }
-    .dash-panel { background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06); border-radius: 14px; padding: 20px; }
-    .dash-panel-title { font-family: 'Space Grotesk'; font-size: 0.82rem; font-weight: 700; color: rgba(255,255,255,0.7); margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+    .dash-panel { background: rgba(255,255,255,0.02); border: 1px solid var(--dark-border); border-radius: 14px; padding: 20px; }
+    .dash-panel-title { font-family: 'Space Grotesk'; font-size: 0.8rem; font-weight: 700; color: rgba(255,255,255,0.7); margin-bottom: 14px; display: flex; align-items: center; gap: 8px; }
     .dash-panel-title i { width: 16px; height: 16px; color: rgba(255,255,255,0.4); }
     .proj-table { width: 100%; border-collapse: collapse; }
-    .proj-table th { font-size: 0.62rem; text-transform: uppercase; letter-spacing: 0.08em; color: rgba(255,255,255,0.35); text-align: left; padding: 8px; border-bottom: 1px solid rgba(255,255,255,0.06); font-weight: 600; }
-    .proj-table td { font-size: 0.78rem; color: rgba(255,255,255,0.8); padding: 11px 8px; border-bottom: 1px solid rgba(255,255,255,0.04); }
-    .proj-table tr:hover td { background: rgba(255,255,255,0.02); }
+    .proj-table th { font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.08em; color: rgba(255,255,255,0.35); text-align: left; padding: 8px 6px; border-bottom: 1px solid var(--dark-border); font-weight: 600; }
+    .proj-table td { font-size: 0.75rem; color: rgba(255,255,255,0.8); padding: 10px 6px; border-bottom: 1px solid rgba(255,255,255,0.03); cursor: pointer; transition: background 0.2s; }
+    .proj-table tr.clickable:hover td { background: rgba(79,106,255,0.08); }
+    .proj-table tr.clickable.selected td { background: rgba(79,106,255,0.12); }
     .proj-table .proj-name { font-weight: 600; color: #fff; }
     .health-bar { width: 48px; height: 6px; border-radius: 3px; background: rgba(255,255,255,0.08); overflow: hidden; display: inline-block; vertical-align: middle; }
     .health-bar-fill { height: 100%; border-radius: 3px; }
     .margin-pos { color: var(--positive); font-weight: 600; }
     .margin-neg { color: var(--danger); font-weight: 600; }
+    .click-hint { font-size: 0.68rem; color: rgba(255,255,255,0.3); text-align: center; margin-top: 12px; display: flex; align-items: center; justify-content: center; gap: 6px; }
+    .click-hint i { width: 14px; height: 14px; }
+
+    /* ═══ ALERTS ═══ */
     .alert-item { padding: 12px 14px; border-radius: 10px; margin-bottom: 10px; display: flex; align-items: flex-start; gap: 10px; }
     .alert-item--red { background: rgba(239,68,68,0.06); border: 1px solid rgba(239,68,68,0.12); }
     .alert-item--amber { background: rgba(245,158,11,0.06); border: 1px solid rgba(245,158,11,0.12); }
     .alert-item--green { background: rgba(16,185,129,0.06); border: 1px solid rgba(16,185,129,0.12); }
-    .alert-icon { width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex: none; margin-top: 1px; }
+    .alert-icon { width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex: none; margin-top: 1px; font-size: 0.6rem; }
     .alert-icon--red { background: rgba(239,68,68,0.2); color: var(--danger); }
     .alert-icon--amber { background: rgba(245,158,11,0.2); color: var(--warn); }
     .alert-icon--green { background: rgba(16,185,129,0.2); color: var(--positive); }
-    .alert-icon svg { width: 10px; height: 10px; }
-    .alert-text { font-size: 0.75rem; color: rgba(255,255,255,0.8); line-height: 1.4; }
-    .alert-text strong { display: block; margin-bottom: 2px; }
-    .alert-text span { color: rgba(255,255,255,0.5); }
+    .alert-text strong { font-size: 0.72rem; color: #fff; display: block; margin-bottom: 2px; }
+    .alert-text span { font-size: 0.68rem; color: rgba(255,255,255,0.5); }
 
-    /* ═══ DRILL DOWN (DARK SECTION) ═══ */
-    .drill-container { margin-top: 56px; }
-    .drill-frame { background: #080D24; border: 1px solid rgba(255,255,255,0.08); border-radius: 20px; overflow: hidden; box-shadow: var(--depth-shadow); }
-    .drill-header { background: rgba(255,255,255,0.03); padding: 16px 24px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid rgba(255,255,255,0.06); }
-    .drill-header-left { display: flex; align-items: center; gap: 12px; }
-    .drill-back { width: 28px; height: 28px; border-radius: 6px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,0.6); }
-    .drill-title { font-family: 'Space Grotesk'; font-size: 0.95rem; font-weight: 700; color: #fff; }
-    .drill-subtitle { font-size: 0.72rem; color: rgba(255,255,255,0.4); }
-    .drill-tabs { display: flex; gap: 2px; background: rgba(255,255,255,0.04); border-radius: 8px; padding: 3px; }
-    .drill-tab { padding: 6px 14px; border-radius: 6px; font-size: 0.72rem; font-weight: 600; color: rgba(255,255,255,0.5); cursor: pointer; transition: all 0.2s; }
-    .drill-tab.active { background: rgba(0,200,255,0.12); color: var(--cyan); }
+    /* ═══ PROJECT DRILL-DOWN ═══ */
+    .drill-section { margin-top: 32px; display: none; animation: slideDown 0.4s var(--ease-out); }
+    .drill-section.active { display: block; }
+    @keyframes slideDown { from { opacity: 0; transform: translateY(-12px); } to { opacity: 1; transform: translateY(0); } }
+    .drill-frame { background: var(--dark-card); border: 1px solid var(--dark-border); border-radius: 16px; overflow: hidden; }
+    .drill-header { padding: 20px 24px; border-bottom: 1px solid var(--dark-border); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+    .drill-title { font-family: 'Space Grotesk'; font-size: 1.1rem; font-weight: 700; color: #fff; }
+    .drill-subtitle { font-size: 0.75rem; color: rgba(255,255,255,0.5); }
+    .drill-tabs { display: flex; gap: 4px; background: rgba(255,255,255,0.03); border-radius: 10px; padding: 4px; }
+    .drill-tab { font-size: 0.72rem; font-weight: 600; padding: 8px 16px; border-radius: 8px; color: rgba(255,255,255,0.5); cursor: pointer; transition: all 0.2s var(--ease-out); }
+    .drill-tab:hover { color: rgba(255,255,255,0.8); }
+    .drill-tab.active { background: var(--brand); color: #fff; }
     .drill-body { padding: 24px; }
-    .waterfall { display: grid; grid-template-columns: repeat(7, 1fr); gap: 12px; margin-bottom: 32px; }
-    .wf-col { text-align: center; }
-    .wf-bar-wrap { height: 160px; display: flex; align-items: flex-end; justify-content: center; margin-bottom: 10px; }
-    .wf-bar { width: 44px; border-radius: 6px 6px 0 0; position: relative; transition: height 0.8s var(--ease-out); }
-    .wf-bar-val { position: absolute; top: -22px; left: 50%; transform: translateX(-50%); font-family: 'JetBrains Mono'; font-size: 0.7rem; font-weight: 600; color: #fff; white-space: nowrap; }
-    .wf-lbl { font-size: 0.62rem; color: rgba(255,255,255,0.4); text-transform: uppercase; letter-spacing: 0.04em; line-height: 1.3; }
-    .wf-bar--contract { background: linear-gradient(180deg, var(--cyan), #0891B2); }
-    .wf-bar--budget { background: linear-gradient(180deg, var(--brand-light), var(--brand)); }
-    .wf-bar--actual { background: linear-gradient(180deg, #F97316, #EA580C); }
-    .wf-bar--committed { background: linear-gradient(180deg, var(--warn), #D97706); }
-    .wf-bar--remaining { background: linear-gradient(180deg, #6366F1, #4F46E5); }
-    .wf-bar--forecast { background: linear-gradient(180deg, #8B5CF6, #7C3AED); }
-    .wf-bar--variance { background: linear-gradient(180deg, var(--danger), #DC2626); }
-    .cost-breakdown { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-    .cb-panel { background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06); border-radius: 14px; padding: 20px; }
-    .cb-title { font-family: 'Space Grotesk'; font-size: 0.8rem; font-weight: 700; color: rgba(255,255,255,0.7); margin-bottom: 14px; }
-    .cb-row { display: flex; justify-content: space-between; align-items: center; padding: 9px 0; border-bottom: 1px solid rgba(255,255,255,0.04); }
-    .cb-row:last-child { border-bottom: none; }
-    .cb-cat { font-size: 0.78rem; color: rgba(255,255,255,0.7); }
-    .cb-vals { display: flex; gap: 20px; }
-    .cb-val { font-family: 'JetBrains Mono'; font-size: 0.75rem; color: rgba(255,255,255,0.8); min-width: 60px; text-align: right; }
-    .cb-val.over { color: var(--danger); } .cb-val.under { color: var(--positive); }
-    .drill-summary { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 24px; }
-    .ds-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; padding: 18px; text-align: center; }
-    .ds-val { font-family: 'Space Grotesk'; font-size: 1.5rem; font-weight: 700; }
-    .ds-val.green { color: var(--positive); } .ds-val.red { color: var(--danger); }
-    .ds-val.blue { color: var(--cyan); } .ds-val.amber { color: var(--warn); }
-    .ds-lbl { font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.06em; color: rgba(255,255,255,0.4); margin-top: 4px; }
+    .drill-tab-content { display: none; }
+    .drill-tab-content.active { display: block; }
 
-    /* ═══ AI SECTION (DARK) ═══ */
-    .ai-container { margin-top: 56px; }
-    .ai-frame { background: #080D24; border: 1px solid rgba(255,255,255,0.08); border-radius: 20px; overflow: hidden; box-shadow: var(--depth-shadow); }
-    .ai-header { background: rgba(255,255,255,0.03); padding: 14px 24px; display: flex; align-items: center; gap: 12px; border-bottom: 1px solid rgba(255,255,255,0.06); }
-    .ai-header-icon { width: 28px; height: 28px; border-radius: 8px; background: linear-gradient(135deg, rgba(139,92,246,0.3), rgba(0,200,255,0.3)); display: flex; align-items: center; justify-content: center; }
-    .ai-header-icon i { color: #fff; width: 14px; height: 14px; }
-    .ai-header span { font-family: 'Space Grotesk'; font-size: 0.88rem; font-weight: 700; color: #fff; }
-    .ai-header .ai-badge { font-size: 0.6rem; background: rgba(139,92,246,0.15); color: #A78BFA; padding: 3px 8px; border-radius: 4px; font-weight: 600; letter-spacing: 0.05em; }
-    .ai-body { padding: 24px; display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-    .ai-insight { background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06); border-radius: 14px; padding: 20px; transition: all 0.3s var(--ease-out); }
-    .ai-insight:hover { background: rgba(255,255,255,0.04); border-color: rgba(255,255,255,0.1); }
-    .ai-insight-header { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
-    .ai-insight-icon { width: 28px; height: 28px; border-radius: 8px; display: flex; align-items: center; justify-content: center; }
-    .ai-insight-icon.red { background: var(--danger-bg); color: var(--danger); }
-    .ai-insight-icon.amber { background: var(--warn-bg); color: var(--warn); }
-    .ai-insight-icon.blue { background: rgba(79,106,255,0.1); color: var(--brand-light); }
-    .ai-insight-icon.green { background: var(--positive-bg); color: var(--positive); }
+    /* Waterfall */
+    .waterfall { display: flex; gap: 12px; justify-content: center; align-items: flex-end; padding: 20px 0 0; }
+    .wf-col { text-align: center; flex: 1; max-width: 100px; }
+    .wf-bar-wrap { height: 160px; display: flex; align-items: flex-end; justify-content: center; }
+    .wf-bar { width: 100%; border-radius: 6px 6px 0 0; display: flex; align-items: flex-start; justify-content: center; padding-top: 8px; position: relative; }
+    .wf-bar-val { font-family: 'JetBrains Mono'; font-size: 0.68rem; font-weight: 600; color: #fff; }
+    .wf-bar--contract { background: linear-gradient(180deg, #4F6AFF, #1C38EA); }
+    .wf-bar--budget { background: linear-gradient(180deg, #6B8AFF, #3B5BFF); }
+    .wf-bar--actual { background: linear-gradient(180deg, #FF8A65, #E65100); }
+    .wf-bar--committed { background: linear-gradient(180deg, #FFB74D, #F57C00); }
+    .wf-bar--remaining { background: linear-gradient(180deg, #81C784, #388E3C); }
+    .wf-bar--forecast { background: linear-gradient(180deg, #CE93D8, #7B1FA2); }
+    .wf-bar--variance { background: linear-gradient(180deg, #EF5350, #B71C1C); }
+    .wf-lbl { font-size: 0.62rem; color: rgba(255,255,255,0.5); margin-top: 8px; line-height: 1.3; }
+
+    /* Cost breakdown */
+    .cost-breakdown { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 28px; }
+    .cb-panel { background: rgba(255,255,255,0.02); border: 1px solid var(--dark-border); border-radius: 12px; padding: 18px; }
+    .cb-title { font-family: 'Space Grotesk'; font-size: 0.75rem; font-weight: 700; color: rgba(255,255,255,0.7); margin-bottom: 14px; }
+    .cb-row { display: flex; align-items: center; justify-content: space-between; padding: 7px 0; border-bottom: 1px solid rgba(255,255,255,0.04); }
+    .cb-cat { font-size: 0.72rem; color: rgba(255,255,255,0.6); }
+    .cb-vals { display: flex; gap: 16px; }
+    .cb-val { font-family: 'JetBrains Mono'; font-size: 0.72rem; color: rgba(255,255,255,0.8); }
+    .cb-val.over { color: var(--danger); }
+    .cb-val.under { color: var(--positive); }
+    .cb-bar-wrap { flex: 1; max-width: 120px; height: 6px; background: rgba(255,255,255,0.06); border-radius: 3px; overflow: hidden; margin: 0 12px; }
+    .cb-bar-fill { height: 100%; border-radius: 3px; }
+
+    /* Drill summary cards */
+    .drill-summary { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 24px; }
+    .ds-card { background: rgba(255,255,255,0.03); border: 1px solid var(--dark-border); border-radius: 12px; padding: 18px; text-align: center; }
+    .ds-val { font-family: 'Space Grotesk'; font-size: 1.4rem; font-weight: 700; }
+    .ds-val.red { color: var(--danger); } .ds-val.green { color: var(--positive); }
+    .ds-val.blue { color: var(--brand-light); } .ds-val.amber { color: var(--warn); }
+    .ds-lbl { font-size: 0.68rem; color: rgba(255,255,255,0.4); margin-top: 4px; }
+
+    /* ═══ SCHEDULE TAB ═══ */
+    .gantt { margin-top: 12px; }
+    .gantt-row { display: grid; grid-template-columns: 140px 1fr; gap: 16px; align-items: center; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.04); }
+    .gantt-label { font-size: 0.72rem; color: rgba(255,255,255,0.7); font-weight: 500; }
+    .gantt-bar-track { height: 24px; background: rgba(255,255,255,0.04); border-radius: 6px; position: relative; overflow: hidden; }
+    .gantt-bar-planned { position: absolute; top: 2px; height: 8px; background: rgba(79,106,255,0.3); border-radius: 4px; }
+    .gantt-bar-actual { position: absolute; bottom: 2px; height: 8px; border-radius: 4px; }
+    .gantt-bar-actual.on-track { background: var(--positive); }
+    .gantt-bar-actual.behind { background: var(--danger); }
+    .gantt-bar-actual.ahead { background: var(--brand-light); }
+    .gantt-milestone { position: absolute; top: 50%; transform: translateY(-50%); width: 10px; height: 10px; border-radius: 2px; transform: translateY(-50%) rotate(45deg); background: var(--cyan); }
+    .gantt-legend { display: flex; gap: 20px; margin-top: 16px; padding-top: 12px; border-top: 1px solid var(--dark-border); }
+    .gantt-legend-item { display: flex; align-items: center; gap: 6px; font-size: 0.65rem; color: rgba(255,255,255,0.5); }
+    .gantt-legend-dot { width: 10px; height: 6px; border-radius: 3px; }
+
+    /* ═══ LABOR TAB ═══ */
+    .labor-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 12px; }
+    .labor-card { background: rgba(255,255,255,0.02); border: 1px solid var(--dark-border); border-radius: 12px; padding: 18px; }
+    .labor-card-title { font-size: 0.72rem; font-weight: 600; color: rgba(255,255,255,0.6); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.06em; }
+    .labor-row { display: flex; align-items: center; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.04); }
+    .labor-trade { font-size: 0.75rem; color: rgba(255,255,255,0.8); }
+    .labor-hours { font-family: 'JetBrains Mono'; font-size: 0.72rem; color: rgba(255,255,255,0.6); }
+    .labor-util { font-family: 'JetBrains Mono'; font-size: 0.72rem; font-weight: 600; }
+    .labor-flag { font-size: 0.62rem; padding: 2px 6px; border-radius: 4px; font-weight: 600; }
+    .labor-flag.overtime { background: rgba(239,68,68,0.12); color: var(--danger); }
+    .labor-flag.normal { background: rgba(16,185,129,0.12); color: var(--positive); }
+
+    /* ═══ RISK TAB ═══ */
+    .risk-table { width: 100%; border-collapse: collapse; margin-top: 12px; }
+    .risk-table th { font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.08em; color: rgba(255,255,255,0.35); text-align: left; padding: 8px; border-bottom: 1px solid var(--dark-border); }
+    .risk-table td { font-size: 0.72rem; color: rgba(255,255,255,0.8); padding: 12px 8px; border-bottom: 1px solid rgba(255,255,255,0.04); }
+    .risk-badge { font-size: 0.6rem; font-weight: 700; padding: 3px 8px; border-radius: 4px; text-transform: uppercase; letter-spacing: 0.06em; }
+    .risk-badge.high { background: rgba(239,68,68,0.15); color: var(--danger); }
+    .risk-badge.medium { background: rgba(245,158,11,0.15); color: var(--warn); }
+    .risk-badge.low { background: rgba(16,185,129,0.15); color: var(--positive); }
+    .risk-status { font-size: 0.65rem; padding: 2px 6px; border-radius: 4px; }
+    .risk-status.mitigating { background: rgba(79,106,255,0.12); color: var(--brand-light); }
+    .risk-status.monitoring { background: rgba(255,255,255,0.06); color: rgba(255,255,255,0.5); }
+
+    /* ═══ AI SECTION ═══ */
+    .ai-container { margin-top: 48px; }
+    .ai-frame { background: var(--dark-card); border: 1px solid var(--dark-border); border-radius: 16px; overflow: hidden; box-shadow: 0 20px 60px rgba(0,0,0,0.3); }
+    .ai-header { padding: 14px 20px; border-bottom: 1px solid var(--dark-border); display: flex; align-items: center; gap: 10px; }
+    .ai-header i { color: var(--cyan); width: 18px; height: 18px; }
+    .ai-header span { font-family: 'Space Grotesk'; font-size: 0.82rem; font-weight: 700; color: #fff; }
+    .ai-badge { font-size: 0.58rem; font-weight: 700; padding: 3px 8px; border-radius: 4px; background: rgba(16,185,129,0.12); color: var(--positive); text-transform: uppercase; letter-spacing: 0.08em; margin-left: auto; }
+    .ai-body { padding: 20px; display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .ai-insight { background: rgba(255,255,255,0.02); border: 1px solid var(--dark-border); border-radius: 12px; padding: 18px; }
+    .ai-insight-header { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; }
+    .ai-insight-icon { width: 24px; height: 24px; border-radius: 6px; display: flex; align-items: center; justify-content: center; }
     .ai-insight-icon i { width: 14px; height: 14px; }
-    .ai-insight-type { font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 600; }
+    .ai-insight-icon.red { background: rgba(239,68,68,0.15); color: var(--danger); }
+    .ai-insight-icon.amber { background: rgba(245,158,11,0.15); color: var(--warn); }
+    .ai-insight-icon.blue { background: rgba(79,106,255,0.15); color: var(--brand-light); }
+    .ai-insight-icon.green { background: rgba(16,185,129,0.15); color: var(--positive); }
+    .ai-insight-type { font-size: 0.6rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; }
     .ai-insight-type.red { color: var(--danger); } .ai-insight-type.amber { color: var(--warn); }
     .ai-insight-type.blue { color: var(--brand-light); } .ai-insight-type.green { color: var(--positive); }
-    .ai-insight h4 { font-size: 0.88rem; font-weight: 700; color: #fff; margin-bottom: 8px; }
-    .ai-insight p { font-size: 0.8rem; color: rgba(255,255,255,0.55); line-height: 1.6; margin-bottom: 14px; }
-    .ai-actions { display: flex; gap: 8px; }
-    .ai-btn { padding: 6px 14px; border-radius: 6px; font-size: 0.7rem; font-weight: 600; border: none; cursor: pointer; transition: all 0.2s; }
-    .ai-btn--primary { background: rgba(0,200,255,0.12); color: var(--cyan); border: 1px solid rgba(0,200,255,0.2); }
-    .ai-btn--primary:hover { background: rgba(0,200,255,0.2); }
-    .ai-btn--dismiss { background: rgba(255,255,255,0.04); color: rgba(255,255,255,0.5); border: 1px solid rgba(255,255,255,0.08); }
-    .ai-btn--dismiss:hover { background: rgba(255,255,255,0.08); }
-    .ai-guardrail { grid-column: 1 / -1; background: rgba(139,92,246,0.04); border: 1px solid rgba(139,92,246,0.15); border-radius: 14px; padding: 18px 22px; display: flex; align-items: center; gap: 14px; }
-    .ai-guardrail i { color: #A78BFA; flex: none; }
-    .ai-guardrail p { font-size: 0.82rem; color: rgba(255,255,255,0.6); line-height: 1.5; }
+    .ai-insight h4 { font-size: 0.82rem; font-weight: 700; color: #fff; margin-bottom: 6px; }
+    .ai-insight p { font-size: 0.72rem; color: rgba(255,255,255,0.5); line-height: 1.5; }
+    .ai-insight .ai-actions { margin-top: 12px; display: flex; gap: 8px; }
+    .ai-btn { font-size: 0.68rem; font-weight: 600; padding: 6px 12px; border-radius: 6px; border: none; cursor: pointer; transition: all 0.16s var(--ease-out); }
+    .ai-btn--primary { background: var(--brand); color: #fff; }
+    .ai-btn--primary:hover { background: var(--brand-light); }
+    .ai-btn--dismiss { background: rgba(255,255,255,0.06); color: rgba(255,255,255,0.5); }
+    .ai-btn--dismiss:hover { background: rgba(255,255,255,0.1); }
+    .ai-guardrail { grid-column: 1 / -1; background: rgba(255,255,255,0.02); border: 1px solid var(--dark-border); border-radius: 10px; padding: 14px 18px; display: flex; align-items: flex-start; gap: 12px; }
+    .ai-guardrail i { color: var(--positive); flex: none; width: 20px; height: 20px; margin-top: 1px; }
+    .ai-guardrail p { font-size: 0.72rem; color: rgba(255,255,255,0.5); line-height: 1.5; }
     .ai-guardrail strong { color: #fff; }
 
-    /* ═══ ROADMAP (LIGHT) ═══ */
-    .roadmap { margin-top: 56px; position: relative; }
-    .roadmap::before { content: ""; position: absolute; left: 28px; top: 0; bottom: 0; width: 2px; background: linear-gradient(180deg, var(--brand), var(--cyan), var(--gray-200)); }
-    .rm-item { display: flex; gap: 24px; margin-bottom: 28px; position: relative; }
-    .rm-marker { width: 56px; flex: none; display: flex; flex-direction: column; align-items: center; }
-    .rm-dot { width: 16px; height: 16px; border-radius: 50%; border: 3px solid; position: relative; z-index: 1; background: var(--white); }
+    /* ═══ COO VIEW ═══ */
+    .coo-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; margin-top: 48px; }
+    .coo-card { background: var(--dark-card); border: 1px solid var(--dark-border); border-radius: 14px; padding: 22px; }
+    .coo-card-title { font-family: 'Space Grotesk'; font-size: 0.75rem; font-weight: 700; color: rgba(255,255,255,0.6); margin-bottom: 16px; text-transform: uppercase; letter-spacing: 0.06em; display: flex; align-items: center; gap: 8px; }
+    .coo-card-title i { width: 16px; height: 16px; color: var(--cyan); }
+    .coo-row { display: flex; align-items: center; justify-content: space-between; padding: 9px 0; border-bottom: 1px solid rgba(255,255,255,0.04); }
+    .coo-row:last-child { border-bottom: none; }
+    .coo-label { font-size: 0.72rem; color: rgba(255,255,255,0.7); }
+    .coo-value { font-family: 'JetBrains Mono'; font-size: 0.72rem; font-weight: 600; color: #fff; }
+    .coo-bar { width: 60px; height: 6px; background: rgba(255,255,255,0.06); border-radius: 3px; overflow: hidden; }
+    .coo-bar-fill { height: 100%; border-radius: 3px; }
+
+    /* ═══ ROADMAP ═══ */
+    .roadmap-timeline { margin-top: 48px; position: relative; padding-left: 40px; }
+    .roadmap-timeline::before { content: ""; position: absolute; left: 15px; top: 0; bottom: 0; width: 2px; background: linear-gradient(180deg, var(--brand), var(--gray-300)); border-radius: 1px; }
+    .rm-item { position: relative; padding: 0 0 40px; }
+    .rm-item:last-child { padding-bottom: 0; }
+    .rm-dot { position: absolute; left: -33px; top: 4px; width: 14px; height: 14px; border-radius: 50%; border: 3px solid; }
     .rm-dot--done { border-color: var(--positive); background: var(--positive); }
-    .rm-dot--next { border-color: var(--brand); background: transparent; box-shadow: 0 0 12px rgba(28,56,234,0.3); }
-    .rm-dot--future { border-color: var(--gray-300); background: transparent; }
-    .rm-content { background: var(--white); border: 1px solid var(--gray-200); border-radius: 14px; padding: 20px 24px; flex: 1; transition: all 0.3s var(--ease-out); box-shadow: var(--shadow-sm); }
-    .rm-content:hover { box-shadow: var(--shadow-md); border-color: var(--brand-border); transform: translateX(4px); }
-    .rm-content h4 { font-family: 'Space Grotesk'; font-size: 0.95rem; font-weight: 700; color: var(--gray-900); margin-bottom: 4px; }
-    .rm-content p { font-size: 0.82rem; color: var(--gray-500); line-height: 1.5; }
-    .rm-badge { display: inline-block; font-size: 0.6rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding: 3px 8px; border-radius: 4px; margin-left: 10px; }
+    .rm-dot--next { border-color: var(--brand); background: var(--brand); box-shadow: 0 0 0 4px rgba(28,56,234,0.2); }
+    .rm-dot--future { border-color: var(--gray-300); background: var(--white); }
+    .rm-content { background: var(--white); border: 1px solid var(--gray-200); border-radius: 14px; padding: 22px 24px; box-shadow: var(--shadow-sm); transition: all 0.3s var(--ease-out); }
+    .rm-content:hover { box-shadow: var(--shadow-md); transform: translateX(4px); }
+    .rm-content h4 { font-family: 'Space Grotesk'; font-size: 1rem; font-weight: 700; color: var(--gray-900); margin-bottom: 6px; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+    .rm-badge { font-size: 0.58rem; font-weight: 700; padding: 3px 8px; border-radius: 4px; text-transform: uppercase; letter-spacing: 0.08em; }
     .rm-badge--live { background: var(--positive-bg); color: var(--positive); }
-    .rm-badge--next { background: var(--brand-bg); color: var(--brand); }
+    .rm-badge--next { background: rgba(28,56,234,0.08); color: var(--brand); }
+    .rm-content p { font-size: 0.82rem; color: var(--gray-500); line-height: 1.6; margin-bottom: 8px; }
+    .rm-deliverables { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+    .rm-deliverable { font-size: 0.62rem; font-weight: 600; padding: 3px 8px; border-radius: 4px; background: var(--gray-100); color: var(--gray-600); border: 1px solid var(--gray-200); }
+    .rm-duration { font-size: 0.68rem; color: var(--gray-400); font-weight: 500; margin-top: 8px; display: flex; align-items: center; gap: 6px; }
+    .rm-duration i { width: 12px; height: 12px; }
 
-    /* ═══ CTA (DARK) ═══ */
-    .cta-section { text-align: center; padding: 140px 32px; }
-    .cta-section h2 { margin-bottom: 20px; }
+    /* ═══ CTA ═══ */
+    .cta-section { padding: 120px 32px; }
+    .footer { padding: 20px 32px; text-align: center; }
+    .footer p { font-size: 0.72rem; color: rgba(255,255,255,0.4); }
 
-    /* ═══ FOOTER ═══ */
-    .footer { text-align: center; padding: 40px 32px; border-top: 1px solid rgba(255,255,255,0.06); }
-    .footer p { font-size: 0.75rem; color: rgba(255,255,255,0.3); }
+    /* ═══ ANIMATIONS ═══ */
+    .fade-up { opacity: 0; transform: translateY(24px); transition: opacity 0.6s var(--ease-out), transform 0.6s var(--ease-out); }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+    .stagger { opacity: 0; transform: translateY(16px); transition: opacity 0.5s var(--ease-out), transform 0.5s var(--ease-out); }
+    .stagger.visible { opacity: 1; transform: translateY(0); }
 
     /* ═══ RESPONSIVE ═══ */
     @media (max-width: 1024px) {
-      .hero-grid { grid-template-columns: 1fr; gap: 48px; }
+      .hero-grid { grid-template-columns: 1fr; gap: 40px; }
       .kpi-row { grid-template-columns: repeat(3, 1fr); }
       .dash-split { grid-template-columns: 1fr; }
-      .waterfall { grid-template-columns: repeat(4, 1fr); }
-      .ai-body { grid-template-columns: 1fr; }
       .cost-breakdown { grid-template-columns: 1fr; }
+      .ai-body { grid-template-columns: 1fr; }
+      .coo-grid { grid-template-columns: 1fr; }
+      .labor-grid { grid-template-columns: 1fr; }
     }
     @media (max-width: 768px) {
-      .section { padding: 80px 20px; }
-      .surface-grid { grid-template-columns: repeat(3, 1fr); gap: 10px; }
+      .section { padding: 64px 20px; }
+      .surface-grid { grid-template-columns: repeat(3, 1fr); }
       .discovery-flow { grid-template-columns: repeat(2, 1fr); }
       .kpi-row { grid-template-columns: repeat(2, 1fr); }
       .proof-row { grid-template-columns: repeat(2, 1fr); }
-      .waterfall { grid-template-columns: repeat(4, 1fr); gap: 8px; }
       .drill-summary { grid-template-columns: repeat(2, 1fr); }
-      .drill-tabs { display: none; }
+      .waterfall { flex-wrap: wrap; }
+      .wf-col { min-width: 60px; }
     }
-    @media (max-width: 480px) {
-      .surface-grid { grid-template-columns: repeat(2, 1fr); }
-      .kpi-row { grid-template-columns: 1fr; }
-      .waterfall { grid-template-columns: repeat(3, 1fr); }
-    }
-
-    /* ═══ ANIMATIONS ═══ */
-    .fade-up { opacity: 0; transform: translateY(24px); transition: opacity 0.7s var(--ease-out), transform 0.7s var(--ease-out); }
-    .fade-up.visible { opacity: 1; transform: translateY(0); }
-    .stagger > * { opacity: 0; transform: translateY(16px); transition: opacity 0.5s var(--ease-out), transform 0.5s var(--ease-out); }
-    .stagger.visible > *:nth-child(1) { transition-delay: 0ms; opacity: 1; transform: translateY(0); }
-    .stagger.visible > *:nth-child(2) { transition-delay: 60ms; opacity: 1; transform: translateY(0); }
-    .stagger.visible > *:nth-child(3) { transition-delay: 120ms; opacity: 1; transform: translateY(0); }
-    .stagger.visible > *:nth-child(4) { transition-delay: 180ms; opacity: 1; transform: translateY(0); }
-    .stagger.visible > *:nth-child(5) { transition-delay: 240ms; opacity: 1; transform: translateY(0); }
-    .stagger.visible > *:nth-child(6) { transition-delay: 300ms; opacity: 1; transform: translateY(0); }
-    .stagger.visible > *:nth-child(7) { transition-delay: 360ms; opacity: 1; transform: translateY(0); }
-    .stagger.visible > *:nth-child(8) { transition-delay: 420ms; opacity: 1; transform: translateY(0); }
-    .stagger.visible > *:nth-child(9) { transition-delay: 480ms; opacity: 1; transform: translateY(0); }
-    .stagger.visible > *:nth-child(10) { transition-delay: 540ms; opacity: 1; transform: translateY(0); }
-    .stagger.visible > *:nth-child(11) { transition-delay: 600ms; opacity: 1; transform: translateY(0); }
-    .stagger.visible > *:nth-child(12) { transition-delay: 660ms; opacity: 1; transform: translateY(0); }
   </style>
 </head>
 <body class="locked">
@@ -311,7 +357,7 @@
 <div id="gate">
   <div class="gate-card">
     <img src="/assets/logo_footer_2x.png" alt="CleanSpace Stay" />
-    <div class="gate-badge">Internal &amp; Confidential</div>
+    <div class="gate-badge">Internal & Confidential</div>
     <div class="gate-title">Platform Demo Guide</div>
     <div class="gate-sub">Enter the access code to continue</div>
     <input type="password" id="gate-input" placeholder="Access code" autocomplete="off" />
@@ -320,34 +366,34 @@
   </div>
 </div>
 
+<!-- ═══ PAGE ═══ -->
 <div class="page">
-<!-- ═══ STICKY BAR ═══ -->
-<header class="topbar">
+<nav class="topbar">
   <div class="topbar-inner">
     <img src="/assets/logo_nav_light_2x.png" alt="CleanSpace Stay" />
-    <div class="topbar-badge">Internal &amp; Confidential</div>
+    <div class="topbar-badge">Internal & Confidential</div>
   </div>
-</header>
+</nav>
 
-<!-- ═══ 1. HERO — WHAT KELLY BUILT (LIGHT) ═══ -->
-<section class="section hero">
+<!-- ═══ 1. HERO ═══ -->
+<section class="section section--gray hero">
   <div class="section-inner">
     <div class="hero-grid">
-      <div class="hero-left">
+      <div class="hero-left fade-up">
         <div class="eyebrow">What Kelly Built</div>
         <h1>Travel was the <span class="accent">test case.</span></h1>
         <p class="hero-sub">One function. One workflow. One proof that the pattern works: take a process that lives in people's heads and put it in a system the company owns.</p>
         <p class="hero-sub">Kelly will walk you through the live platform — bookings, approvals, reconciliation, and the mobile app.</p>
         <div class="hero-context">
-          <i data-lucide="monitor-smartphone"></i>
+          <i data-lucide="external-link"></i>
           <span>Live at <a href="https://app.cleanspacestay.com" target="_blank">app.cleanspacestay.com</a></span>
         </div>
       </div>
-      <div class="hero-right">
+      <div class="hero-right fade-up">
         <img src="/assets/dashboard_real.png" alt="CleanSpace Stay Dashboard — Live Platform" />
       </div>
     </div>
-    <div class="proof-row stagger fade-up">
+    <div class="proof-row fade-up">
       <div class="proof-card"><div class="val">1</div><div class="lbl">Workflow digitized</div></div>
       <div class="proof-card"><div class="val">100%</div><div class="lbl">Booking visibility</div></div>
       <div class="proof-card"><div class="val">Real-time</div><div class="lbl">Spend by project</div></div>
@@ -356,8 +402,8 @@
   </div>
 </section>
 
-<!-- ═══ 2. THE QUESTION (LIGHT GRAY) ═══ -->
-<section class="section section--gray">
+<!-- ═══ 2. THE QUESTION ═══ -->
+<section class="section section--white">
   <div class="section-inner">
     <div class="question-block fade-up">
       <div class="eyebrow">The Real Question</div>
@@ -368,15 +414,15 @@
   </div>
 </section>
 
-<!-- ═══ 3. THE FULL OPERATING SURFACE (WHITE) ═══ -->
-<section class="section section--white">
+<!-- ═══ 3. THE FULL SURFACE ═══ -->
+<section class="section section--gray">
   <div class="section-inner">
     <div class="fade-up">
       <div class="eyebrow">The Full Picture</div>
       <h2>Travel is one of twelve places where money and risk live.</h2>
       <p class="lead">Every box below is a workflow that currently depends on people, spreadsheets, or tribal knowledge. Travel was the first one we moved into a system. The rest follow the same playbook.</p>
     </div>
-    <div class="surface-grid stagger fade-up">
+    <div class="surface-grid fade-up">
       <div class="surface-item active"><i data-lucide="plane"></i><div class="name">Travel</div></div>
       <div class="surface-item"><i data-lucide="handshake"></i><div class="name">Sales</div></div>
       <div class="surface-item"><i data-lucide="calculator"></i><div class="name">Estimating</div></div>
@@ -387,47 +433,31 @@
       <div class="surface-item"><i data-lucide="truck"></i><div class="name">Subcontractors</div></div>
       <div class="surface-item"><i data-lucide="receipt"></i><div class="name">AP / AR</div></div>
       <div class="surface-item"><i data-lucide="landmark"></i><div class="name">Finance</div></div>
-      <div class="surface-item"><i data-lucide="drafting-compass"></i><div class="name">Engineering</div></div>
+      <div class="surface-item"><i data-lucide="ruler"></i><div class="name">Engineering</div></div>
       <div class="surface-item"><i data-lucide="pen-tool"></i><div class="name">Design</div></div>
     </div>
   </div>
 </section>
 
-<!-- ═══ 4. DISCOVERY ENGINE (LIGHT GRAY) ═══ -->
-<section class="section section--gray">
+<!-- ═══ 4. DISCOVERY ═══ -->
+<section class="section section--white">
   <div class="section-inner">
     <div class="fade-up" style="text-align:center; max-width:800px; margin:0 auto;">
       <div class="eyebrow">How We Get There</div>
       <h2>We don't guess. We ask.</h2>
       <p class="lead" style="margin:0 auto;">Before building anything else, leadership completes an adaptive discovery process. The system interviews you — one question at a time — and generates the exact blueprint for your company.</p>
     </div>
-    <div class="discovery-flow stagger fade-up">
-      <div class="disc-step">
-        <div class="disc-num">1</div>
-        <h4>Discovery</h4>
-        <p>Adaptive interview across 20 business areas — feels like TurboTax</p>
-      </div>
-      <div class="disc-step">
-        <div class="disc-num">2</div>
-        <h4>Blueprint</h4>
-        <p>Auto-generates BRD, PRD, workflows, roles &amp; permissions</p>
-      </div>
-      <div class="disc-step">
-        <div class="disc-num">3</div>
-        <h4>Architecture</h4>
-        <p>Data model, KPIs, cost codes, AI guardrails</p>
-      </div>
-      <div class="disc-step">
-        <div class="disc-num">4</div>
-        <h4>Build</h4>
-        <p>Sprint backlog, MVP scope, delivery — configured to your company</p>
-      </div>
+    <div class="discovery-flow fade-up">
+      <div class="disc-step"><div class="disc-num">1</div><h4>Discovery</h4><p>Adaptive interview across 20 business areas — feels like TurboTax</p></div>
+      <div class="disc-step"><div class="disc-num">2</div><h4>Blueprint</h4><p>Auto-generates BRD, PRD, workflows, roles & permissions</p></div>
+      <div class="disc-step"><div class="disc-num">3</div><h4>Architecture</h4><p>Data model, KPIs, cost codes, AI guardrails</p></div>
+      <div class="disc-step"><div class="disc-num">4</div><h4>Build</h4><p>Sprint backlog, MVP scope, delivery — configured to your company</p></div>
     </div>
-    <p class="fade-up" style="text-align:center; color:var(--gray-500); font-size:0.88rem; margin-top:36px; max-width:600px; margin-left:auto; margin-right:auto;">Nothing gets built on assumptions. The platform is configured to how your company actually operates — not how a generic software vendor thinks you should.</p>
+    <p class="fade-up" style="text-align:center; color:var(--gray-500); font-size:0.88rem; margin-top:32px; max-width:640px; margin-left:auto; margin-right:auto;">Nothing gets built on assumptions. The platform is configured to how your company actually operates — not how a generic software vendor thinks you should.</p>
   </div>
 </section>
 
-<!-- ═══ 5. CEO DASHBOARD (DARK — the mock UI) ═══ -->
+<!-- ═══ 5. CEO DASHBOARD (DARK) ═══ -->
 <section class="section section--dark">
   <div class="section-inner">
     <div class="fade-up" style="text-align:center; max-width:800px; margin:0 auto;">
@@ -438,125 +468,235 @@
     <div class="dash-container fade-up">
       <div class="dash-frame">
         <div class="dash-header">
-          <div class="dash-header-left">
-            <i data-lucide="layout-dashboard" style="width:18px;height:18px;"></i>
-            <span>BuildOS — Executive Dashboard</span>
-          </div>
-          <div class="dash-user">
-            <span>Glenn</span>
-            <div class="dash-avatar">G</div>
-          </div>
+          <div class="dash-header-left"><i data-lucide="layout-dashboard"></i><span>BuildOS — Executive Dashboard</span></div>
+          <div class="dash-user"><span>Glenn</span><div class="dash-avatar">G</div></div>
         </div>
         <div class="dash-body">
-          <div class="kpi-row stagger">
-            <div class="kpi-card green"><div class="kpi-val">$42.3M</div><div class="kpi-lbl">Active Backlog</div><div class="kpi-trend up"><i data-lucide="trending-up" style="width:12px;height:12px;"></i> +12% YoY</div></div>
-            <div class="kpi-card green"><div class="kpi-val">28.4%</div><div class="kpi-lbl">Forecast Margin</div><div class="kpi-trend up"><i data-lucide="trending-up" style="width:12px;height:12px;"></i> +1.2pp</div></div>
-            <div class="kpi-card green"><div class="kpi-val">$2.1M</div><div class="kpi-lbl">Cash Position</div><div class="kpi-trend up"><i data-lucide="check-circle" style="width:12px;height:12px;"></i> Healthy</div></div>
-            <div class="kpi-card red"><div class="kpi-val">2</div><div class="kpi-lbl">Projects at Risk</div><div class="kpi-trend down"><i data-lucide="alert-triangle" style="width:12px;height:12px;"></i> Was 0</div></div>
-            <div class="kpi-card blue"><div class="kpi-val">87%</div><div class="kpi-lbl">Labor Utilization</div><div class="kpi-trend up"><i data-lucide="trending-up" style="width:12px;height:12px;"></i> +3%</div></div>
-            <div class="kpi-card amber"><div class="kpi-val">$1.4M</div><div class="kpi-lbl">AR &gt; 60 Days</div><div class="kpi-trend neutral"><i data-lucide="clock" style="width:12px;height:12px;"></i> +$200K</div></div>
+          <div class="kpi-row">
+            <div class="kpi-card green"><div class="kpi-val">$42.3M</div><div class="kpi-lbl">Active Backlog</div><div class="kpi-trend up">+12% YoY</div></div>
+            <div class="kpi-card green"><div class="kpi-val">28.4%</div><div class="kpi-lbl">Forecast Margin</div><div class="kpi-trend up">+1.2pp</div></div>
+            <div class="kpi-card green"><div class="kpi-val">$2.1M</div><div class="kpi-lbl">Cash Position</div><div class="kpi-trend neutral">Healthy</div></div>
+            <div class="kpi-card red"><div class="kpi-val">2</div><div class="kpi-lbl">Projects at Risk</div><div class="kpi-trend down">Was 0</div></div>
+            <div class="kpi-card blue"><div class="kpi-val">87%</div><div class="kpi-lbl">Labor Utilization</div><div class="kpi-trend up">+3%</div></div>
+            <div class="kpi-card amber"><div class="kpi-val">$1.4M</div><div class="kpi-lbl">AR > 60 Days</div><div class="kpi-trend down">+$200K</div></div>
           </div>
           <div class="dash-split">
             <div class="dash-panel">
-              <div class="dash-panel-title"><i data-lucide="folder-open"></i> Active Projects — Cost to Complete</div>
+              <div class="dash-panel-title"><i data-lucide="folder-kanban"></i> Active Projects — Cost to Complete</div>
               <table class="proj-table">
                 <thead><tr><th>Project</th><th>Contract</th><th>Actual</th><th>ETC</th><th>Forecast</th><th>Margin</th><th>Health</th></tr></thead>
                 <tbody>
-                  <tr><td class="proj-name">ATL Data Center</td><td>$8.2M</td><td>$3.1M</td><td>$4.4M</td><td>$7.5M</td><td class="margin-pos">8.5%</td><td><div class="health-bar"><div class="health-bar-fill" style="width:85%;background:var(--positive);"></div></div></td></tr>
-                  <tr><td class="proj-name">MIA Tower Fit-out</td><td>$12.6M</td><td>$7.8M</td><td>$5.1M</td><td>$12.9M</td><td class="margin-neg">-2.4%</td><td><div class="health-bar"><div class="health-bar-fill" style="width:25%;background:var(--danger);"></div></div></td></tr>
-                  <tr><td class="proj-name">DFW Campus Ph.2</td><td>$6.4M</td><td>$1.2M</td><td>$4.8M</td><td>$6.0M</td><td class="margin-pos">6.3%</td><td><div class="health-bar"><div class="health-bar-fill" style="width:72%;background:var(--positive);"></div></div></td></tr>
-                  <tr><td class="proj-name">ORD Warehouse</td><td>$4.8M</td><td>$2.9M</td><td>$2.1M</td><td>$5.0M</td><td class="margin-neg">-4.2%</td><td><div class="health-bar"><div class="health-bar-fill" style="width:30%;background:var(--danger);"></div></div></td></tr>
-                  <tr><td class="proj-name">SEA Office Reno</td><td>$3.1M</td><td>$0.4M</td><td>$2.4M</td><td>$2.8M</td><td class="margin-pos">9.7%</td><td><div class="health-bar"><div class="health-bar-fill" style="width:92%;background:var(--positive);"></div></div></td></tr>
+                  <tr class="clickable" data-project="atl"><td class="proj-name">ATL Data Center</td><td>$8.2M</td><td>$3.1M</td><td>$4.4M</td><td>$7.5M</td><td class="margin-pos">8.5%</td><td><div class="health-bar"><div class="health-bar-fill" style="width:85%; background:var(--positive);"></div></div></td></tr>
+                  <tr class="clickable selected" data-project="mia"><td class="proj-name">MIA Tower Fit-out</td><td>$12.6M</td><td>$7.8M</td><td>$5.1M</td><td>$12.9M</td><td class="margin-neg">-2.4%</td><td><div class="health-bar"><div class="health-bar-fill" style="width:35%; background:var(--danger);"></div></div></td></tr>
+                  <tr class="clickable" data-project="dfw"><td class="proj-name">DFW Campus Ph.2</td><td>$6.4M</td><td>$1.2M</td><td>$4.8M</td><td>$6.0M</td><td class="margin-pos">6.3%</td><td><div class="health-bar"><div class="health-bar-fill" style="width:70%; background:var(--positive);"></div></div></td></tr>
+                  <tr class="clickable" data-project="ord"><td class="proj-name">ORD Warehouse</td><td>$4.8M</td><td>$2.9M</td><td>$2.1M</td><td>$5.0M</td><td class="margin-neg">-4.2%</td><td><div class="health-bar"><div class="health-bar-fill" style="width:30%; background:var(--danger);"></div></div></td></tr>
+                  <tr class="clickable" data-project="sea"><td class="proj-name">SEA Office Reno</td><td>$3.1M</td><td>$0.4M</td><td>$2.4M</td><td>$2.8M</td><td class="margin-pos">9.7%</td><td><div class="health-bar"><div class="health-bar-fill" style="width:92%; background:var(--positive);"></div></div></td></tr>
                 </tbody>
               </table>
+              <div class="click-hint"><i data-lucide="mouse-pointer-click"></i> Click any project to drill down</div>
             </div>
             <div class="dash-panel">
-              <div class="dash-panel-title"><i data-lucide="bell"></i> Attention Required</div>
-              <div class="alert-item alert-item--red"><div class="alert-icon alert-icon--red"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M12 9v4m0 4h.01"/></svg></div><div class="alert-text"><strong>MIA Tower over budget</strong><span>ETC exceeds contract by $300K — labor &amp; materials</span></div></div>
-              <div class="alert-item alert-item--amber"><div class="alert-icon alert-icon--amber"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div><div class="alert-text"><strong>ORD schedule slip</strong><span>2 weeks behind — labor shortage on electrical</span></div></div>
-              <div class="alert-item alert-item--amber"><div class="alert-icon alert-icon--amber"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M12 2v20M2 12h20"/></svg></div><div class="alert-text"><strong>AR aging: Apex Corp</strong><span>$480K outstanding 72 days — escalation recommended</span></div></div>
-              <div class="alert-item alert-item--green"><div class="alert-icon alert-icon--green"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></div><div class="alert-text"><strong>DFW change order approved</strong><span>+$180K scope — margin preserved at 6.3%</span></div></div>
+              <div class="dash-panel-title"><i data-lucide="alert-triangle"></i> Attention Required</div>
+              <div class="alert-item alert-item--red"><div class="alert-icon alert-icon--red">!</div><div class="alert-text"><strong>MIA Tower over budget</strong><span>ETC exceeds contract by $300K — labor & materials</span></div></div>
+              <div class="alert-item alert-item--amber"><div class="alert-icon alert-icon--amber">!</div><div class="alert-text"><strong>ORD schedule slip</strong><span>2 weeks behind — labor shortage on electrical</span></div></div>
+              <div class="alert-item alert-item--green"><div class="alert-icon alert-icon--green">+</div><div class="alert-text"><strong>AR aging: Apex Corp</strong><span>$480K outstanding 72 days — escalation recommended</span></div></div>
+              <div class="alert-item alert-item--green"><div class="alert-icon alert-icon--green">✓</div><div class="alert-text"><strong>DFW change order approved</strong><span>+$180K scope — margin preserved at 6.3%</span></div></div>
             </div>
           </div>
-        </div>
-      </div>
-    </div>
-    <p class="fade-up" style="text-align:center; color:var(--text-on-dark-dim); font-size:0.8rem; margin-top:24px; font-style:italic;">Illustrative — real numbers come from the Discovery Engine process and live data feeds.</p>
-  </div>
-</section>
 
-<!-- ═══ 6. DRILL DOWN (DARK — the mock UI) ═══ -->
-<section class="section section--dark" style="padding-top:80px;">
-  <div class="section-inner">
-    <div class="fade-up" style="text-align:center; max-width:800px; margin:0 auto;">
-      <div class="eyebrow eyebrow--light">Drill Down</div>
-      <h2 class="light">Every project answers the one question.</h2>
-      <p class="lead lead--light" style="margin:0 auto;">Click any project. See the full cost waterfall: what was sold, what was estimated, what's been spent, what's committed, what remains — and whether you'll finish on budget.</p>
-    </div>
-    <div class="drill-container fade-up">
-      <div class="drill-frame">
-        <div class="drill-header">
-          <div class="drill-header-left">
-            <div class="drill-back"><i data-lucide="chevron-left" style="width:14px;height:14px;"></i></div>
-            <div>
-              <div class="drill-title">MIA Tower Fit-out</div>
-              <div class="drill-subtitle">Client: Meridian Development Group — PM: Jake Harmon — Updated: Today, 9:14 AM</div>
-            </div>
-          </div>
-          <div class="drill-tabs">
-            <div class="drill-tab active">Cost</div>
-            <div class="drill-tab">Schedule</div>
-            <div class="drill-tab">Change Orders</div>
-            <div class="drill-tab">Documents</div>
-          </div>
-        </div>
-        <div class="drill-body">
-          <div class="waterfall stagger">
-            <div class="wf-col"><div class="wf-bar-wrap"><div class="wf-bar wf-bar--contract" style="height:140px;"><div class="wf-bar-val">$12.6M</div></div></div><div class="wf-lbl">Contract<br>Value</div></div>
-            <div class="wf-col"><div class="wf-bar-wrap"><div class="wf-bar wf-bar--budget" style="height:120px;"><div class="wf-bar-val">$10.8M</div></div></div><div class="wf-lbl">Original<br>Budget</div></div>
-            <div class="wf-col"><div class="wf-bar-wrap"><div class="wf-bar wf-bar--actual" style="height:87px;"><div class="wf-bar-val">$7.8M</div></div></div><div class="wf-lbl">Actual<br>Cost</div></div>
-            <div class="wf-col"><div class="wf-bar-wrap"><div class="wf-bar wf-bar--committed" style="height:42px;"><div class="wf-bar-val">$3.8M</div></div></div><div class="wf-lbl">Committed<br>Cost</div></div>
-            <div class="wf-col"><div class="wf-bar-wrap"><div class="wf-bar wf-bar--remaining" style="height:14px;"><div class="wf-bar-val">$1.3M</div></div></div><div class="wf-lbl">Est.<br>Remaining</div></div>
-            <div class="wf-col"><div class="wf-bar-wrap"><div class="wf-bar wf-bar--forecast" style="height:143px;"><div class="wf-bar-val">$12.9M</div></div></div><div class="wf-lbl">Forecast<br>Final Cost</div></div>
-            <div class="wf-col"><div class="wf-bar-wrap"><div class="wf-bar wf-bar--variance" style="height:4px;"><div class="wf-bar-val">-$300K</div></div></div><div class="wf-lbl">Forecast<br>Variance</div></div>
-          </div>
-          <div class="cost-breakdown">
-            <div class="cb-panel">
-              <div class="cb-title">Cost by Category — Budget vs. Actual</div>
-              <div class="cb-row"><span class="cb-cat">Labor</span><div class="cb-vals"><span class="cb-val">$4.2M</span><span class="cb-val over">$4.6M</span></div></div>
-              <div class="cb-row"><span class="cb-cat">Materials</span><div class="cb-vals"><span class="cb-val">$3.1M</span><span class="cb-val over">$3.4M</span></div></div>
-              <div class="cb-row"><span class="cb-cat">Subcontractors</span><div class="cb-vals"><span class="cb-val">$1.8M</span><span class="cb-val under">$1.6M</span></div></div>
-              <div class="cb-row"><span class="cb-cat">Equipment</span><div class="cb-vals"><span class="cb-val">$0.9M</span><span class="cb-val">$0.9M</span></div></div>
-              <div class="cb-row"><span class="cb-cat">Engineering</span><div class="cb-vals"><span class="cb-val">$0.4M</span><span class="cb-val">$0.4M</span></div></div>
-              <div class="cb-row"><span class="cb-cat">Travel</span><div class="cb-vals"><span class="cb-val">$0.2M</span><span class="cb-val over">$0.3M</span></div></div>
-              <div class="cb-row"><span class="cb-cat">General Conditions</span><div class="cb-vals"><span class="cb-val">$0.2M</span><span class="cb-val">$0.2M</span></div></div>
-            </div>
-            <div class="cb-panel">
-              <div class="cb-title">Change Orders</div>
-              <div class="cb-row"><span class="cb-cat">CO-001: Electrical reroute</span><div class="cb-vals"><span class="cb-val" style="color:var(--positive);">Approved</span><span class="cb-val">+$120K</span></div></div>
-              <div class="cb-row"><span class="cb-cat">CO-002: HVAC upgrade</span><div class="cb-vals"><span class="cb-val" style="color:var(--warn);">Pending</span><span class="cb-val">+$85K</span></div></div>
-              <div class="cb-row"><span class="cb-cat">CO-003: Fire suppression</span><div class="cb-vals"><span class="cb-val" style="color:var(--warn);">Pending</span><span class="cb-val">+$62K</span></div></div>
-              <div style="margin-top:16px; padding-top:14px; border-top:1px solid rgba(255,255,255,0.06);">
-                <div class="cb-row"><span class="cb-cat" style="font-weight:600; color:#fff;">Approved Total</span><div class="cb-vals"><span class="cb-val" style="color:var(--positive);">+$120K</span></div></div>
-                <div class="cb-row"><span class="cb-cat" style="font-weight:600; color:#fff;">Pending Exposure</span><div class="cb-vals"><span class="cb-val" style="color:var(--warn);">+$147K</span></div></div>
+          <!-- ═══ DRILL-DOWN PANEL ═══ -->
+          <div class="drill-section active" id="drill-panel">
+            <div class="drill-frame">
+              <div class="drill-header">
+                <div>
+                  <div class="drill-title" id="drill-project-name">MIA Tower Fit-out</div>
+                  <div class="drill-subtitle" id="drill-project-meta">Client: Meridian Development Group — PM: Jake Harmon — Status: Construction — Updated: Today, 9:14 AM</div>
+                </div>
+                <div class="drill-tabs">
+                  <div class="drill-tab active" data-tab="cost">Cost</div>
+                  <div class="drill-tab" data-tab="schedule">Schedule</div>
+                  <div class="drill-tab" data-tab="labor">Labor</div>
+                  <div class="drill-tab" data-tab="risk">Risk</div>
+                  <div class="drill-tab" data-tab="changes">Change Orders</div>
+                </div>
+              </div>
+              <div class="drill-body">
+                <!-- COST TAB -->
+                <div class="drill-tab-content active" id="tab-cost">
+                  <div class="waterfall">
+                    <div class="wf-col"><div class="wf-bar-wrap"><div class="wf-bar wf-bar--contract" style="height:140px;"><div class="wf-bar-val">$12.6M</div></div></div><div class="wf-lbl">Contract<br>Value</div></div>
+                    <div class="wf-col"><div class="wf-bar-wrap"><div class="wf-bar wf-bar--budget" style="height:120px;"><div class="wf-bar-val">$10.8M</div></div></div><div class="wf-lbl">Original<br>Budget</div></div>
+                    <div class="wf-col"><div class="wf-bar-wrap"><div class="wf-bar wf-bar--actual" style="height:87px;"><div class="wf-bar-val">$7.8M</div></div></div><div class="wf-lbl">Actual<br>Cost</div></div>
+                    <div class="wf-col"><div class="wf-bar-wrap"><div class="wf-bar wf-bar--committed" style="height:42px;"><div class="wf-bar-val">$3.8M</div></div></div><div class="wf-lbl">Committed<br>Cost</div></div>
+                    <div class="wf-col"><div class="wf-bar-wrap"><div class="wf-bar wf-bar--remaining" style="height:14px;"><div class="wf-bar-val">$1.3M</div></div></div><div class="wf-lbl">Est.<br>Remaining</div></div>
+                    <div class="wf-col"><div class="wf-bar-wrap"><div class="wf-bar wf-bar--forecast" style="height:143px;"><div class="wf-bar-val">$12.9M</div></div></div><div class="wf-lbl">Forecast<br>Final</div></div>
+                    <div class="wf-col"><div class="wf-bar-wrap"><div class="wf-bar wf-bar--variance" style="height:6px;"><div class="wf-bar-val">-$300K</div></div></div><div class="wf-lbl">Variance</div></div>
+                  </div>
+                  <div class="cost-breakdown">
+                    <div class="cb-panel">
+                      <div class="cb-title">Cost by Category — Budget vs. Actual</div>
+                      <div class="cb-row"><span class="cb-cat">Labor</span><div class="cb-vals"><span class="cb-val">$4.2M</span><span class="cb-val over">$4.6M</span></div></div>
+                      <div class="cb-row"><span class="cb-cat">Materials</span><div class="cb-vals"><span class="cb-val">$3.1M</span><span class="cb-val over">$3.4M</span></div></div>
+                      <div class="cb-row"><span class="cb-cat">Subcontractors</span><div class="cb-vals"><span class="cb-val">$1.8M</span><span class="cb-val under">$1.6M</span></div></div>
+                      <div class="cb-row"><span class="cb-cat">Equipment</span><div class="cb-vals"><span class="cb-val">$0.9M</span><span class="cb-val">$0.9M</span></div></div>
+                      <div class="cb-row"><span class="cb-cat">Engineering</span><div class="cb-vals"><span class="cb-val">$0.4M</span><span class="cb-val">$0.4M</span></div></div>
+                      <div class="cb-row"><span class="cb-cat">Travel</span><div class="cb-vals"><span class="cb-val">$0.2M</span><span class="cb-val over">$0.3M</span></div></div>
+                      <div class="cb-row"><span class="cb-cat">General Conditions</span><div class="cb-vals"><span class="cb-val">$0.2M</span><span class="cb-val">$0.2M</span></div></div>
+                    </div>
+                    <div class="cb-panel">
+                      <div class="cb-title">Forecast Formula</div>
+                      <div class="cb-row"><span class="cb-cat">Actual Cost</span><div class="cb-vals"><span class="cb-val">$7.8M</span></div></div>
+                      <div class="cb-row"><span class="cb-cat">+ Committed Cost</span><div class="cb-vals"><span class="cb-val">$3.8M</span></div></div>
+                      <div class="cb-row"><span class="cb-cat">+ Est. Remaining</span><div class="cb-vals"><span class="cb-val">$1.3M</span></div></div>
+                      <div style="margin-top:12px; padding-top:12px; border-top:1px solid rgba(255,255,255,0.06);">
+                        <div class="cb-row"><span class="cb-cat" style="font-weight:700; color:#fff;">= Forecast Final Cost</span><div class="cb-vals"><span class="cb-val" style="color:var(--danger); font-weight:700;">$12.9M</span></div></div>
+                        <div class="cb-row"><span class="cb-cat" style="font-weight:700; color:#fff;">Forecast Gross Profit</span><div class="cb-vals"><span class="cb-val" style="color:var(--danger);">-$300K</span></div></div>
+                        <div class="cb-row"><span class="cb-cat" style="font-weight:700; color:#fff;">Forecast Gross Margin</span><div class="cb-vals"><span class="cb-val" style="color:var(--danger);">-2.4%</span></div></div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="drill-summary">
+                    <div class="ds-card"><div class="ds-val red">$5.1M</div><div class="ds-lbl">Cost to Complete</div></div>
+                    <div class="ds-card"><div class="ds-val red">-2.4%</div><div class="ds-lbl">Forecast Margin</div></div>
+                    <div class="ds-card"><div class="ds-val blue">62%</div><div class="ds-lbl">% Complete</div></div>
+                    <div class="ds-card"><div class="ds-val amber">$300K</div><div class="ds-lbl">Over Budget</div></div>
+                  </div>
+                </div>
+
+                <!-- SCHEDULE TAB -->
+                <div class="drill-tab-content" id="tab-schedule">
+                  <div class="gantt">
+                    <div class="gantt-row"><div class="gantt-label">Design</div><div class="gantt-bar-track"><div class="gantt-bar-planned" style="left:0%;width:15%;"></div><div class="gantt-bar-actual on-track" style="left:0%;width:15%;"></div></div></div>
+                    <div class="gantt-row"><div class="gantt-label">Engineering</div><div class="gantt-bar-track"><div class="gantt-bar-planned" style="left:10%;width:20%;"></div><div class="gantt-bar-actual on-track" style="left:10%;width:20%;"></div></div></div>
+                    <div class="gantt-row"><div class="gantt-label">Procurement</div><div class="gantt-bar-track"><div class="gantt-bar-planned" style="left:20%;width:25%;"></div><div class="gantt-bar-actual on-track" style="left:20%;width:25%;"></div></div></div>
+                    <div class="gantt-row"><div class="gantt-label">Structural</div><div class="gantt-bar-track"><div class="gantt-bar-planned" style="left:30%;width:30%;"></div><div class="gantt-bar-actual on-track" style="left:30%;width:30%;"></div></div></div>
+                    <div class="gantt-row"><div class="gantt-label">MEP Rough-in</div><div class="gantt-bar-track"><div class="gantt-bar-planned" style="left:45%;width:25%;"></div><div class="gantt-bar-actual behind" style="left:45%;width:20%;"></div></div></div>
+                    <div class="gantt-row"><div class="gantt-label">Electrical</div><div class="gantt-bar-track"><div class="gantt-bar-planned" style="left:50%;width:25%;"></div><div class="gantt-bar-actual behind" style="left:52%;width:18%;"></div></div></div>
+                    <div class="gantt-row"><div class="gantt-label">Finishes</div><div class="gantt-bar-track"><div class="gantt-bar-planned" style="left:70%;width:20%;"></div></div></div>
+                    <div class="gantt-row"><div class="gantt-label">Commissioning</div><div class="gantt-bar-track"><div class="gantt-bar-planned" style="left:88%;width:12%;"></div></div></div>
+                  </div>
+                  <div class="gantt-legend">
+                    <div class="gantt-legend-item"><div class="gantt-legend-dot" style="background:rgba(79,106,255,0.3);"></div>Planned</div>
+                    <div class="gantt-legend-item"><div class="gantt-legend-dot" style="background:var(--positive);"></div>On Track</div>
+                    <div class="gantt-legend-item"><div class="gantt-legend-dot" style="background:var(--danger);"></div>Behind</div>
+                  </div>
+                  <div class="drill-summary" style="margin-top:20px;">
+                    <div class="ds-card"><div class="ds-val blue">62%</div><div class="ds-lbl">Schedule Complete</div></div>
+                    <div class="ds-card"><div class="ds-val amber">-2 wks</div><div class="ds-lbl">Schedule Variance</div></div>
+                    <div class="ds-card"><div class="ds-val red">MEP</div><div class="ds-lbl">Critical Path Item</div></div>
+                    <div class="ds-card"><div class="ds-val green">Mar 2026</div><div class="ds-lbl">Target Completion</div></div>
+                  </div>
+                </div>
+
+                <!-- LABOR TAB -->
+                <div class="drill-tab-content" id="tab-labor">
+                  <div class="labor-grid">
+                    <div class="labor-card">
+                      <div class="labor-card-title">Hours by Trade — Budget vs. Actual</div>
+                      <div class="labor-row"><span class="labor-trade">Electricians</span><span class="labor-hours">4,200 / 3,600 budgeted</span><span class="labor-flag overtime">+17% OT</span></div>
+                      <div class="labor-row"><span class="labor-trade">Plumbers</span><span class="labor-hours">2,100 / 2,200 budgeted</span><span class="labor-flag normal">On track</span></div>
+                      <div class="labor-row"><span class="labor-trade">HVAC Techs</span><span class="labor-hours">1,800 / 1,900 budgeted</span><span class="labor-flag normal">On track</span></div>
+                      <div class="labor-row"><span class="labor-trade">Iron Workers</span><span class="labor-hours">3,400 / 3,200 budgeted</span><span class="labor-flag overtime">+6% OT</span></div>
+                      <div class="labor-row"><span class="labor-trade">Carpenters</span><span class="labor-hours">1,600 / 1,800 budgeted</span><span class="labor-flag normal">Under</span></div>
+                      <div class="labor-row"><span class="labor-trade">Laborers</span><span class="labor-hours">5,200 / 5,000 budgeted</span><span class="labor-flag normal">On track</span></div>
+                    </div>
+                    <div class="labor-card">
+                      <div class="labor-card-title">Crew Utilization This Week</div>
+                      <div class="labor-row"><span class="labor-trade">Total Headcount</span><span class="labor-util" style="color:var(--brand-light);">42</span></div>
+                      <div class="labor-row"><span class="labor-trade">Avg. Utilization</span><span class="labor-util" style="color:var(--positive);">91%</span></div>
+                      <div class="labor-row"><span class="labor-trade">Overtime Hours</span><span class="labor-util" style="color:var(--danger);">186 hrs</span></div>
+                      <div class="labor-row"><span class="labor-trade">Overtime Cost (week)</span><span class="labor-util" style="color:var(--danger);">$14,200</span></div>
+                      <div class="labor-row"><span class="labor-trade">Open Positions</span><span class="labor-util" style="color:var(--warn);">3</span></div>
+                      <div class="labor-row"><span class="labor-trade">Safety Incidents (MTD)</span><span class="labor-util" style="color:var(--positive);">0</span></div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- RISK TAB -->
+                <div class="drill-tab-content" id="tab-risk">
+                  <table class="risk-table">
+                    <thead><tr><th>Risk</th><th>Probability</th><th>Impact</th><th>Score</th><th>Mitigation</th><th>Status</th></tr></thead>
+                    <tbody>
+                      <tr><td>Electrical labor overrun</td><td><span class="risk-badge high">High</span></td><td><span class="risk-badge high">High</span></td><td style="color:var(--danger); font-weight:700;">9</td><td style="font-size:0.68rem; color:rgba(255,255,255,0.5);">Added 3 electricians; reviewing scope reduction on Level 4</td><td><span class="risk-status mitigating">Mitigating</span></td></tr>
+                      <tr><td>MEP schedule delay</td><td><span class="risk-badge high">High</span></td><td><span class="risk-badge medium">Med</span></td><td style="color:var(--warn); font-weight:700;">6</td><td style="font-size:0.68rem; color:rgba(255,255,255,0.5);">Weekend shifts approved; monitoring daily</td><td><span class="risk-status mitigating">Mitigating</span></td></tr>
+                      <tr><td>Material price escalation</td><td><span class="risk-badge medium">Med</span></td><td><span class="risk-badge medium">Med</span></td><td style="color:var(--warn); font-weight:700;">4</td><td style="font-size:0.68rem; color:rgba(255,255,255,0.5);">Locked pricing on 80% of remaining POs</td><td><span class="risk-status monitoring">Monitoring</span></td></tr>
+                      <tr><td>Client scope creep</td><td><span class="risk-badge low">Low</span></td><td><span class="risk-badge high">High</span></td><td style="color:var(--warn); font-weight:700;">3</td><td style="font-size:0.68rem; color:rgba(255,255,255,0.5);">Change order process enforced; CO-002/003 pending</td><td><span class="risk-status monitoring">Monitoring</span></td></tr>
+                      <tr><td>Weather delays</td><td><span class="risk-badge low">Low</span></td><td><span class="risk-badge low">Low</span></td><td style="color:var(--positive); font-weight:700;">1</td><td style="font-size:0.68rem; color:rgba(255,255,255,0.5);">Interior work only remaining; no exposure</td><td><span class="risk-status monitoring">Monitoring</span></td></tr>
+                    </tbody>
+                  </table>
+                </div>
+
+                <!-- CHANGE ORDERS TAB -->
+                <div class="drill-tab-content" id="tab-changes">
+                  <div class="cost-breakdown" style="margin-top:0;">
+                    <div class="cb-panel" style="grid-column: 1 / -1;">
+                      <div class="cb-title">Change Order Log</div>
+                      <div class="cb-row" style="padding:12px 0;"><span class="cb-cat" style="font-weight:600; color:#fff;">CO-001: Electrical reroute — Level 3 conflict</span><div class="cb-vals"><span class="cb-val" style="color:var(--positive); font-weight:600;">Approved</span><span class="cb-val">+$120K</span></div></div>
+                      <div style="padding:0 0 12px; font-size:0.68rem; color:rgba(255,255,255,0.4); border-bottom:1px solid rgba(255,255,255,0.04);">Submitted: Jan 14 — Approved: Jan 18 — Approved by: Glenn — Impact: 0 days schedule</div>
+                      <div class="cb-row" style="padding:12px 0;"><span class="cb-cat" style="font-weight:600; color:#fff;">CO-002: HVAC upgrade — client-requested</span><div class="cb-vals"><span class="cb-val" style="color:var(--warn); font-weight:600;">Pending</span><span class="cb-val">+$85K</span></div></div>
+                      <div style="padding:0 0 12px; font-size:0.68rem; color:rgba(255,255,255,0.4); border-bottom:1px solid rgba(255,255,255,0.04);">Submitted: Feb 3 — Awaiting client signature — Impact: +5 days if approved</div>
+                      <div class="cb-row" style="padding:12px 0;"><span class="cb-cat" style="font-weight:600; color:#fff;">CO-003: Fire suppression — code compliance</span><div class="cb-vals"><span class="cb-val" style="color:var(--warn); font-weight:600;">Pending</span><span class="cb-val">+$62K</span></div></div>
+                      <div style="padding:0 0 12px; font-size:0.68rem; color:rgba(255,255,255,0.4);">Submitted: Feb 10 — Under internal review — Impact: 0 days (parallel path)</div>
+                      <div style="margin-top:16px; padding-top:14px; border-top:1px solid rgba(255,255,255,0.06);">
+                        <div class="cb-row"><span class="cb-cat" style="font-weight:700; color:#fff;">Approved Total</span><div class="cb-vals"><span class="cb-val" style="color:var(--positive); font-weight:700;">+$120K</span></div></div>
+                        <div class="cb-row"><span class="cb-cat" style="font-weight:700; color:#fff;">Pending Exposure</span><div class="cb-vals"><span class="cb-val" style="color:var(--warn); font-weight:700;">+$147K</span></div></div>
+                        <div class="cb-row"><span class="cb-cat" style="font-weight:700; color:#fff;">Net Contract Impact</span><div class="cb-vals"><span class="cb-val" style="color:var(--brand-light); font-weight:700;">+$267K (if all approved)</span></div></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-          <div class="drill-summary stagger">
-            <div class="ds-card"><div class="ds-val red">$5.1M</div><div class="ds-lbl">Cost to Complete</div></div>
-            <div class="ds-card"><div class="ds-val red">-2.4%</div><div class="ds-lbl">Forecast Margin</div></div>
-            <div class="ds-card"><div class="ds-val blue">62%</div><div class="ds-lbl">% Complete</div></div>
-            <div class="ds-card"><div class="ds-val amber">$300K</div><div class="ds-lbl">Over Budget</div></div>
-          </div>
         </div>
       </div>
     </div>
-    <p class="fade-up" style="text-align:center; color:var(--text-on-dark-muted); font-size:0.92rem; margin-top:32px; max-width:640px; margin-left:auto; margin-right:auto;">This is the answer to the one question — for every project, in real time. No phone calls. No spreadsheets. No waiting for month-end.</p>
+    <p class="fade-up" style="text-align:center; color:var(--text-on-dark-dim); font-size:0.82rem; margin-top:24px; font-style:italic;">Illustrative — real numbers come from the Discovery Engine process and live data feeds.</p>
   </div>
 </section>
 
-<!-- ═══ 7. AI LAYER (DARK — the mock UI) ═══ -->
-<section class="section section--dark" style="padding-top:80px;">
+<!-- ═══ 6. COO OPERATIONAL VIEW (DARK) ═══ -->
+<section class="section section--dark" style="padding-top:60px;">
+  <div class="section-inner">
+    <div class="fade-up" style="text-align:center; max-width:800px; margin:0 auto;">
+      <div class="eyebrow eyebrow--light">Operational Layer</div>
+      <h2 class="light">What the COO sees.</h2>
+      <p class="lead lead--light" style="margin:0 auto;">Resource allocation, approval queues, and vendor performance — across every active project.</p>
+    </div>
+    <div class="coo-grid fade-up">
+      <div class="coo-card">
+        <div class="coo-card-title"><i data-lucide="users"></i> Resource Allocation</div>
+        <div class="coo-row"><span class="coo-label">Electricians</span><span class="coo-value">42 / 38 needed</span></div>
+        <div class="coo-row"><span class="coo-label">Plumbers</span><span class="coo-value">18 / 20 needed</span></div>
+        <div class="coo-row"><span class="coo-label">HVAC</span><span class="coo-value">12 / 12 needed</span></div>
+        <div class="coo-row"><span class="coo-label">Iron Workers</span><span class="coo-value">24 / 28 needed</span></div>
+        <div class="coo-row"><span class="coo-label">Carpenters</span><span class="coo-value">16 / 14 needed</span></div>
+        <div class="coo-row"><span class="coo-label">Laborers</span><span class="coo-value">56 / 52 needed</span></div>
+      </div>
+      <div class="coo-card">
+        <div class="coo-card-title"><i data-lucide="check-circle"></i> Approval Queue</div>
+        <div class="coo-row"><span class="coo-label">POs awaiting approval</span><span class="coo-value" style="color:var(--warn);">4</span></div>
+        <div class="coo-row"><span class="coo-label">Change orders pending</span><span class="coo-value" style="color:var(--warn);">2</span></div>
+        <div class="coo-row"><span class="coo-label">Invoices to release</span><span class="coo-value">7</span></div>
+        <div class="coo-row"><span class="coo-label">RFIs open > 5 days</span><span class="coo-value" style="color:var(--danger);">3</span></div>
+        <div class="coo-row"><span class="coo-label">Submittals pending</span><span class="coo-value">5</span></div>
+        <div class="coo-row"><span class="coo-label">Avg. approval time</span><span class="coo-value" style="color:var(--positive);">1.8 days</span></div>
+      </div>
+      <div class="coo-card">
+        <div class="coo-card-title"><i data-lucide="truck"></i> Vendor Scorecard</div>
+        <div class="coo-row"><span class="coo-label">Apex Electrical</span><div class="coo-bar"><div class="coo-bar-fill" style="width:92%; background:var(--positive);"></div></div></div>
+        <div class="coo-row"><span class="coo-label">Metro Plumbing</span><div class="coo-bar"><div class="coo-bar-fill" style="width:85%; background:var(--positive);"></div></div></div>
+        <div class="coo-row"><span class="coo-label">SteelCo Fabrication</span><div class="coo-bar"><div class="coo-bar-fill" style="width:78%; background:var(--brand-light);"></div></div></div>
+        <div class="coo-row"><span class="coo-label">CoolAir HVAC</span><div class="coo-bar"><div class="coo-bar-fill" style="width:65%; background:var(--warn);"></div></div></div>
+        <div class="coo-row"><span class="coo-label">FastTrack Logistics</span><div class="coo-bar"><div class="coo-bar-fill" style="width:88%; background:var(--positive);"></div></div></div>
+        <div class="coo-row"><span class="coo-label">ProFinish Interiors</span><div class="coo-bar"><div class="coo-bar-fill" style="width:71%; background:var(--brand-light);"></div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 7. AI LAYER (DARK) ═══ -->
+<section class="section section--dark" style="padding-top:60px;">
   <div class="section-inner">
     <div class="fade-up" style="text-align:center; max-width:800px; margin:0 auto;">
       <div class="eyebrow eyebrow--light">The Intelligence Layer</div>
@@ -566,7 +706,7 @@
     <div class="ai-container fade-up">
       <div class="ai-frame">
         <div class="ai-header">
-          <div class="ai-header-icon"><i data-lucide="sparkles"></i></div>
+          <i data-lucide="sparkles"></i>
           <span>AI Router — Project Insights</span>
           <span class="ai-badge">Real-time</span>
         </div>
@@ -596,7 +736,7 @@
             <div class="ai-actions"><button class="ai-btn ai-btn--primary">View Report</button><button class="ai-btn ai-btn--dismiss">Dismiss</button></div>
           </div>
           <div class="ai-guardrail">
-            <i data-lucide="shield-check" style="width:20px;height:20px;"></i>
+            <i data-lucide="shield-check"></i>
             <p><strong>AI recommends. Humans approve.</strong> The AI Router can summarize, draft, compare, forecast, and flag risk — but it cannot approve purchase orders, release invoices, alter contract values, or mark projects complete. Every financial action requires human approval.</p>
           </div>
         </div>
@@ -605,27 +745,128 @@
   </div>
 </section>
 
-<!-- ═══ 8. ROADMAP (LIGHT GRAY) ═══ -->
+<!-- ═══ 8. ROADMAP (LIGHT) ═══ -->
 <section class="section section--gray">
   <div class="section-inner">
     <div class="fade-up">
       <div class="eyebrow">The Roadmap</div>
       <h2>Travel is live. Here's what comes next.</h2>
-      <p class="lead">Each milestone builds on the last. The Discovery Engine defines the exact scope before anything else gets built.</p>
+      <p class="lead">Each milestone builds on the last. The Discovery Engine defines the exact scope before anything else gets built. No guessing, no wasted sprints.</p>
     </div>
-    <div class="roadmap fade-up">
-      <div class="rm-item"><div class="rm-marker"><div class="rm-dot rm-dot--done"></div></div><div class="rm-content"><h4>Crew Travel &amp; Spend <span class="rm-badge rm-badge--live">Live</span></h4><p>Bookings, approvals, reconciliation, mobile app — fully operational today.</p></div></div>
-      <div class="rm-item"><div class="rm-marker"><div class="rm-dot rm-dot--next"></div></div><div class="rm-content"><h4>Enterprise Discovery Engine <span class="rm-badge rm-badge--next">Next</span></h4><p>Adaptive interview across 20 business areas — generates the full blueprint, BRD, PRD, workflow maps, role matrix, KPI requirements, and AI guardrails.</p></div></div>
-      <div class="rm-item"><div class="rm-marker"><div class="rm-dot rm-dot--future"></div></div><div class="rm-content"><h4>Core Platform &amp; Budget Tracking</h4><p>Organizations, users, roles, projects, budgets, actual cost, committed cost, cost-to-complete dashboard.</p></div></div>
-      <div class="rm-item"><div class="rm-marker"><div class="rm-dot rm-dot--future"></div></div><div class="rm-content"><h4>Workflow Engine &amp; Approvals</h4><p>States, transitions, audit trail, notifications — across all functions. Human approval guardrails enforced.</p></div></div>
-      <div class="rm-item"><div class="rm-marker"><div class="rm-dot rm-dot--future"></div></div><div class="rm-content"><h4>AI Router &amp; Guardrails</h4><p>Provider-agnostic AI that summarizes, drafts, compares, forecasts, and flags risk — but never approves financial actions.</p></div></div>
-      <div class="rm-item"><div class="rm-marker"><div class="rm-dot rm-dot--future"></div></div><div class="rm-content"><h4>Mobile Field App</h4><p>Daily reports, photos, labor tracking, punch lists, inspections — offline-friendly, task-first design.</p></div></div>
-      <div class="rm-item"><div class="rm-marker"><div class="rm-dot rm-dot--future"></div></div><div class="rm-content"><h4>SaaS Readiness</h4><p>Multi-tenant onboarding, white labeling, templates, billing — the platform becomes a product for similar companies.</p></div></div>
+    <div class="roadmap-timeline fade-up">
+      <div class="rm-item">
+        <div class="rm-dot rm-dot--done"></div>
+        <div class="rm-content">
+          <h4>Crew Travel & Spend <span class="rm-badge rm-badge--live">Live</span></h4>
+          <p>Bookings, approvals, reconciliation, mobile app — fully operational today. Proved the pattern works.</p>
+          <div class="rm-deliverables">
+            <span class="rm-deliverable">Booking Engine</span>
+            <span class="rm-deliverable">Approval Workflow</span>
+            <span class="rm-deliverable">QuickBooks Sync</span>
+            <span class="rm-deliverable">Mobile App</span>
+            <span class="rm-deliverable">Spend Dashboard</span>
+          </div>
+        </div>
+      </div>
+      <div class="rm-item">
+        <div class="rm-dot rm-dot--next"></div>
+        <div class="rm-content">
+          <h4>Enterprise Discovery Engine <span class="rm-badge rm-badge--next">Next</span></h4>
+          <p>Adaptive interview across 20 business areas. Generates the full blueprint — BRD, PRD, workflow maps, role matrix, KPI requirements, AI guardrails. Configured to how your company actually operates.</p>
+          <div class="rm-deliverables">
+            <span class="rm-deliverable">Adaptive Questionnaire</span>
+            <span class="rm-deliverable">Auto-Generated BRD</span>
+            <span class="rm-deliverable">Auto-Generated PRD</span>
+            <span class="rm-deliverable">Workflow Maps</span>
+            <span class="rm-deliverable">Role & Permission Matrix</span>
+            <span class="rm-deliverable">KPI Definitions</span>
+          </div>
+          <div class="rm-duration"><i data-lucide="clock"></i> 4–6 weeks</div>
+        </div>
+      </div>
+      <div class="rm-item">
+        <div class="rm-dot rm-dot--future"></div>
+        <div class="rm-content">
+          <h4>Core Platform & Budget Tracking</h4>
+          <p>Organizations, users, roles, projects, documents. Budget entry, actual cost capture, committed cost tracking, and the cost-to-complete dashboard Glenn sees above.</p>
+          <div class="rm-deliverables">
+            <span class="rm-deliverable">Org & User Management</span>
+            <span class="rm-deliverable">Project Setup</span>
+            <span class="rm-deliverable">Budget Entry</span>
+            <span class="rm-deliverable">Cost Capture</span>
+            <span class="rm-deliverable">ETC Dashboard</span>
+            <span class="rm-deliverable">Executive KPIs</span>
+          </div>
+          <div class="rm-duration"><i data-lucide="clock"></i> 8–12 weeks</div>
+        </div>
+      </div>
+      <div class="rm-item">
+        <div class="rm-dot rm-dot--future"></div>
+        <div class="rm-content">
+          <h4>Workflow Engine & Approvals</h4>
+          <p>State machines for every business process — from PO approval to project closeout. Audit trail, notifications, exception handling. Human guardrails enforced at every financial boundary.</p>
+          <div class="rm-deliverables">
+            <span class="rm-deliverable">State Machine Engine</span>
+            <span class="rm-deliverable">Approval Chains</span>
+            <span class="rm-deliverable">Audit Trail</span>
+            <span class="rm-deliverable">Notifications</span>
+            <span class="rm-deliverable">Exception Handling</span>
+          </div>
+          <div class="rm-duration"><i data-lucide="clock"></i> 6–8 weeks</div>
+        </div>
+      </div>
+      <div class="rm-item">
+        <div class="rm-dot rm-dot--future"></div>
+        <div class="rm-content">
+          <h4>AI Router & Guardrails</h4>
+          <p>Provider-agnostic AI that summarizes daily reports, drafts RFIs and change orders, explains cost-to-complete changes, flags over-budget categories, identifies schedule risk, and generates the executive weekly report. Never approves — only recommends.</p>
+          <div class="rm-deliverables">
+            <span class="rm-deliverable">Context Retrieval</span>
+            <span class="rm-deliverable">Cost Explanation</span>
+            <span class="rm-deliverable">Risk Flagging</span>
+            <span class="rm-deliverable">Document Drafting</span>
+            <span class="rm-deliverable">Weekly Reports</span>
+            <span class="rm-deliverable">Historical Search</span>
+          </div>
+          <div class="rm-duration"><i data-lucide="clock"></i> 6–8 weeks</div>
+        </div>
+      </div>
+      <div class="rm-item">
+        <div class="rm-dot rm-dot--future"></div>
+        <div class="rm-content">
+          <h4>Mobile Field App</h4>
+          <p>Daily reports, photos, labor tracking, punch lists, inspections. Offline-friendly, task-first design. Field users complete daily tasks in under 2 minutes.</p>
+          <div class="rm-deliverables">
+            <span class="rm-deliverable">Daily Reports</span>
+            <span class="rm-deliverable">Photo Capture</span>
+            <span class="rm-deliverable">Labor Entry</span>
+            <span class="rm-deliverable">Punch Lists</span>
+            <span class="rm-deliverable">Inspections</span>
+            <span class="rm-deliverable">Offline Mode</span>
+          </div>
+          <div class="rm-duration"><i data-lucide="clock"></i> 8–10 weeks</div>
+        </div>
+      </div>
+      <div class="rm-item">
+        <div class="rm-dot rm-dot--future"></div>
+        <div class="rm-content">
+          <h4>SaaS Readiness</h4>
+          <p>Multi-tenant onboarding, white labeling, templates, billing. The platform becomes a product for similar companies — recurring revenue from the system you already built for yourself.</p>
+          <div class="rm-deliverables">
+            <span class="rm-deliverable">Multi-Tenant</span>
+            <span class="rm-deliverable">White Labeling</span>
+            <span class="rm-deliverable">Templates</span>
+            <span class="rm-deliverable">Billing</span>
+            <span class="rm-deliverable">Onboarding Flow</span>
+          </div>
+          <div class="rm-duration"><i data-lucide="clock"></i> 10–14 weeks</div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- ═══ 9. CTA (DARK) ═══ -->
+<!-- ═══ 9. CTA ═══ -->
 <section class="section section--dark cta-section">
   <div class="section-inner fade-up" style="text-align:center;">
     <div class="eyebrow eyebrow--light">The Outcome</div>
@@ -634,9 +875,8 @@
   </div>
 </section>
 
-<!-- ═══ FOOTER ═══ -->
-<footer class="footer" style="background: var(--navy-deep); border-top: 1px solid var(--dark-border);">
-  <p>&copy; 2025 CleanSpace Stay. Internal &amp; Confidential.</p>
+<footer class="footer" style="background: var(--navy-deep); border-top: 1px solid rgba(255,255,255,0.06);">
+  <p>&copy; 2025 CleanSpace Stay. Internal & Confidential.</p>
 </footer>
 </div>
 
@@ -654,11 +894,35 @@ function tryUnlock() {
 btn.addEventListener('click', tryUnlock);
 inp.addEventListener('keydown', e => { if (e.key === 'Enter') tryUnlock(); });
 
-// Scroll animations — lower threshold for reliable triggering
+// Scroll animations
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('visible'); } });
-}, { threshold: 0.05, rootMargin: '0px 0px -40px 0px' });
+}, { threshold: 0.02, rootMargin: '0px 0px -20px 0px' });
 document.querySelectorAll('.fade-up, .stagger').forEach(el => observer.observe(el));
+
+// Drill-down tabs
+document.querySelectorAll('.drill-tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.drill-tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.drill-tab-content').forEach(c => c.classList.remove('active'));
+    tab.classList.add('active');
+    document.getElementById('tab-' + tab.dataset.tab).classList.add('active');
+  });
+});
+
+// Project row click
+document.querySelectorAll('.proj-table tr.clickable').forEach(row => {
+  row.addEventListener('click', () => {
+    document.querySelectorAll('.proj-table tr.clickable').forEach(r => r.classList.remove('selected'));
+    row.classList.add('selected');
+    const panel = document.getElementById('drill-panel');
+    panel.classList.remove('active');
+    void panel.offsetWidth; // trigger reflow
+    panel.classList.add('active');
+    // Scroll to drill panel
+    panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+});
 
 // Lucide icons
 lucide.createIcons();
