@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CleanSpace Stay — Help Center</title>
+<link rel="icon" href="/favicon.ico">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --brand:#1C38EA;
+  --brand-light:#E8ECFD;
+  --dark:#0F1729;
+  --gray-50:#F8FAFC;
+  --gray-100:#F1F5F9;
+  --gray-200:#E2E8F0;
+  --gray-300:#CBD5E1;
+  --gray-500:#64748B;
+  --gray-700:#334155;
+  --gray-900:#0F172A;
+  --green:#10B981;
+  --orange:#F59E0B;
+  --purple:#8B5CF6;
+  --indigo:#6366F1;
+  --red:#EF4444;
+  --radius:12px;
+  --shadow:0 1px 3px rgba(0,0,0,.08),0 4px 12px rgba(0,0,0,.04);
+  --shadow-lg:0 4px 20px rgba(0,0,0,.1);
+}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:var(--gray-50);color:var(--gray-900);line-height:1.6}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+
+/* Header */
+.header{background:#fff;border-bottom:1px solid var(--gray-200);padding:16px 24px;position:sticky;top:0;z-index:100}
+.header-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between}
+.header img{height:32px}
+.header-links{display:flex;gap:16px;font-size:14px}
+.header-links a{color:var(--gray-700);font-weight:500}
+
+/* Hero */
+.hero{background:#fff;padding:60px 24px 40px;text-align:center;border-bottom:1px solid var(--gray-200)}
+.hero h1{font-size:32px;font-weight:700;margin-bottom:8px}
+.hero p{font-size:18px;color:var(--gray-500);max-width:600px;margin:0 auto 32px}
+
+/* Role Selector */
+.role-selector{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;max-width:800px;margin:0 auto}
+.role-btn{padding:12px 20px;border-radius:40px;border:2px solid var(--gray-200);background:#fff;font-size:14px;font-weight:600;cursor:pointer;transition:all .2s ease}
+.role-btn:hover{border-color:var(--brand);color:var(--brand)}
+.role-btn.active{background:var(--brand);color:#fff;border-color:var(--brand)}
+.role-btn .role-icon{margin-right:6px}
+
+/* Content */
+.content{max-width:900px;margin:0 auto;padding:40px 24px 80px}
+.role-section{display:none}
+.role-section.active{display:block}
+
+/* Section Cards */
+.section-title{font-size:24px;font-weight:700;margin-bottom:8px}
+.section-subtitle{font-size:16px;color:var(--gray-500);margin-bottom:24px}
+.card{background:#fff;border-radius:var(--radius);border:1px solid var(--gray-200);padding:24px;margin-bottom:16px;box-shadow:var(--shadow)}
+.card h3{font-size:18px;font-weight:600;margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.card h3 .icon{width:28px;height:28px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0}
+.card p{color:var(--gray-700);margin-bottom:12px}
+.card ol,.card ul{padding-left:20px;color:var(--gray-700)}
+.card li{margin-bottom:8px}
+.card li strong{color:var(--gray-900)}
+
+/* Step indicators */
+.step-flow{display:flex;align-items:center;gap:8px;margin:16px 0;flex-wrap:wrap}
+.step-pill{background:var(--brand-light);color:var(--brand);padding:6px 14px;border-radius:20px;font-size:13px;font-weight:600;white-space:nowrap}
+.step-arrow{color:var(--gray-300);font-size:18px}
+
+/* Access badge */
+.access-badge{display:inline-flex;align-items:center;gap:6px;padding:4px 12px;border-radius:20px;font-size:12px;font-weight:600;margin-bottom:20px}
+.access-badge.web{background:#DBEAFE;color:#1D4ED8}
+.access-badge.app{background:#D1FAE5;color:#065F46}
+.access-badge.both{background:#EDE9FE;color:#5B21B6}
+
+/* Permissions table */
+.perm-table{width:100%;border-collapse:collapse;margin:16px 0;font-size:14px}
+.perm-table th{text-align:left;padding:10px 12px;background:var(--gray-100);border-bottom:2px solid var(--gray-200);font-weight:600}
+.perm-table td{padding:10px 12px;border-bottom:1px solid var(--gray-100)}
+.perm-table .yes{color:var(--green);font-weight:600}
+.perm-table .no{color:var(--gray-300)}
+
+/* FAQ accordion */
+.faq{margin-top:32px}
+.faq-item{border:1px solid var(--gray-200);border-radius:var(--radius);margin-bottom:8px;overflow:hidden;background:#fff}
+.faq-q{padding:16px 20px;font-weight:600;cursor:pointer;display:flex;justify-content:space-between;align-items:center}
+.faq-q:hover{background:var(--gray-50)}
+.faq-q::after{content:'+';font-size:20px;color:var(--gray-500);transition:transform .2s}
+.faq-item.open .faq-q::after{content:'-'}
+.faq-a{padding:0 20px 16px;color:var(--gray-700);display:none}
+.faq-item.open .faq-a{display:block}
+
+/* App store badges */
+.app-badges{display:flex;gap:12px;margin-top:16px;flex-wrap:wrap}
+.app-badges a img{height:44px;border-radius:8px}
+
+/* Responsive */
+@media(max-width:600px){
+  .hero{padding:40px 16px 24px}
+  .hero h1{font-size:24px}
+  .role-selector{gap:6px}
+  .role-btn{padding:10px 14px;font-size:13px}
+  .content{padding:24px 16px 60px}
+  .card{padding:16px}
+  .step-flow{gap:4px}
+  .perm-table{font-size:12px}
+  .perm-table th,.perm-table td{padding:8px 6px}
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-inner">
+    <img src="/assets/logo_nav_light_2x.png" alt="CleanSpace Stay">
+    <div class="header-links">
+      <a href="https://app.cleanspacestay.com">Open Platform</a>
+    </div>
+  </div>
+</div>
+
+<div class="hero">
+  <h1>Help Center</h1>
+  <p>Select your role to see exactly how to use CleanSpace Stay — step by step.</p>
+  <div class="role-selector">
+    <button class="role-btn active" data-role="field_worker"><span class="role-icon">👷</span>Field Worker</button>
+    <button class="role-btn" data-role="foreman"><span class="role-icon">🔧</span>Foreman</button>
+    <button class="role-btn" data-role="project_manager"><span class="role-icon">📋</span>Project Manager</button>
+    <button class="role-btn" data-role="admin"><span class="role-icon">⚙️</span>Admin / Ops</button>
+    <button class="role-btn" data-role="accounting"><span class="role-icon">📊</span>Accounting</button>
+  </div>
+</div>
+
+<div class="content">
+
+<!-- ═══════════════════════════════════════════════════════════════════════ -->
+<!-- FIELD WORKER -->
+<!-- ═══════════════════════════════════════════════════════════════════════ -->
+<div class="role-section active" id="role-field_worker">
+  <div class="access-badge app">Mobile App</div>
+  <h2 class="section-title">Field Worker Guide</h2>
+  <p class="section-subtitle">Everything you need is in the mobile app. No passwords — just your phone number.</p>
+
+  <div class="card">
+    <h3><span class="icon" style="background:#D1FAE5;color:#065F46">1</span>Getting Started</h3>
+    <ol>
+      <li><strong>Download the app</strong> — Search "CleanSpace Stay" on the App Store (iPhone) or Google Play (Android)</li>
+      <li><strong>Sign in</strong> — Enter your phone number. You'll receive a one-time code via text or WhatsApp. Enter it.</li>
+      <li><strong>You're in</strong> — No password to remember. You stay logged in until you sign out.</li>
+    </ol>
+    <div class="app-badges">
+      <a href="https://apps.apple.com/us/app/cleanspace-stay/id6779867377"><img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg" alt="App Store"></a>
+      <a href="https://play.google.com/store/apps/details?id=com.cleanspacestay.app"><img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Google Play"></a>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3><span class="icon" style="background:#DBEAFE;color:#1D4ED8">2</span>Requesting Travel</h3>
+    <p>You can request your own travel, or your Foreman can do it for you.</p>
+    <ol>
+      <li>Tap <strong>Requests</strong> at the bottom of the app</li>
+      <li>Tap <strong>New Request</strong></li>
+      <li>Select your <strong>Project</strong> (the job you're traveling for)</li>
+      <li>Pick your <strong>travel dates</strong> (start and end)</li>
+      <li>Choose what you need: <strong>Hotel, Flight, Rental Car, or Rideshare</strong></li>
+      <li>Add any notes (hotel preferences, early check-in, etc.)</li>
+      <li>Review everything, then tap <strong>Submit</strong></li>
+    </ol>
+    <div class="step-flow">
+      <span class="step-pill">Submit Request</span>
+      <span class="step-arrow">→</span>
+      <span class="step-pill">PM Approves</span>
+      <span class="step-arrow">→</span>
+      <span class="step-pill">Ops Books It</span>
+      <span class="step-arrow">→</span>
+      <span class="step-pill">You Get Notified</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3><span class="icon" style="background:#FEF3C7;color:#92400E">3</span>Viewing Your Trips</h3>
+    <p>Tap <strong>Trips</strong> to see all your upcoming and past travel. Each trip shows:</p>
+    <ul>
+      <li>Hotel name, address, and confirmation number</li>
+      <li>Flight details and times</li>
+      <li>Rental car pickup/return info</li>
+      <li>Check-in and check-out dates</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h3><span class="icon" style="background:#D1FAE5;color:#065F46">4</span>Checking In & Out</h3>
+    <p>When you arrive at your hotel (or pick up your rental car, or board your flight):</p>
+    <ol>
+      <li>Open your trip</li>
+      <li>Tap <strong>Check In</strong> on the booking</li>
+      <li>When you leave, tap <strong>Check Out</strong></li>
+    </ol>
+    <p>This lets ops know you arrived safely and helps track actual travel dates.</p>
+  </div>
+
+  <div class="card">
+    <h3><span class="icon" style="background:#EDE9FE;color:#5B21B6">5</span>Messages</h3>
+    <p>Need to ask a question or report an issue? Tap <strong>Messages</strong> to chat directly with ops. You'll also receive notifications here when your bookings are confirmed or changed.</p>
+  </div>
+
+  <div class="card">
+    <h3><span class="icon" style="background:#FCE7F3;color:#9D174D">6</span>Your Profile</h3>
+    <p>Tap <strong>Profile</strong> to update:</p>
+    <ul>
+      <li>Your photo (used for identification)</li>
+      <li>Driver's license (front and back photos)</li>
+      <li>TSA Known Traveler / Global Entry number</li>
+      <li>Loyalty program numbers (Marriott Bonvoy, Hilton Honors, Delta SkyMiles, etc.)</li>
+    </ul>
+    <p>Keeping this updated means ops can book using your loyalty numbers and preferences automatically.</p>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════════════ -->
+<!-- FOREMAN -->
+<!-- ═══════════════════════════════════════════════════════════════════════ -->
+<div class="role-section" id="role-foreman">
+  <div class="access-badge both">Mobile App + Web</div>
+  <h2 class="section-title">Foreman Guide</h2>
+  <p class="section-subtitle">You manage travel for your crew. Submit requests for them, approve when needed, and keep everyone on track.</p>
+
+  <div class="card">
+    <h3><span class="icon" style="background:#D1FAE5;color:#065F46">1</span>Getting Started</h3>
+    <ol>
+      <li><strong>Download the app</strong> — Same as workers: App Store or Google Play, search "CleanSpace Stay"</li>
+      <li><strong>Sign in with your phone number</strong> — OTP code, no password</li>
+      <li>You'll see the same tabs as workers, plus an <strong>Approvals</strong> tab</li>
+    </ol>
+    <p>You can also access the web dashboard at <strong>app.cleanspacestay.com</strong> for a bigger view.</p>
+  </div>
+
+  <div class="card">
+    <h3><span class="icon" style="background:#DBEAFE;color:#1D4ED8">2</span>Requesting Travel for Your Crew</h3>
+    <p>As a Foreman, you can submit travel requests for yourself AND your crew members:</p>
+    <ol>
+      <li>Tap <strong>Requests → New Request</strong></li>
+      <li>Select the <strong>Project</strong></li>
+      <li>In the <strong>Traveler</strong> field, search for the worker(s) who need travel</li>
+      <li>Pick dates, travel types, and add notes</li>
+      <li>Review and <strong>Submit</strong></li>
+    </ol>
+    <p>You can select multiple travelers in one request if they're all traveling to the same place on the same dates.</p>
+  </div>
+
+  <div class="card">
+    <h3><span class="icon" style="background:#FEF3C7;color:#92400E">3</span>Approving Requests</h3>
+    <p>When one of your workers submits their own request, it lands in your <strong>Approvals</strong> tab:</p>
+    <ol>
+      <li>Tap <strong>Approvals</strong></li>
+      <li>Review the request (who, where, when, what type)</li>
+      <li>Tap <strong>Approve</strong>, <strong>Reject</strong>, or <strong>Request Changes</strong></li>
+    </ol>
+    <p>Once approved, ops will book it and the worker gets notified.</p>
+  </div>
+
+  <div class="card">
+    <h3><span class="icon" style="background:#EDE9FE;color:#5B21B6">4</span>Viewing Your Crew's Bookings</h3>
+    <p>On the web dashboard, you can see all bookings for workers on your project(s). This includes hotel confirmations, flight details, and check-in status.</p>
+  </div>
+
+  <div class="card">
+    <h3><span class="icon" style="background:#D1FAE5;color:#065F46">5</span>Everything Else</h3>
+    <p>You also have access to:</p>
+    <ul>
+      <li><strong>Messages</strong> — Chat with ops and your workers</li>
+      <li><strong>Calendar</strong> — See upcoming travel across your crew</li>
+      <li><strong>Map</strong> — See where your workers are located</li>
+      <li><strong>Check-in</strong> — Same as workers, for your own bookings</li>
+      <li><strong>Profile</strong> — Update your own info and loyalty numbers</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════════════ -->
+<!-- PROJECT MANAGER -->
+<!-- ═══════════════════════════════════════════════════════════════════════ -->
+<div class="role-section" id="role-project_manager">
+  <div class="access-badge both">Mobile App + Web</div>
+  <h2 class="section-title">Project Manager Guide</h2>
+  <p class="section-subtitle">You oversee travel for your project(s). Approve requests, track budgets, and keep visibility on all crew movement.</p>
+
+  <div class="card">
+    <h3><span class="icon" style="background:#D1FAE5;color:#065F46">1</span>Getting Started</h3>
+    <ol>
+      <li><strong>Web:</strong> Log in at <strong>app.cleanspacestay.com</strong> with your email and password</li>
+      <li><strong>App:</strong> Download CleanSpace Stay, sign in with your phone number (OTP)</li>
+    </ol>
+    <p>The web dashboard gives you the full view. The app is great for approving requests on the go.</p>
+  </div>
+
+  <div class="card">
+    <h3><span class="icon" style="background:#DBEAFE;color:#1D4ED8">2</span>Approval Queue</h3>
+    <p>Your primary action item. When foremen or workers submit travel requests for your project, they appear here:</p>
+    <ol>
+      <li>Go to <strong>Approval Queue</strong> in the sidebar</li>
+      <li>Review each request: traveler, project, dates, travel type, notes</li>
+      <li><strong>Approve</strong> — ops will book it</li>
+      <li><strong>Reject</strong> — traveler is notified with your reason</li>
+      <li><strong>Request Changes</strong> — ask for different dates, hotel, etc.</li>
+    </ol>
+  </div>
+
+  <div class="card">
+    <h3><span class="icon" style="background:#FEF3C7;color:#92400E">3</span>Budget Tracking</h3>
+    <p>See how much has been spent on travel for your project vs. what was budgeted:</p>
+    <ul>
+      <li><strong>Budget Tracking</strong> in the sidebar shows spend by category (lodging, flights, transportation, per diem)</li>
+      <li>Compare actual vs. budgeted amounts</li>
+      <li>Drill into individual charges</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h3><span class="icon" style="background:#EDE9FE;color:#5B21B6">4</span>Your Project Dashboard</h3>
+    <p>Go to <strong>Projects</strong> to see and manage your project(s):</p>
+    <ul>
+      <li>View all workers assigned to the project</li>
+      <li>See active bookings and upcoming travel</li>
+      <li>Edit project details (location, dates, contacts)</li>
+      <li>Add or remove workers from the project</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h3><span class="icon" style="background:#D1FAE5;color:#065F46">5</span>Other Screens You Have Access To</h3>
+    <table class="perm-table">
+      <tr><th>Screen</th><th>What It Does</th></tr>
+      <tr><td>Dashboard</td><td>Overview of activity across your projects</td></tr>
+      <tr><td>Booking Requests</td><td>All requests (not just pending approval)</td></tr>
+      <tr><td>Travel Calendar</td><td>Visual calendar of all upcoming travel</td></tr>
+      <tr><td>Hotel / Flight / Car / Rideshare Bookings</td><td>View all confirmed bookings</td></tr>
+      <tr><td>Workers</td><td>View and edit worker profiles on your projects</td></tr>
+      <tr><td>Contacts</td><td>Vendor contacts, hotel contacts</td></tr>
+      <tr><td>Map</td><td>Real-time worker locations</td></tr>
+      <tr><td>Reports</td><td>Travel spend and project reports</td></tr>
+      <tr><td>Messages</td><td>Chat with workers and ops</td></tr>
+      <tr><td>Team</td><td>View the full team roster (read-only)</td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════════════ -->
+<!-- ADMIN -->
+<!-- ═══════════════════════════════════════════════════════════════════════ -->
+<div class="role-section" id="role-admin">
+  <div class="access-badge web">Web Dashboard</div>
+  <h2 class="section-title">Admin / Operations Guide</h2>
+  <p class="section-subtitle">You run the day-to-day. Book travel, manage workers, handle approvals, and keep everything flowing.</p>
+
+  <div class="card">
+    <h3><span class="icon" style="background:#D1FAE5;color:#065F46">1</span>Getting Started</h3>
+    <ol>
+      <li>Log in at <strong>app.cleanspacestay.com</strong> with your email and password</li>
+      <li>You have full access to every screen in the sidebar</li>
+    </ol>
+  </div>
+
+  <div class="card">
+    <h3><span class="icon" style="background:#DBEAFE;color:#1D4ED8">2</span>Daily Workflow</h3>
+    <p>Your typical day:</p>
+    <ol>
+      <li><strong>Check Approval Queue</strong> — approve or route pending requests</li>
+      <li><strong>Book approved travel</strong> — create hotel/flight/car bookings from approved requests</li>
+      <li><strong>Handle messages</strong> — respond to worker questions</li>
+      <li><strong>Monitor notifications</strong> — check-in confirmations, status changes</li>
+      <li><strong>Email Import</strong> — forward booking confirmations to auto-parse into the system</li>
+    </ol>
+  </div>
+
+  <div class="card">
+    <h3><span class="icon" style="background:#FEF3C7;color:#92400E">3</span>Managing Bookings</h3>
+    <p>Each booking type has its own screen (Hotel, Flight, Car, Rideshare). From any booking screen:</p>
+    <ul>
+      <li><strong>Create</strong> — Add a new booking manually</li>
+      <li><strong>Edit</strong> — Update dates, confirmation numbers, notes</li>
+      <li><strong>Cancel</strong> — Mark as cancelled</li>
+      <li><strong>View details</strong> — Click any row to open the detail drawer (who, what, when, status)</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h3><span class="icon" style="background:#EDE9FE;color:#5B21B6">4</span>Managing the Team</h3>
+    <p>Go to <strong>Team</strong> to:</p>
+    <ul>
+      <li><strong>Invite new users</strong> — set their role (PM, Foreman, Worker, Accounting)</li>
+      <li><strong>Edit roles</strong> — promote/demote as needed</li>
+      <li><strong>Disable accounts</strong> — when someone leaves the company</li>
+      <li><strong>Permission overrides</strong> — grant specific screen access to individual users beyond their role default</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h3><span class="icon" style="background:#D1FAE5;color:#065F46">5</span>Projects & Workers</h3>
+    <ul>
+      <li><strong>Projects</strong> — Create projects, assign PMs and Foremen, set budgets, manage worker assignments</li>
+      <li><strong>Workers</strong> — View all workers, their profiles, loyalty numbers, assigned projects</li>
+      <li><strong>Contacts</strong> — Hotel contacts, vendor reps, emergency contacts</li>
+      <li><strong>Vendors</strong> — Manage preferred hotels, airlines, rental companies</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h3><span class="icon" style="background:#FCE7F3;color:#9D174D">6</span>Full Screen Access</h3>
+    <table class="perm-table">
+      <tr><th>Screen</th><th>Access Level</th></tr>
+      <tr><td>Dashboard</td><td class="yes">Full Access</td></tr>
+      <tr><td>Projects</td><td class="yes">Full Access</td></tr>
+      <tr><td>Workers</td><td class="yes">Full Access</td></tr>
+      <tr><td>Contacts</td><td class="yes">Full Access</td></tr>
+      <tr><td>Vendors</td><td class="yes">Full Access</td></tr>
+      <tr><td>Booking Requests</td><td class="yes">Full Access</td></tr>
+      <tr><td>Approval Queue</td><td class="yes">Full Access</td></tr>
+      <tr><td>Travel Calendar</td><td class="yes">Full Access</td></tr>
+      <tr><td>All Booking Types</td><td class="yes">Full Access</td></tr>
+      <tr><td>Reconciliation</td><td class="yes">Full Access</td></tr>
+      <tr><td>Budget Tracking</td><td class="yes">Full Access</td></tr>
+      <tr><td>Map</td><td class="yes">Full Access</td></tr>
+      <tr><td>Messages</td><td class="yes">Full Access</td></tr>
+      <tr><td>Email Import</td><td class="yes">Full Access</td></tr>
+      <tr><td>Reports</td><td class="yes">Full Access</td></tr>
+      <tr><td>Team</td><td class="yes">Full Access</td></tr>
+      <tr><td>Settings</td><td class="yes">View & Edit</td></tr>
+      <tr><td>Audit Logs</td><td class="yes">Full Access</td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════════════ -->
+<!-- ACCOUNTING -->
+<!-- ═══════════════════════════════════════════════════════════════════════ -->
+<div class="role-section" id="role-accounting">
+  <div class="access-badge web">Web Dashboard</div>
+  <h2 class="section-title">Accounting Guide</h2>
+  <p class="section-subtitle">You reconcile travel charges with QuickBooks, track budgets, and run financial reports.</p>
+
+  <div class="card">
+    <h3><span class="icon" style="background:#D1FAE5;color:#065F46">1</span>Getting Started</h3>
+    <ol>
+      <li>Log in at <strong>app.cleanspacestay.com</strong> with your email and password</li>
+      <li>Your primary screens are: <strong>Reconciliation</strong>, <strong>Budget Tracking</strong>, and <strong>Reports</strong></li>
+    </ol>
+  </div>
+
+  <div class="card">
+    <h3><span class="icon" style="background:#DBEAFE;color:#1D4ED8">2</span>Reconciliation</h3>
+    <p>This is where QuickBooks transactions meet platform bookings:</p>
+    <ol>
+      <li>Go to <strong>Reconciliation</strong> in the sidebar</li>
+      <li>You'll see QB transactions that need to be matched to bookings</li>
+      <li>For each transaction: <strong>Match</strong> it to the correct booking, or mark as <strong>Disputed</strong> / <strong>No Charge Expected</strong></li>
+      <li>Once matched, mark as <strong>Reconciled</strong></li>
+    </ol>
+    <div class="step-flow">
+      <span class="step-pill">Pending</span>
+      <span class="step-arrow">→</span>
+      <span class="step-pill">Matched</span>
+      <span class="step-arrow">→</span>
+      <span class="step-pill">Reconciled</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3><span class="icon" style="background:#FEF3C7;color:#92400E">3</span>Budget Tracking</h3>
+    <p>View and manage travel budgets by project:</p>
+    <ul>
+      <li>See budget vs. actual spend per project</li>
+      <li>Break down by category: lodging, flights, transportation, per diem</li>
+      <li>Flag projects that are over budget</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h3><span class="icon" style="background:#EDE9FE;color:#5B21B6">4</span>Reports</h3>
+    <p>Full access to all reports:</p>
+    <ul>
+      <li>Travel spend by project, by worker, by vendor</li>
+      <li>Reconciliation status reports</li>
+      <li>Budget variance reports</li>
+      <li>Export to CSV for further analysis</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h3><span class="icon" style="background:#D1FAE5;color:#065F46">5</span>Other Access</h3>
+    <table class="perm-table">
+      <tr><th>Screen</th><th>Access</th></tr>
+      <tr><td>All Booking Types (Hotel, Flight, Car, Rideshare)</td><td class="yes">View & Edit</td></tr>
+      <tr><td>Reconciliation</td><td class="yes">View & Edit</td></tr>
+      <tr><td>Budget Tracking</td><td class="yes">View & Edit</td></tr>
+      <tr><td>Reports</td><td class="yes">Full Access</td></tr>
+      <tr><td>Vendors</td><td class="yes">View & Edit</td></tr>
+      <tr><td>Projects</td><td>View Only</td></tr>
+      <tr><td>Travel Calendar</td><td>View Only</td></tr>
+      <tr><td>Messages</td><td class="yes">View & Edit</td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════════════ -->
+<!-- FAQ (shown for all roles) -->
+<!-- ═══════════════════════════════════════════════════════════════════════ -->
+<div class="faq">
+  <h2 class="section-title" style="margin-top:40px">Frequently Asked Questions</h2>
+  
+  <div class="faq-item">
+    <div class="faq-q">I forgot my password. How do I reset it?</div>
+    <div class="faq-a">On the web login page, click "Forgot Password" and enter your email. You'll receive a reset link. Mobile users don't have passwords — just sign in with your phone number again.</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q">I'm not receiving the OTP code on my phone.</div>
+    <div class="faq-a">Make sure the phone number on your account is correct (ask your admin to verify). Check if you have SMS or WhatsApp blocked. If using WhatsApp, make sure WhatsApp is installed. Contact ops if the issue persists.</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q">How do I change my phone number?</div>
+    <div class="faq-a">Ask your Admin to update your phone number in the Team settings. You'll need to verify the new number with an OTP on next login.</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q">Can I request travel for someone else?</div>
+    <div class="faq-a">Foremen can request for their crew. Project Managers and Admins can request for anyone. Field Workers can only request for themselves.</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q">How do I know when my booking is confirmed?</div>
+    <div class="faq-a">You'll receive a push notification on the app and an in-app notification. You can also check your Trips tab — confirmed bookings show the confirmation number and all details.</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q">What if I need to change my travel dates?</div>
+    <div class="faq-a">Message ops through the Messages tab in the app. They'll update the booking and you'll be notified of the change.</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q">The app says I have no projects. What do I do?</div>
+    <div class="faq-a">Your Admin needs to assign you to a project. Contact your Foreman or ops and they'll add you.</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q">How do I add my hotel loyalty number?</div>
+    <div class="faq-a">Go to Profile in the app, scroll down to the loyalty programs section, and enter your numbers (Marriott Bonvoy, Hilton Honors, etc.). Ops will use these when booking your hotels.</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q">Is the app available in Spanish?</div>
+    <div class="faq-a">Yes. The app supports English and Spanish. Your language preference is set in your profile.</div>
+  </div>
+</div>
+
+</div><!-- end .content -->
+
+<script>
+// Role tab switching
+document.querySelectorAll('.role-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.role-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.role-section').forEach(s => s.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('role-' + btn.dataset.role).classList.add('active');
+  });
+});
+
+// FAQ accordion
+document.querySelectorAll('.faq-q').forEach(q => {
+  q.addEventListener('click', () => {
+    q.parentElement.classList.toggle('open');
+  });
+});
+</script>
+
+</body>
+</html>
