@@ -199,6 +199,42 @@ tr:hover td{background:#f8faff}
   <!-- Section 3: IT Setup -->
   <div class="section" id="it-setup">
     <h2>3. IT Setup — Email Integration</h2>
+
+    <div class="info-box" style="background: rgba(28,56,234,0.05); border: 1px solid rgba(28,56,234,0.15); border-radius: 12px; padding: 1.5rem 2rem; margin-bottom: 2rem;">
+      <h3 style="margin-top:0; font-size:1.1rem;">Platform Technical Overview</h3>
+      <p style="margin-bottom: 1rem; color: #475569;">For your IT team's reference — here's what the platform runs on and how data is secured.</p>
+      <table style="width:100%; border-collapse:collapse; font-size:0.9rem; margin-bottom:1rem;">
+        <thead>
+          <tr style="border-bottom:1px solid #e2e8f0; text-align:left;">
+            <th style="padding:0.5rem 0.75rem; color:#334155;">Layer</th>
+            <th style="padding:0.5rem 0.75rem; color:#334155;">Technology</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="border-bottom:1px solid #f1f5f9;"><td style="padding:0.5rem 0.75rem;">Web Application</td><td style="padding:0.5rem 0.75rem;">React, TypeScript, Node.js</td></tr>
+          <tr style="border-bottom:1px solid #f1f5f9;"><td style="padding:0.5rem 0.75rem;">Mobile App</td><td style="padding:0.5rem 0.75rem;">React Native (Expo) — iOS + Android</td></tr>
+          <tr style="border-bottom:1px solid #f1f5f9;"><td style="padding:0.5rem 0.75rem;">Database</td><td style="padding:0.5rem 0.75rem;">PostgreSQL on Supabase (SOC 2 Type II)</td></tr>
+          <tr style="border-bottom:1px solid #f1f5f9;"><td style="padding:0.5rem 0.75rem;">Hosting</td><td style="padding:0.5rem 0.75rem;">Vercel (SOC 2 Type II, ISO 27001)</td></tr>
+          <tr style="border-bottom:1px solid #f1f5f9;"><td style="padding:0.5rem 0.75rem;">Authentication</td><td style="padding:0.5rem 0.75rem;">Phone OTP via Twilio (workers), encrypted credentials (admins)</td></tr>
+          <tr style="border-bottom:1px solid #f1f5f9;"><td style="padding:0.5rem 0.75rem;">Email Parsing</td><td style="padding:0.5rem 0.75rem;">Microsoft Graph API (direct mailbox read)</td></tr>
+          <tr style="border-bottom:1px solid #f1f5f9;"><td style="padding:0.5rem 0.75rem;">Accounting</td><td style="padding:0.5rem 0.75rem;">QuickBooks Online OAuth2 (Intuit API)</td></tr>
+          <tr style="border-bottom:1px solid #f1f5f9;"><td style="padding:0.5rem 0.75rem;">SMS / WhatsApp</td><td style="padding:0.5rem 0.75rem;">Twilio</td></tr>
+          <tr><td style="padding:0.5rem 0.75rem;">Maps</td><td style="padding:0.5rem 0.75rem;">Google Maps Platform</td></tr>
+        </tbody>
+      </table>
+      <h4 style="font-size:0.95rem; margin-bottom:0.5rem;">Security</h4>
+      <ul style="color:#475569; font-size:0.88rem; margin:0; padding-left:1.25rem;">
+        <li>TLS 1.3 encryption on every connection (web, mobile, API)</li>
+        <li>AES-256 encryption at rest for all database storage and file uploads</li>
+        <li>No shared passwords for field workers — phone-based one-time codes only</li>
+        <li>Role-based access control — six permission levels, strict data isolation between roles</li>
+        <li>OAuth2 token-based auth for all third-party integrations (no stored credentials)</li>
+        <li>Microsoft Graph access restricted to a single mailbox via Exchange Application Access Policy</li>
+        <li>Full audit logging — every action timestamped and attributed to a specific user</li>
+        <li>All infrastructure US-based (US-East regions)</li>
+      </ul>
+    </div>
+
     <p>The platform automatically parses booking confirmation emails (hotels, flights, rental cars) to create booking records. This eliminates manual data entry. There are two options:</p>
 
     <div class="it-tabs">
