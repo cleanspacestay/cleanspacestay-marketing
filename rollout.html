@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CleanSpace Stay — Rollout Guide</title>
+<link rel="icon" href="/assets/favicon.ico">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#f8f9fa;color:#1a1a2e;line-height:1.7}
+a{color:#1C38EA;text-decoration:none}
+a:hover{text-decoration:underline}
+
+/* Gate */
+.gate{position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;background:#0a0f2e}
+.gate-card{background:rgba(28,56,234,0.08);border:1px solid rgba(255,255,255,0.1);border-radius:16px;padding:48px 40px;text-align:center;max-width:400px;width:90%;backdrop-filter:blur(20px)}
+.gate-card img{height:40px;margin-bottom:24px}
+.gate-card .badge{color:#00d4ff;font-size:11px;letter-spacing:2px;font-weight:700;margin-bottom:8px}
+.gate-card h2{color:#fff;font-size:22px;margin-bottom:6px}
+.gate-card p{color:rgba(255,255,255,0.6);font-size:14px;margin-bottom:24px}
+.gate-card input{width:100%;padding:14px 16px;border-radius:8px;border:1px solid rgba(255,255,255,0.15);background:rgba(255,255,255,0.05);color:#fff;font-size:15px;outline:none;margin-bottom:16px}
+.gate-card input::placeholder{color:rgba(255,255,255,0.4)}
+.gate-card button{width:100%;padding:14px;border:none;border-radius:8px;background:linear-gradient(135deg,#1C38EA,#00d4ff);color:#fff;font-size:15px;font-weight:600;cursor:pointer}
+.gate-card .error{color:#ff6b6b;font-size:13px;margin-top:8px;display:none}
+.gate.hidden{display:none}
+
+/* Top bar */
+.topbar{position:sticky;top:0;z-index:100;background:#fff;border-bottom:1px solid #e5e7eb;padding:12px 32px;display:flex;align-items:center;justify-content:space-between}
+.topbar img{height:28px}
+.topbar .badge{background:#1C38EA;color:#fff;font-size:10px;letter-spacing:1.5px;font-weight:700;padding:4px 10px;border-radius:4px}
+
+/* Layout */
+.page{max-width:900px;margin:0 auto;padding:40px 24px 80px}
+h1{font-size:32px;font-weight:800;margin-bottom:8px;color:#0a0f2e}
+.subtitle{font-size:16px;color:#6b7280;margin-bottom:40px}
+
+/* TOC */
+.toc{background:#fff;border:1px solid #e5e7eb;border-radius:12px;padding:24px 28px;margin-bottom:40px}
+.toc h3{font-size:14px;text-transform:uppercase;letter-spacing:1px;color:#6b7280;margin-bottom:12px}
+.toc ol{padding-left:20px}
+.toc li{margin-bottom:6px;font-size:15px}
+.toc a{color:#1C38EA;font-weight:500}
+
+/* Sections */
+.section{background:#fff;border:1px solid #e5e7eb;border-radius:12px;padding:32px;margin-bottom:24px}
+.section h2{font-size:22px;font-weight:700;margin-bottom:16px;color:#0a0f2e;padding-bottom:12px;border-bottom:2px solid #f0f0f0}
+.section h3{font-size:17px;font-weight:600;margin:20px 0 10px;color:#1a1a2e}
+.section h4{font-size:15px;font-weight:600;margin:16px 0 8px;color:#374151}
+.section p,.section li{font-size:15px;color:#374151}
+.section ul,.section ol{padding-left:20px;margin-bottom:12px}
+.section li{margin-bottom:6px}
+
+/* Tables */
+table{width:100%;border-collapse:collapse;margin:16px 0;font-size:14px}
+th{background:#f8f9fa;text-align:left;padding:10px 12px;font-weight:600;border-bottom:2px solid #e5e7eb}
+td{padding:10px 12px;border-bottom:1px solid #f0f0f0}
+tr:hover td{background:#f8faff}
+
+/* Code blocks */
+.code-block{background:#1a1a2e;color:#e0e0e0;border-radius:8px;padding:16px 20px;font-family:'SF Mono',Monaco,monospace;font-size:13px;overflow-x:auto;margin:12px 0;line-height:1.6}
+.code-block .comment{color:#6b7280}
+.code-block .key{color:#00d4ff}
+.code-block .value{color:#a7f3d0}
+
+/* Callout boxes */
+.callout{border-radius:8px;padding:16px 20px;margin:16px 0;font-size:14px}
+.callout-info{background:#eff6ff;border-left:4px solid #1C38EA}
+.callout-warning{background:#fffbeb;border-left:4px solid #f59e0b}
+.callout-success{background:#ecfdf5;border-left:4px solid #10b981}
+.callout-danger{background:#fef2f2;border-left:4px solid #ef4444}
+.callout strong{display:block;margin-bottom:4px}
+
+/* Steps */
+.step{display:flex;gap:16px;margin-bottom:20px;align-items:flex-start}
+.step-num{min-width:32px;height:32px;background:#1C38EA;color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;flex-shrink:0}
+.step-content{flex:1}
+.step-content h4{margin:0 0 4px;font-size:15px}
+.step-content p{margin:0;font-size:14px;color:#6b7280}
+
+/* Tabs for IT sections */
+.it-tabs{display:flex;gap:4px;margin-bottom:20px;border-bottom:2px solid #e5e7eb;padding-bottom:0}
+.it-tab{padding:10px 20px;font-size:14px;font-weight:600;cursor:pointer;border-bottom:3px solid transparent;margin-bottom:-2px;color:#6b7280;transition:all 0.2s}
+.it-tab.active{color:#1C38EA;border-bottom-color:#1C38EA}
+.it-tab:hover{color:#1C38EA}
+.it-panel{display:none}
+.it-panel.active{display:block}
+
+/* Checklist */
+.checklist{list-style:none;padding:0}
+.checklist li{padding:8px 0 8px 32px;position:relative;font-size:14px;border-bottom:1px solid #f5f5f5}
+.checklist li::before{content:"☐";position:absolute;left:0;top:8px;font-size:16px;color:#d1d5db}
+
+/* Responsive */
+@media(max-width:600px){
+  .page{padding:20px 16px 60px}
+  .section{padding:20px 16px}
+  h1{font-size:24px}
+  .topbar{padding:10px 16px}
+  table{font-size:12px}
+  th,td{padding:8px 6px}
+  .it-tabs{flex-wrap:wrap}
+  .it-tab{font-size:12px;padding:8px 12px}
+}
+</style>
+</head>
+<body>
+
+<!-- Password Gate -->
+<div class="gate" id="gate">
+  <div class="gate-card">
+    <img src="/assets/logo_footer_2x.png" alt="CleanSpace Stay">
+    <div class="badge">INTERNAL & CONFIDENTIAL</div>
+    <h2>Rollout Guide</h2>
+    <p>Enter the access code to continue</p>
+    <input type="password" id="gate-input" placeholder="Access code" autocomplete="off">
+    <button onclick="checkGate()">Continue</button>
+    <div class="error" id="gate-error">Incorrect code. Try again.</div>
+  </div>
+</div>
+
+<!-- Top Bar -->
+<div class="topbar">
+  <img src="/assets/logo_nav_light_2x.png" alt="CleanSpace Stay">
+  <span class="badge">INTERNAL</span>
+</div>
+
+<!-- Main Content -->
+<div class="page">
+  <h1>CleanSpace Stay — Company Rollout Guide</h1>
+  <p class="subtitle">Everything needed to get the platform live across the company. For IT, Accounting, and Operations.</p>
+
+  <!-- TOC -->
+  <div class="toc">
+    <h3>Contents</h3>
+    <ol>
+      <li><a href="#overview">Platform Overview & Roles</a></li>
+      <li><a href="#rollout-steps">Rollout Steps (Day by Day)</a></li>
+      <li><a href="#it-setup">IT Setup — Microsoft Email & Permissions</a></li>
+      <li><a href="#qb-setup">Accounting Setup — QuickBooks Integration</a></li>
+      <li><a href="#comms">Communication Templates</a></li>
+      <li><a href="#ongoing">Ongoing Operations</a></li>
+    </ol>
+  </div>
+
+  <!-- Section 1: Overview -->
+  <div class="section" id="overview">
+    <h2>1. Platform Overview & Roles</h2>
+    <p>CleanSpace Stay manages all workforce travel — booking requests, confirmations, spend tracking, and QuickBooks reconciliation — in one platform with a companion mobile app.</p>
+    
+    <h3>User Roles</h3>
+    <table>
+      <thead>
+        <tr><th>Role</th><th>Access</th><th>Primary Tool</th><th>What They Do</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Field Worker</strong></td><td>Mobile app only</td><td>iOS / Android app</td><td>Request travel, view trips, check in/out, message ops</td></tr>
+        <tr><td><strong>Foreman</strong></td><td>Mobile app + limited web</td><td>iOS / Android app</td><td>Request travel for self + crew, view crew assignments</td></tr>
+        <tr><td><strong>Project Manager</strong></td><td>Web platform</td><td>app.cleanspacestay.com</td><td>Approve/deny requests, manage project assignments, view spend</td></tr>
+        <tr><td><strong>Admin / Ops</strong></td><td>Full web platform</td><td>app.cleanspacestay.com</td><td>Book travel, manage all bookings, reconcile, configure settings</td></tr>
+        <tr><td><strong>Accounting</strong></td><td>Web platform (finance views)</td><td>app.cleanspacestay.com</td><td>QuickBooks sync, reconciliation, spend reports, project tagging</td></tr>
+        <tr><td><strong>Executive</strong></td><td>Web platform (read-only dashboards)</td><td>app.cleanspacestay.com</td><td>View spend dashboards, project summaries (no edit access)</td></tr>
+      </tbody>
+    </table>
+
+    <div class="callout callout-info">
+      <strong>No passwords for field workers.</strong>
+      Workers sign in with their phone number + one-time code (SMS or WhatsApp). No password to remember, no password resets.
+    </div>
+  </div>
+
+  <!-- Section 2: Rollout Steps -->
+  <div class="section" id="rollout-steps">
+    <h2>2. Rollout Steps</h2>
+
+    <h3>Day 1 — Admin Setup</h3>
+    <div class="step"><div class="step-num">1</div><div class="step-content"><h4>Create Projects</h4><p>Add all active projects with project codes, locations, and dates. These are what workers select when requesting travel.</p></div></div>
+    <div class="step"><div class="step-num">2</div><div class="step-content"><h4>Add Project Managers</h4><p>Create PM accounts (email + password login). Assign each PM to their projects.</p></div></div>
+    <div class="step"><div class="step-num">3</div><div class="step-content"><h4>Add Foremen</h4><p>Create Foreman accounts (phone number login). Assign to projects. Foremen will be the ones who introduce the app to their crews.</p></div></div>
+    <div class="step"><div class="step-num">4</div><div class="step-content"><h4>Connect QuickBooks</h4><p>Go to Settings → Integrations → Connect QuickBooks. Follow the OAuth flow. Map each project to its QB Customer/Class. (See Section 4 below.)</p></div></div>
+    <div class="step"><div class="step-num">5</div><div class="step-content"><h4>Set Up Email Integration</h4><p>Either connect Microsoft Graph (preferred) or set up auto-forwarding from travel@ to booking@cleanspacestay.com. (See Section 3 below.)</p></div></div>
+
+    <h3>Day 2-3 — PM & Foreman Onboarding</h3>
+    <div class="step"><div class="step-num">6</div><div class="step-content"><h4>Walk PMs through the platform</h4><p>15-minute screen share: show them the dashboard, how to approve requests, and where to see spend. Share the Help Center link.</p></div></div>
+    <div class="step"><div class="step-num">7</div><div class="step-content"><h4>Walk Foremen through the app</h4><p>Quick call or in-person: show them how to download the app, sign in, and submit a request for themselves or a crew member.</p></div></div>
+
+    <h3>Day 4-7 — Field Worker Onboarding</h3>
+    <div class="step"><div class="step-num">8</div><div class="step-content"><h4>Foremen introduce to their crews</h4><p>Foremen tell their workers: "Download CleanSpace Stay, sign in with your phone number." That's it. No IT involvement needed.</p></div></div>
+    <div class="step"><div class="step-num">9</div><div class="step-content"><h4>Workers complete their profiles</h4><p>Workers add their photo, driver's license, loyalty numbers, and TSA info. This lets ops book using their preferences automatically.</p></div></div>
+
+    <h3>Day 5-7 — Accounting Onboarding</h3>
+    <div class="step"><div class="step-num">10</div><div class="step-content"><h4>Walk accounting through reconciliation</h4><p>Show them the Reconciliation page: how charges are matched to bookings, how to approve/reject matches, and how project tags flow back to QB.</p></div></div>
+
+    <div class="callout callout-success">
+      <strong>Start with one project.</strong>
+      Pick one active project with a known Foreman. Get it running end-to-end (request → approve → book → reconcile) before rolling out to the full company.
+    </div>
+  </div>
+
+  <!-- Section 3: IT Setup -->
+  <div class="section" id="it-setup">
+    <h2>3. IT Setup — Email Integration</h2>
+    <p>The platform automatically parses booking confirmation emails (hotels, flights, rental cars) to create booking records. This eliminates manual data entry. There are two options:</p>
+
+    <div class="it-tabs">
+      <div class="it-tab active" onclick="switchTab('graph')">Option A: Microsoft Graph (Recommended)</div>
+      <div class="it-tab" onclick="switchTab('forward')">Option B: Auto-Forward Rule</div>
+    </div>
+
+    <div class="it-panel active" id="panel-graph">
+      <h3>Microsoft Graph — Direct Mailbox Access</h3>
+      <p>This gives the platform direct, real-time access to the <code>travel@acmservicesus.com</code> mailbox. No forwarding rules, no delays, no missed emails.</p>
+
+      <h4>What IT Needs to Do</h4>
+      <ol>
+        <li><strong>Register an App in Microsoft Entra ID (Azure AD)</strong>
+          <ul>
+            <li>Go to <a href="https://entra.microsoft.com" target="_blank">entra.microsoft.com</a> → App registrations → New registration</li>
+            <li>Name: <code>CleanSpace Stay - Mail Reader</code></li>
+            <li>Supported account types: <strong>Single tenant</strong> (this organization only)</li>
+            <li>Redirect URI: leave blank (not needed for app-only access)</li>
+          </ul>
+        </li>
+        <li><strong>Add API Permissions</strong>
+          <ul>
+            <li>API permissions → Add a permission → Microsoft Graph → Application permissions</li>
+            <li>Add: <code>Mail.Read</code> (Read mail in all mailboxes)</li>
+            <li>Click "Grant admin consent for [org name]"</li>
+          </ul>
+        </li>
+        <li><strong>Restrict to the travel@ mailbox only</strong> (security best practice)
+          <ul>
+            <li>Create a mail-enabled security group containing only <code>travel@acmservicesus.com</code></li>
+            <li>Run PowerShell (Exchange Online):</li>
+          </ul>
+          <div class="code-block">
+<span class="comment"># Connect to Exchange Online</span>
+Connect-ExchangeOnline
+
+<span class="comment"># Create application access policy restricting to the security group</span>
+New-ApplicationAccessPolicy `
+  -AppId "<span class="value">[App Client ID from step 1]</span>" `
+  -PolicyScopeGroupId "<span class="value">[Security Group email]</span>" `
+  -AccessRight RestrictAccess `
+  -Description "CleanSpace Stay - travel mailbox only"
+          </div>
+        </li>
+        <li><strong>Create a Client Secret</strong>
+          <ul>
+            <li>Certificates & secrets → New client secret</li>
+            <li>Description: <code>CleanSpace Stay production</code></li>
+            <li>Expiry: 24 months (set a calendar reminder to rotate)</li>
+          </ul>
+        </li>
+        <li><strong>Provide these 3 values to CleanSpace Stay admin:</strong></li>
+      </ol>
+
+      <table>
+        <thead><tr><th>Value</th><th>Where to Find It</th><th>Example Format</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Tenant ID</strong></td><td>App registration → Overview → Directory (tenant) ID</td><td><code>a1b2c3d4-e5f6-7890-abcd-ef1234567890</code></td></tr>
+          <tr><td><strong>Client ID</strong></td><td>App registration → Overview → Application (client) ID</td><td><code>12345678-abcd-ef12-3456-7890abcdef12</code></td></tr>
+          <tr><td><strong>Client Secret</strong></td><td>Certificates & secrets → Value (copy immediately, shown only once)</td><td><code>abc~DEF123ghiJKL456...</code></td></tr>
+        </tbody>
+      </table>
+
+      <div class="callout callout-warning">
+        <strong>Security note:</strong> With the access policy restriction (step 3), the app can ONLY read the travel@ mailbox — not any other mailbox in the organization. This is the Microsoft-recommended approach for least-privilege access.
+      </div>
+
+      <h4>What the Platform Does With It</h4>
+      <ul>
+        <li>Polls the travel@ inbox every 5 minutes for new booking confirmation emails</li>
+        <li>Parses hotel, flight, and rental car confirmations automatically</li>
+        <li>Creates booking records in the platform with all details (confirmation #, dates, amounts)</li>
+        <li>Marks processed emails as read (does not delete or move them)</li>
+        <li>Read-only access — the platform cannot send emails or modify the mailbox</li>
+      </ul>
+    </div>
+
+    <div class="it-panel" id="panel-forward">
+      <h3>Auto-Forward Rule — Simpler but Less Reliable</h3>
+      <p>If Microsoft Graph setup is not feasible, the fallback is an auto-forward rule on the travel@ mailbox. This is simpler for IT but has limitations.</p>
+
+      <h4>What IT Needs to Do</h4>
+      <ol>
+        <li><strong>Open Exchange Admin Center</strong> or Outlook Web for the travel@ account</li>
+        <li><strong>Create a mail flow rule (transport rule):</strong>
+          <ul>
+            <li>Condition: Messages received by <code>travel@acmservicesus.com</code></li>
+            <li>Condition: Subject or body contains keywords: <code>confirmation</code>, <code>itinerary</code>, <code>reservation</code>, <code>booking</code></li>
+            <li>Action: <strong>Redirect the message to</strong> <code>booking@cleanspacestay.com</code></li>
+          </ul>
+        </li>
+        <li><strong>Alternatively</strong> — forward ALL emails (simpler, the platform ignores non-booking emails):</li>
+      </ol>
+
+      <div class="code-block">
+<span class="comment"># Exchange Online PowerShell — forward all travel@ mail</span>
+Set-Mailbox -Identity "travel@acmservicesus.com" `
+  -ForwardingSmtpAddress "booking@cleanspacestay.com" `
+  -DeliverToMailboxAndForward $true
+      </div>
+
+      <div class="callout callout-info">
+        <strong><code>DeliverToMailboxAndForward $true</code></strong> means the original stays in the travel@ inbox AND a copy goes to our platform. Nothing is lost.
+      </div>
+
+      <h4>Limitations vs. Microsoft Graph</h4>
+      <table>
+        <thead><tr><th>Aspect</th><th>Microsoft Graph</th><th>Auto-Forward</th></tr></thead>
+        <tbody>
+          <tr><td>Reliability</td><td>Direct API access, never misses</td><td>Depends on Exchange rule execution</td></tr>
+          <tr><td>Latency</td><td>~5 min polling</td><td>~1-5 min (Exchange processing)</td></tr>
+          <tr><td>Attachments</td><td>Full access to all attachments</td><td>May strip some attachments</td></tr>
+          <tr><td>Maintenance</td><td>Rotate client secret every 24 months</td><td>Rule can break silently on mailbox changes</td></tr>
+          <tr><td>IT effort</td><td>30-minute one-time setup</td><td>5-minute one-time setup</td></tr>
+        </tbody>
+      </table>
+
+      <h4>Forwarding Address</h4>
+      <div class="code-block">
+Forward to: <span class="value">booking@cleanspacestay.com</span>
+      </div>
+      <p>This address is owned and monitored by CleanSpace Stay. All emails are processed within seconds of receipt.</p>
+    </div>
+  </div>
+
+  <!-- Section 4: QuickBooks -->
+  <div class="section" id="qb-setup">
+    <h2>4. Accounting Setup — QuickBooks Integration</h2>
+    <p>The platform connects to QuickBooks Online to automatically tag travel expenses to the correct project. This eliminates manual categorization of credit card charges.</p>
+
+    <h3>How It Works</h3>
+    <ol>
+      <li>Credit card charges appear in QuickBooks (from your bank feed as normal)</li>
+      <li>The platform pulls those charges and matches them to bookings it already knows about</li>
+      <li>When matched, the platform writes the <strong>project tag</strong> back onto the QB charge (sparse update — only changes the tag, preserves everything else)</li>
+      <li>Accounting reviews matches and approves/rejects in the platform</li>
+    </ol>
+
+    <div class="callout callout-info">
+      <strong>QuickBooks remains the system of record.</strong> The platform is a tagging + reconciliation layer on top of it. It never creates, deletes, or modifies the charge amounts — only adds the project dimension.
+    </div>
+
+    <h3>Connection Steps</h3>
+    <div class="step"><div class="step-num">1</div><div class="step-content"><h4>Connect QB from the platform</h4><p>Settings → Integrations → Connect QuickBooks Online. You'll be redirected to Intuit to authorize. Sign in with the QB admin account.</p></div></div>
+    <div class="step"><div class="step-num">2</div><div class="step-content"><h4>Choose tagging mode</h4><p>The platform supports two ways to tag charges. Choose based on how your QB is set up:</p></div></div>
+
+    <table>
+      <thead><tr><th>Tagging Mode</th><th>QB Field Used</th><th>Best For</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Project (Customer/Sub-customer)</strong></td><td>CustomerRef on each expense line</td><td>Companies using QB Projects or Sub-customers to track jobs</td></tr>
+        <tr><td><strong>Class</strong></td><td>ClassRef on each expense line</td><td>Companies using Classes for job costing</td></tr>
+      </tbody>
+    </table>
+
+    <div class="step"><div class="step-num">3</div><div class="step-content"><h4>Map projects</h4><p>For each CleanSpace project, select the corresponding QB Customer/Class. The platform pulls your QB customer list automatically.</p></div></div>
+
+    <h3>Questions for Accounting / IT</h3>
+    <p>To configure the integration correctly, we need answers to these questions:</p>
+
+    <table>
+      <thead><tr><th>#</th><th>Question</th><th>Why We Need It</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>Do you use <strong>QB Projects</strong> (sub-customers) or <strong>Classes</strong> to track jobs?</td><td>Determines which tagging mode to use</td></tr>
+        <tr><td>2</td><td>Do you also use <strong>Departments</strong> (called "Location" in QB) for any dimension?</td><td>Platform can write DepartmentRef alongside the project tag</td></tr>
+        <tr><td>3</td><td>Which <strong>credit card account(s)</strong> in QB are used for travel expenses?</td><td>Platform only pulls charges from these accounts to avoid noise</td></tr>
+        <tr><td>4</td><td>Is there a specific <strong>expense category</strong> (Account) for travel? (e.g., "Travel Expense", "Lodging", "Transportation")</td><td>Helps the matching algorithm identify travel charges vs. other charges</td></tr>
+        <tr><td>5</td><td>Do you want the platform to write a <strong>Memo</strong> on tagged charges? (e.g., "Tagged by CleanSpace Stay — Booking #1234")</td><td>Creates an audit trail visible in QB</td></tr>
+        <tr><td>6</td><td>Who should have <strong>QB admin access</strong> to authorize the connection?</td><td>The OAuth consent requires a QB admin to approve</td></tr>
+        <tr><td>7</td><td>Are there any <strong>existing automation rules</strong> in QB that auto-categorize travel charges?</td><td>We need to ensure they don't conflict with platform tagging</td></tr>
+        <tr><td>8</td><td>Do you want <strong>auto-tagging</strong> (platform tags high-confidence matches automatically) or <strong>review-first</strong> (all matches require human approval)?</td><td>Determines the reconciliation workflow</td></tr>
+      </tbody>
+    </table>
+
+    <h3>What Gets Written to QuickBooks</h3>
+    <p>When the platform tags a charge, it writes a <strong>sparse update</strong> containing only:</p>
+    <div class="code-block">
+{
+  <span class="key">"sparse"</span>: true,
+  <span class="key">"Id"</span>: <span class="value">"[existing charge ID]"</span>,
+  <span class="key">"SyncToken"</span>: <span class="value">"[current sync token]"</span>,
+  <span class="key">"DepartmentRef"</span>: { <span class="key">"value"</span>: <span class="value">"[Location/Dept ID]"</span> },
+  <span class="key">"Line"</span>: [{
+    <span class="key">"Amount"</span>: <span class="value">[unchanged]</span>,
+    <span class="key">"AccountBasedExpenseLineDetail"</span>: {
+      <span class="key">"AccountRef"</span>: <span class="value">[unchanged]</span>,
+      <span class="key">"CustomerRef"</span>: { <span class="key">"value"</span>: <span class="value">"[Project ID]"</span> }
+    }
+  }]
+}
+    </div>
+    <p>This means: the charge amount, account, vendor, date, and all other fields remain exactly as they were. Only the project dimension is added.</p>
+
+    <div class="callout callout-success">
+      <strong>Safe and reversible.</strong> The platform can also un-tag a charge (remove the project dimension) if a match is rejected. No data is ever permanently altered.
+    </div>
+  </div>
+
+  <!-- Section 5: Communication Templates -->
+  <div class="section" id="comms">
+    <h2>5. Communication Templates</h2>
+    <p>Ready-to-send messages for each group during rollout.</p>
+
+    <h3>For Project Managers (Email)</h3>
+    <div class="code-block" style="background:#f8f9fa;color:#1a1a2e;border:1px solid #e5e7eb">
+Subject: CleanSpace Stay — Your login is ready
+
+Hi [Name],
+
+Your CleanSpace Stay account is set up. This is where you'll approve travel requests and track project spend.
+
+<span class="key">Login:</span> https://app.cleanspacestay.com
+<span class="key">Help Center:</span> https://cleanspacestay.com/help
+
+You'll receive notifications when crew members submit travel requests. You can approve or deny directly from the platform.
+
+Let me know if you have questions.
+— Kelly
+    </div>
+
+    <h3>For Foremen (Text / WhatsApp)</h3>
+    <div class="code-block" style="background:#f8f9fa;color:#1a1a2e;border:1px solid #e5e7eb">
+Hey [Name] — download the CleanSpace Stay app (App Store or Google Play). Sign in with your phone number. You'll get a code via text.
+
+This is how you'll request travel for yourself and your crew going forward. Takes 30 seconds to submit a request.
+
+Help if you need it: cleanspacestay.com/help
+    </div>
+
+    <h3>For Field Workers (Text — sent by Foreman)</h3>
+    <div class="code-block" style="background:#f8f9fa;color:#1a1a2e;border:1px solid #e5e7eb">
+Download CleanSpace Stay from the App Store or Google Play. Sign in with your phone number. That's it.
+
+When you need travel for a job, open the app and tap "New Request." Your foreman can also submit for you.
+    </div>
+  </div>
+
+  <!-- Section 6: Ongoing -->
+  <div class="section" id="ongoing">
+    <h2>6. Ongoing Operations</h2>
+
+    <h3>Daily Flow</h3>
+    <table>
+      <thead><tr><th>Time</th><th>Who</th><th>Action</th></tr></thead>
+      <tbody>
+        <tr><td>Anytime</td><td>Worker / Foreman</td><td>Submits travel request via app</td></tr>
+        <tr><td>Within hours</td><td>Project Manager</td><td>Approves or denies the request</td></tr>
+        <tr><td>Same day</td><td>Ops / Admin</td><td>Books the travel (hotel, flight, car)</td></tr>
+        <tr><td>Automatic</td><td>Platform</td><td>Parses confirmation email, creates booking record</td></tr>
+        <tr><td>Automatic</td><td>Platform</td><td>Notifies worker with confirmation details</td></tr>
+        <tr><td>On arrival</td><td>Worker</td><td>Taps "Check In" in the app</td></tr>
+        <tr><td>Weekly</td><td>Accounting</td><td>Reviews reconciliation matches, approves project tags to QB</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Maintenance Checklist</h3>
+    <ul class="checklist">
+      <li>Add new projects as they start (Admin → Projects → New)</li>
+      <li>Assign workers to projects as crews change</li>
+      <li>Map new projects to QB Customers/Classes</li>
+      <li>Rotate Microsoft Graph client secret before expiry (if using Graph)</li>
+      <li>Review unmatched charges weekly in Reconciliation</li>
+      <li>Deactivate workers/foremen when they leave the company</li>
+    </ul>
+
+    <h3>Support</h3>
+    <p><strong>Help Center:</strong> <a href="https://cleanspacestay.com/help" target="_blank">cleanspacestay.com/help</a> — role-based guides for every user type.</p>
+    <p><strong>Platform issues:</strong> Contact Kelly or the ops team via the platform messaging system.</p>
+  </div>
+
+</div>
+
+<script>
+function checkGate(){
+  const input=document.getElementById('gate-input');
+  if(input.value==='123'){
+    document.getElementById('gate').classList.add('hidden');
+    localStorage.setItem('rollout-auth','1');
+  } else {
+    document.getElementById('gate-error').style.display='block';
+    input.value='';
+    input.focus();
+  }
+}
+document.getElementById('gate-input').addEventListener('keydown',e=>{if(e.key==='Enter')checkGate()});
+if(localStorage.getItem('rollout-auth')==='1')document.getElementById('gate').classList.add('hidden');
+
+function switchTab(tab){
+  document.querySelectorAll('.it-tab').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.it-panel').forEach(p=>p.classList.remove('active'));
+  event.target.classList.add('active');
+  document.getElementById('panel-'+tab).classList.add('active');
+}
+</script>
+</body>
+</html>
