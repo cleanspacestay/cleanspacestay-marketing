@@ -2,6 +2,13 @@
   "outputDirectory": ".",
   "cleanUrls": true,
   "trailingSlash": false,
+  "redirects": [
+    {
+      "source": "/help",
+      "destination": "https://app.cleanspacestay.com/help",
+      "permanent": true
+    }
+  ],
   "headers": [
     {
       "source": "/(.*)",
