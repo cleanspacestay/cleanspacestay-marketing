@@ -5,6 +5,10 @@
   "description": "CleanspaceStay marketing and sales landing page",
   "scripts": {
     "dev": "npx serve .",
-    "build": "echo 'Static site - no build step required'"
+    "build": "echo 'Static site - no build step required'",
+    "test": "vitest run"
+  },
+  "devDependencies": {
+    "vitest": "^2.1.9"
   }
 }
