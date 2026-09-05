@@ -1,6 +1,7 @@
 {
   "name": "cleanspacestay-marketing",
   "version": "1.0.0",
+  "packageManager": "pnpm@11.24.0",
   "type": "module",
   "description": "CleanspaceStay marketing and sales landing page",
   "scripts": {

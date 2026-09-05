@@ -44,4 +44,15 @@ All three pages now comprehensively cover the web platform and the iOS/Android m
 - [x] Refresh `origin/master` (no intervening commits) and pass 4 Vitest governance tests plus static build
 - [x] Confirm Vercel preview is CLEAN for PR #1
 - [x] Commit as Colin Brechbill, push `governance/repository-operating-manual`, and open unmerged PR #1
-- [ ] Post-merge production smoke test remains pending explicit merge approval
+- [x] Post-merge production smoke test passed after approved PR #1 merge
+
+## 2026-09-05 — Continuous knowledge and site validation
+
+- [x] Add read-only validation on every pull request to `master` and every `master` push
+- [x] Run governance source-contract tests and the static build in the workflow
+- [x] Extend Vitest coverage for workflow triggers, permissions, commands, and credential safety
+- [x] Pin pnpm, declare the single-package workspace, and allow only Esbuild’s required install script
+- [x] Refresh `origin/master` (no intervening commits) and pass clean pnpm install, five Vitest governance tests, workflow YAML, and static build
+- [x] Confirm Vercel preview is CLEAN for PR #2
+- [x] Commit as Colin Brechbill, push `governance/continuous-knowledge-checks`, and open unmerged PR #2
+- [ ] Post-merge default-branch and production verification pending explicit merge approval
