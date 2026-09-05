@@ -51,6 +51,7 @@ All three pages now comprehensively cover the web platform and the iOS/Android m
 - [x] Add read-only validation on every pull request to `master` and every `master` push
 - [x] Run governance source-contract tests and the static build in the workflow
 - [x] Extend Vitest coverage for workflow triggers, permissions, commands, and credential safety
+- [x] Pin pnpm, declare the single-package workspace, and allow only Esbuild’s required install script
 - [x] Refresh `origin/master` (no intervening commits) and pass clean pnpm install, five Vitest governance tests, workflow YAML, and static build
 - [ ] Confirm Vercel preview is CLEAN
 - [x] Commit as Colin Brechbill, push `governance/continuous-knowledge-checks`, and open unmerged PR #2
