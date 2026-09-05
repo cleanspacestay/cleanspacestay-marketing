@@ -40,9 +40,27 @@ describe("marketing governance source contract", () => {
     expect(template).toMatch(/No placeholder production copy/);
   });
 
+  it("runs governance and static-site checks on every PR and master change", () => {
+    const workflow = read(".github/workflows/continuous-governance.yml");
+    expect(workflow).toMatch(/pull_request:\s*\n\s+branches: \[master\]/);
+    expect(workflow).toMatch(/push:\s*\n\s+branches: \[master\]/);
+    expect(workflow).toMatch(/permissions:\s*\n\s+contents:\s*read/);
+    expect(workflow).not.toMatch(/contents:\s*write|pull-requests:\s*write|issues:\s*write/);
+    expect(workflow).toMatch(/pnpm test/);
+    expect(workflow).toMatch(/pnpm build/);
+    expect(read("pnpm-workspace.yaml")).toMatch(/allowBuilds:\s*\n\s+esbuild:\s*true/);
+    expect(read(".gitignore")).toMatch(/(?:^|\n)node_modules\//);
+    expect(read(".gitignore")).toMatch(/(?:^|\n)\.vercel(?:\n|$)/);
+  });
+
   it("does not commit credential-looking values in governance files", () => {
     const secretPattern = /\b(?:sbp_|vcp_|re_[A-Za-z0-9]|sk-(?:proj-)?)[A-Za-z0-9_-]{12,}/g;
-    const offenders = ["AGENTS.md", "CLAUDE.md", ".github/pull_request_template.md"].filter((file) =>
+    const offenders = [
+      "AGENTS.md",
+      "CLAUDE.md",
+      ".github/pull_request_template.md",
+      ".github/workflows/continuous-governance.yml",
+    ].filter((file) =>
       secretPattern.test(read(file)),
     );
     expect(offenders).toEqual([]);
