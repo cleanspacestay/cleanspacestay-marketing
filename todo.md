@@ -43,5 +43,5 @@ All three pages now comprehensively cover the web platform and the iOS/Android m
 - [x] Add Vitest as a development-only dependency and source-contract governance coverage
 - [x] Refresh `origin/master` (no intervening commits) and pass 4 Vitest governance tests plus static build
 - [ ] Confirm Vercel preview is CLEAN
-- [ ] Commit with verified author, push branch, and open an unmerged PR
+- [x] Commit as Colin Brechbill, push `governance/repository-operating-manual`, and open unmerged PR #1
 - [ ] Post-merge production smoke test remains pending explicit merge approval
