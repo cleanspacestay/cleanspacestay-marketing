@@ -33,3 +33,15 @@
 ## Closeout
 All three pages now comprehensively cover the web platform and the iOS/Android mobile app. Privacy Policy adds mobile-app data, identity/travel documents, retention, Florida Digital Bill of Rights / CCPA-style rights, and a no-sale statement. Terms add a mobile-app EULA with Apple/Google clauses, Florida trade-secret/confidentiality protection of workflows and business logic, strengthened IP and feedback ownership, customer-data vs. platform-IP split, AS-IS and travel-supplier disclaimers, indemnification, termination, acceptable use, assignment (supports acquisition), and Florida-seated binding arbitration with a class-action waiver. Support cross-links the EULA/app-store terms. Verified live and committed as Colin Brechbill.
 - [ ] Closeout
+
+
+## 2026-08-26 — Repository operating manual and canonical knowledge link
+
+- [x] Add root `AGENTS.md` covering verified product claims, accessibility, contact privacy, Resend, deployment, and source precedence
+- [x] Add `CLAUDE.md` delegating to the agent-neutral rules and canonical web knowledge
+- [x] Add pull-request governance for knowledge, public-site regressions, validation, privacy, and recovery
+- [x] Add Vitest as a development-only dependency and source-contract governance coverage
+- [x] Refresh `origin/master` (no intervening commits) and pass 4 Vitest governance tests plus static build
+- [x] Confirm Vercel preview is CLEAN for PR #1
+- [x] Commit as Colin Brechbill, push `governance/repository-operating-manual`, and open unmerged PR #1
+- [ ] Post-merge production smoke test remains pending explicit merge approval
