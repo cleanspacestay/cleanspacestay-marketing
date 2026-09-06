@@ -1,6 +1,25 @@
 import { createHash, timingSafeEqual } from "node:crypto";
 import { next } from "@vercel/functions";
 
+export const config = {
+  matcher: [
+    "/value-calculator/:path*",
+    "/value-calculator.html",
+    "/rollout/:path*",
+    "/rollout.html",
+    "/executive-briefing/:path*",
+    "/executive-briefing.html",
+    "/demo-script/:path*",
+    "/demo-script.html",
+    "/platform-overview/:path*",
+    "/platform-overview.html",
+    "/public/value-calculator/:path*",
+    "/public/value-calculator.html",
+    "/public/executive-briefing/:path*",
+    "/public/executive-briefing.html",
+  ],
+};
+
 const ACCESS_USER = "cleanspacestay";
 const HASH_PATTERN = /^[a-f0-9]{64}$/i;
 const MAX_AUTHORIZATION_LENGTH = 1024;

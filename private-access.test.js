@@ -2,7 +2,7 @@ import { createHash } from "node:crypto";
 import fs from "node:fs";
 import path from "node:path";
 import { afterEach, beforeEach, describe, expect, it } from "vitest";
-import privatePageAccess, { __test } from "./proxy.js";
+import privatePageAccess, { __test, config as middlewareConfig } from "./middleware.js";
 
 const repoRoot = process.cwd();
 const TEST_PASSWORD = "correct-horse-for-source-contracts";
@@ -95,10 +95,12 @@ describe("private marketing page access", () => {
     expect(fs.existsSync(path.join(repoRoot, "public/executive-briefing.html"))).toBe(false);
   });
 
-  it("protects every canonical route and defensive legacy alias through Routing Middleware", () => {
-    const config = JSON.parse(fs.readFileSync(path.join(repoRoot, "vercel.json"), "utf8"));
-    expect(config.proxy.entrypoint).toBe("proxy.js");
-    expect(config.proxy.matcher).toEqual(expect.arrayContaining([
+  it("protects every canonical route and defensive legacy alias through the root Routing Middleware convention", () => {
+    const vercelConfig = JSON.parse(fs.readFileSync(path.join(repoRoot, "vercel.json"), "utf8"));
+    expect(vercelConfig.proxy).toBeUndefined();
+    expect(fs.existsSync(path.join(repoRoot, "middleware.js"))).toBe(true);
+    expect(fs.existsSync(path.join(repoRoot, "proxy.js"))).toBe(false);
+    expect(middlewareConfig.matcher).toEqual(expect.arrayContaining([
       "/value-calculator/:path*",
       "/value-calculator.html",
       "/rollout/:path*",
