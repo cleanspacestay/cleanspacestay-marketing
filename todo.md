@@ -78,5 +78,5 @@ All three pages now comprehensively cover the web platform and the iOS/Android m
 - [x] Add seven behavioral/source-contract tests; complete marketing suite passes 12 tests; workflow YAML and a Vercel CLI 59.11.7 no-deploy build pass
 - [x] Securely remove temporary local Vercel/OIDC/settings files created during no-deploy validation
 - [x] Provision the rotated encrypted `MARKETING_PRIVATE_ACCESS_SHA256` for Preview and Production and deliver the replacement password to KB by attachment-only email; the first pre-activation value was revoked after integration preview exposure and is unusable
-- [x] Catch an activation blocker in live preview testing—the explicit `proxy.js` entrypoint built but did not intercept static GET routes—and switch to Vercel’s default root `middleware.js` convention with matcher regression coverage
+- [x] Catch activation blockers in live preview testing: switch the non-intercepting explicit `proxy.js` entrypoint to Vercel’s default root `middleware.js` convention, then select the Node.js runtime required for timing-safe `node:crypto`; lock both choices with source contracts
 - [ ] Validate the refreshed PR preview: unauthenticated private routes fail closed, authenticated routes return content, removed aliases cannot bypass, and normal public/contact routes remain healthy

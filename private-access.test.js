@@ -100,6 +100,7 @@ describe("private marketing page access", () => {
     expect(vercelConfig.proxy).toBeUndefined();
     expect(fs.existsSync(path.join(repoRoot, "middleware.js"))).toBe(true);
     expect(fs.existsSync(path.join(repoRoot, "proxy.js"))).toBe(false);
+    expect(middlewareConfig.runtime).toBe("nodejs");
     expect(middlewareConfig.matcher).toEqual(expect.arrayContaining([
       "/value-calculator/:path*",
       "/value-calculator.html",

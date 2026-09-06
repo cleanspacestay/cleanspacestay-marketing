@@ -2,6 +2,7 @@ import { createHash, timingSafeEqual } from "node:crypto";
 import { next } from "@vercel/functions";
 
 export const config = {
+  runtime: "nodejs",
   matcher: [
     "/value-calculator/:path*",
     "/value-calculator.html",
