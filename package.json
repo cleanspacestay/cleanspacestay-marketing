@@ -11,5 +11,8 @@
   },
   "devDependencies": {
     "vitest": "^2.1.9"
+  },
+  "dependencies": {
+    "@vercel/functions": "3.9.5"
   }
 }

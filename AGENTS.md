@@ -18,6 +18,8 @@ Use **CleanSpace Stay** consistently. No placeholder copy (`coming soon`, `TODO`
 
 The static site and contact endpoint deploy through the existing Vercel Git integration. Do not add a second deploy path. Production runtime may use KB-owned Resend/Vercel accounts only and must not call Manus-operated services. Do not submit contact forms, send email, alter domains/DNS/provider settings, deploy, or merge without explicit authorization.
 
+The confidential routes `/value-calculator`, `/rollout`, `/executive-briefing`, `/demo-script`, and `/platform-overview` (including `.html` forms and defensive former `public/` aliases) are protected before static content is served by the selective Vercel Routing Middleware in the root `middleware.js`. The middleware must remain fail-closed and read only the encrypted `MARKETING_PRIVATE_ACCESS_SHA256` Vercel environment variable. Never add client-side password fields, credential literals, unlock-state storage, unprotected duplicate page copies, or a bypass around the matcher. The plaintext access password is owner-controlled and must never enter source, documentation, logs, issue text, or chat.
+
 ## Knowledge maintenance and validation
 
 When public positioning, feature availability, domains/routes, contact behavior, provider use, privacy/security, deployment, or recovery changes, update local guidance and the canonical web documentation/status in the same coordinated work. Before final validation, fetch `origin/master` again and reconcile intervening commits.
@@ -29,7 +31,7 @@ pnpm test
 pnpm build
 ```
 
-Add/update Vitest source-contract coverage, inspect mobile/desktop layouts and keyboard/focus behavior, verify links/forms without sending production data, update `todo.md` if present, and require a CLEAN Vercel preview. Every commit is authored as `Colin Brechbill <cbrechbill@byvenuecreative.com>`.
+Add/update Vitest source-contract coverage, including `private-access.test.js` whenever confidential routes or `vercel.json` change; inspect mobile/desktop layouts and keyboard/focus behavior, verify links/forms without sending production data, update `todo.md` if present, and require a CLEAN Vercel preview. Every commit is authored as `Colin Brechbill <cbrechbill@byvenuecreative.com>`.
 
 ## High-risk review and handoff
 
