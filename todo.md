@@ -55,4 +55,27 @@ All three pages now comprehensively cover the web platform and the iOS/Android m
 - [x] Refresh `origin/master` (no intervening commits) and pass clean pnpm install, five Vitest governance tests, workflow YAML, and static build
 - [x] Confirm Vercel preview is CLEAN for PR #2
 - [x] Commit as Colin Brechbill, push `governance/continuous-knowledge-checks`, and open unmerged PR #2
-- [ ] Post-merge default-branch and production verification pending explicit merge approval
+- [x] Post-merge default-branch validation, READY production deployment, and homepage smoke test passed after approved PR #2 merge
+
+## 2026-09-06 — Resend isolation and workflow maintenance
+
+- [x] Replace the shared Resend key with a dedicated marketing sending-only key scoped to `cleanspacestay.com`
+- [x] Redeploy the unchanged production source and verify the synthetic contact message reached `delivered`
+- [x] Upgrade continuous-governance workflow dependencies to current Node 24-compatible action majors
+- [x] Extend source-contract coverage for the upgraded action versions and credential-safety boundary
+- [x] Refresh `origin/master` with no intervening commits; pass all 12 Vitest tests, workflow YAML, static build, secret/browser-gate scans, and Vercel CLI 59.11.7 no-deploy build validation
+- [ ] Confirm Vercel preview is CLEAN
+- [ ] Commit as Colin Brechbill, push `governance/workflow-security-followup`, and open an unmerged PR
+- [ ] Post-merge default-branch and production smoke verification pending explicit merge approval
+
+## 2026-09-06 — Confidential page access remediation
+
+- [x] Expand the final security review from the initially reported calculator/rollout gates to every confidential artifact: value calculator, rollout guide, executive briefing, demo script, and platform overview
+- [x] Remove every browser-visible password/code literal, password field, unlock routine, and session/local-storage authorization flag
+- [x] Delete duplicate `public/` copies of the value calculator and executive briefing to eliminate alias and drift bypasses
+- [x] Add selective Vercel Routing Middleware using hashed Basic Auth, timing-safe comparison, fail-closed configuration, non-cacheable responses, read-method restriction, and bounded failed-attempt throttling
+- [x] Protect all extensionless, `.html`, and defensive former `public/` aliases while leaving public routes and the contact endpoint outside the matcher
+- [x] Add seven behavioral/source-contract tests; complete marketing suite passes 12 tests; workflow YAML and a Vercel CLI 59.11.7 no-deploy build pass
+- [x] Securely remove temporary local Vercel/OIDC/settings files created during no-deploy validation
+- [ ] Before merge, provision encrypted `MARKETING_PRIVATE_ACCESS_SHA256` for required Vercel targets and deliver the plaintext password to KB out of band; never retain it in source, docs, logs, issues, or chat
+- [ ] Validate the PR preview: unauthenticated private routes fail closed, authenticated routes return content, removed aliases cannot bypass, and normal public/contact routes remain healthy

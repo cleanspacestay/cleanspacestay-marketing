@@ -48,6 +48,10 @@ describe("marketing governance source contract", () => {
     expect(workflow).not.toMatch(/contents:\s*write|pull-requests:\s*write|issues:\s*write/);
     expect(workflow).toMatch(/pnpm test/);
     expect(workflow).toMatch(/pnpm build/);
+    expect(workflow).toMatch(/actions\/checkout@v7/);
+    expect(workflow).toMatch(/pnpm\/action-setup@v6/);
+    expect(workflow).toMatch(/actions\/setup-node@v7/);
+    expect(workflow).not.toMatch(/actions\/(?:checkout|setup-node)@v[1-6]\b|pnpm\/action-setup@v[1-5]\b/);
     expect(JSON.parse(read("package.json")).packageManager).toBe("pnpm@11.24.0");
     const workspace = read("pnpm-workspace.yaml");
     expect(workspace).toMatch(/packages:\s*\n\s+- \./);

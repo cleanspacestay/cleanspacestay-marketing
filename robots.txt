@@ -1,6 +1,10 @@
 User-agent: *
 Disallow: /value-calculator
 Disallow: /value-calculator.html
+Disallow: /rollout
+Disallow: /rollout.html
+Disallow: /public/value-calculator
+Disallow: /public/value-calculator.html
 Disallow: /executive-briefing
 Disallow: /executive-briefing.html
 Disallow: /demo-script

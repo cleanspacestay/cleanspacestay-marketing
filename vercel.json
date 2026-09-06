@@ -1,5 +1,25 @@
 {
+  "$schema": "https://openapi.vercel.sh/vercel.json",
   "outputDirectory": ".",
+  "proxy": {
+    "entrypoint": "proxy.js",
+    "matcher": [
+      "/value-calculator/:path*",
+      "/value-calculator.html",
+      "/rollout/:path*",
+      "/rollout.html",
+      "/executive-briefing/:path*",
+      "/executive-briefing.html",
+      "/demo-script/:path*",
+      "/demo-script.html",
+      "/platform-overview/:path*",
+      "/platform-overview.html",
+      "/public/value-calculator/:path*",
+      "/public/value-calculator.html",
+      "/public/executive-briefing/:path*",
+      "/public/executive-briefing.html"
+    ]
+  },
   "cleanUrls": true,
   "trailingSlash": false,
   "redirects": [
