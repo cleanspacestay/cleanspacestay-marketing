@@ -64,9 +64,9 @@ All three pages now comprehensively cover the web platform and the iOS/Android m
 - [x] Upgrade continuous-governance workflow dependencies to current Node 24-compatible action majors
 - [x] Extend source-contract coverage for the upgraded action versions and credential-safety boundary
 - [x] Refresh `origin/master` with no intervening commits; pass all 12 Vitest tests, workflow YAML, static build, secret/browser-gate scans, and Vercel CLI 59.11.7 no-deploy build validation
-- [x] Confirm Vercel preview build and all GitHub checks are CLEAN for PR #3; authenticated private-route validation remains pending encrypted digest provisioning
+- [x] Confirm Vercel preview build, all GitHub checks, encrypted digest loading, and the authenticated/unauthenticated private-route matrix are CLEAN for PR #3
 - [x] Commit as Colin Brechbill, push `governance/workflow-security-followup`, and open unmerged PR #3
-- [ ] Post-merge default-branch and production smoke verification pending explicit merge approval
+- [x] Merge PR #3 after explicit KB approval; confirm Vercel production READY, public pages 200, all five private routes 401 unauthenticated and 200 authenticated, removed aliases 404, and the temporary preview bypass revoked
 
 ## 2026-09-06 — Confidential page access remediation
 
