@@ -77,5 +77,5 @@ All three pages now comprehensively cover the web platform and the iOS/Android m
 - [x] Protect all extensionless, `.html`, and defensive former `public/` aliases while leaving public routes and the contact endpoint outside the matcher
 - [x] Add seven behavioral/source-contract tests; complete marketing suite passes 12 tests; workflow YAML and a Vercel CLI 59.11.7 no-deploy build pass
 - [x] Securely remove temporary local Vercel/OIDC/settings files created during no-deploy validation
-- [ ] Before merge, provision encrypted `MARKETING_PRIVATE_ACCESS_SHA256` for required Vercel targets and deliver the plaintext password to KB out of band; never retain it in source, docs, logs, issues, or chat
+- [x] Provision the rotated encrypted `MARKETING_PRIVATE_ACCESS_SHA256` for Preview and Production and deliver the replacement password to KB by attachment-only email; the first pre-activation value was revoked after integration preview exposure and is unusable
 - [ ] Validate the PR preview: unauthenticated private routes fail closed, authenticated routes return content, removed aliases cannot bypass, and normal public/contact routes remain healthy
